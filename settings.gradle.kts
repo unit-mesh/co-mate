@@ -6,9 +6,15 @@ rootProject.name = "Comate"
 
 pluginManagement {
     repositories {
+        google()
         gradlePluginPortal()
         mavenCentral()
-        mavenLocal()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    }
+
+    plugins {
+        kotlin("multiplatform").version(extra["kotlin.version"] as String)
+        id("org.jetbrains.compose").version(extra["compose.version"] as String)
     }
 }
 
@@ -22,4 +28,5 @@ dependencyResolutionManagement {
 include(":architecture")
 include(":llm-core")
 include(":comate-core")
+include(":comate-gui")
 include(":comate-cli")
