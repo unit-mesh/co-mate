@@ -1,2 +1,2 @@
 # archguard-comate
-Co-mate is a architecture governance in ArchGuard.
+> Co-mate is an architecture governance in ArchGuard.
