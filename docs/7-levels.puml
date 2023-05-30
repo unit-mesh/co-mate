@@ -1,0 +1,53 @@
+@startuml
+
+package "渠道层(Channel)" {
+  [App]
+  [Website]
+}
+
+package "应用程序层(Application)" {
+  [CRM]
+  [ERP] 
+}
+
+package "集成层(Integration)" {
+  [ESB]
+}
+
+package "业务逻辑层(Business Logic)" {
+  [Business Process]
+  [Business Rules] 
+}
+
+package "系统对象存储集成层\n(Object/Data Persistence Integration)" {
+  [RDBMS]
+  [NoSQL]
+}
+
+package "能力层(Domain Services)" {
+  [Order Service] 
+  [Account Service]
+  [Product Service] 
+}   
+
+package "核心平台(Core Platform)" {
+  [Authentication]
+  [Logging]
+  [Caching]
+}
+
+[App] --> [CRM]  
+[Website] --> [ERP]
+[CRM] --> [ESB]
+[ERP] --> [ESB]
+[ESB] --> [Business Process]
+[Business Process] --> [Business Rules]
+[Business Process] --> [RDBMS]
+[Business Process] --> [NoSQL]
+[Order Service] --> [RDBMS]   
+[Account Service] --> [NoSQL]
+[Product Service] --> [RDBMS]
+[Authentication] --> [Logging] 
+[Business Process] --> [Caching]
+
+@enduml

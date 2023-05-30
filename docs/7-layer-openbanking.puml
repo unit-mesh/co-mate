@@ -1,0 +1,60 @@
+@startuml
+
+!define CHANNEL_LAYER_COLOR #F9E79F
+!define APPLICATION_LAYER_COLOR #82E0AA
+!define INTEGRATION_LAYER_COLOR #85C1E9
+!define BUSINESS_LOGIC_LAYER_COLOR #F5B7B1
+!define SYSTEM_OBJECT_STORAGE_LAYER_COLOR #D7BDE2
+!define CAPABILITY_LAYER_COLOR #FAD7A0
+!define CORE_PLATFORM_COLOR #A9DFBF
+
+rectangle "渠道层" as channel_layer #F9E79F {
+    rectangle "网站" as website
+    rectangle "移动应用" as mobile_app
+    rectangle "电话" as phone
+    rectangle "邮件" as email
+}
+
+rectangle "应用程序层" as application_layer #82E0AA {
+    rectangle "ERP" as erp
+    rectangle "CRM" as crm
+    rectangle "SCM" as scm
+    rectangle "OA" as oa
+}
+
+rectangle "集成层 (服务)" as integration_layer #85C1E9 {
+    rectangle "SOA" as soa
+    rectangle "微服务" as microservice
+}
+
+rectangle "业务逻辑层" as business_logic_layer #F5B7B1 {
+    rectangle "订单管理" as order_management
+    rectangle "客户管理" as customer_management
+    rectangle "库存管理" as inventory_management
+}
+
+rectangle "系统对象存储集成层" as system_object_storage_layer #D7BDE2 {
+    rectangle "数据库" as database
+    rectangle "文件系统" as file_system
+}
+
+rectangle "能力层 (领域服务)" as capability_layer #FAD7A0 {
+    rectangle "支付" as payment
+    rectangle "物流" as logistics
+    rectangle "推荐" as recommendation
+}
+
+rectangle "核心平台" as core_platform #A9DFBF {
+    rectangle "身份认证" as authentication
+    rectangle "日志管理" as log_management
+    rectangle "监控" as monitoring
+}
+
+channel_layer -- application_layer
+application_layer -- integration_layer
+integration_layer -- business_logic_layer
+business_logic_layer -- system_object_storage_layer
+system_object_storage_layer -- capability_layer
+capability_layer -- core_platform
+
+@enduml
