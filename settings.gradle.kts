@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 include(":architecture")
 include(":llm-core")
+include(":comate-core")
 include(":comate-cli")
