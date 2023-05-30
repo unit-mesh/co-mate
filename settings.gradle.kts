@@ -2,7 +2,7 @@
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "comate"
+rootProject.name = "Comate"
 
 pluginManagement {
     repositories {
