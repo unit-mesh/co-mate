@@ -13,10 +13,11 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
+import model.ConversationViewModel
 
 @Composable
 fun TextInput(
-
+    conversationViewModel: ConversationViewModel,
 ) {
     val scope = rememberCoroutineScope()
     var text by remember { mutableStateOf(TextFieldValue("")) }
@@ -49,8 +50,9 @@ fun TextInput(
                     )
                     IconButton(onClick = {
                         scope.launch {
-                            val textClone = text.text.toString()
+                            val textClone = text.text
                             text = TextFieldValue("")
+                            conversationViewModel.sendMessage(textClone)
                         }
                     }) {
                         Icon(

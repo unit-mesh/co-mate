@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import model.ConversationViewModel
 import model.MessageModel
 
 const val ConversationTestTag = "ConversationTestTag"
@@ -17,6 +18,7 @@ const val ConversationTestTag = "ConversationTestTag"
 @Composable
 fun MessageList(
     modifier: Modifier = Modifier,
+//    conversationViewModel: ConversationViewModel,
 ) {
     val listState = rememberLazyListState()
 

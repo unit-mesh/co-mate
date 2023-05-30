@@ -16,11 +16,19 @@ dependencies {
     // Image loading
     // implementation("io.coil-kt:coil-compose:2.3.0")
 
+    // Dependency Injection
+    implementation("org.kodein.di:kodein-di:7.20.1")
+    runtimeOnly("org.kodein.di:kodein-di-framework-compose:7.20.1")
+
     // UI/UX Utils
     val richtextVersion = "0.16.0"
     implementation("com.halilibo.compose-richtext:richtext-commonmark:${richtextVersion}")
     implementation("com.halilibo.compose-richtext:richtext-ui-material:${richtextVersion}")
     implementation("com.halilibo.compose-richtext:richtext-ui-material3:${richtextVersion}")
+
+    val voyagerVersion = "1.0.0-rc05"
+    implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
+    implementation("cafe.adriel.voyager:voyager-kodein:$voyagerVersion")
 }
 
 repositories {
@@ -53,4 +61,9 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+
+kapt {
+    correctErrorTypes = true
 }
