@@ -61,7 +61,7 @@ fun HumanMessageCard(message: MessageModel) {
 
 @Composable
 fun BotMessageCard(message: MessageModel) {
-    LiteTheme {
+    LightTheme {
         SetupMaterial3RichText {
             RichText(
                 modifier = Modifier.padding(horizontal = 18.dp, vertical = 12.dp),
