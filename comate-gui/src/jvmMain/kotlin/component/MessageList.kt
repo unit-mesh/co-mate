@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
@@ -18,11 +20,15 @@ const val ConversationTestTag = "ConversationTestTag"
 @Composable
 fun MessageList(
     modifier: Modifier = Modifier,
-//    conversationViewModel: ConversationViewModel,
+    conversationViewModel: ConversationViewModel,
 ) {
     val listState = rememberLazyListState()
 
-    val messages: List<MessageModel> = listOf()
+    val conversationId by conversationViewModel.currentConversationState.collectAsState()
+    val messagesMap by conversationViewModel.messagesState.collectAsState()
+
+    val messages: List<MessageModel> =
+        if (messagesMap[conversationId] == null) listOf() else messagesMap[conversationId]!!
 
     Box(modifier = modifier) {
         LazyColumn(

@@ -11,25 +11,23 @@ import androidx.compose.ui.window.application
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
-import cafe.adriel.voyager.kodein.rememberScreenModel
 import cafe.adriel.voyager.navigator.Navigator
 import component.MessageList
 import component.TextInput
 import data.remote.OpenAIRepositoryImpl
 import model.ConversationViewModel
 import org.kodein.di.DI
-import org.kodein.di.bindProvider
+import org.kodein.di.bindSingleton
+import org.kodein.di.instance
 import theme.LightTheme
-//import org.kodein.di.compose.localDI
 
-class MainScreen : Screen {
+
+class MainScreen(val di: DI) : Screen {
     override val key: ScreenKey = uniqueScreenKey
+    private val viewmodel: ConversationViewModel by di.instance()
 
     @Composable
     override fun Content() {
-//        val screenModel = rememberScreenModel<ConversationViewModel>()
-//        val scopedDependency by localDI().on(ScreenContext(this)).instance<KodeinScopedDependencySample>()
-
         LightTheme {
             Surface(modifier = Modifier.fillMaxSize()) {
                 Box(Modifier.fillMaxSize()) {
@@ -38,9 +36,9 @@ class MainScreen : Screen {
                             modifier = Modifier
                                 .weight(1f)
                                 .padding(horizontal = 16.dp),
-//                            conversationViewModel = screenModel
+                            conversationViewModel = viewmodel
                         )
-                        TextInput(ConversationViewModel(OpenAIRepositoryImpl()))
+                        TextInput(viewmodel)
                     }
                 }
             }
@@ -49,7 +47,13 @@ class MainScreen : Screen {
 }
 
 fun main() = application {
+    val di = DI {
+        bindSingleton<ConversationViewModel> {
+            ConversationViewModel(OpenAIRepositoryImpl())
+        }
+    }
+
     Window(onCloseRequest = ::exitApplication) {
-        Navigator(MainScreen())
+        Navigator(MainScreen(di))
     }
 }

@@ -13,6 +13,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.44")
     implementation("androidx.compose.material3:material3:1.1.0-alpha06")
 
+    implementation("com.google.code.gson:gson:2.9.0")
+
     // Image loading
     // implementation("io.coil-kt:coil-compose:2.3.0")
 
