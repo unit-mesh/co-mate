@@ -1,8 +1,10 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     kotlin("multiplatform")
     kotlin("kapt")
+    alias(libs.plugins.serialization)
     id("org.jetbrains.compose")
 }
 
@@ -10,6 +12,8 @@ group = "org.archguard.comate"
 version = "1.0-SNAPSHOT"
 
 dependencies {
+    implementation(libs.serialization.json)
+
     implementation("com.google.dagger:hilt-android:2.44")
     implementation("androidx.compose.material3:material3:1.1.0-alpha06")
 

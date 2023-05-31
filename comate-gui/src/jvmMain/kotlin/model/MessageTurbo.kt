@@ -1,12 +1,11 @@
 package model
 
 import com.google.gson.JsonObject
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class MessageTurbo(
-    @SerializedName("content")
     val content: String = "",
-    @SerializedName("role")
     val role: TurboRole = TurboRole.user,
 )
 
