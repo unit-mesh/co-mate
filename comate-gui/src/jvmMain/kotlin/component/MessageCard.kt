@@ -75,7 +75,7 @@ fun BotMessageCard(message: MessageModel) {
                         ),
                         wordWrap = true,
                         modifier = Modifier.background(
-                            color = Color.Black,
+                            color = Purple80,
                             shape = RoundedCornerShape(6.dp)
                         )
                     )

@@ -13,7 +13,7 @@ import kotlin.String
 
 class OpenAIRepositoryImpl {
     private var token: String = ""
-//
+
 //    init {
 //        val dotenv = Dotenv.load()
 //        token = dotenv["OPENAI_API_KEY"]
