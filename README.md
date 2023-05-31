@@ -1,6 +1,6 @@
 # ArchGuard CoMate
 
-> CoMate is an architecture governance in ArchGuard.
+>  Co-mate is an AI-powered architecture copilot, design and governance tools.
 
 ## Todo
 
