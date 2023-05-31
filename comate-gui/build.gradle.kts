@@ -14,6 +14,10 @@ version = "1.0-SNAPSHOT"
 dependencies {
     implementation(libs.serialization.json)
 
+    implementation(libs.dotenv)
+    implementation(libs.bundles.openai)
+    implementation(libs.bundles.markdown)
+
     implementation("com.google.dagger:hilt-android:2.44")
     implementation("androidx.compose.material3:material3:1.1.0-alpha06")
 
