@@ -8,6 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
@@ -20,6 +24,7 @@ import org.kodein.di.DI
 import org.kodein.di.bindSingleton
 import org.kodein.di.instance
 import theme.LightTheme
+import java.io.File
 
 
 class MainScreen(val di: DI) : Screen {
@@ -47,6 +52,10 @@ class MainScreen(val di: DI) : Screen {
 }
 
 fun main() = application {
+    val appDir = File("${System.getProperty("user.home")}", ".comate")
+
+    val dataStores = PreferenceDataStoreFactory.create { appDir }
+
     val di = DI {
         bindSingleton<ConversationViewModel> {
             ConversationViewModel(OpenAIRepositoryImpl())

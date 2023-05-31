@@ -21,6 +21,12 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.44")
     implementation("androidx.compose.material3:material3:1.1.0-alpha06")
 
+    implementation("io.reactivex.rxjava3:rxjava:3.1.6")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences-rxjava3:1.0.0")
+    implementation("androidx.datastore:datastore-preferences-core:1.0.0")
+
+
     implementation("com.google.code.gson:gson:2.9.0")
 
     // Image loading
