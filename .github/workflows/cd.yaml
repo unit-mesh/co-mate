@@ -12,43 +12,20 @@ jobs:
       matrix:
         assets:
           # analysers:
-          - analyser_diff_changes/build/libs/analyser_diff_changes*-all.jar
-          - analyser_git/build/libs/analyser_git*-all.jar
-          - analyser_sca/build/libs/analyser_sca*-all.jar
-          - analyser_estimate/build/libs/analyser_estimate*-all.jar
-          - analyser_sourcecode/feat_apicalls/build/libs/feat_apicalls*-all.jar
-          - analyser_sourcecode/feat_datamap/build/libs/feat_datamap*-all.jar
-          - analyser_sourcecode/lang_csharp/build/libs/lang_csharp*-all.jar
-          - analyser_sourcecode/lang_golang/build/libs/lang_golang*-all.jar
-          - analyser_sourcecode/lang_java/build/libs/lang_java*-all.jar
-          - analyser_sourcecode/lang_kotlin/build/libs/lang_kotlin*-all.jar
-          - analyser_sourcecode/lang_python/build/libs/lang_python*-all.jar
-          - analyser_sourcecode/lang_scala/build/libs/lang_scala*-all.jar
-          - analyser_sourcecode/lang_typescript/build/libs/lang_typescript*-all.jar
-          # cli:
-          - scanner_cli/build/libs/scanner_cli*-all.jar
-          # rules:
-          - rule-linter/rule-sql/build/libs/rule-sql*-all.jar
-          - rule-linter/rule-webapi/build/libs/rule-webapi*-all.jar
-          - rule-linter/rule-test/build/libs/rule-test*-all.jar
-          # server:
-          - server/build/libs/server*.jar
 
     permissions:
       contents: write
       packages: write
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
         with:
-          java-version: '11'
-          distribution: 'adopt'
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
-      - name: Execute Gradle build
-        run: ./gradlew build -x test
+        run: ./gradlew build --no-daemon  -x test
 
       - name: Upload assets to release
         uses: svenstaro/upload-release-action@v2
