@@ -12,6 +12,10 @@ class IntroductionPrompterTest {
 
         assertEquals(
             """
+Project Instruction: Reflekt is a compile-time reflection library that leverages the flows of the
+standard reflection approach and can find classes, objects (singleton classes) or functions
+by some conditions in compile-time.
+            
 dependencies: 
 
 | path | deps |
