@@ -1,6 +1,6 @@
 # ArchGuard CoMate
 
-> Co-mate is an AI-powered architecture copilot, design and governance tools.
+> Co-mate is an AI-powered software architecture copilot, design and governance tools.
 
 ## Todo
 

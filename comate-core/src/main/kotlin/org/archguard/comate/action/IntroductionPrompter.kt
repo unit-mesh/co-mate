@@ -2,9 +2,12 @@ package org.archguard.comate.action
 
 import org.archguard.architecture.layered.ChannelType
 import org.archguard.comate.context.ComateScaContext
+import org.archguard.comate.document.ReadmeParser
 import org.archguard.scanner.analyser.ScaAnalyser
 import java.nio.file.Path
 import kotlin.io.path.Path
+import kotlin.io.path.exists
+import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
 
 class IntroductionPrompter(private val workdir: Path) : Prompter() {
@@ -18,7 +21,7 @@ class IntroductionPrompter(private val workdir: Path) : Prompter() {
     override fun getSample(): String {
         return """
 ```
-这个项目是一个 {channel type} 应用程序，使用了 Jetpack Compose、{xxx} 和一系列相关的库来构建 {xxx} 等功能。
+{xxx} 项目是一个 {channel type} 应用程序，使用了 Jetpack Compose、{xxx} 和一系列相关的库来构建 {xxx} 等功能。
 该应用还使用了一些第三方库来构建用户界面 {xxx}，以及进行 {xxx} 等任务。该应用需要考虑 {xxx} 等非功能需求。
 ```""".trimIndent()
     }
@@ -35,9 +38,18 @@ class IntroductionPrompter(private val workdir: Path) : Prompter() {
                 .filter { it.isNotEmpty() && it != ":" }
         }
 
+        var instr = "";
+        val readmeFile = Path(workdir.toString(), "README.md")
+        if (readmeFile.exists()) {
+            val readme = readmeFile.readText()
+            val readmeParser = ReadmeParser(readme)
+            val introduction = readmeParser.introduction()
+            instr = "\nProject Instruction: ${introduction.content}\n"
+        }
+
         val items = depMap.map { "| ${it.key} | ${it.value.joinToString(", ")} |" }.joinToString("\n")
         val channels = ChannelType.allValues()
-        return """
+        return instr + """            
 dependencies: 
 
 | path | deps |
