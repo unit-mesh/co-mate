@@ -1,6 +1,9 @@
 package org.archguard.copilot
 
 import chapi.domain.core.CodeDataStruct
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import org.archguard.architecture.layered.ChannelType
 import org.archguard.rule.core.Issue
 import org.archguard.scanner.analyser.ScaAnalyser
 import org.archguard.scanner.core.client.ArchGuardClient
@@ -11,9 +14,34 @@ import org.archguard.scanner.core.sca.CompositionDependency
 import org.archguard.scanner.core.sca.ScaContext
 import org.archguard.scanner.core.sourcecode.CodeDatabaseRelation
 import org.archguard.scanner.core.sourcecode.ContainerService
+import java.io.File
 
 fun main() {
-    ScaAnalyser(ComateScaContext.create("comate", ".", "kotlin")).analyse()
+    val dep = ScaAnalyser(ComateScaContext.create(".", "kotlin")).analyse()
+    val depNames = dep
+        .map { it.depName }
+        .toSet()
+        .filter { it.isNotEmpty() && it != ":" }
+
+    val channels = ChannelType.allValues()
+
+    println("""根据下面的 dependencies 信息，分析这个应用的渠道类型（channel types）。要求如下：
+
+1. 只返回最可能的 channel type，不做解释。
+2. 根据 dependencies 分析这个应用要考虑的非功能需求。
+3. 根据 dependencies 分析这个应用使用的三个核心库。
+4. 最后返回的形式类似于：
+
+```
+该应用是一个面向 {channelType} 应用，它使用了 {coreLibs}，它需要考虑 {nonFunctionalRequirements} 等非功能需求。
+```
+
+dependencies: $depNames
+
+all channel types: $channels
+
+
+    """.trimMargin())
 }
 
 class ComateScaContext(
@@ -22,14 +50,14 @@ class ComateScaContext(
     override val language: String,
 ) : ScaContext {
     companion object {
-        fun create(id: String, path: String, language: String): ScaContext {
-            val client = ComateJsonClient(id)
+        fun create(path: String, language: String): ScaContext {
+            val client = ComateArchGuardClient()
             return ComateScaContext(client, path, language)
         }
     }
 }
 
-class ComateJsonClient(private val systemId: String) : ArchGuardClient {
+class ComateArchGuardClient : ArchGuardClient {
     override fun saveApi(apis: List<ContainerService>) {
         TODO("Not yet implemented")
     }
@@ -39,7 +67,8 @@ class ComateJsonClient(private val systemId: String) : ArchGuardClient {
     }
 
     override fun saveDependencies(dependencies: List<CompositionDependency>) {
-        println(dependencies)
+        // save to json file
+        File("dependencies.json").writeText(Json.encodeToString(dependencies))
     }
 
     override fun saveDiffs(calls: List<ChangedCall>) {

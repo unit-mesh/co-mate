@@ -7,6 +7,7 @@ plugins {
 
 dependencies {
     implementation(projects.llmCore)
+    implementation(projects.architecture)
 
     implementation("org.archguard.scanner:analyser_sca:2.0.1")
 
