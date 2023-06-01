@@ -31,4 +31,21 @@ reflection.
 standard reflection approach and can find classes, objects (singleton classes) or functions
 by some conditions in compile-time."""
     }
+
+    @Test
+    fun test_with_description_in_quote() {
+        val parser = ReadmeParser(
+            """
+# ArchGuard CoMate
+
+> Co-mate is an AI-powered architecture copilot, design and governance tools.
+
+## Todo
+"""
+        )
+        val introduction = parser.introduction()
+
+        introduction.title shouldBe "ArchGuard CoMate"
+        introduction.content shouldBe """Co-mate is an AI-powered architecture copilot, design and governance tools."""
+    }
 }
