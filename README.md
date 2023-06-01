@@ -8,16 +8,16 @@
     - [ ] Apache Arrow
     - [ ] Embedding API for Kotlin/Java
     - [ ] Embedding Database
-- [ ] OpenAI Calling
 - [ ] [SentenceTransformers](https://huggingface.co/sentence-transformers) for Local Command
     - [ ] Onnx Spike
         - [ ] https://github.com/JetBrains-Research/kinference
         - [ ] https://onnxruntime.ai/docs/get-started/with-java.html
     - [ ] Onnx Model
         - [ ] use Bloop converted: [https://github.com/BloopAI/bloop/tree/main/model]
-        - [ ] or convert by ourself.
+        - [ ] or convert by ourselves.
     - Usecase examples:
-        - analysis system: https://github.com/archguard/ddd-monolithic-code-sample
+        - analysis system ： https://github.com/archguard/ddd-monolithic-code-sample
+        - refactor function ：`comate-cli`
 - [ ] Agent API
 - [ ] Command
 - [ ] JVM version LangChain
@@ -32,7 +32,8 @@
 
 ## To Spike
 
-- Architecture Records
+- Architecture Documentation
+    - [ ] README.md
     - [ ] ADR
 - Business Architecture
     - [ ] By function call
