@@ -25,15 +25,15 @@ fun main() {
 
     val channels = ChannelType.allValues()
 
-    println("""根据下面的 dependencies 信息，分析这个应用的渠道类型（channel types）。要求如下：
+    println("""根据下面的 dependencies 信息，编写这个项目的介绍。要求如下：
 
 1. 只返回最可能的 channel type，不做解释。
 2. 根据 dependencies 分析这个应用要考虑的非功能需求。
 3. 根据 dependencies 分析这个应用使用的三个核心库。
-4. 最后返回的形式类似于：
+4. 你返回的介绍类似于：
 
 ```
-该应用是一个面向 {channelType} 应用，它使用了 {coreLibs}，它需要考虑 {nonFunctionalRequirements} 等非功能需求。
+这个项目是一个 {channel type} 应用程序，使用了 {xxx} 和一系列相关的库来构建 {xxx} 等功能。该应用还使用了一些第三方库来显 {xxx}，以及进行 {xxx} 等任务。该应用需要考虑 {xxx} 等非功能需求。
 ```
 
 dependencies: $depNames
