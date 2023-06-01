@@ -45,12 +45,21 @@ dependencies {
     val voyagerVersion = "1.0.0-rc05"
     implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
     implementation("cafe.adriel.voyager:voyager-kodein:$voyagerVersion")
+
+    // ONNX ML
+//    implementation("io.kinference:inference-api:0.2.13")
+//    implementation("io.kinference:ndarray-api:0.2.13")
+    implementation("io.kinference:inference-core:0.2.13")
 }
 
 repositories {
     google()
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    // kinference
+    maven {
+        url = uri("https://packages.jetbrains.team/maven/p/ki/maven")
+    }
 }
 
 kotlin {
