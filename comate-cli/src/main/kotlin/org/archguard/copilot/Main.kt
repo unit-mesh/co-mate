@@ -15,13 +15,21 @@ import org.archguard.scanner.core.sca.ScaContext
 import org.archguard.scanner.core.sourcecode.CodeDatabaseRelation
 import org.archguard.scanner.core.sourcecode.ContainerService
 import java.io.File
+import kotlin.io.path.Path
+import kotlin.io.path.relativeTo
 
 fun main() {
+    val basepath = Path(File(".").absolutePath)
     val dep = ScaAnalyser(ComateScaContext.create(".", "kotlin")).analyse()
-    val depNames = dep
-        .map { it.depName }
-        .toSet()
-        .filter { it.isNotEmpty() && it != ":" }
+    println(dep)
+    val depMap: Map<String, List<String>> = dep.groupBy {
+        val relativePath = Path(it.path).relativeTo(basepath).toString()
+        relativePath
+    }.mapValues {
+        it.value.map { it.depName }
+            .toSet()
+            .filter { it.isNotEmpty() && it != ":" }
+    }
 
     val channels = ChannelType.allValues()
 
@@ -37,7 +45,11 @@ fun main() {
 该应用还使用了一些第三方库来构建用户界面 {xxx}，以及进行 {xxx} 等任务。该应用需要考虑 {xxx} 等非功能需求。
 ```
 
-dependencies: $depNames
+dependencies: 
+
+| path | deps |
+| --- | --- |
+| ${depMap.map { "| ${it.key} | ${it.value.joinToString(", ")} |" }.joinToString("\n")} |
 
 all channel types: $channels
 
