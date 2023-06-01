@@ -7,7 +7,7 @@ import java.nio.file.Path
 class IntroductionPrompterTest {
     @Test
     fun should_generate_correct_prompt_test() {
-        val workdir = javaClass.getResource("/hello-world").path
+        val workdir = javaClass.classLoader.getResource("hello-world")?.path ?: ""
         val prompter = IntroductionPrompter(Path.of(workdir))
 
         assertEquals(
