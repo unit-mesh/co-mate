@@ -6,5 +6,6 @@ import kotlin.io.path.Path
 
 fun main() {
     val basepath = Path(File(".").absolutePath)
-    IntroductionPrompter(basepath).prompt()
+    val prompt = IntroductionPrompter(basepath).prompt()
+    print(prompt)
 }
