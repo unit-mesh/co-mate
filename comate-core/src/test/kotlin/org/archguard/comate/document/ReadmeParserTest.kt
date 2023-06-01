@@ -25,10 +25,10 @@ reflection.
         )
 
         val introduction = parser.introduction()
-        introduction shouldBe """
-            # Reflekt
-            
-            Reflekt is a compile-time reflection library that leverages the flows of theInstead of relying on JVM reflection, Reflekt performs compile-time resolution of reflection queries
-        """.trimIndent()
+
+        introduction.title shouldBe "Reflekt"
+        introduction.content shouldBe """Reflekt is a compile-time reflection library that leverages the flows of the
+standard reflection approach and can find classes, objects (singleton classes) or functions
+by some conditions in compile-time."""
     }
 }

@@ -3,12 +3,14 @@ package org.archguard.comate.document
 import org.commonmark.node.*
 import org.commonmark.parser.Parser
 
+data class ReadmeIntroduction(val title: String, val content: String)
+
 
 class ReadmeParser(val content: String) {
     private val parser: Parser = Parser.builder().build()
     private val node: Node = parser.parse(content)
 
-    fun introduction(): String {
+    fun introduction(): ReadmeIntroduction {
         val visitor = IntroductionVisitor()
         node.accept(visitor)
         return visitor.introduction()
@@ -20,21 +22,20 @@ class IntroductionVisitor : AbstractVisitor() {
     private var headers = mutableListOf<String>()
 
     override fun visit(paragraph: Paragraph?) {
+        var result = ""
         if (paragraph?.firstChild is Text) {
-            paragraphs.add((paragraph.firstChild as Text).literal)
+            result += (paragraph.firstChild as Text).literal
             var next = paragraph.firstChild?.next
 
             while (next is Text || next is SoftLineBreak) {
                 if (next is Text) {
-                    paragraphs[paragraphs.lastIndex] += next.literal
+                    result += "\n" + next.literal
                 }
 
-                val current = next
                 next = next.next
-                if (current !is Text || next !is SoftLineBreak) {
-                    break
-                }
             }
+
+            paragraphs.add(result)
         }
     }
 
@@ -44,16 +45,10 @@ class IntroductionVisitor : AbstractVisitor() {
         }
     }
 
-    fun introduction(): String {
+    fun introduction(): ReadmeIntroduction {
         val title = headers.firstOrNull() ?: ""
-        val description = paragraphs.joinToString("")
+        val description = paragraphs.firstOrNull() ?: ""
 
-        return """
-            # $title
-            
-            $description
-        """.trimIndent()
+        return ReadmeIntroduction(title, description)
     }
-
-
 }
