@@ -29,8 +29,8 @@ class IntroductionPrompter(private val workdir: Path) : Prompter() {
         val depMap: Map<String, List<String>> = dep.groupBy {
             val relativePath = Path(it.path).relativeTo(workdir).toString()
             relativePath
-        }.mapValues {
-            it.value.map { it.depName }
+        }.mapValues { entry ->
+            entry.value.map { it.depName }
                 .toSet()
                 .filter { it.isNotEmpty() && it != ":" }
         }

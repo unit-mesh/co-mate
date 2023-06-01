@@ -11,6 +11,8 @@ dependencies {
 
     implementation("org.archguard.scanner:analyser_sca:2.0.1")
 
+    implementation(libs.bundles.markdown)
+
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.test.junit.engine)
 }
