@@ -16,6 +16,8 @@ import cafe.adriel.voyager.navigator.Navigator
 import component.MessageList
 import component.TextInput
 import data.remote.OpenAIRepositoryImpl
+import io.github.cdimascio.dotenv.Dotenv
+import io.github.cdimascio.dotenv.dotenv
 import model.ConversationViewModel
 import org.kodein.di.DI
 import org.kodein.di.bindSingleton
@@ -26,7 +28,7 @@ import java.io.File
 
 class MainScreen(val di: DI) : Screen {
     override val key: ScreenKey = uniqueScreenKey
-    private val viewmodel: ConversationViewModel by di.instance()
+    private val viewModel: ConversationViewModel by di.instance()
 
     @Composable
     override fun Content() {
@@ -38,9 +40,9 @@ class MainScreen(val di: DI) : Screen {
                             modifier = Modifier
                                 .weight(1f)
                                 .padding(horizontal = 16.dp),
-                            conversationViewModel = viewmodel
+                            conversationViewModel = viewModel
                         )
-                        TextInput(viewmodel)
+                        TextInput(viewModel)
                     }
                 }
             }
@@ -49,17 +51,23 @@ class MainScreen(val di: DI) : Screen {
 }
 
 fun main() = application {
+    // todo: move this to a better place
     val appDir = File("${System.getProperty("user.home")}", ".comate")
+    if (!appDir.exists()) {
+        appDir.mkdir()
+    }
 
-    val dataStores = PreferenceDataStoreFactory.create { appDir }
+    // for now, create ~/.comate/.env, and put OPENAI_API_KEY=... in it
+    val dotenv = Dotenv.configure().directory(appDir.toString()).load()
+    val token = dotenv["OPENAI_API_KEY"]
 
     val di = DI {
         bindSingleton<ConversationViewModel> {
-            ConversationViewModel(OpenAIRepositoryImpl())
+            ConversationViewModel(OpenAIRepositoryImpl(token))
         }
     }
 
-    Window(onCloseRequest = ::exitApplication) {
+    Window(onCloseRequest = ::exitApplication, title = "Comate") {
         Navigator(MainScreen(di))
     }
 }

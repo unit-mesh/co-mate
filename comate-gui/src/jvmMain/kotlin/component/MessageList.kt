@@ -32,9 +32,7 @@ fun MessageList(
 
     Box(modifier = modifier) {
         LazyColumn(
-            modifier = Modifier
-                .testTag(ConversationTestTag)
-                .fillMaxSize(),
+            modifier = Modifier.testTag(ConversationTestTag).fillMaxSize(),
             reverseLayout = true,
             state = listState,
         ) {
