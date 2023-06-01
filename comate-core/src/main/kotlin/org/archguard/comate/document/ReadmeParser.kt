@@ -5,8 +5,8 @@ import org.commonmark.parser.Parser
 
 
 class ReadmeParser(val content: String) {
-    val parser: Parser = Parser.builder().build()
-    val node: Node = parser.parse(content)
+    private val parser: Parser = Parser.builder().build()
+    private val node: Node = parser.parse(content)
 
     fun introduction(): String {
         val visitor = IntroductionVisitor()
@@ -22,24 +22,21 @@ class IntroductionVisitor : AbstractVisitor() {
     override fun visit(paragraph: Paragraph?) {
         if (paragraph?.firstChild is Text) {
             paragraphs.add((paragraph.firstChild as Text).literal)
-            val text = paragraph.firstChild
+            var next = paragraph.firstChild?.next
 
-            var next = text.next
-            while (next != null && (next is Text || next is SoftLineBreak)) {
+            while (next is Text || next is SoftLineBreak) {
                 if (next is Text) {
                     paragraphs[paragraphs.lastIndex] += next.literal
                 }
 
                 val current = next
-                next = text.next
-
+                next = next.next
                 if (current !is Text || next !is SoftLineBreak) {
                     break
                 }
             }
         }
     }
-
 
     override fun visit(heading: Heading?) {
         if (heading?.firstChild is Text) {
