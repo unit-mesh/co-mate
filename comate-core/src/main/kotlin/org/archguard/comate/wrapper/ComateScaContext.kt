@@ -1,6 +1,7 @@
 package org.archguard.comate.wrapper
 
 import org.archguard.scanner.core.client.ArchGuardClient
+import org.archguard.scanner.core.client.EmptyArchGuardClient
 import org.archguard.scanner.core.sca.ScaContext
 
 class ComateScaContext(
@@ -10,8 +11,7 @@ class ComateScaContext(
 ) : ScaContext {
     companion object {
         fun create(path: String, language: String): ScaContext {
-            val client = ComateArchGuardClient()
-            return ComateScaContext(client, path, language)
+            return ComateScaContext(EmptyArchGuardClient(), path, language)
         }
     }
 }

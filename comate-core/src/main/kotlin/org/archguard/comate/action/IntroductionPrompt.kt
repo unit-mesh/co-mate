@@ -53,6 +53,7 @@ class IntroductionPrompt(
 
         val items = depMap.map { "| ${it.key} | ${it.value.joinToString(", ")} |" }.joinToString("\n")
         val channels = ChannelType.allValues()
+
         return instr + """            
 dependencies: 
 
