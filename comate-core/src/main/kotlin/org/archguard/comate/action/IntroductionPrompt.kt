@@ -15,7 +15,7 @@ import kotlin.io.path.relativeTo
 class IntroductionPrompt(
     private val workdir: Path,
     override val strategy: Strategy
-) : BaseTemplate, PromptStrategy {
+) : PromptStrategy {
     override fun getRole(): String = "Architecture"
     override fun getInstruction(): String = "根据分析如下的 dependencies 等信息，分析并编写这个项目的介绍。"
     override fun getRequirements(): String = """1. 只返回最可能的 channel type，不做解释。
