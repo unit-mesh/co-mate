@@ -21,7 +21,7 @@
     - JVM version: [LangTorch](https://github.com/Knowly-ai/langtorch)
 - [ ] Content parser
     - Code analyser by ArchGuard
-        - [ ] Dependency parser: `Gradle`, `Maven`, `Cargo`, `NPM`, `Pip`, `Gem
+        - [ ] Dependency parser: `Gradle`, `Maven`, `Gomod`, `NPM`
         - [ ] Source code parser: `Java`, `Kotlin`, `Go`, `JavaScript`, `TypeScript`
     - [x] README.md parser: `Markdown`
     - [ ] K8s parser: `YAML`
