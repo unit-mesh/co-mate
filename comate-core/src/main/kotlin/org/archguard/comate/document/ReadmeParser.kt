@@ -5,8 +5,7 @@ import org.commonmark.parser.Parser
 
 data class ReadmeIntroduction(val title: String, val content: String)
 
-
-class ReadmeParser(val content: String) {
+class ReadmeParser(content: String) {
     private val parser: Parser = Parser.builder().build()
     private val node: Node = parser.parse(content)
 

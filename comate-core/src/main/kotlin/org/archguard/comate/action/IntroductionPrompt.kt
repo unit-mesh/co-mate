@@ -3,6 +3,8 @@ package org.archguard.comate.action
 import org.archguard.architecture.layered.ChannelType
 import org.archguard.comate.context.ComateScaContext
 import org.archguard.comate.document.ReadmeParser
+import org.archguard.comate.strategy.PromptStrategy
+import org.archguard.comate.strategy.Strategy
 import org.archguard.scanner.analyser.ScaAnalyser
 import java.nio.file.Path
 import kotlin.io.path.Path
@@ -10,7 +12,10 @@ import kotlin.io.path.exists
 import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
 
-class IntroductionPrompter(private val workdir: Path) : Prompter() {
+class IntroductionPrompt(
+    private val workdir: Path,
+    override val strategy: Strategy
+) : BaseTemplate, PromptStrategy {
     override fun getRole(): String = "Architecture"
     override fun getInstruction(): String = "根据分析如下的 dependencies 等信息，分析并编写这个项目的介绍。"
     override fun getRequirements(): String = """1. 只返回最可能的 channel type，不做解释。
