@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         assets:
-          # analysers:
+          - comate-cli/build/libs/comate-cli-*-all.jar
 
     permissions:
       contents: write
