@@ -1,7 +1,7 @@
 package org.archguard.comate.action
 
 import org.archguard.architecture.layered.ChannelType
-import org.archguard.comate.context.ComateScaContext
+import org.archguard.comate.wrapper.ComateScaContext
 import org.archguard.comate.document.ReadmeParser
 import org.archguard.comate.strategy.PromptStrategy
 import org.archguard.comate.strategy.Strategy
@@ -30,7 +30,6 @@ class IntroductionPrompt(
 该应用还使用了一些第三方库来构建用户界面 {xxx}，以及进行 {xxx} 等任务。该应用需要考虑 {xxx} 等非功能需求。
 ```""".trimIndent()
     }
-
 
     override fun getExtendData(): String {
         val dep = ScaAnalyser(ComateScaContext.create(workdir.toString(), "kotlin")).analyse()

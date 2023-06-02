@@ -1,6 +1,5 @@
-package org.archguard.comate.context
+package org.archguard.comate.wrapper
 
-import org.archguard.comate.ComateArchGuardClient
 import org.archguard.scanner.core.client.ArchGuardClient
 import org.archguard.scanner.core.sca.ScaContext
 

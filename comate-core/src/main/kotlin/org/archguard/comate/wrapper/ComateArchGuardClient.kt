@@ -1,4 +1,4 @@
-package org.archguard.comate
+package org.archguard.comate.wrapper
 
 import chapi.domain.core.CodeDataStruct
 import kotlinx.serialization.encodeToString
