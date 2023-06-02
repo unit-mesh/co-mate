@@ -5,7 +5,6 @@
 ## Todo
 
 - [ ] Indexes and Search
-    - [ ] Apache Arrow
     - [ ] Embedding API for Kotlin/Java
     - [ ] Embedding Database
 - [ ] [SentenceTransformers](https://huggingface.co/sentence-transformers) for Local Command
@@ -18,17 +17,16 @@
     - Usecase examples:
         - analysis system ： https://github.com/archguard/ddd-monolithic-code-sample
         - refactor function ：`comate-cli`
-- [ ] Agent API
-- [ ] Command
-- [ ] JVM version LangChain
-    - [LangTorch](https://github.com/Knowly-ai/langtorch)
+- [ ] LangChain
+    - JVM version: [LangTorch](https://github.com/Knowly-ai/langtorch)
 - [ ] Content parser
-    - [ ] Dependency parser: `Gradle`, `Maven`, `Cargo`, `NPM`, `Pip`, `Gem
-    - [ ] README.md parser: `Markdown`, `RST`
-    - [ ] Source code parser: `Java`, `Kotlin`, `Python`, `Rust`, `C`, `C++`, `Go`, `JavaScript`, `TypeScript`, `Ruby`
+    - Code analyser by ArchGuard
+        - [ ] Dependency parser: `Gradle`, `Maven`, `Cargo`, `NPM`, `Pip`, `Gem
+        - [ ] Source code parser: `Java`, `Kotlin`, `Go`, `JavaScript`, `TypeScript`
+    - [x] README.md parser: `Markdown`
     - [ ] K8s parser: `YAML`
     - [ ] Dockerfile parser: `Dockerfile`
-    - [ ] CI/CD parser: `Jenkinsfile`, `CircleCI`, `TravisCI`, `Github Action`
+    - [ ] CI/CD parser: `Github Action`
 
 ## To Spike
 
