@@ -3,6 +3,7 @@ package org.archguard.comate
 import ai.djl.huggingface.tokenizers.HuggingFaceTokenizer
 import ai.onnxruntime.OnnxTensor
 import ai.onnxruntime.OrtEnvironment
+import ai.onnxruntime.OrtSession
 import ai.onnxruntime.OrtSession.SessionOptions
 import ai.onnxruntime.OrtUtil
 import org.archguard.comate.action.IntroductionPrompt
@@ -19,13 +20,24 @@ fun main(args: Array<String>) {
     val tokenizer = HuggingFaceTokenizer.newInstance(Paths.get("model/tokenizer.json"))
     val sequence = "hello, world";
 
-    embed(tokenizer, sequence)
+
+    val env = OrtEnvironment.getEnvironment()
+    val modelPath: String = Path("model/model.onnx").toString()
+    val sessionOptions = SessionOptions()
+    val session = env.createSession(modelPath, sessionOptions)
+
+    embed(tokenizer, session, env, sequence)
 
 //    val prompt = processCmds(args, basepath)
 //    println(prompt)
 }
 
-private fun embed(tokenizer: HuggingFaceTokenizer, sequence: String): FloatArray {
+private fun embed(
+    tokenizer: HuggingFaceTokenizer,
+    session: OrtSession,
+    env: OrtEnvironment,
+    sequence: String,
+): FloatArray {
     val tokenized = tokenizer.encode(sequence, true)
 
     val inputIds = tokenized.ids
@@ -36,24 +48,20 @@ private fun embed(tokenizer: HuggingFaceTokenizer, sequence: String): FloatArray
     val tensorAttentionMask = OrtUtil.reshape(attentionMask, longArrayOf(1, attentionMask.size.toLong()))
     val tensorTypeIds = OrtUtil.reshape(typeIds, longArrayOf(1, typeIds.size.toLong()))
 
-    val env = OrtEnvironment.getEnvironment()
-    val modelPath: String = Path("model/model.onnx").toString()
-    SessionOptions().use { options ->
-        env.createSession(modelPath, options).use { session ->
-            val result = session.run(
-                mapOf(
-                    "input_ids" to OnnxTensor.createTensor(env, tensorInput),
-                    "attention_mask" to OnnxTensor.createTensor(env, tensorAttentionMask),
-                    "token_type_ids" to OnnxTensor.createTensor(env, tensorTypeIds),
-                ),
-            )
+    val result = session.run(
+        mapOf(
+            "input_ids" to OnnxTensor.createTensor(env, tensorInput),
+            "attention_mask" to OnnxTensor.createTensor(env, tensorAttentionMask),
+            "token_type_ids" to OnnxTensor.createTensor(env, tensorTypeIds),
+        ),
+    )
 
-            val outputTensor = result.get(0) as OnnxTensor
-            val output = outputTensor.floatBuffer.array()
+    val outputTensor = result.get(0) as OnnxTensor
+    val output = outputTensor.floatBuffer.array()
 
-            return output
-        }
-    }
+    // todo: fill details
+
+    return output
 }
 
 private fun processCmds(args: Array<String>, basepath: Path): String {
