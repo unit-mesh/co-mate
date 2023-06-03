@@ -11,25 +11,46 @@ import kotlin.io.path.Path
 
 fun main(args: Array<String>) {
     val basepath = Path(File(".").absolutePath)
-
     val create = Semantic.create()
-    val first = create.embed("analysis system")
-    val second = create.embed("analysys systems")
+    val basicIntroCommand = listOf(
+        "introduction system",
+        "介绍一下这个系统",
+        "介绍系统",
+    )
 
-    val similarity = cosineSimilarity(first, second)
-    println(similarity)
-}
+    val basicIntro = basicIntroCommand.map { create.embed(it) }
 
-private fun processCmds(args: Array<String>, basepath: Path): String {
     val cmd = if (args.isEmpty()) {
-        "intro"
+        "introduction systems"
     } else {
         args[0]
     }
 
-    val command = ComateCommand.valueOf(cmd.capitalize())
-    val prompt = command.prompt(basepath)
-    return prompt
+    val input = create.embed(cmd)
+    var isMatchIntro = false
+
+    run breaking@{
+        basicIntro.forEach {
+            try {
+                val similarity = cosineSimilarity(it, input)
+                if (similarity > 0.6) {
+                    isMatchIntro = true
+                    return@breaking
+                }
+            } catch (e: Exception) {
+//                println(e)
+            }
+        }
+    }
+
+    if (isMatchIntro) {
+        val promptStrategy = BasicPromptStrategy()
+        val basicPrompter = IntroductionPrompt(basepath, promptStrategy)
+        val prompt = basicPrompter.prompt()
+        println(prompt)
+    } else {
+        println("不知道你在说什么")
+    }
 }
 
 enum class ComateCommand(command: String) {

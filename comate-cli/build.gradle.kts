@@ -11,6 +11,9 @@ dependencies {
     implementation(projects.comateCore)
     implementation(projects.architecture)
 
+    implementation(libs.bundles.openai)
+    implementation(libs.bundles.markdown)
+
     implementation(libs.kotlin.stdlib)
     implementation(libs.langtorch)
 
