@@ -23,7 +23,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("org.archguard.copilot.MainKt")
+    mainClass.set("org.archguard.comate.MainKt")
 }
 
 tasks {
