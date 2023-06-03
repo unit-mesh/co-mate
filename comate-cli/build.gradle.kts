@@ -11,14 +11,6 @@ dependencies {
     implementation(projects.comateCore)
     implementation(projects.architecture)
 
-    implementation("org.jetbrains.kotlinx:kotlin-deeplearning-api:0.5.2")
-    implementation("org.jetbrains.kotlinx:kotlin-deeplearning-onnx:0.5.2")
-
-    implementation("ai.djl.huggingface:tokenizers:0.22.1")
-//    implementation("org.nd4j:nd4j-backends:1.0.0-M2.1")
-//    implementation("org.nd4j:nd4j-native:1.0.0-M2.1")
-//    implementation("org.nd4j:nd4j-api:1.0.0-M2.1")
-
     implementation(libs.kotlin.stdlib)
     implementation(libs.langtorch)
 
