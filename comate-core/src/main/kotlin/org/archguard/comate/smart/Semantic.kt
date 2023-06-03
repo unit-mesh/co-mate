@@ -44,13 +44,13 @@ class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val
             val onnxPath =  Companion::class.java.classLoader.getResource("model/model.onnx")!!.toURI()
 
             // https://stackoverflow.com/questions/22605666/java-access-files-in-jar-causes-java-nio-file-filesystemnotfoundexception
-            val fsEnv: MutableMap<String, String> = HashMap()
-            FileSystems.newFileSystem(tokenizerPath, fsEnv)
-            try {
-                FileSystems.newFileSystem(onnxPath, fsEnv)
-            } catch (e: Exception) {
-                // ignore
-            }
+//            val fsEnv: MutableMap<String, String> = HashMap()
+//            FileSystems.newFileSystem(tokenizerPath, fsEnv)
+//            try {
+//                FileSystems.newFileSystem(onnxPath, fsEnv)
+//            } catch (e: Exception) {
+//                // ignore
+//            }
 
             val tokenizer = HuggingFaceTokenizer.newInstance(tokenizerPath.toPath())
             val env = OrtEnvironment.getEnvironment()
