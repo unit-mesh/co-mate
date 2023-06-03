@@ -12,13 +12,33 @@ import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
 import kotlin.io.path.Path
+import kotlin.math.sqrt
 
 
 fun main(args: Array<String>) {
     val basepath = Path(File(".").absolutePath)
 
-    val sequence = "Hello, world!";
-    Semantic.create().embed(sequence)
+    val create = Semantic.create()
+    val first = create.embed("analysis system")
+    val second = create.embed("analysys systems")
+
+    val similarity = cosineSimilarity(first, second)
+    println(similarity)
+}
+
+fun cosineSimilarity(first: FloatArray, second: FloatArray): Float {
+    var dotProduct = 0f
+    var normA = 0f
+    var normB = 0f
+
+    for (i in first.indices) {
+        dotProduct += first[i] * second[i]
+        normA += first[i] * first[i]
+        normB += second[i] * second[i]
+    }
+
+    val denominator = sqrt(normA) * sqrt(normB)
+    return if (denominator == 0f) 0f else dotProduct / denominator
 }
 
 class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val env: OrtEnvironment) {

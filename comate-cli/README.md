@@ -2,6 +2,8 @@
 
 - JDL -> Java Deep Learning
 - KotlinDL -> Kotlin Deep Learning
+- Algorithmia 
+  - [ ] cosine similarits: https://huggingface.co/tasks/sentence-similarity
 
 ```kotlin
 val model = OnnxInferenceModel("model/model.onnx")
