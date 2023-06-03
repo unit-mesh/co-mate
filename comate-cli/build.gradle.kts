@@ -29,7 +29,7 @@ application {
 tasks {
     shadowJar {
         manifest {
-            attributes(Pair("Main-Class", "org.archguard.copilot.MainKt"))
+            attributes(Pair("Main-Class", "org.archguard.comate.MainKt"))
         }
         // minimize()
         dependencies {
