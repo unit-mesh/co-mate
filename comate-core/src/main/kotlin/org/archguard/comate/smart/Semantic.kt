@@ -5,7 +5,9 @@ import ai.onnxruntime.OnnxTensor
 import ai.onnxruntime.OrtEnvironment
 import ai.onnxruntime.OrtSession
 import ai.onnxruntime.OrtUtil
+import java.nio.file.FileSystems
 import kotlin.io.path.toPath
+
 
 class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val env: OrtEnvironment) {
     fun embed(
@@ -38,13 +40,22 @@ class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val
 
     companion object {
         fun create(): Semantic {
-            val tokenizerPath = Companion::class.java.classLoader.getResource("model/tokenizer.json")!!.toURI().toPath()
-            val onnxPath =  Companion::class.java.classLoader.getResource("model/model.onnx")!!.toURI().path
+            val tokenizerPath = Companion::class.java.classLoader.getResource("model/tokenizer.json")!!.toURI()
+            val onnxPath =  Companion::class.java.classLoader.getResource("model/model.onnx")!!.toURI()
 
-            val tokenizer = HuggingFaceTokenizer.newInstance(tokenizerPath)
+            // https://stackoverflow.com/questions/22605666/java-access-files-in-jar-causes-java-nio-file-filesystemnotfoundexception
+            val fsEnv: MutableMap<String, String> = HashMap()
+            FileSystems.newFileSystem(tokenizerPath, fsEnv)
+            try {
+                FileSystems.newFileSystem(onnxPath, fsEnv)
+            } catch (e: Exception) {
+                // ignore
+            }
+
+            val tokenizer = HuggingFaceTokenizer.newInstance(tokenizerPath.toPath())
             val env = OrtEnvironment.getEnvironment()
             val sessionOptions = OrtSession.SessionOptions()
-            val session = env.createSession(onnxPath.toString(), sessionOptions)
+            val session = env.createSession(onnxPath.path, sessionOptions)
 
             return Semantic(tokenizer, session, env)
         }
