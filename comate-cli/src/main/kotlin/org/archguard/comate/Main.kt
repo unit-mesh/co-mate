@@ -21,6 +21,7 @@ fun main(args: Array<String>) {
     val basicIntroCommand = listOf(
         "introduction system",
         "介绍一下这个系统",
+        "介绍这个系统",
         "介绍系统",
     )
 
@@ -60,7 +61,7 @@ fun main(args: Array<String>) {
         val promptStrategy = BasicPromptStrategy()
         val basicPrompter = IntroductionPrompt(basepath, promptStrategy)
         val prompt = basicPrompter.prompt()
-        println("prompt to openai: $prompt")
+        println("prompt to openai...")
         val output = prompt(service, prompt)
         println(output)
     } else {
