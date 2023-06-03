@@ -17,51 +17,50 @@ import kotlin.io.path.Path
 fun main(args: Array<String>) {
     val basepath = Path(File(".").absolutePath)
 
-    val tokenizer = HuggingFaceTokenizer.newInstance(Paths.get("model/tokenizer.json"))
-    val sequence = "hello, world";
-
-
-    val env = OrtEnvironment.getEnvironment()
-    val modelPath: String = Path("model/model.onnx").toString()
-    val sessionOptions = SessionOptions()
-    val session = env.createSession(modelPath, sessionOptions)
-
-    embed(tokenizer, session, env, sequence)
-
-//    val prompt = processCmds(args, basepath)
-//    println(prompt)
+    val sequence = "Hello, world!";
+    Semantic.create().embed(sequence)
 }
 
-private fun embed(
-    tokenizer: HuggingFaceTokenizer,
-    session: OrtSession,
-    env: OrtEnvironment,
-    sequence: String,
-): FloatArray {
-    val tokenized = tokenizer.encode(sequence, true)
+class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val env: OrtEnvironment) {
+    fun embed(
+        sequence: String,
+    ): FloatArray {
+        val tokenized = tokenizer.encode(sequence, true)
 
-    val inputIds = tokenized.ids
-    val attentionMask = tokenized.attentionMask
-    val typeIds = tokenized.typeIds
+        val inputIds = tokenized.ids
+        val attentionMask = tokenized.attentionMask
+        val typeIds = tokenized.typeIds
 
-    val tensorInput = OrtUtil.reshape(inputIds, longArrayOf(1, inputIds.size.toLong()))
-    val tensorAttentionMask = OrtUtil.reshape(attentionMask, longArrayOf(1, attentionMask.size.toLong()))
-    val tensorTypeIds = OrtUtil.reshape(typeIds, longArrayOf(1, typeIds.size.toLong()))
+        val tensorInput = OrtUtil.reshape(inputIds, longArrayOf(1, inputIds.size.toLong()))
+        val tensorAttentionMask = OrtUtil.reshape(attentionMask, longArrayOf(1, attentionMask.size.toLong()))
+        val tensorTypeIds = OrtUtil.reshape(typeIds, longArrayOf(1, typeIds.size.toLong()))
 
-    val result = session.run(
-        mapOf(
-            "input_ids" to OnnxTensor.createTensor(env, tensorInput),
-            "attention_mask" to OnnxTensor.createTensor(env, tensorAttentionMask),
-            "token_type_ids" to OnnxTensor.createTensor(env, tensorTypeIds),
-        ),
-    )
+        val result = session.run(
+            mapOf(
+                "input_ids" to OnnxTensor.createTensor(env, tensorInput),
+                "attention_mask" to OnnxTensor.createTensor(env, tensorAttentionMask),
+                "token_type_ids" to OnnxTensor.createTensor(env, tensorTypeIds),
+            ),
+        )
 
-    val outputTensor = result.get(0) as OnnxTensor
-    val output = outputTensor.floatBuffer.array()
+        val outputTensor = result.get(0) as OnnxTensor
+        val output = outputTensor.floatBuffer.array()
 
-    // todo: fill details
+        return output
+    }
 
-    return output
+
+    companion object {
+        fun create(): Semantic {
+            val tokenizer = HuggingFaceTokenizer.newInstance(Paths.get("model/tokenizer.json"))
+            val env = OrtEnvironment.getEnvironment()
+            val modelPath: String = Path("model/model.onnx").toString()
+            val sessionOptions = SessionOptions()
+            val session = env.createSession(modelPath, sessionOptions)
+
+            return Semantic(tokenizer, session, env)
+        }
+    }
 }
 
 private fun processCmds(args: Array<String>, basepath: Path): String {
