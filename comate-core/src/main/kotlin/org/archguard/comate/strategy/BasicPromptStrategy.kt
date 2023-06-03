@@ -4,26 +4,26 @@ import org.archguard.comate.action.BaseTemplate
 
 class BasicPromptStrategy : Strategy {
     override fun prompt(template: BaseTemplate): String {
-        var output = "";
+        var output = ""
 
         if (template.getRole().isNotEmpty()) {
-            output += "You're an ${template.getRole()}. "
+            output += "You're an ${template.getRole()},"
         }
 
         if (template.getInstruction().isNotEmpty()) {
-            output += "${template.getInstruction()}. "
+            output += template.getInstruction()
         }
 
         if (template.getRequirements().isNotEmpty()) {
-            output += "Here is requirements: ${template.getRequirements()}. "
+            output += "Here is requirements: ${template.getRequirements()}\n"
         }
 
         if (template.getSample().isNotEmpty()) {
-            output += "${template.getSample()}. "
+            output += "${template.getSample()}\n"
         }
 
         if (template.getExtendData().isNotEmpty()) {
-            output += "${template.getExtendData()}. "
+            output += "${template.getExtendData()}\n"
         }
 
         return output
