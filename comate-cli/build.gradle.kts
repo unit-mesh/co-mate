@@ -14,10 +14,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlin-deeplearning-api:0.5.2")
     implementation("org.jetbrains.kotlinx:kotlin-deeplearning-onnx:0.5.2")
 
-    implementation(platform("ai.djl:bom:0.22.0"))
-    implementation("ai.djl:api:0.22.0")
-    runtimeOnly("ai.djl.pytorch:pytorch-engine")
-    runtimeOnly("ai.djl.pytorch:pytorch-model-zoo")
+    implementation("ai.djl.huggingface:tokenizers:0.22.1")
+//    implementation(platform("ai.djl:bom:0.22.0"))
+//    implementation("ai.djl:api:0.22.0")
+//    runtimeOnly("ai.djl.pytorch:pytorch-engine")
+//    runtimeOnly("ai.djl.pytorch:pytorch-model-zoo")
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.langtorch)
