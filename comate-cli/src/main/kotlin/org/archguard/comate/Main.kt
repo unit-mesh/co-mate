@@ -1,14 +1,9 @@
 package org.archguard.comate
 
 import ai.djl.huggingface.tokenizers.HuggingFaceTokenizer
-import ai.djl.modality.nlp.bert.BertTokenizer
-import ai.djl.modality.nlp.bert.WordpieceTokenizer
-import ai.djl.modality.nlp.preprocess.Tokenizer
+import ai.djl.ndarray.NDManager
 import org.archguard.comate.action.IntroductionPrompt
 import org.archguard.comate.strategy.BasicPromptStrategy
-import org.jetbrains.kotlinx.dl.onnx.inference.OnnxInferenceModel
-import org.jetbrains.kotlinx.dl.onnx.inference.executionproviders.ExecutionProvider
-import org.jetbrains.kotlinx.dl.onnx.inference.inferAndCloseUsing
 import java.io.File
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -34,20 +29,19 @@ fun main(args: Array<String>) {
 
 private fun embed(tokenizer: HuggingFaceTokenizer, sequence: String) {
     val tokenized = tokenizer.encode(sequence, true)
-    val inputIds = tokenized.ids
-    val attentionMask = tokenized.attentionMask
-    val tokenTypeIds = tokenized.typeIds
-    val length = tokenized.ids.size
-//    let inputs_ids_array = ndarray::Array::from_shape_vec(
-//            (1, length),
-//            input_ids.iter().map(|&x| x as i64).collect(),
-//        )?;
 
+    val manager = NDManager.newBaseManager()
 
-//    val model = OnnxInferenceModel("model/model.onnx")
-//    model.inferAndCloseUsing(ExecutionProvider.CPU()) {
-//        println(it.inputDataType)
-//    }
+    val inputIdsArray = manager.create(tokenized.ids)
+    val attentionMaskArray = manager.create(tokenized.attentionMask)
+    val tokenTypeIdsArray = manager.create(tokenized.typeIds)
+
+//        let outputs = self.session.run([
+//            InputTensor::from_array(inputs_ids_array.into_dyn()),
+//            InputTensor::from_array(attention_mask_array.into_dyn()),
+//            InputTensor::from_array(token_type_ids_array.into_dyn()),
+//        ])?;
+
 }
 
 private fun processCmds(args: Array<String>, basepath: Path): String {
