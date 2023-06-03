@@ -4,6 +4,7 @@ import ai.djl.huggingface.tokenizers.HuggingFaceTokenizer
 import ai.onnxruntime.OnnxTensor
 import ai.onnxruntime.OrtEnvironment
 import ai.onnxruntime.OrtSession.SessionOptions
+import ai.onnxruntime.OrtUtil
 import org.archguard.comate.action.IntroductionPrompt
 import org.archguard.comate.strategy.BasicPromptStrategy
 import java.io.File
@@ -18,54 +19,39 @@ fun main(args: Array<String>) {
     val tokenizer = HuggingFaceTokenizer.newInstance(Paths.get("model/tokenizer.json"))
     val sequence = "hello, world";
 
-//            let tokenizer_output = self.tokenizer.encode(sequence, true).unwrap();
-//
-//        let input_ids = tokenizer_output.get_ids();
-//        let attention_mask = tokenizer_output.get_attention_mask();
-//        let token_type_ids = tokenizer_output.get_type_ids();
-
     embed(tokenizer, sequence)
 
 //    val prompt = processCmds(args, basepath)
 //    println(prompt)
 }
 
-private fun embed(tokenizer: HuggingFaceTokenizer, sequence: String) {
+private fun embed(tokenizer: HuggingFaceTokenizer, sequence: String): FloatArray {
     val tokenized = tokenizer.encode(sequence, true)
 
     val inputIds = tokenized.ids
     val attentionMask = tokenized.attentionMask
     val typeIds = tokenized.typeIds
 
-//    val manager = NDManager.newBaseManager()
-//    val inputIdsArray = manager.create(inputIds)
-//    val attentionMaskArray = manager.create(attentionMask)
-//    val tokenTypeIdsArray = manager.create(typeIds)
-
-//        let outputs = self.session.run([
-//            InputTensor::from_array(inputs_ids_array.into_dyn()),
-//            InputTensor::from_array(attention_mask_array.into_dyn()),
-//            InputTensor::from_array(token_type_ids_array.into_dyn()),
-//        ])?;
-
-//    val model = OnnxInferenceModel("model/model.onnx")
-//    val detections = model.inferAndCloseUsing(ExecutionProvider.CPU()) {
-//    }
-
+    val tensorInput = OrtUtil.reshape(inputIds, longArrayOf(1, inputIds.size.toLong()))
+    val tensorAttentionMask = OrtUtil.reshape(attentionMask, longArrayOf(1, attentionMask.size.toLong()))
+    val tensorTypeIds = OrtUtil.reshape(typeIds, longArrayOf(1, typeIds.size.toLong()))
 
     val env = OrtEnvironment.getEnvironment()
     val modelPath: String = Path("model/model.onnx").toString()
     SessionOptions().use { options ->
-//        val a = OnnxTensor.createTensor(env, floatArrayOf(2.0f))
         env.createSession(modelPath, options).use { session ->
-            val output = session.run(
+            val result = session.run(
                 mapOf(
-                    "input_ids" to OnnxTensor.createTensor(env, inputIds),
-                    "attention_mask" to OnnxTensor.createTensor(env, attentionMask),
-                    "token_type_ids" to OnnxTensor.createTensor(env, typeIds),
+                    "input_ids" to OnnxTensor.createTensor(env, tensorInput),
+                    "attention_mask" to OnnxTensor.createTensor(env, tensorAttentionMask),
+                    "token_type_ids" to OnnxTensor.createTensor(env, tensorTypeIds),
                 ),
             )
-            println(output[0])
+
+            val outputTensor = result.get(0) as OnnxTensor
+            val output = outputTensor.floatBuffer.array()
+
+            return output
         }
     }
 }
