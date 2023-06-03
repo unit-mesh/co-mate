@@ -1,4 +1,4 @@
-package org.archguard.copilot.agent
+package org.archguard.comate.agent
 
 enum class AgentType(val value: String) {
     ZERO_SHOT_REACT_DESCRIPTION("zero-shot-react-description"),
