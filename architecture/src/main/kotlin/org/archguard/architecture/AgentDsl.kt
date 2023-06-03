@@ -1,28 +1,8 @@
-package org.archguard.copilot.exec.agent
+package org.archguard.architecture
 
-enum class ArchStyle(val value: String) {
-    MVC("mvc"),
-    MVP("mvp"),
-    MVVM("mvvm"),
-    VIPER("viper"),
-    CLEAN("clean"),
-    DDD("ddd"),
-    ONION("onion"),
-    HEXAGONAL("hexagonal");
+import org.archguard.architecture.layered.ArchStyle
 
-    companion object {
-        fun contains(string: String): Boolean {
-            val lowercase = string.lowercase()
-            return values().any { it.value == lowercase }
-        }
-
-        fun valuesString(): String {
-            return values().joinToString(", ") { it.value }
-        }
-    }
-}
-
-class ExecAgent {
+class ComateDsl {
     private var workdir: String = ""
     private var archStyle: ArchStyle = ArchStyle.MVC
 
@@ -63,8 +43,8 @@ class ClassBody {
     }
 }
 
-fun exec(init: ExecAgent.() -> Unit): ExecAgent {
-    val agent = ExecAgent()
+fun exec(init: ComateDsl.() -> Unit): ComateDsl {
+    val agent = ComateDsl()
     agent.init()
     return agent
 }

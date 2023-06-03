@@ -9,6 +9,7 @@ plugins {
 dependencies {
     implementation(projects.llmCore)
     implementation(projects.comateCore)
+    implementation(projects.architecture)
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.langtorch)

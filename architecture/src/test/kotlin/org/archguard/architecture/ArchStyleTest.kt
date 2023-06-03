@@ -1,8 +1,8 @@
-package org.archguard.copilot.exec.agent
+package org.archguard.architecture
 
 import org.junit.jupiter.api.Test
 
-class ExecAgentTest {
+class ArchStyleTest {
     @Test
     fun demo() {
         exec {
