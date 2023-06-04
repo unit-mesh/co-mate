@@ -9,6 +9,9 @@ dependencies {
 
     implementation(projects.architecture)
 
+    implementation(libs.bundles.openai)
+    implementation(libs.bundles.markdown)
+
     implementation("org.archguard.scanner:analyser_sca:2.0.1")
 
     implementation("org.jetbrains.kotlinx:kotlin-deeplearning-api:0.5.2")
