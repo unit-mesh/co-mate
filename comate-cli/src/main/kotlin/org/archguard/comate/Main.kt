@@ -18,6 +18,7 @@ fun main(args: Array<String>) {
 
     val commandEmbedMap = createEmbedMap(create)
 
+    // architecture style
     val cmd = if (args.isEmpty()) "introduction systems" else args[0]
 
     val inputEmbed = create.embed(cmd)
@@ -41,19 +42,30 @@ fun main(args: Array<String>) {
 
     val openAiConnector = createConnector()
 
-    when (comateCommand) {
-        ComateCommand.None -> {
-            logger.info("不知道你在说什么")
-        }
+    if (comateCommand == ComateCommand.None) {
+        println("no command found")
+        return;
+    }
 
-        else -> {
-            logger.info("prompt to openai...")
+    logger.info("prompt to openai...")
+
+    val output = when (comateCommand) {
+        ComateCommand.Intro -> {
             val promptText = ComateCommand.Intro.prompt(basepath, "kotlin")
             logger.info("prompt text: $promptText")
-            val output = openAiConnector.prompt(promptText)
-            println(output)
+            openAiConnector.prompt(promptText)
         }
+
+        ComateCommand.ArchStyle -> {
+            val promptText = ComateCommand.ArchStyle.prompt(basepath, "kotlin")
+            logger.info("prompt text: $promptText")
+            openAiConnector.prompt(promptText)
+        }
+
+        else -> ""
     }
+
+    println(output)
 }
 
 private fun createEmbedMap(create: Semantic): Map<ComateCommand, List<Embed>> {
@@ -65,7 +77,8 @@ private fun createEmbedMap(create: Semantic): Map<ComateCommand, List<Embed>> {
         "介绍系统",
     )
     val archStyleCommand = listOf(
-        "what is system arch style",
+        "architecture style",
+        "what is system architecture style",
         "系统的架构风格是什么？",
         "架构风格是啥",
         "架构风格是啥？",

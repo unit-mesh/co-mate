@@ -15,6 +15,11 @@ class ArchStylePrompt(
         val sourceCodeContext = ComateSourceCodeContext.create(workdir.toString(), lang)
         val codeDataStructs = KotlinAnalyser(sourceCodeContext).analyse()
 
+        println(codeDataStructs)
+
+        // filter Main.kt
+        val codeDataStructsFiltered = codeDataStructs.filter { it.FilePath.endsWith("Main.kt") }
+
         return ""
     }
 }
