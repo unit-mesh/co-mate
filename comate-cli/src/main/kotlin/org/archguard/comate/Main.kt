@@ -1,17 +1,13 @@
 package org.archguard.comate
 
-import com.theokanning.openai.completion.chat.ChatCompletionRequest
-import com.theokanning.openai.completion.chat.ChatMessage
-import com.theokanning.openai.completion.chat.ChatMessageRole
-import com.theokanning.openai.service.OpenAiService
 import io.github.cdimascio.dotenv.Dotenv
 import org.archguard.comate.action.IntroductionPrompt
+import org.archguard.comate.smart.OpenAIConnector
 import org.archguard.comate.smart.Semantic
 import org.archguard.comate.smart.cosineSimilarity
 import org.archguard.comate.strategy.BasicPromptStrategy
 import java.io.File
 import java.nio.file.Path
-import java.time.Duration
 import kotlin.io.path.Path
 
 
@@ -54,37 +50,18 @@ fun main(args: Array<String>) {
     val dotenv = Dotenv.configure().directory(appDir.toString()).load()
     val apiKey = dotenv["OPENAI_API_KEY"]
 
-    val timeout = Duration.ofSeconds(600)
-    val service = OpenAiService(apiKey, timeout)
+    val openAiConnector = OpenAIConnector(apiKey)
 
     if (isMatchIntro) {
         val promptStrategy = BasicPromptStrategy()
         val basicPrompter = IntroductionPrompt(basepath, promptStrategy)
         val prompt = basicPrompter.prompt()
         println("prompt to openai...")
-        val output = prompt(service, prompt)
+        val output = openAiConnector.prompt(prompt)
         println(output)
     } else {
         println("不知道你在说什么")
     }
-}
-
-fun prompt(service: OpenAiService, promptText: String): String {
-    val messages: MutableList<ChatMessage> = ArrayList()
-    val systemMessage = ChatMessage(ChatMessageRole.USER.value(), promptText)
-
-    messages.add(systemMessage)
-    val completionRequest = ChatCompletionRequest.builder()
-        .model("gpt-3.5-turbo")
-        .temperature(0.0)
-        .messages(messages)
-        .build()
-
-    val completion = service.createChatCompletion(completionRequest)
-    val output = completion
-        .choices[0].message.content
-
-    return output
 }
 
 enum class ComateCommand(command: String) {
