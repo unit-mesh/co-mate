@@ -1,13 +1,10 @@
 package org.archguard.comate
 
 import io.github.cdimascio.dotenv.Dotenv
-import org.archguard.comate.action.IntroductionPrompt
 import org.archguard.comate.smart.OpenAIConnector
 import org.archguard.comate.smart.Semantic
 import org.archguard.comate.smart.cosineSimilarity
-import org.archguard.comate.strategy.BasicPromptStrategy
 import java.io.File
-import java.nio.file.Path
 import kotlin.io.path.Path
 
 typealias Embed = FloatArray
@@ -45,6 +42,7 @@ fun main(args: Array<String>) {
         ComateCommand.None -> {
             println("不知道你在说什么")
         }
+
         else -> {
             println("prompt to openai...")
             val promptText = ComateCommand.Intro.prompt(basepath)
@@ -62,10 +60,16 @@ private fun createEmbedMap(create: Semantic): Map<ComateCommand, List<Embed>> {
         "介绍这个系统",
         "介绍系统",
     )
-    val basicIntro = basicIntroCommand.map { create.embed(it) }
+    val archStyleCommand = listOf(
+        "what is system arch style",
+        "系统的架构风格是什么？",
+        "架构风格是啥",
+        "架构风格是啥？",
+    );
 
     commandEmbedMap = mapOf(
-        ComateCommand.Intro to basicIntro,
+        ComateCommand.Intro to basicIntroCommand.map { create.embed(it) },
+        ComateCommand.ArchStyle to archStyleCommand.map { create.embed(it) },
     )
     return commandEmbedMap
 }
@@ -78,18 +82,3 @@ private fun createConnector(): OpenAIConnector {
     return openAiConnector
 }
 
-enum class ComateCommand(command: String) {
-    None("") {
-        override fun prompt(basepath: Path): String = ""
-    },
-    Intro("intro") {
-        override fun prompt(basepath: Path): String {
-            val promptStrategy = BasicPromptStrategy()
-            val basicPrompter = IntroductionPrompt(basepath, promptStrategy)
-            val prompt = basicPrompter.prompt()
-            return prompt
-        }
-    };
-
-    abstract fun prompt(basepath: Path): String
-}

@@ -8,7 +8,9 @@ enum class ArchStyle(val value: String) {
     CLEAN("clean"),
     DDD("ddd"),
     ONION("onion"),
-    HEXAGONAL("hexagonal");
+    HEXAGONAL("hexagonal"),
+    MONOLITH("monolith")
+    ;
 
     companion object {
         fun contains(string: String): Boolean {
