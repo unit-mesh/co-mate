@@ -13,16 +13,16 @@
         - [x] Deep Java Library: https://github.com/deepjavalibrary/djl
             - [x] [Huggingface tokenizers](https://github.com/deepjavalibrary/djl/tree/master/extensions/tokenizers)
     - [x] Onnx Model
-        - [x] use Bloop converted: [https://github.com/BloopAI/bloop/tree/main/model]
-    - Usecase examples:
+        - [x] use Bloop converted: https://github.com/BloopAI/bloop/tree/main/model
+    - Usecases examples:
         - [ ] analysis system ： https://github.com/archguard/ddd-monolithic-code-sample
         - [ ] refactor function ：`comate-cli`
 - [ ] LangChain
     - JVM version: [LangTorch](https://github.com/Knowly-ai/langtorch)
 - [ ] Content parser
     - Code analyser by ArchGuard
-        - [ ] Dependency parser: `Gradle`, `Maven`, `Gomod`, `NPM`
-        - [ ] Source code parser: `Java`, `Kotlin`, `Go`, `JavaScript`, `TypeScript`
+        - [x] Dependency parser: `Gradle`, `Maven`, `Gomod`, `NPM`
+        - [x] Source code parser: `Java`, `Kotlin`, `Go`, `JavaScript`, `TypeScript`
     - [x] README.md parser: `Markdown`
     - [ ] K8s parser: `YAML`
     - [ ] Dockerfile parser: `Dockerfile`
