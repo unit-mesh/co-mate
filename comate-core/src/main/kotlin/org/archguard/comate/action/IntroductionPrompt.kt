@@ -18,7 +18,7 @@ class IntroductionPrompt(
 ) : PromptStrategy {
     override fun getRole(): String = "Architecture"
     override fun getInstruction(): String = "根据分析如下的 dependencies 等信息，分析并编写这个项目的介绍。"
-    override fun getRequirements(): String = """1. 只返回最可能的 channel type，不做解释。
+    override fun getRequirements(): String = """1. 从 {all channel types} 中选择最可能的 {channel type}，不做解释。
 2. 根据 dependencies 分析这个应用的核心场景。
 3. 根据 dependencies 分析这个应用要考虑的功能需求和非功能需求。
 4. 你返回的介绍类似于："""
@@ -54,14 +54,14 @@ class IntroductionPrompt(
         val items = depMap.map { "| ${it.key} | ${it.value.joinToString(", ")} |" }.joinToString("\n")
         val channels = ChannelType.allValues()
 
-        return instr + """            
+        return instr + """
+all channel types: $channels
+                
 dependencies: 
 
 | path | deps |
 | --- | --- |
 $items
-
-all channel types: $channels
 """
     }
 }

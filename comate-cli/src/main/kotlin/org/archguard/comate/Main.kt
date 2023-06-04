@@ -18,25 +18,23 @@ fun main(args: Array<String>) {
 
     val commandEmbedMap = createEmbedMap(create)
 
-    val cmd = if (args.isEmpty()) {
-        "introduction systems"
-    } else {
-        args[0]
-    }
+    val cmd = if (args.isEmpty()) "introduction systems" else args[0]
 
-    val input = create.embed(cmd)
+    val inputEmbed = create.embed(cmd)
 
     var comateCommand = ComateCommand.None
-    commandEmbedMap.forEach { (command, embeds) ->
-        embeds.forEach {
-            try {
-                val similarity = cosineSimilarity(it, input)
-                if (similarity > 0.6) {
-                    comateCommand = command
-                    return@main
-                }
-            } catch (e: Exception) {
+    run breaking@{
+        commandEmbedMap.forEach { (command, embeds) ->
+            embeds.forEach {
+                try {
+                    val similarity = cosineSimilarity(it, inputEmbed)
+                    if (similarity > 0.6) {
+                        comateCommand = command
+                        return@breaking
+                    }
+                } catch (e: Exception) {
 //                println(e)
+                }
             }
         }
     }
@@ -47,7 +45,6 @@ fun main(args: Array<String>) {
         ComateCommand.None -> {
             println("不知道你在说什么")
         }
-
         else -> {
             println("prompt to openai...")
             val promptText = ComateCommand.Intro.prompt(basepath)
