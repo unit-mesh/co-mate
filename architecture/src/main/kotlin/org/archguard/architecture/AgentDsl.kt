@@ -1,22 +1,22 @@
 package org.archguard.architecture
 
-import org.archguard.architecture.layered.ArchStyle
+import org.archguard.architecture.layered.LayeredStyle
 
 class ComateDsl {
     private var workdir: String = ""
-    private var archStyle: ArchStyle = ArchStyle.MVC
+    private var layeredStyle: LayeredStyle = LayeredStyle.MVC
 
     fun workspace(path: String) {
         this.workdir = path
     }
 
     /**
-     * the Architecture Style, default is MVC, available values are: [ArchStyle.valuesString]
+     * the Architecture Style, default is MVC, available values are: [LayeredStyle.valuesString]
      * should be lowercase
      */
     fun archStyle(string: String) {
-        if (ArchStyle.contains(string)) {
-            this.archStyle = ArchStyle.valueOf(string.uppercase())
+        if (LayeredStyle.contains(string)) {
+            this.layeredStyle = LayeredStyle.valueOf(string.uppercase())
         }
     }
 

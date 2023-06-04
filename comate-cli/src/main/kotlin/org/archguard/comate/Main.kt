@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
 
     val commandEmbedMap = createEmbedMap(create)
 
-    // architecture style
+    // layered style
     val cmd = if (args.isEmpty()) "introduction systems" else args[0]
 
     val inputEmbed = create.embed(cmd)
@@ -56,8 +56,8 @@ fun main(args: Array<String>) {
             openAiConnector.prompt(promptText)
         }
 
-        ComateCommand.ArchStyle -> {
-            val promptText = ComateCommand.ArchStyle.prompt(basepath, "kotlin")
+        ComateCommand.LayeredStyle -> {
+            val promptText = ComateCommand.LayeredStyle.prompt(basepath, "kotlin")
             logger.info("prompt text: $promptText")
             openAiConnector.prompt(promptText)
         }
@@ -77,16 +77,14 @@ private fun createEmbedMap(create: Semantic): Map<ComateCommand, List<Embed>> {
         "介绍系统",
     )
     val archStyleCommand = listOf(
-        "architecture style",
-        "what is system architecture style",
-        "系统的架构风格是什么？",
-        "架构风格是啥",
-        "架构风格是啥？",
+        "layered style",
+        "what is layered style",
+        "系统的分层",
     );
 
     commandEmbedMap = mapOf(
         ComateCommand.Intro to basicIntroCommand.map { create.embed(it) },
-        ComateCommand.ArchStyle to archStyleCommand.map { create.embed(it) },
+        ComateCommand.LayeredStyle to archStyleCommand.map { create.embed(it) },
     )
     return commandEmbedMap
 }

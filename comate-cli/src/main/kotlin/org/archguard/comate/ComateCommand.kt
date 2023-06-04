@@ -1,6 +1,6 @@
 package org.archguard.comate
 
-import org.archguard.comate.action.ArchStylePrompt
+import org.archguard.comate.action.LayeredStylePrompt
 import org.archguard.comate.action.IntroductionPrompt
 import org.archguard.comate.strategy.BasicPromptStrategy
 import java.nio.file.Path
@@ -16,10 +16,10 @@ enum class ComateCommand(command: String) {
             return basicPrompter.prompt()
         }
     },
-    ArchStyle("archstyle") {
+    LayeredStyle("archstyle") {
         override fun prompt(basepath: Path, lang: String): String {
             val promptStrategy = BasicPromptStrategy()
-            val basicPrompter = ArchStylePrompt(basepath, lang, promptStrategy)
+            val basicPrompter = LayeredStylePrompt(basepath, lang, promptStrategy)
             return basicPrompter.prompt()
         }
     }

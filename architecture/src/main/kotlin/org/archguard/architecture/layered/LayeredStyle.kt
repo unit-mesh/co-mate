@@ -1,6 +1,6 @@
 package org.archguard.architecture.layered
 
-enum class ArchStyle(val value: String) {
+enum class LayeredStyle(val value: String) {
     MVC("mvc"),
     MVP("mvp"),
     MVVM("mvvm"),
@@ -8,8 +8,7 @@ enum class ArchStyle(val value: String) {
     CLEAN("clean"),
     DDD("ddd"),
     ONION("onion"),
-    HEXAGONAL("hexagonal"),
-    MONOLITH("monolith")
+    HEXAGONAL("hexagonal")
     ;
 
     companion object {

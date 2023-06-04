@@ -6,7 +6,7 @@ import org.archguard.comate.wrapper.ComateSourceCodeContext
 import org.archguard.scanner.analyser.KotlinAnalyser
 import java.nio.file.Path
 
-class ArchStylePrompt(
+class LayeredStylePrompt(
     private val workdir: Path,
     val lang: String,
     override val strategy: Strategy,
