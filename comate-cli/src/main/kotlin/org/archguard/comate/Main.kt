@@ -48,7 +48,7 @@ fun main(args: Array<String>) {
 
         else -> {
             logger.info("prompt to openai...")
-            val promptText = ComateCommand.Intro.prompt(basepath)
+            val promptText = ComateCommand.Intro.prompt(basepath, "kotlin")
             logger.info("prompt text: $promptText")
             val output = openAiConnector.prompt(promptText)
             println(output)

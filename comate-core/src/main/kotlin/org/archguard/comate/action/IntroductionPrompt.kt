@@ -14,6 +14,7 @@ import kotlin.io.path.relativeTo
 
 class IntroductionPrompt(
     private val workdir: Path,
+    val lang: String,
     override val strategy: Strategy
 ) : PromptStrategy {
     override fun getRole(): String = "Architecture"
@@ -32,7 +33,7 @@ class IntroductionPrompt(
     }
 
     override fun getExtendData(): String {
-        val dep = ScaAnalyser(ComateScaContext.create(workdir.toString(), "kotlin")).analyse()
+        val dep = ScaAnalyser(ComateScaContext.create(workdir.toString(), lang)).analyse()
         val depMap: Map<String, List<String>> = dep.groupBy {
             val relativePath = Path(it.path).relativeTo(workdir).toString()
             relativePath
