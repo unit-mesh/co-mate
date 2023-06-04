@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
     val commandEmbedMap = createEmbedMap(create)
 
     // layered style
-    val cmd = if (args.isEmpty()) "introduction systems" else args[0]
+    val cmd = if (args.isEmpty()) "layered style" else args[0]
 
     val inputEmbed = create.embed(cmd)
 

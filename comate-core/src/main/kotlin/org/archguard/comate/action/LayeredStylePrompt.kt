@@ -1,5 +1,6 @@
 package org.archguard.comate.action
 
+import chapi.domain.core.CodeDataStruct
 import org.archguard.comate.strategy.PromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.comate.wrapper.ComateSourceCodeContext
@@ -15,10 +16,9 @@ class LayeredStylePrompt(
         val sourceCodeContext = ComateSourceCodeContext.create(workdir.toString(), lang)
         val codeDataStructs = KotlinAnalyser(sourceCodeContext).analyse()
 
-        println(codeDataStructs)
-
-        // filter Main.kt
-        val codeDataStructsFiltered = codeDataStructs.filter { it.FilePath.endsWith("Main.kt") }
+        // get all packages and remove duplicates
+        val packages = codeDataStructs.map { it.Module + "/" + it.Package }.toSet().toList()
+        println("packages: $packages")
 
         return ""
     }
