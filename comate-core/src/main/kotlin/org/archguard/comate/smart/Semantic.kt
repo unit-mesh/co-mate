@@ -45,9 +45,13 @@ class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val
             val tokenizerPath = Companion::class.java.classLoader.getResource("model/tokenizer.json")!!.toURI()
             val onnxPath =  Companion::class.java.classLoader.getResource("model/model.onnx")!!.toURI()
 
-            val env: Map<String, String> = HashMap()
-            val array: List<String> = tokenizerPath.toString().split("!")
-            val fs: FileSystem = FileSystems.newFileSystem(URI.create(array[0]), env)
+            try {
+                val env: Map<String, String> = HashMap()
+                val array: List<String> = tokenizerPath.toString().split("!")
+                val fs: FileSystem = FileSystems.newFileSystem(URI.create(array[0]), env)
+            } catch (e: Exception) {
+//                e.printStackTrace()
+            }
 
             val tokenizer = HuggingFaceTokenizer.newInstance(tokenizerPath.toPath())
             val ortEnv = OrtEnvironment.getEnvironment()
