@@ -11,11 +11,54 @@ import java.nio.file.Path
 import kotlin.io.path.Path
 
 typealias Embed = FloatArray
-var commandEmbedMap: Map<ComateCommand, List<Embed>> = mapOf()
 
 fun main(args: Array<String>) {
     val basepath = Path(File(".").absolutePath)
     val create = Semantic.create()
+
+    val commandEmbedMap = createEmbedMap(create)
+
+    val cmd = if (args.isEmpty()) {
+        "introduction systems"
+    } else {
+        args[0]
+    }
+
+    val input = create.embed(cmd)
+
+    var comateCommand = ComateCommand.None
+    commandEmbedMap.forEach { (command, embeds) ->
+        embeds.forEach {
+            try {
+                val similarity = cosineSimilarity(it, input)
+                if (similarity > 0.6) {
+                    comateCommand = command
+                    return@main
+                }
+            } catch (e: Exception) {
+//                println(e)
+            }
+        }
+    }
+
+    val openAiConnector = createConnector()
+
+    when (comateCommand) {
+        ComateCommand.None -> {
+            println("不知道你在说什么")
+        }
+
+        else -> {
+            println("prompt to openai...")
+            val promptText = ComateCommand.Intro.prompt(basepath)
+            val output = openAiConnector.prompt(promptText)
+            println(output)
+        }
+    }
+}
+
+private fun createEmbedMap(create: Semantic): Map<ComateCommand, List<Embed>> {
+    var commandEmbedMap: Map<ComateCommand, List<Embed>> = mapOf()
     val basicIntroCommand = listOf(
         "introduction system",
         "介绍一下这个系统",
@@ -27,40 +70,7 @@ fun main(args: Array<String>) {
     commandEmbedMap = mapOf(
         ComateCommand.Intro to basicIntro,
     )
-
-    val cmd = if (args.isEmpty()) {
-        "introduction systems"
-    } else {
-        args[0]
-    }
-
-    val input = create.embed(cmd)
-
-    var isMatchIntro = false
-    run breaking@{
-        basicIntro.forEach {
-            try {
-                val similarity = cosineSimilarity(it, input)
-                if (similarity > 0.6) {
-                    isMatchIntro = true
-                    return@breaking
-                }
-            } catch (e: Exception) {
-//                println(e)
-            }
-        }
-    }
-
-    val openAiConnector = createConnector()
-
-    if (isMatchIntro) {
-        val promptText = ComateCommand.Intro.prompt(basepath)
-        println("prompt to openai...")
-        val output = openAiConnector.prompt(promptText)
-        println(output)
-    } else {
-        println("不知道你在说什么")
-    }
+    return commandEmbedMap
 }
 
 private fun createConnector(): OpenAIConnector {
@@ -72,6 +82,9 @@ private fun createConnector(): OpenAIConnector {
 }
 
 enum class ComateCommand(command: String) {
+    None("") {
+        override fun prompt(basepath: Path): String = ""
+    },
     Intro("intro") {
         override fun prompt(basepath: Path): String {
             val promptStrategy = BasicPromptStrategy()
