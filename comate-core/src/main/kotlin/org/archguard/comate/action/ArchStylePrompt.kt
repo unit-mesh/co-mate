@@ -9,7 +9,6 @@ class ArchStylePrompt(
     override val strategy: Strategy,
 ) : PromptStrategy {
     override fun getExtendData(): String {
-
         return ""
     }
 }
