@@ -5,9 +5,12 @@ import org.archguard.comate.smart.OpenAIConnector
 import org.archguard.comate.smart.Semantic
 import org.archguard.comate.smart.cosineSimilarity
 import java.io.File
+import java.util.logging.Logger
 import kotlin.io.path.Path
 
 typealias Embed = FloatArray
+
+private val logger = Logger.getLogger("comate")
 
 fun main(args: Array<String>) {
     val basepath = Path(File(".").absolutePath)
@@ -40,12 +43,13 @@ fun main(args: Array<String>) {
 
     when (comateCommand) {
         ComateCommand.None -> {
-            println("不知道你在说什么")
+            logger.info("不知道你在说什么")
         }
 
         else -> {
-            println("prompt to openai...")
+            logger.info("prompt to openai...")
             val promptText = ComateCommand.Intro.prompt(basepath)
+            logger.info("prompt text: $promptText")
             val output = openAiConnector.prompt(promptText)
             println(output)
         }

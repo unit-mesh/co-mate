@@ -8,15 +8,15 @@
     - [ ] Embedding API for Kotlin/Java
     - [ ] Embedding Database
 - [ ] [SentenceTransformers](https://huggingface.co/sentence-transformers) for Local Command
-    - [ ] Onnx Spike
-        - [ ] https://github.com/JetBrains-Research/kinference
-        - [ ] https://onnxruntime.ai/docs/get-started/with-java.html
-    - [ ] Onnx Model
-        - [ ] use Bloop converted: [https://github.com/BloopAI/bloop/tree/main/model]
-        - [ ] or convert by ourselves.
+    - [x] Onnx Spike
+        - [x] KotlinDL: [https://github.com/Kotlin/kotlindl](https://github.com/Kotlin/kotlindl)
+        - [x] Deep Java Library: https://github.com/deepjavalibrary/djl
+            - [x] [Huggingface tokenizers](https://github.com/deepjavalibrary/djl/tree/master/extensions/tokenizers)
+    - [x] Onnx Model
+        - [x] use Bloop converted: [https://github.com/BloopAI/bloop/tree/main/model]
     - Usecase examples:
-        - analysis system ： https://github.com/archguard/ddd-monolithic-code-sample
-        - refactor function ：`comate-cli`
+        - [ ] analysis system ： https://github.com/archguard/ddd-monolithic-code-sample
+        - [ ] refactor function ：`comate-cli`
 - [ ] LangChain
     - JVM version: [LangTorch](https://github.com/Knowly-ai/langtorch)
 - [ ] Content parser
