@@ -13,6 +13,8 @@ dependencies {
     implementation(libs.bundles.markdown)
 
     implementation("org.archguard.scanner:analyser_sca:2.0.1")
+    implementation("org.archguard.scanner:lang_kotlin:2.0.1")
+    implementation("org.archguard.scanner:lang_java:2.0.1")
 
     implementation("org.jetbrains.kotlinx:kotlin-deeplearning-api:0.5.2")
     implementation("org.jetbrains.kotlinx:kotlin-deeplearning-onnx:0.5.2")
