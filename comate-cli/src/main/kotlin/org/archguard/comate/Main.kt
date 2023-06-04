@@ -10,6 +10,8 @@ import java.io.File
 import java.nio.file.Path
 import kotlin.io.path.Path
 
+typealias Embed = FloatArray
+var commandEmbedMap: Map<ComateCommand, List<Embed>> = mapOf()
 
 fun main(args: Array<String>) {
     val basepath = Path(File(".").absolutePath)
@@ -20,8 +22,11 @@ fun main(args: Array<String>) {
         "介绍这个系统",
         "介绍系统",
     )
-
     val basicIntro = basicIntroCommand.map { create.embed(it) }
+
+    commandEmbedMap = mapOf(
+        ComateCommand.Intro to basicIntro,
+    )
 
     val cmd = if (args.isEmpty()) {
         "introduction systems"
@@ -30,8 +35,8 @@ fun main(args: Array<String>) {
     }
 
     val input = create.embed(cmd)
-    var isMatchIntro = false
 
+    var isMatchIntro = false
     run breaking@{
         basicIntro.forEach {
             try {
@@ -46,22 +51,24 @@ fun main(args: Array<String>) {
         }
     }
 
-    val appDir = File("${System.getProperty("user.home")}", ".comate")
-    val dotenv = Dotenv.configure().directory(appDir.toString()).load()
-    val apiKey = dotenv["OPENAI_API_KEY"]
-
-    val openAiConnector = OpenAIConnector(apiKey)
+    val openAiConnector = createConnector()
 
     if (isMatchIntro) {
-        val promptStrategy = BasicPromptStrategy()
-        val basicPrompter = IntroductionPrompt(basepath, promptStrategy)
-        val prompt = basicPrompter.prompt()
+        val promptText = ComateCommand.Intro.prompt(basepath)
         println("prompt to openai...")
-        val output = openAiConnector.prompt(prompt)
+        val output = openAiConnector.prompt(promptText)
         println(output)
     } else {
         println("不知道你在说什么")
     }
+}
+
+private fun createConnector(): OpenAIConnector {
+    val appDir = File("${System.getProperty("user.home")}", ".comate")
+    val dotenv = Dotenv.configure().directory(appDir.toString()).load()
+    val apiKey = dotenv["OPENAI_API_KEY"]
+    val openAiConnector = OpenAIConnector(apiKey)
+    return openAiConnector
 }
 
 enum class ComateCommand(command: String) {
