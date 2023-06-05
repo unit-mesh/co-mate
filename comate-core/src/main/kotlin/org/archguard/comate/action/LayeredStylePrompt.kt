@@ -14,7 +14,7 @@ class LayeredStylePrompt(
 ) : PromptStrategy {
 
     override fun getRole(): String = "Architecture"
-    override fun getInstruction(): String = "根据如下的信息，分析这部分的业务场景，并使用 200 个字介绍。"
+    override fun getInstruction(): String = "根据如下的信息，分析该业务场景的功能，并使用 200 个字介绍该部分功能。"
     override fun getRequirements(): String = """
 1. 使用中文描述。
 2. 使用业务场景的语言描述，不要使用技术术语。
@@ -29,9 +29,7 @@ class LayeredStylePrompt(
 
         val introduction = this.introduction(workdir)
 
-        return """
-project introduction: $introduction
-            
+        return """$introduction
 function calls tree: $nodeTree""".trimIndent()
     }
 }
