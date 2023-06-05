@@ -2,9 +2,29 @@ package org.archguard.comate.code
 
 import chapi.domain.core.CodeDataStruct
 
-class Leaf(val left: String, val right: String) {
+data class Leaf(val left: String, val right: String) {
     override fun toString(): String {
         return "$left -> $right"
+    }
+}
+
+data class NodeTree(val node: String, val children: List<Leaf>) {
+    // remove duplicate leaf
+    fun removeDuplicate(): NodeTree {
+        val map = mutableMapOf<String, String>()
+        val newChildren = mutableListOf<Leaf>()
+        for (child in children) {
+            if (!map.containsKey(child.right)) {
+                map[child.right] = child.left
+                newChildren.add(child)
+            }
+        }
+
+        return NodeTree(node, newChildren)
+    }
+
+    override fun toString(): String {
+        return "$node -> ${children.joinToString(", ")}"
     }
 }
 
@@ -12,10 +32,10 @@ class FunctionCall {
     private var loopCount = 0
     private var maxLoopCount = 6
 
-    fun analysis(funcName: String, structs: List<CodeDataStruct>): String {
+    fun analysis(funcName: String, structs: List<CodeDataStruct>): NodeTree {
         val methodMap = buildMethodMap(structs)
         val chain = buildCallChain(funcName, methodMap, emptyMap())
-        return chain
+        return NodeTree(funcName, chain).removeDuplicate()
     }
 
     private fun buildMethodMap(structs: List<CodeDataStruct>): Map<String, List<String>> {
@@ -34,15 +54,15 @@ class FunctionCall {
         funcName: String,
         methodMap: Map<String, List<String>>,
         diMap: Map<String, String>,
-    ): String {
+    ): List<Leaf> {
         if (loopCount > maxLoopCount) {
-            return "\n"
+            return listOf()
         }
 
         loopCount++
 
         if (methodMap[funcName]?.isNotEmpty() == true) {
-            var arrayResult = ""
+            val arrayResult: MutableList<Leaf> = mutableListOf()
             methodMap[funcName]?.forEach { child ->
                 val childName = if (diMap.containsKey(child.getClassName())) {
                     diMap[child.getClassName()] + "." + child.getMethodName()
@@ -53,13 +73,13 @@ class FunctionCall {
                     arrayResult += buildCallChain(childName, methodMap, diMap)
                 }
 
-                arrayResult += "\"" + escapeStr(funcName) + "\" -> \"" + escapeStr(childName) + "\";\n"
+                arrayResult += Leaf(funcName, childName)
             }
 
             return arrayResult
         }
 
-        return "\n"
+        return listOf()
     }
 }
 
