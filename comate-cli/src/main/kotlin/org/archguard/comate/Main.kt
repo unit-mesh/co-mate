@@ -51,15 +51,13 @@ fun main(args: Array<String>) {
             ComateCommand.LayeredStyle.prompt(basepath, "kotlin")
         }
         ComateCommand.None -> null
-    }
+    } ?: return
 
-    if (promptText == null) return
     logger.info("prompt text: $promptText")
 
     val openAiConnector = createConnector()
     val output = openAiConnector.prompt(promptText)
     println(output)
-
 }
 
 private fun createEmbedMap(create: Semantic): Map<ComateCommand, List<Embed>> {
