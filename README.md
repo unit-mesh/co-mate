@@ -4,6 +4,21 @@
 
 ## Todo
 
+### BAU and Spike
+
+- [ ] Analysis project
+- [ ] Analysis business logic
+- [ ] Suggestions
+    - [ ] Architecture governance
+    - [ ] pattern design
+- [ ] Refactor
+    - [ ] architecture modification ?
+    - [ ] MVC to DDD
+    - [ ] Language migrations
+        - [ ] JavaScript to Typescript ?
+
+### Technology
+
 - [ ] Indexes and Search
     - [ ] Embedding API for Kotlin/Java
     - [ ] Embedding Database

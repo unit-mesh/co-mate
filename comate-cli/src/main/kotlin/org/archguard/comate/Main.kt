@@ -13,15 +13,15 @@ typealias Embed = FloatArray
 private val logger = Logger.getLogger("comate")
 
 fun main(args: Array<String>) {
-    val basepath = Path(File(".").absolutePath)
-    val create = Semantic.create()
+    val basePath = Path(File(".").absolutePath)
+    val semantic = Semantic.create()
 
-    val commandEmbedMap = createEmbedMap(create)
+    val commandEmbedMap = createEmbedMap(semantic)
 
     // layered style
     val cmd = if (args.isEmpty()) "layered style" else args[0]
 
-    val inputEmbed = create.embed(cmd)
+    val inputEmbed = semantic.embed(cmd)
 
     var comateCommand = ComateCommand.None
     run breaking@{
@@ -44,11 +44,11 @@ fun main(args: Array<String>) {
 
     val promptText = when (comateCommand) {
         ComateCommand.Intro -> {
-             ComateCommand.Intro.prompt(basepath, "kotlin")
+             ComateCommand.Intro.prompt(basePath, "kotlin")
         }
 
         ComateCommand.LayeredStyle -> {
-            ComateCommand.LayeredStyle.prompt(basepath, "kotlin")
+            ComateCommand.LayeredStyle.prompt(basePath, "kotlin")
         }
         ComateCommand.None -> null
     } ?: return
