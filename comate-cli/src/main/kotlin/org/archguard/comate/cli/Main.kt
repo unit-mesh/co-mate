@@ -43,14 +43,10 @@ fun main(args: Array<String>) {
 
     logger.info("prompt to openai...")
 
+    val language = "kotlin"
     val promptText = when (comateCommand) {
-        ComateCommand.Intro -> {
-             ComateCommand.Intro.prompt(basePath, "kotlin")
-        }
-
-        ComateCommand.LayeredStyle -> {
-            ComateCommand.LayeredStyle.prompt(basePath, "kotlin")
-        }
+        ComateCommand.Intro -> ComateCommand.Intro.prompt(basePath, language)
+        ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.prompt(basePath, language)
         ComateCommand.None -> null
     } ?: return
 
