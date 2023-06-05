@@ -2,14 +2,18 @@ package org.archguard.comate.strategy
 
 import org.archguard.comate.action.BaseTemplate
 import org.archguard.comate.document.ReadmeParser
+import org.archguard.comate.wrapper.ComateScaContext
+import org.archguard.scanner.analyser.ScaAnalyser
 import java.nio.file.Path
 import kotlin.io.path.Path
 import kotlin.io.path.exists
 import kotlin.io.path.readText
 
-interface PromptStrategy : BaseTemplate {
+interface CodePromptStrategy : BaseTemplate {
     val strategy: Strategy
     fun prompt(): String = strategy.prompt(this)
+
+    override fun dependencies(workdir: Path, lang: String) = ScaAnalyser(ComateScaContext.create(workdir.toString(), lang)).analyse()
 
     fun introduction(workdir: Path): String {
         var instr = "";

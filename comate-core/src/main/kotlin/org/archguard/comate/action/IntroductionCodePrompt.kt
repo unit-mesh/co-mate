@@ -2,21 +2,18 @@ package org.archguard.comate.action
 
 import org.archguard.architecture.layered.ChannelType
 import org.archguard.comate.wrapper.ComateScaContext
-import org.archguard.comate.document.ReadmeParser
-import org.archguard.comate.strategy.PromptStrategy
+import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.scanner.analyser.ScaAnalyser
 import java.nio.file.Path
 import kotlin.io.path.Path
-import kotlin.io.path.exists
-import kotlin.io.path.readText
 import kotlin.io.path.relativeTo
 
-class IntroductionPrompt(
+class IntroductionCodePrompt(
     private val workdir: Path,
     val lang: String,
-    override val strategy: Strategy
-) : PromptStrategy {
+    override val strategy: Strategy,
+) : CodePromptStrategy {
     override fun getRole(): String = "Architecture"
     override fun getInstruction(): String = "根据分析如下的 dependencies 等信息，分析并编写这个项目的介绍。"
     override fun getRequirements(): String = """1. 从 {all channel types} 中选择最可能的 {channel type}，不做解释。
@@ -33,7 +30,7 @@ class IntroductionPrompt(
     }
 
     override fun getExtendData(): String {
-        val dep = ScaAnalyser(ComateScaContext.create(workdir.toString(), lang)).analyse()
+        val dep = dependencies(workdir, lang)
         val depMap: Map<String, List<String>> = dep.groupBy {
             val relativePath = Path(it.path).relativeTo(workdir).toString()
             relativePath

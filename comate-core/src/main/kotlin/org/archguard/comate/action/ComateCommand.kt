@@ -10,7 +10,7 @@ enum class ComateCommand(command: String) {
     Intro("intro") {
         override fun prompt(basepath: Path, lang: String): String {
             val promptStrategy = BasicPromptStrategy()
-            val basicPrompter = IntroductionPrompt(basepath, lang, promptStrategy)
+            val basicPrompter = IntroductionCodePrompt(basepath, lang, promptStrategy)
             return basicPrompter.prompt()
         }
     },

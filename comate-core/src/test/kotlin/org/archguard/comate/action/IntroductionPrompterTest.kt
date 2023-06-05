@@ -12,7 +12,7 @@ class IntroductionPrompterTest {
     @Ignore
     fun should_generate_correct_prompt_test() {
         val workdir = javaClass.classLoader.getResource("hello-world")?.path.orEmpty()
-        val introduction = IntroductionPrompt(Path.of(workdir), "kotlin", BasicPromptStrategy())
+        val introduction = IntroductionCodePrompt(Path.of(workdir), "kotlin", BasicPromptStrategy())
 
         assertEquals(
             """
