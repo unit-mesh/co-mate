@@ -2,11 +2,23 @@ package org.archguard.comate.code
 
 import chapi.domain.core.CodeDataStruct
 
-class FunctionCall {
-    var loopCount = 0
-    var maxLoopCount = 6
+class Leaf(val left: String, val right: String) {
+    override fun toString(): String {
+        return "$left -> $right"
+    }
+}
 
-    fun buildMethodMap(structs: List<CodeDataStruct>): Map<String, List<String>> {
+class FunctionCall {
+    private var loopCount = 0
+    private var maxLoopCount = 6
+
+    fun analysis(funcName: String, structs: List<CodeDataStruct>): String {
+        val methodMap = buildMethodMap(structs)
+        val chain = buildCallChain(funcName, methodMap, emptyMap())
+        return chain
+    }
+
+    private fun buildMethodMap(structs: List<CodeDataStruct>): Map<String, List<String>> {
         val methodMap = mutableMapOf<String, List<String>>()
         for (clz in structs) {
             for (method in clz.Functions) {
@@ -18,10 +30,15 @@ class FunctionCall {
         return methodMap
     }
 
-    fun buildCallChain(funcName: String, methodMap: Map<String, List<String>>, diMap: Map<String, String>): String {
+    private fun buildCallChain(
+        funcName: String,
+        methodMap: Map<String, List<String>>,
+        diMap: Map<String, String>,
+    ): String {
         if (loopCount > maxLoopCount) {
             return "\n"
         }
+
         loopCount++
 
         if (methodMap[funcName]?.isNotEmpty() == true) {
@@ -30,16 +47,18 @@ class FunctionCall {
                 val childName = if (diMap.containsKey(child.getClassName())) {
                     diMap[child.getClassName()] + "." + child.getMethodName()
                 } else {
-                    child.toString()
+                    child
                 }
                 if (methodMap[child]?.isNotEmpty() == true) {
                     arrayResult += buildCallChain(childName, methodMap, diMap)
                 }
-                arrayResult += "\"${escapeStr(funcName)}\" -> \"${escapeStr(childName)}\";\n"
+
+                arrayResult += "\"" + escapeStr(funcName) + "\" -> \"" + escapeStr(childName) + "\";\n"
             }
 
             return arrayResult
         }
+
         return "\n"
     }
 }

@@ -1,6 +1,7 @@
-package org.archguard.comate
+package org.archguard.comate.cli
 
 import io.github.cdimascio.dotenv.Dotenv
+import org.archguard.comate.ComateCommand
 import org.archguard.comate.smart.OpenAIConnector
 import org.archguard.comate.smart.Semantic
 import org.archguard.comate.smart.cosineSimilarity

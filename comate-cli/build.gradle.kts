@@ -23,13 +23,13 @@ dependencies {
 }
 
 application {
-    mainClass.set("org.archguard.comate.MainKt")
+    mainClass.set("org.archguard.comate.cli.MainKt")
 }
 
 tasks {
     shadowJar {
         manifest {
-            attributes(Pair("Main-Class", "org.archguard.comate.MainKt"))
+            attributes(Pair("Main-Class", "org.archguard.comate.cli.MainKt"))
         }
         // minimize()
         dependencies {

@@ -37,3 +37,4 @@ replay_pid*
 build
 .env
 dependencies.json
+codedatastructs.json
