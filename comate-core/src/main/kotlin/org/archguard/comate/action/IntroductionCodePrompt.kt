@@ -1,10 +1,8 @@
 package org.archguard.comate.action
 
 import org.archguard.architecture.layered.ChannelType
-import org.archguard.comate.wrapper.ComateScaContext
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
-import org.archguard.scanner.analyser.ScaAnalyser
 import java.nio.file.Path
 import kotlin.io.path.Path
 import kotlin.io.path.relativeTo
