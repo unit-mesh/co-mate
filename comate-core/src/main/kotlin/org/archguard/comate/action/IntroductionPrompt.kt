@@ -43,14 +43,7 @@ class IntroductionPrompt(
                 .filter { it.isNotEmpty() && it != ":" }
         }
 
-        var instr = "";
-        val readmeFile = Path(workdir.toString(), "README.md")
-        if (readmeFile.exists()) {
-            val readme = readmeFile.readText()
-            val readmeParser = ReadmeParser(readme)
-            val introduction = readmeParser.introduction()
-            instr = "\nProject Instruction: ${introduction.content}\n"
-        }
+        val instr = this.introduction(workdir)
 
         val items = depMap.map { "| ${it.key} | ${it.value.joinToString(", ")} |" }.joinToString("\n")
         val channels = ChannelType.allValues()
