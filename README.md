@@ -6,8 +6,10 @@
 
 ### BAU and Spike
 
-- [ ] Analysis project
+- [x] Analysis project
 - [ ] Analysis business logic
+    - [x] Main.main function
+    - [ ] Spring Boot application
 - [ ] Suggestions
     - [ ] Architecture governance
     - [ ] pattern design
