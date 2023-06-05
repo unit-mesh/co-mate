@@ -1,7 +1,5 @@
-package org.archguard.comate
+package org.archguard.comate.action
 
-import org.archguard.comate.action.LayeredStylePrompt
-import org.archguard.comate.action.IntroductionPrompt
 import org.archguard.comate.strategy.BasicPromptStrategy
 import java.nio.file.Path
 
