@@ -14,7 +14,7 @@ class LayeredStylePrompt(
 ) : PromptStrategy {
 
     override fun getRole(): String = "Architecture"
-    override fun getInstruction(): String = "根据如下的信息，分析该业务场景的功能，并使用 200 个字介绍该部分功能。"
+    override fun getInstruction(): String = "根据如下的调用信息，分析该业务场景的功能、分层架构，并使用 200 个字总结。"
     override fun getRequirements(): String = """
 1. 使用中文描述。
 2. 使用业务场景的语言描述，不要使用技术术语。
@@ -25,11 +25,13 @@ class LayeredStylePrompt(
         val sourceCodeContext = ComateSourceCodeContext.create(workdir.toString(), lang)
         val codeDataStructs = KotlinAnalyser(sourceCodeContext).analyse()
 
-        val nodeTree = FunctionCall().analysis("org.archguard.comate.cli.MainKt.main", codeDataStructs)
+        val funcName = "org.archguard.comate.cli.MainKt.main"
+        val nodeTree = FunctionCall().analysis(funcName, codeDataStructs)
 
         val introduction = this.introduction(workdir)
 
         return """$introduction
+function name: $funcName            
 function calls tree: $nodeTree""".trimIndent()
     }
 }
