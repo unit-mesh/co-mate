@@ -40,32 +40,26 @@ fun main(args: Array<String>) {
         }
     }
 
-    val openAiConnector = createConnector()
-
-    if (comateCommand == ComateCommand.None) {
-        println("no command found")
-        return;
-    }
-
     logger.info("prompt to openai...")
 
-    val output = when (comateCommand) {
+    val promptText = when (comateCommand) {
         ComateCommand.Intro -> {
-            val promptText = ComateCommand.Intro.prompt(basepath, "kotlin")
-            logger.info("prompt text: $promptText")
-            openAiConnector.prompt(promptText)
+             ComateCommand.Intro.prompt(basepath, "kotlin")
         }
 
         ComateCommand.LayeredStyle -> {
-            val promptText = ComateCommand.LayeredStyle.prompt(basepath, "kotlin")
-            logger.info("prompt text: $promptText")
-            openAiConnector.prompt(promptText)
+            ComateCommand.LayeredStyle.prompt(basepath, "kotlin")
         }
-
-        else -> ""
+        ComateCommand.None -> null
     }
 
+    if (promptText == null) return
+    logger.info("prompt text: $promptText")
+
+    val openAiConnector = createConnector()
+    val output = openAiConnector.prompt(promptText)
     println(output)
+
 }
 
 private fun createEmbedMap(create: Semantic): Map<ComateCommand, List<Embed>> {
@@ -90,10 +84,9 @@ private fun createEmbedMap(create: Semantic): Map<ComateCommand, List<Embed>> {
 }
 
 private fun createConnector(): OpenAIConnector {
-    val appDir = File("${System.getProperty("user.home")}", ".comate")
+    val appDir = File(System.getProperty("user.home"), ".comate")
     val dotenv = Dotenv.configure().directory(appDir.toString()).load()
     val apiKey = dotenv["OPENAI_API_KEY"]
-    val openAiConnector = OpenAIConnector(apiKey)
-    return openAiConnector
+    return OpenAIConnector(apiKey)
 }
 
