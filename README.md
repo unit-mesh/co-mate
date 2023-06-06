@@ -4,7 +4,7 @@
 
 ## Todo
 
-### BAU and Spike
+### BAU
 
 - [x] Analysis project
 - [ ] Analysis business logic
@@ -13,6 +13,9 @@
 - [ ] Suggestions
     - [ ] Architecture governance
     - [ ] pattern design
+
+### Feature Spike
+
 - [ ] Refactor
     - [ ] architecture modification ?
     - [ ] MVC to DDD
