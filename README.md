@@ -46,6 +46,8 @@
         - [ ] refactor function ：`comate-cli`
 - [ ] LangChain
     - JVM version: [LangTorch](https://github.com/Knowly-ai/langtorch)
+- [ ] Token usage
+   - [JTokkit](https://github.com/knuddelsgmbh/jtokkit) 
 - [ ] Content parser
     - Code analyser by ArchGuard
         - [x] Dependency parser: `Gradle`, `Maven`, `Gomod`, `NPM`
