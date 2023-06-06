@@ -35,3 +35,7 @@ include(":llm-core")
 include(":comate-core")
 include(":comate-gui")
 include(":comate-cli")
+
+include(":spec-partitioner")
+
+include(":meta-action")
