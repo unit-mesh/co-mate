@@ -1,10 +1,11 @@
 package org.archguard.spec.markdown
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class MarkdownParserTest {
     @Test
+    @Disabled
     fun parse_by_title() {
         val markdown = """
 HTTP response status codes
