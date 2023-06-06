@@ -1,5 +1,7 @@
 package org.archguard.spec
 
+import org.archguard.meta.AtomicAction
+
 interface Partitioner {
-    fun partition()
+    fun partition(): List<AtomicAction>
 }

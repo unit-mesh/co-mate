@@ -4,14 +4,14 @@ package org.archguard.meta
 @DslMarker
 annotation class AtomicDsl
 
-interface Action {
+interface AtomicAction {
     fun exec(input: Element): Any
 }
 
 open class Element
 
 @AtomicDsl
-abstract class ApiRule(val name: String) : Action {
+abstract class ApiRule(val name: String) : AtomicAction {
     abstract override fun exec(input: Element): Any
 }
 

@@ -5,6 +5,8 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.metaAction)
+
     implementation(libs.kotlin.stdlib)
 
     testImplementation(libs.bundles.test)
