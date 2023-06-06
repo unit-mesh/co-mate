@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     implementation(projects.metaAction)
+    implementation(projects.llmCore)
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.bundles.markdown)

@@ -1,10 +1,14 @@
 package org.archguard.meta
 
-import org.archguard.meta.restful.HttpAtomicActionRule
-import org.archguard.meta.restful.SecurityRule
-import org.archguard.meta.restful.StatusCodeRule
-import org.archguard.meta.restful.UriConstructionRule
+import org.archguard.meta.restful.*
 
+enum class ApiRuleType(java: Class<out ApiRule>) {
+    URI_CONSTRUCTION(UriConstructionRule::class.java),
+    HTTP_ACTION(HttpActionRule::class.java),
+    STATUS_CODE(StatusCodeRule::class.java),
+    SECURITY(SecurityRule::class.java),
+    MISC(MiscRule::class.java)
+}
 
 class ApiGovernance {
     var rules: List<ApiRule> = listOf()
@@ -15,8 +19,8 @@ class ApiGovernance {
         return html
     }
 
-    fun http_action(vararg actions: String): HttpAtomicActionRule {
-        val httpActionRule = HttpAtomicActionRule(actions.toList())
+    fun http_action(vararg actions: String): HttpActionRule {
+        val httpActionRule = HttpActionRule(actions.toList())
         rules = rules + httpActionRule
         return httpActionRule
     }
