@@ -7,6 +7,7 @@ class RestApiGovernanceTest {
     fun spec_checking() {
         val governance = api_governance {
             uri_construction {
+                // todo: add multiple rule samples
                 rule("")
                 sample("")
             }
