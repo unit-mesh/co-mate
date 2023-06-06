@@ -1,8 +1,7 @@
 package org.archguard.meta
 
 
-
-class UriConstruction: ApiRule("uri-construction") {
+class UriConstructionRule : ApiRule("uri-construction") {
     var ruleRegex: Regex? = null
     var sample = ""
 
@@ -18,16 +17,24 @@ class UriConstruction: ApiRule("uri-construction") {
         println("exec: ${this.name}")
         return ""
     }
-
 }
 
-class StatusCode: ApiRule("status-code") {
-    var codes = listOf<Int>()
-
-    fun codes(vararg codes: Int) {
-        this.codes = codes.toList()
+class StatusCodeRule(val codes: List<Int>) : ApiRule("status-code") {
+    override fun exec(input: Element): Any {
+        println("exec: ${this.name}")
+        return ""
     }
+}
 
+class HttpActionRule(val actions: List<String>) : ApiRule("http-action") {
+    override fun exec(input: Element): Any {
+        println("exec: ${this.name}")
+        return ""
+    }
+}
+
+
+class SecurityRule(val rule: String) : ApiRule("security") {
     override fun exec(input: Element): Any {
         println("exec: ${this.name}")
         return ""
@@ -35,27 +42,36 @@ class StatusCode: ApiRule("status-code") {
 }
 
 class ApiGovernance {
-    var http_action = listOf<String>()
-    var security = ""
+    var rules: List<ApiRule> = listOf()
 
-    fun uri_construction(function: UriConstruction.() -> Unit): UriConstruction {
-        val html = UriConstruction()
+    fun uri_construction(function: UriConstructionRule.() -> Unit): UriConstructionRule {
+        val html = UriConstructionRule()
         html.function()
         return html
     }
 
-    fun http_action(vararg actions: String) {
-        this.http_action = actions.toList()
+    fun http_action(vararg actions: String): HttpActionRule {
+        val httpActionRule = HttpActionRule(actions.toList())
+        rules = rules + httpActionRule
+        return httpActionRule
     }
 
-    fun status_code(vararg codes: Int): StatusCode {
-        val action = StatusCode()
-        action.codes(*codes)
-        return action
+    fun status_code(vararg codes: Int): StatusCodeRule {
+        val statusCodeRule = StatusCodeRule(codes.toList())
+        rules = rules + statusCodeRule
+        return statusCodeRule
     }
 
-    fun security(securityRule: String) {
-        this.security = securityRule
+    fun security(security: String): SecurityRule {
+        val securityRule = SecurityRule(security)
+        rules = rules + securityRule
+        return securityRule
+    }
+
+    fun exec(element: RestApi) {
+        rules.forEach {
+            it.exec(element)
+        }
     }
 }
 

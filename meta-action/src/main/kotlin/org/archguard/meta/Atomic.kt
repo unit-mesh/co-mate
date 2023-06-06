@@ -15,6 +15,6 @@ abstract class ApiRule(val name: String) : Action {
     abstract override fun exec(input: Element): Any
 }
 
-class RestApi: Element() {
+class RestApi(uri: String) : Element() {
 
 }
