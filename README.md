@@ -10,11 +10,11 @@
 - [ ] Analysis business logic
     - [x] Main.main function
     - [ ] Spring Boot application
-- [ ] Architecture governance
-    - [ ] Api governance by specs
-        - [ ] RESTful API design docs
-        - [ ] GraphQL API design docs
+- [ ] Architecture alignment
     - [ ] ADR with embedding
+- [ ] Api governance by specs
+    - [ ] GPT: Design Specification to functionality
+    - [ ] functionality to DSL
 - [ ] Suggestions
     - [ ] pattern design
 
