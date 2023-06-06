@@ -2,7 +2,7 @@ package org.archguard.meta
 
 import org.archguard.meta.restful.*
 
-enum class ApiRuleType(java: Class<out ApiRule>) {
+enum class ApiRuleType(rule: Class<out ApiRule>) {
     URI_CONSTRUCTION(UriConstructionRule::class.java),
     HTTP_ACTION(HttpActionRule::class.java),
     STATUS_CODE(StatusCodeRule::class.java),
