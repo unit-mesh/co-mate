@@ -47,7 +47,7 @@
 - [ ] LangChain
     - JVM version: [LangTorch](https://github.com/Knowly-ai/langtorch)
 - [ ] Token usage
-   - [JTokkit](https://github.com/knuddelsgmbh/jtokkit) 
+    - [JTokkit](https://github.com/knuddelsgmbh/jtokkit)
 - [ ] Content parser
     - Code analyser by ArchGuard
         - [x] Dependency parser: `Gradle`, `Maven`, `Gomod`, `NPM`
@@ -56,11 +56,13 @@
     - [ ] K8s parser: `YAML`
     - [ ] Dockerfile parser: `Dockerfile`
     - [ ] CI/CD parser: `Github Action`
-- [ ] Rust Wrapper for ML embedding
-    - HuggingFace Tokenizers
-    - SentenceTransformers
-    - Onnx Runtime
-    - Tiktoken: https://github.com/openai/tiktoken
+- [ ] Rust ML RPC Server
+    - [ ] JSON Rpc Server
+    - [ ] Wrapper for ML embedding
+        - HuggingFace Tokenizers
+        - SentenceTransformers
+        - Onnx Runtime
+        - Tiktoken: https://github.com/openai/tiktoken
 
 ## To Spike
 
