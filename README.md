@@ -58,6 +58,7 @@
     - HuggingFace Tokenizers
     - SentenceTransformers
     - Onnx Runtime
+    - Tiktoken: https://github.com/openai/tiktoken
 
 ## To Spike
 
