@@ -14,9 +14,12 @@
     - [ ] ADR with embedding
 - [ ] Api governance by specs
     - [ ] GPT: Design Specification to functionality
-    - [ ] functionality to DSL
+    - [ ] Functionality to DSL
+    - [ ] Construction by dynamic DSL
 - [ ] Suggestions
     - [ ] pattern design
+- [ ] Design by specs with examples
+    - [ ] Functionality for DSL
 
 ### Feature Spike
 
