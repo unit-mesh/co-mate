@@ -2,9 +2,9 @@ package org.archguard.meta
 
 import org.junit.jupiter.api.Test
 
-class ApiGovernanceTest {
+class RestApiGovernanceTest {
     @Test
-    fun demo() {
+    fun spec_checking() {
         api_governance {
             uri_construction {
                 rule("")
