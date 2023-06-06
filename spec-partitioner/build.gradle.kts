@@ -8,6 +8,7 @@ dependencies {
     implementation(projects.metaAction)
 
     implementation(libs.kotlin.stdlib)
+    implementation(libs.bundles.markdown)
 
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.test.junit.engine)

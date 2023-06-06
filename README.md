@@ -54,6 +54,10 @@
     - [ ] K8s parser: `YAML`
     - [ ] Dockerfile parser: `Dockerfile`
     - [ ] CI/CD parser: `Github Action`
+- [ ] Rust Wrapper for ML embedding
+    - HuggingFace Tokenizers
+    - SentenceTransformers
+    - Onnx Runtime
 
 ## To Spike
 
