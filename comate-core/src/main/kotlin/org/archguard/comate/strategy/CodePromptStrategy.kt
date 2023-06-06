@@ -13,7 +13,11 @@ interface CodePromptStrategy : BaseTemplate {
     val strategy: Strategy
     fun prompt(): String = strategy.prompt(this)
 
-    override fun dependencies(workdir: Path, lang: String) = ScaAnalyser(ComateScaContext.create(workdir.toString(), lang)).analyse()
+    fun dependencies(workdir: Path, lang: String) = ScaAnalyser(ComateScaContext.create(workdir.toString(), lang)).analyse()
+
+    fun sourceCode(workdir: Path, lang: String) {
+
+    }
 
     fun introduction(workdir: Path): String {
         var instr = "";

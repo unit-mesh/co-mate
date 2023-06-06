@@ -20,7 +20,14 @@ enum class ComateCommand(command: String) {
             val basicPrompter = LayeredStylePrompt(basepath, lang, promptStrategy)
             return basicPrompter.prompt()
         }
-    }
+    },
+    ApiGovernance("api-gov") {
+        override fun prompt(basepath: Path, lang: String): String {
+            val promptStrategy = BasicPromptStrategy()
+            val basicPrompter = ApiGovernancePrompt(basepath, lang, promptStrategy)
+            return basicPrompter.prompt()
+        }
+    },
     ;
 
     abstract fun prompt(basepath: Path, lang: String): String

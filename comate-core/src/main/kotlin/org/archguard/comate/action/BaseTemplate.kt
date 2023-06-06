@@ -9,5 +9,4 @@ interface BaseTemplate {
     fun getRequirements(): String = ""
     fun getSample(): String = ""
     fun getExtendData(): String = ""
-    fun dependencies(workdir: Path, lang: String): List<CompositionDependency>
 }

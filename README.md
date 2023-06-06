@@ -10,8 +10,12 @@
 - [ ] Analysis business logic
     - [x] Main.main function
     - [ ] Spring Boot application
+- [ ] Architecture governance
+    - [ ] Api governance by specs
+        - [ ] RESTful API design docs
+        - [ ] GraphQL API design docs
+    - [ ] ADR with embedding
 - [ ] Suggestions
-    - [ ] Architecture governance
     - [ ] pattern design
 
 ### Feature Spike

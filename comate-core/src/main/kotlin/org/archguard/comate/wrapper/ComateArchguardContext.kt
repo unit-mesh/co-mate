@@ -26,8 +26,8 @@ class ComateSourceCodeContext(
     override val path: String,
 ) : SourceCodeContext {
     companion object {
-        fun create(path: String, language: String): SourceCodeContext {
-            return ComateSourceCodeContext(archGuardClient, listOf(), language, path)
+        fun create(path: String, language: String, features: List<String> = listOf()): SourceCodeContext {
+            return ComateSourceCodeContext(archGuardClient, features, language, path)
         }
     }
 }

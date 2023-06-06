@@ -47,6 +47,7 @@ fun main(args: Array<String>) {
     val promptText = when (comateCommand) {
         ComateCommand.Intro -> ComateCommand.Intro.prompt(basePath, language)
         ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.prompt(basePath, language)
+        ComateCommand.ApiGovernance -> ComateCommand.ApiGovernance.prompt(basePath, language)
         ComateCommand.None -> null
     } ?: return
 
@@ -55,27 +56,6 @@ fun main(args: Array<String>) {
     val openAiConnector = createConnector()
     val output = openAiConnector.prompt(promptText)
     println(output)
-}
-
-private fun createEmbedMap(create: Semantic): Map<ComateCommand, List<Embed>> {
-    var commandEmbedMap: Map<ComateCommand, List<Embed>> = mapOf()
-    val basicIntroCommand = listOf(
-        "introduction system",
-        "介绍一下这个系统",
-        "介绍这个系统",
-        "介绍系统",
-    )
-    val archStyleCommand = listOf(
-        "layered style",
-        "what is layered style",
-        "系统的分层",
-    );
-
-    commandEmbedMap = mapOf(
-        ComateCommand.Intro to basicIntroCommand.map { create.embed(it) },
-        ComateCommand.LayeredStyle to archStyleCommand.map { create.embed(it) },
-    )
-    return commandEmbedMap
 }
 
 private fun createConnector(): OpenAIConnector {
