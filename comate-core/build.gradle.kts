@@ -8,6 +8,7 @@ dependencies {
     implementation(libs.kotlin.stdlib)
 
     implementation(projects.architecture)
+    implementation(projects.llmCore)
 
     implementation(libs.bundles.openai)
     implementation(libs.bundles.markdown)
