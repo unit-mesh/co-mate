@@ -4,8 +4,8 @@ import org.archguard.meta.ApiRule
 import org.archguard.meta.RestApi
 
 class UriConstructionRule : ApiRule("uri-construction") {
-    var ruleRegex: Regex? = null
-    var sample = ""
+    private var ruleRegex: Regex? = null
+    private var sample = ""
 
     fun rule(regex: String) {
         this.ruleRegex = Regex(regex)
