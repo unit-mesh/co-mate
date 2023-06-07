@@ -3,7 +3,7 @@ package org.archguard.comate.governance
 import org.archguard.comate.smart.LlmConnector
 import org.archguard.meta.LlmRuleVerifier
 
-class ApiRuleVerifier(val connector: LlmConnector): LlmRuleVerifier {
+class ApiRuleVerifier(val connector: LlmConnector) : LlmRuleVerifier {
     override fun check(prompt: String, input: String): Boolean {
         val result = connector.prompt(
             """
@@ -23,6 +23,6 @@ class ApiRuleVerifier(val connector: LlmConnector): LlmRuleVerifier {
         """.trimMargin()
         )
 
-        return result.lowercase() == "true"
+        return result.lowercase() == "true" || result.lowercase().contains("true")
     }
 }
