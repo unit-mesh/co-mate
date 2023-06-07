@@ -16,7 +16,6 @@ class UriConstructionRule : ApiRule("uri-construction") {
     }
 
     override fun exec(input: RestApi): Boolean {
-        println("exec: ${this.name}")
         if (ruleRegex != null) {
             val matchResult = ruleRegex!!.find(input.uri)
             return matchResult != null
