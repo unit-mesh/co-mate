@@ -58,7 +58,7 @@ fun main(args: Array<String>) {
     println(output)
 }
 
-private fun createConnector(): OpenAIConnector {
+fun createConnector(): OpenAIConnector {
     val appDir = File(System.getProperty("user.home"), ".comate")
     val dotenv = Dotenv.configure().directory(appDir.toString()).load()
     val apiKey = dotenv["OPENAI_API_KEY"]

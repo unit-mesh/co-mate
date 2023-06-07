@@ -18,10 +18,8 @@ class OpenAIConnector(
     val openAiKey: String,
     val openAiVersion: String = OPENAI_MODEL[0],
     val openAiProxy: String? = null,
-) {
+): LlmConnector {
     private var service: OpenAiService
-
-    private val timeout = Duration.ofSeconds(600)
 
     init {
         if (openAiKey.isEmpty()) {
@@ -49,7 +47,7 @@ class OpenAIConnector(
     val messages: MutableList<ChatMessage> = ArrayList()
     var historyMessageLength: Int = 0
 
-    fun prompt(promptText: String): String {
+    override fun prompt(promptText: String): String {
         val systemMessage = ChatMessage(ChatMessageRole.USER.value(), promptText)
 
         historyMessageLength += promptText.length

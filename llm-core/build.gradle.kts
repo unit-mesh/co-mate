@@ -5,6 +5,7 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.metaAction)
     implementation(libs.kotlin.stdlib)
 
     implementation(libs.bundles.openai)
