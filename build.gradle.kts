@@ -24,7 +24,7 @@ allprojects {
     }
 
     group = "org.archguard.comate"
-    version = "0.1.3"
+    version = "0.1.4"
 
 //    java.sourceCompatibility = JavaVersion.VERSION_11
 //    java.targetCompatibility = JavaVersion.VERSION_11
