@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+@RestController
+@RequestMapping("/api")
 public class BlogController {
     BlogService blogService;
 
@@ -13,7 +14,7 @@ public class BlogController {
         this.blogService = blogService;
     }
 
-    @RequestMapping("/blog/create")
+    @PostMapping("/blog/create")
     public String create() {
         return "";
     }

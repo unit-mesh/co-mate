@@ -26,7 +26,7 @@ enum class ComateCommand(command: String) {
     ApiGovernance("api-gov") {
         override fun run(context: CommandContext): String {
             val promptStrategy = BasicPromptStrategy()
-            val basicPrompter = ApiGovernance(context, promptStrategy)
+            val basicPrompter = ApiGovernancePrompter(context, promptStrategy)
             return basicPrompter.execute()
         }
     },

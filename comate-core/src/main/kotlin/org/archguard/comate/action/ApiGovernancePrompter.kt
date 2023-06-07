@@ -4,9 +4,12 @@ import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.comate.wrapper.ComateArchGuardClient
 import org.archguard.comate.wrapper.ComateSourceCodeContext
+import org.archguard.meta.restful.RestApi
+import org.archguard.scanner.analyser.ApiCallAnalyser
+import org.archguard.scanner.core.sourcecode.ContainerService
 import org.slf4j.LoggerFactory
 
-class ApiGovernance(
+class ApiGovernancePrompter(
     val context: CommandContext,
     override val strategy: Strategy,
 ) : CodePromptStrategy {
@@ -24,11 +27,20 @@ class ApiGovernance(
             features = listOf()
         )
 
-        codeAnalyser(context.lang, codeContext)?.analyse()
-        val apis = client.apis
-        println(apis)
+        val codeDataStructs = codeAnalyser(context.lang, codeContext)?.analyse()
+        val services: List<ContainerService> = if (codeDataStructs != null) {
+            ApiCallAnalyser(codeContext).analyse(codeDataStructs)
+        } else {
+            listOf()
+        }
 
         logger.info("finished analyse code: ${context.workdir}")
+
+        val apis = services.flatMap {
+            it.resources.map { resource ->
+                RestApi(uri = resource.sourceUrl, action = resource.sourceHttpMethod, statusCodes = listOf(200))
+            }
+        }
 
         val introduction = this.introduction(context.workdir)
 
@@ -40,6 +52,6 @@ class ApiGovernance(
     }
 
     companion object {
-        val logger = LoggerFactory.getLogger(ApiGovernance::class.java)
+        val logger = LoggerFactory.getLogger(ApiGovernancePrompter::class.java)
     }
 }
