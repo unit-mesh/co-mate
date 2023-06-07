@@ -17,10 +17,10 @@ RESTful APIs use Uniform Resource Identifiers (URIs) to address resources, ONAP 
     The URI is comprised of a fixed base uri /api/{service name}\]/v{version number} and the resource path. Only major version number is used in the URI. An example: [http://127.0.0.1:8080/api/petstore/v1/pets/dogs](http://127.0.0.1:8080/api/petstore/v1/pets/dogs)
 *   CRUD function names should not be used in URIs. Instead, CRUD actions should be represented by HTTP methods. Below is the proposed methodology to implement CRUD operations in a RESTful API. (Recommended)
     
-    | Resource | POST | GET | PUT | DELETE |
-    | --- | --- | --- | --- | --- |
-    | /api/petstore/v1/pets/dogs | Create a new dog | List dogs | Replace dogs with new dogs(Bulk update) | Delete all dogs |
-    | /api/petstore/v1/pets/dogs/bailey | Error | Show dog | If exist update dog else ERROR | Delete dog |
+    | Resource                          | POST             | GET       | PUT                                     | DELETE          |
+    |-----------------------------------|------------------|-----------|-----------------------------------------|-----------------|
+    | /api/petstore/v1/pets/dogs        | Create a new dog | List dogs | Replace dogs with new dogs(Bulk update) | Delete all dogs |
+    | /api/petstore/v1/pets/dogs/bailey | Error            | Show dog  | If exist update dog else ERROR          | Delete dog      |
     
     Do not use:
 

@@ -16,6 +16,12 @@ interface LlmRuleVerifier {
     }
 }
 
+class FakeRuleVerifier : LlmRuleVerifier {
+    override fun check(prompt: String, content: String): Boolean {
+        return true
+    }
+}
+
 
 open class Element
 

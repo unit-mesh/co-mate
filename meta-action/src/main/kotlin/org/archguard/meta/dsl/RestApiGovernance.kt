@@ -1,5 +1,6 @@
 package org.archguard.meta.dsl
 
+import org.archguard.meta.FakeRuleVerifier
 import org.archguard.meta.LlmRuleVerifier
 import org.archguard.meta.restful.ApiRule
 import org.archguard.meta.restful.RestApi
@@ -15,7 +16,7 @@ enum class ApiRuleType(rule: Class<out ApiRule>) {
 }
 
 class RestApiGovernance {
-    private lateinit var ruleVerifier: LlmRuleVerifier
+    private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
     private var rules: List<ApiRule> = listOf()
 
     fun uri_construction(function: UriConstructionRule.() -> Unit): UriConstructionRule {
