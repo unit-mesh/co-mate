@@ -45,9 +45,9 @@ fun main(args: Array<String>) {
 
     val language = "kotlin"
     val promptText = when (comateCommand) {
-        ComateCommand.Intro -> ComateCommand.Intro.prompt(basePath, language)
-        ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.prompt(basePath, language)
-        ComateCommand.ApiGovernance -> ComateCommand.ApiGovernance.prompt(basePath, language)
+        ComateCommand.Intro -> ComateCommand.Intro.run(basePath, language)
+        ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.run(basePath, language)
+        ComateCommand.ApiGovernance -> ComateCommand.ApiGovernance.run(basePath, language)
         ComateCommand.None -> null
     } ?: return
 

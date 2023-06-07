@@ -3,26 +3,28 @@ package org.archguard.comate.action
 import org.archguard.comate.strategy.BasicPromptStrategy
 import java.nio.file.Path
 
+data class CommandContext(val basepath: Path, val lang: String)
+
 enum class ComateCommand(command: String) {
     None("") {
-        override fun prompt(basepath: Path, lang: String): String = ""
+        override fun run(basepath: Path, lang: String): String = ""
     },
     Intro("intro") {
-        override fun prompt(basepath: Path, lang: String): String {
+        override fun run(basepath: Path, lang: String): String {
             val promptStrategy = BasicPromptStrategy()
             val basicPrompter = IntroductionCodePrompt(basepath, lang, promptStrategy)
             return basicPrompter.prompt()
         }
     },
     LayeredStyle("archstyle") {
-        override fun prompt(basepath: Path, lang: String): String {
+        override fun run(basepath: Path, lang: String): String {
             val promptStrategy = BasicPromptStrategy()
             val basicPrompter = LayeredStylePrompt(basepath, lang, promptStrategy)
             return basicPrompter.prompt()
         }
     },
     ApiGovernance("api-gov") {
-        override fun prompt(basepath: Path, lang: String): String {
+        override fun run(basepath: Path, lang: String): String {
             val promptStrategy = BasicPromptStrategy()
             val basicPrompter = ApiGovernancePrompt(basepath, lang, promptStrategy)
             return basicPrompter.prompt()
@@ -30,5 +32,5 @@ enum class ComateCommand(command: String) {
     },
     ;
 
-    abstract fun prompt(basepath: Path, lang: String): String
+    abstract fun run(basepath: Path, lang: String): String
 }
