@@ -18,50 +18,5 @@ uri_construction {
 RESTful API 文档：
 
 ###
-
-URI Construction
-================
-
-RESTful APIs use Uniform Resource Identifiers (URIs) to address resources, ONAP projects should comply with a unified URI standard to implement the microservices.
-
-*   URI structure (Mandatory)
-    URI structure http://\[host\]:\[port\]/api/{service name}\]/v{version number}/{resource}
-    The URI is comprised of a fixed base uri /api/{service name}\]/v{version number} and the resource path. Only major version number is used in the URI. An example: [http://127.0.0.1:8080/api/petstore/v1/pets/dogs](http://127.0.0.1:8080/api/petstore/v1/pets/dogs)
-*   CRUD function names should not be used in URIs. Instead, CRUD actions should be represented by HTTP methods. Below is the proposed methodology to implement CRUD operations in a RESTful API. (Recommended)
-
-    | Resource | POST | GET | PUT | DELETE |
-    | --- | --- | --- | --- | --- |
-    | /api/petstore/v1/pets/dogs | Create a new dog | List dogs | Replace dogs with new dogs(Bulk update) | Delete all dogs |
-    | /api/petstore/v1/pets/dogs/bailey | Error | Show dog | If exist update dog else ERROR | Delete dog |
-
-    Do not use:
-
- /api/petstore/v1/pets/getalldogs
-
- /api/petstore/v1/pets/createdog
-
- /api/petstore/v1/pets/deletedog
-
-*   A trailing forward slash (/) should not be included in URIs (Mandatory)
-
-A forward slash (/) adds no semantic value and may cause confusion. RESTful API’s should not expect a trailing slash and should not include them in the links that they provide to clients.
-
-*   Forward slash separator (/) must be used to indicate a hierarchical relationship (Mandatory)
-*   Use Hyphens (-) instead of Underscores (\_)  if separation of words is needed in the URI (May have conflict with SOL, TBD)
-
- Underscores (\_) can be hidden by the underline of URIs in browsers.
-
-*   Lowercase letters should be preferred in URI paths (Recommended)
-
-When convenient, lowercase letters are preferred in URI paths since capital letters can sometimes cause problems. RFC 3986 defines URIs as case-sensitive except for the scheme and host components.
-
-*   File extensions should not be included in URIs (Recommended)
-
-A REST API should not include artificial file extensions in URIs to indicate the format of a message’s entity body. Instead, they should rely on the media type, as communicated through the Content-Type header, to determine how to process the body’s content.
-
-*   A plural noun should be used for collection names (Mandatory)
-    For example, the URI for a collection of dog documents uses the plural noun form of its contained resources: /api/petstore/v1/pets/dogs
-*   A singular noun should be used for document names (Mandatory)
-    For example, the URI for a single dog document would have the singular form: /api/petstore/v1/pets/dogs/bailey
-
+{{documents}}
 ###
