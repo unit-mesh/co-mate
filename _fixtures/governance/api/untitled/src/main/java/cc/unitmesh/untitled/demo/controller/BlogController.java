@@ -14,8 +14,8 @@ public class BlogController {
         this.blogService = blogService;
     }
 
-    @PostMapping("/blog/create")
-    public String create() {
+    @PostMapping("/blog/get")
+    public String get() {
         return "";
     }
 }

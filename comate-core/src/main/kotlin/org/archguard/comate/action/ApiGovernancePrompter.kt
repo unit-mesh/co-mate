@@ -1,24 +1,40 @@
 package org.archguard.comate.action
 
+import kotlinx.serialization.Serializable
+import org.archguard.comate.governance.ApiRuleVerifier
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.comate.wrapper.ComateArchGuardClient
 import org.archguard.comate.wrapper.ComateSourceCodeContext
 import org.archguard.meta.FakeRuleVerifier
+import org.archguard.meta.dsl.ApiRuleResult
 import org.archguard.meta.dsl.rest_api
 import org.archguard.meta.restful.RestApi
 import org.archguard.scanner.analyser.ApiCallAnalyser
 import org.archguard.scanner.core.sourcecode.ContainerService
 import org.slf4j.LoggerFactory
 
-data class ApiResult(val apiUri: String, val result: Map<String, Boolean>)
+@Serializable
+data class ApiResult(val apiUri: String, val result: Map<String, ApiRuleResult>)
 
 class ApiGovernancePrompter(
     val context: CommandContext,
     override val strategy: Strategy,
 ) : CodePromptStrategy {
-    override fun getRole(): String = "Architecture"
-    override fun getInstruction(): String = "根据下面的信息，总结 API 的规范情况。"
+    override fun getRole(): String = "Architecture Governance Expert"
+    override fun getInstruction(): String = "根据下面的信息，总结 RESTful API 的规范情况。"
+
+    override fun getRequirements(): String = """
+1. 请使用中文返回。
+2. API 应该符合基本 RESTful API 的规范，如 URI 构造、采用标准的 HTTP 方法、状态码、安全等。
+3. 如果 result 是 true，请不要返回任何信息。
+4. 如果 result 是 false，请返回不通过的原因，并根据 rule 提供符合规范的 API。
+5. 你的返回结果应该如下：
+
+###
+- API `{api uri}` 不符合 { rule name } 规范，Rule: { rule }，建议修改为 {new api}。
+###
+"""
 
     override fun getExtendData(): String {
         val client = ComateArchGuardClient()
@@ -69,21 +85,13 @@ Token Based Authentication (Recommended) Ideally, microservices should be statel
                 misc("""""")
             }
 
-            governance.context(FakeRuleVerifier())
+            governance.context(ApiRuleVerifier(context.connector!!))
             val result = governance.exec(api)
 
             ApiResult(api.uri, result)
         }
 
-        println(results)
-
-        val introduction = this.introduction(context.workdir)
-
-        throw NotImplementedError()
-
-        return """$introduction
-
-""".trimIndent()
+        return """results: ${results.joinToString("\n") { "${it.apiUri}: ${it.result}" }}""".trimIndent()
     }
 
     companion object {

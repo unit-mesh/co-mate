@@ -1,5 +1,6 @@
 package org.archguard.meta.dsl
 
+import kotlinx.serialization.Serializable
 import org.archguard.meta.FakeRuleVerifier
 import org.archguard.meta.LlmRuleVerifier
 import org.archguard.meta.restful.ApiCheckRule
@@ -15,6 +16,9 @@ enum class ApiRuleType(rule: Class<out ApiRule>) {
     STATUS_CODE(StatusCodeRule::class.java),
     URI_CONSTRUCTION(UriConstructionRule::class.java)
 }
+
+@Serializable
+data class ApiRuleResult(val ruleName: String, val rule: String, val result: Boolean)
 
 class RestApiGovernance {
     private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
@@ -55,8 +59,8 @@ class RestApiGovernance {
         return miscRule
     }
 
-    fun exec(element: RestApi): Map<String, Boolean> {
-        return rules.associate { it.name to it.exec(element) } as Map<String, Boolean>
+    fun exec(element: RestApi): Map<String, ApiRuleResult> {
+        return rules.associate { it.name to ApiRuleResult(it.name, it.rule, it.exec(element) as Boolean) }
     }
 
     fun context(ruleVerifier: LlmRuleVerifier) {
