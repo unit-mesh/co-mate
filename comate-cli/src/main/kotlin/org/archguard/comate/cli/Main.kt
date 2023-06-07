@@ -2,6 +2,7 @@ package org.archguard.comate.cli
 
 import io.github.cdimascio.dotenv.Dotenv
 import org.archguard.comate.action.ComateCommand
+import org.archguard.comate.action.CommandContext
 import org.archguard.comate.smart.OpenAIConnector
 import org.archguard.comate.smart.Semantic
 import org.archguard.comate.smart.cosineSimilarity
@@ -43,11 +44,12 @@ fun main(args: Array<String>) {
 
     logger.info("prompt to openai...")
 
-    val language = "kotlin"
+    val language = "java"
+    val context = CommandContext(basePath, language)
     val promptText = when (comateCommand) {
-        ComateCommand.Intro -> ComateCommand.Intro.run(basePath, language)
-        ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.run(basePath, language)
-        ComateCommand.ApiGovernance -> ComateCommand.ApiGovernance.run(basePath, language)
+        ComateCommand.Intro -> ComateCommand.Intro.run(context)
+        ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.run(context)
+        ComateCommand.ApiGovernance -> ComateCommand.ApiGovernance.run(context)
         ComateCommand.None -> null
     } ?: return
 

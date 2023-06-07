@@ -8,8 +8,7 @@ import org.archguard.scanner.analyser.KotlinAnalyser
 import java.nio.file.Path
 
 class ApiGovernancePrompt(
-    private val workdir: Path,
-    val lang: String,
+    val context: CommandContext,
     override val strategy: Strategy,
 ) : CodePromptStrategy {
     override fun getRole(): String = "Architecture"
@@ -21,13 +20,13 @@ class ApiGovernancePrompt(
     """.trimIndent()
 
     override fun getExtendData(): String {
-        val sourceCodeContext = ComateSourceCodeContext.create(workdir.toString(), lang, features = listOf("apicalls", "datamap"))
+        val sourceCodeContext = ComateSourceCodeContext.create(context.workdir.toString(), context.lang, features = listOf("apicalls", "datamap"))
         val codeDataStructs = KotlinAnalyser(sourceCodeContext).analyse()
 
         val funcName = ""
         val nodeTree = FunctionCall().analysis(funcName, codeDataStructs)
 
-        val introduction = this.introduction(workdir)
+        val introduction = this.introduction(context.workdir)
 
         return """$introduction
 function name: $funcName            

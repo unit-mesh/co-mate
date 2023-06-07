@@ -8,8 +8,7 @@ import kotlin.io.path.Path
 import kotlin.io.path.relativeTo
 
 class IntroductionCodePrompt(
-    private val workdir: Path,
-    val lang: String,
+    val context: CommandContext,
     override val strategy: Strategy,
 ) : CodePromptStrategy {
     override fun getRole(): String = "Architecture"
@@ -28,9 +27,9 @@ class IntroductionCodePrompt(
     }
 
     override fun getExtendData(): String {
-        val dep = dependencies(workdir, lang)
+        val dep = dependencies(context.workdir, context.lang)
         val depMap: Map<String, List<String>> = dep.groupBy {
-            val relativePath = Path(it.path).relativeTo(workdir).toString()
+            val relativePath = Path(it.path).relativeTo(context.workdir).toString()
             relativePath
         }.mapValues { entry ->
             entry.value.map { it.depName }
@@ -38,7 +37,7 @@ class IntroductionCodePrompt(
                 .filter { it.isNotEmpty() && it != ":" }
         }
 
-        val instr = this.introduction(workdir)
+        val instr = this.introduction(context.workdir)
 
         val items = depMap.map { "| ${it.key} | ${it.value.joinToString(", ")} |" }.joinToString("\n")
         val channels = ChannelType.allValues()
