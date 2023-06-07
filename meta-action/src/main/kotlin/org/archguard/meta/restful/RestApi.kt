@@ -10,5 +10,7 @@ data class RestApi(
     val request: JsonObject? = null,
     val response: List<JsonObject> = listOf(),
 ) : Element() {
-
+    override fun toString(): String {
+        return "RestApi(uri='$uri', action='$action', statusCodes=$statusCodes, request=$request, response=$response)"
+    }
 }

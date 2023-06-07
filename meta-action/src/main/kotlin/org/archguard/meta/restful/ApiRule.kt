@@ -7,3 +7,4 @@ import org.archguard.meta.AtomicDsl
 abstract class ApiRule(val name: String) : AtomicAction {
     abstract fun exec(input: RestApi): Any
 }
+
