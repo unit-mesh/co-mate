@@ -1,7 +1,7 @@
-package org.archguard.meta.restful
+package org.archguard.meta.restful.rule
 
-import org.archguard.meta.ApiRule
-import org.archguard.meta.RestApi
+import org.archguard.meta.restful.ApiRule
+import org.archguard.meta.restful.RestApi
 
 class HttpActionRule(private val actions: List<String>) : ApiRule("http-action") {
     override fun exec(input: RestApi): Boolean {

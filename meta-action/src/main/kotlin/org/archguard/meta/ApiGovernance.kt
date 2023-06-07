@@ -1,6 +1,8 @@
 package org.archguard.meta
 
-import org.archguard.meta.restful.*
+import org.archguard.meta.restful.ApiRule
+import org.archguard.meta.restful.RestApi
+import org.archguard.meta.restful.rule.*
 
 // todo: is for checking the rule type
 enum class ApiRuleType(rule: Class<out ApiRule>) {

@@ -1,7 +1,7 @@
-package org.archguard.meta.restful
+package org.archguard.meta.restful.rule
 
-import org.archguard.meta.ApiRule
-import org.archguard.meta.RestApi
+import org.archguard.meta.restful.ApiRule
+import org.archguard.meta.restful.RestApi
 
 class StatusCodeRule(private val codes: List<Int>) : ApiRule("status-code") {
     override fun exec(input: RestApi): Boolean {

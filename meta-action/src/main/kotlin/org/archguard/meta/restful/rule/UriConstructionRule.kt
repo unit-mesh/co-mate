@@ -1,7 +1,7 @@
-package org.archguard.meta.restful
+package org.archguard.meta.restful.rule
 
-import org.archguard.meta.ApiRule
-import org.archguard.meta.RestApi
+import org.archguard.meta.restful.ApiRule
+import org.archguard.meta.restful.RestApi
 
 class UriConstructionRule : ApiRule("uri-construction") {
     private var ruleRegex: Regex? = null
