@@ -1,9 +1,10 @@
 package org.archguard.comate.action
 
+import org.archguard.comate.smart.OpenAIConnector
 import org.archguard.comate.strategy.BasicPromptStrategy
 import java.nio.file.Path
 
-data class CommandContext(val workdir: Path, val lang: String)
+data class CommandContext(val workdir: Path, val lang: String, val connector: OpenAIConnector?)
 
 enum class ComateCommand(command: String) {
     None("") {

@@ -55,10 +55,8 @@ class RestApiGovernance {
         return miscRule
     }
 
-    fun exec(element: RestApi) {
-        rules.forEach {
-            it.exec(element)
-        }
+    fun exec(element: RestApi): Map<String, Boolean> {
+        return rules.associate { it.name to it.exec(element) } as Map<String, Boolean>
     }
 
     fun context(ruleVerifier: LlmRuleVerifier) {

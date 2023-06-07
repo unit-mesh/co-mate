@@ -10,7 +10,6 @@ import com.theokanning.openai.service.OpenAiService.defaultObjectMapper
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
-import java.time.Duration
 
 val OPENAI_MODEL = arrayOf("gpt-3.5-turbo", "gpt-4.0")
 

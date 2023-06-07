@@ -23,7 +23,8 @@ fun main(args: Array<String>) {
     logger.info("start execution ...")
 
     val language = "java"
-    val context = CommandContext(basePath, language)
+    val openAiConnector = createConnector()
+    val context = CommandContext(basePath, language, openAiConnector)
     val summarizePrompt = when (comateCommand) {
         ComateCommand.Intro -> ComateCommand.Intro.run(context)
         ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.run(context)
@@ -33,7 +34,6 @@ fun main(args: Array<String>) {
 
     logger.info("summarize prompt text: $summarizePrompt")
 
-    val openAiConnector = createConnector()
     val output = openAiConnector.prompt(summarizePrompt)
     println(output)
 }
