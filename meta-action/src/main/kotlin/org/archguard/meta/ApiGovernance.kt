@@ -2,12 +2,13 @@ package org.archguard.meta
 
 import org.archguard.meta.restful.*
 
+// todo: is for checking the rule type
 enum class ApiRuleType(rule: Class<out ApiRule>) {
-    URI_CONSTRUCTION(UriConstructionRule::class.java),
     HTTP_ACTION(HttpActionRule::class.java),
-    STATUS_CODE(StatusCodeRule::class.java),
+    MISC(MiscRule::class.java),
     SECURITY(SecurityRule::class.java),
-    MISC(MiscRule::class.java)
+    STATUS_CODE(StatusCodeRule::class.java),
+    URI_CONSTRUCTION(UriConstructionRule::class.java)
 }
 
 class ApiGovernance {
