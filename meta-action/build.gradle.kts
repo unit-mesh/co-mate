@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.stdlib)
+    implementation(libs.serialization.json)
 
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.test.junit.engine)

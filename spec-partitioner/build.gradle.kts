@@ -8,6 +8,7 @@ dependencies {
     implementation(projects.metaAction)
     implementation(projects.llmCore)
 
+    implementation(libs.serialization.json)
     implementation(libs.kotlin.stdlib)
     implementation(libs.bundles.markdown)
 
