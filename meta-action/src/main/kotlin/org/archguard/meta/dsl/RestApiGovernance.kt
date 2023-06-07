@@ -2,6 +2,7 @@ package org.archguard.meta.dsl
 
 import org.archguard.meta.FakeRuleVerifier
 import org.archguard.meta.LlmRuleVerifier
+import org.archguard.meta.restful.ApiCheckRule
 import org.archguard.meta.restful.ApiRule
 import org.archguard.meta.restful.RestApi
 import org.archguard.meta.restful.rule.*
@@ -18,6 +19,8 @@ enum class ApiRuleType(rule: Class<out ApiRule>) {
 class RestApiGovernance {
     private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
     private var rules: List<ApiRule> = listOf()
+
+    private var needUpdateContextRules: List<ApiRule> = listOf()
 
     fun uri_construction(function: UriConstructionRule.() -> Unit): UriConstructionRule {
         val uriRule = UriConstructionRule()
@@ -40,8 +43,16 @@ class RestApiGovernance {
 
     fun security(security: String): SecurityRule {
         val securityRule = SecurityRule(security, ruleVerifier)
+        needUpdateContextRules += securityRule
         rules = rules + securityRule
         return securityRule
+    }
+
+    fun misc(misc: String): MiscRule {
+        val miscRule = MiscRule(misc, ruleVerifier)
+        needUpdateContextRules += miscRule
+        rules = rules + miscRule
+        return miscRule
     }
 
     fun exec(element: RestApi) {
@@ -52,6 +63,11 @@ class RestApiGovernance {
 
     fun context(ruleVerifier: LlmRuleVerifier) {
         this.ruleVerifier = ruleVerifier
+        needUpdateContextRules.forEach {
+            if (it is ApiCheckRule) {
+                it.ruleVerifier = ruleVerifier
+            }
+        }
     }
 }
 

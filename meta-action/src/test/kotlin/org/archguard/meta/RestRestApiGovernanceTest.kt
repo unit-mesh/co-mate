@@ -21,6 +21,8 @@ class RestRestApiGovernanceTest {
 Token Based Authentication (Recommended) Ideally, microservices should be stateless so the service instances can be scaled out easily and the client requests can be routed to multiple independent service providers. A token based authentication mechanism should be used instead of session based authentication
             """.trimIndent()
             )
+
+            misc("""""")
         }
 
         val restApi = RestApi("http://127.0.0.1:8080/api/petstore/v1/pets/dogs", "GET", listOf(200, 500))
