@@ -13,21 +13,21 @@ enum class ComateCommand(command: String) {
         override fun run(context: CommandContext): String {
             val promptStrategy = BasicPromptStrategy()
             val basicPrompter = IntroductionCodePrompt(context, promptStrategy)
-            return basicPrompter.prompt()
+            return basicPrompter.execute()
         }
     },
     LayeredStyle("archstyle") {
         override fun run(context: CommandContext): String {
             val promptStrategy = BasicPromptStrategy()
             val basicPrompter = LayeredStylePrompt(context, promptStrategy)
-            return basicPrompter.prompt()
+            return basicPrompter.execute()
         }
     },
     ApiGovernance("api-gov") {
         override fun run(context: CommandContext): String {
             val promptStrategy = BasicPromptStrategy()
-            val basicPrompter = ApiGovernancePrompt(context, promptStrategy)
-            return basicPrompter.prompt()
+            val basicPrompter = ApiGovernance(context, promptStrategy)
+            return basicPrompter.execute()
         }
     },
     ;

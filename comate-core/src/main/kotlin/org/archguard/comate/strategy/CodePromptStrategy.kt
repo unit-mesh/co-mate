@@ -11,7 +11,7 @@ import kotlin.io.path.readText
 
 interface CodePromptStrategy : BaseTemplate {
     val strategy: Strategy
-    fun prompt(): String = strategy.prompt(this)
+    fun execute(): String = strategy.prompt(this)
 
     fun dependencies(workdir: Path, lang: String) = ScaAnalyser(ComateScaContext.create(workdir.toString(), lang)).analyse()
 
