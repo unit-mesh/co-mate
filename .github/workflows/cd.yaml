@@ -12,7 +12,6 @@ jobs:
       matrix:
         assets:
           - comate-cli/build/libs/comate-cli-*-all.jar
-          - comate-gui/build/libs/comate-gui-*-all.jar
 
     permissions:
       contents: write
