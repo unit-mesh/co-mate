@@ -3,7 +3,7 @@ package org.archguard.meta.restful.rule
 import org.archguard.meta.restful.ApiRule
 import org.archguard.meta.restful.RestApi
 
-class StatusCodeRule(private val codes: List<Int>) : ApiRule("status-code") {
+class StatusCodeRule(private val codes: List<Int>) : ApiRule("status-code", "supported codes: ${codes.joinToString(", ")}") {
     override fun exec(input: RestApi): Boolean {
         if (input.statusCodes.isEmpty()) {
             return false

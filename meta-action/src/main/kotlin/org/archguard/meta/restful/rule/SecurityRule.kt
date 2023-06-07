@@ -5,7 +5,7 @@ import org.archguard.meta.restful.ApiCheckRule
 import org.archguard.meta.restful.RestApi
 
 class SecurityRule(private val ruleContent: String, override var ruleVerifier: LlmRuleVerifier) :
-    ApiCheckRule("security", ruleVerifier) {
+    ApiCheckRule("security", ruleContent, ruleVerifier) {
     override fun exec(input: RestApi): Boolean {
         return ruleVerifier.check(ruleContent, input.toString())
     }
