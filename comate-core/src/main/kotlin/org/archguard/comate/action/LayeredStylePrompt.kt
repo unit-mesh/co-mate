@@ -4,8 +4,6 @@ import org.archguard.comate.code.FunctionCall
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.comate.wrapper.ComateSourceCodeContext
-import org.archguard.scanner.analyser.KotlinAnalyser
-import java.nio.file.Path
 
 class LayeredStylePrompt(
     val context: CommandContext,
@@ -20,11 +18,18 @@ class LayeredStylePrompt(
     """.trimIndent()
 
     override fun getExtendData(): String {
-        val sourceCodeContext = ComateSourceCodeContext.create(context.workdir.toString(), context.lang)
-        val codeDataStructs = KotlinAnalyser(sourceCodeContext).analyse()
+        val codeContext = ComateSourceCodeContext.create(context.workdir.toString(), context.lang)
+
+        val codeDataStructs = codeAnalyser(context.lang, codeContext)?.analyse()
 
         val funcName = "org.archguard.comate.cli.MainKt.main"
-        val nodeTree = FunctionCall().analysis(funcName, codeDataStructs)
+
+        val nodeTree = if (codeDataStructs != null) {
+            FunctionCall().analysis(funcName, codeDataStructs)
+        } else {
+            null
+        }
+
 
         val introduction = this.introduction(context.workdir)
 

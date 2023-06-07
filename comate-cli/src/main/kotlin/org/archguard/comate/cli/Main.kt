@@ -15,7 +15,7 @@ typealias Embed = FloatArray
 private val logger = Logger.getLogger("comate")
 
 fun main(args: Array<String>) {
-    val cmd = if (args.isEmpty()) "layered style" else args[0]
+    val cmd = if (args.isEmpty()) "检查 API 规范" else args[0]
 
     val basePath = Path(File(".").absolutePath)
     val comateCommand = cmdToComateCommand(cmd)
@@ -24,17 +24,17 @@ fun main(args: Array<String>) {
 
     val language = "java"
     val context = CommandContext(basePath, language)
-    val promptText = when (comateCommand) {
+    val summarizePrompt = when (comateCommand) {
         ComateCommand.Intro -> ComateCommand.Intro.run(context)
         ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.run(context)
         ComateCommand.ApiGovernance -> ComateCommand.ApiGovernance.run(context)
         ComateCommand.None -> null
     } ?: return
 
-    logger.info("prompt text: $promptText")
+    logger.info("summarize prompt text: $summarizePrompt")
 
     val openAiConnector = createConnector()
-    val output = openAiConnector.prompt(promptText)
+    val output = openAiConnector.prompt(summarizePrompt)
     println(output)
 }
 

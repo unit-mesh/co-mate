@@ -18,7 +18,7 @@ fun createEmbedMap(create: Semantic): Map<ComateCommand, List<Embed>> {
     )
     val apiGovernanceCommand = listOf(
         "api governance",
-        "治理一下 API ",
+        "治理 API ",
         "检查 API 规范",
     )
 

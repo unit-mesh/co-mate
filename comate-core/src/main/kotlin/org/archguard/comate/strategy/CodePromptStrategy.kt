@@ -3,7 +3,11 @@ package org.archguard.comate.strategy
 import org.archguard.comate.action.BaseTemplate
 import org.archguard.comate.document.ReadmeParser
 import org.archguard.comate.wrapper.ComateScaContext
+import org.archguard.scanner.analyser.JavaAnalyser
+import org.archguard.scanner.analyser.KotlinAnalyser
 import org.archguard.scanner.analyser.ScaAnalyser
+import org.archguard.scanner.core.sourcecode.LanguageSourceCodeAnalyser
+import org.archguard.scanner.core.sourcecode.SourceCodeContext
 import java.nio.file.Path
 import kotlin.io.path.Path
 import kotlin.io.path.exists
@@ -15,8 +19,18 @@ interface CodePromptStrategy : BaseTemplate {
 
     fun dependencies(workdir: Path, lang: String) = ScaAnalyser(ComateScaContext.create(workdir.toString(), lang)).analyse()
 
-    fun sourceCode(workdir: Path, lang: String) {
-
+    fun codeAnalyser(lang: String, context: SourceCodeContext): LanguageSourceCodeAnalyser? {
+        return when(lang) {
+            "java" -> {
+                JavaAnalyser(context)
+            }
+            "kotlin" -> {
+                KotlinAnalyser(context)
+            }
+            else -> {
+                null
+            }
+        }
     }
 
     fun introduction(workdir: Path): String {

@@ -1,10 +1,10 @@
 package org.archguard.comate.action
 
-import org.archguard.comate.code.FunctionCall
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
+import org.archguard.comate.wrapper.ComateArchGuardClient
 import org.archguard.comate.wrapper.ComateSourceCodeContext
-import org.archguard.scanner.analyser.KotlinAnalyser
+import org.slf4j.LoggerFactory
 
 class ApiGovernance(
     val context: CommandContext,
@@ -14,16 +14,32 @@ class ApiGovernance(
     override fun getInstruction(): String = "根据下面的信息，总结 API 的规范情况。"
 
     override fun getExtendData(): String {
-        val sourceCodeContext = ComateSourceCodeContext.create(context.workdir.toString(), context.lang, features = listOf("apicalls", "datamap"))
-        val codeDataStructs = KotlinAnalyser(sourceCodeContext).analyse()
+        val client = ComateArchGuardClient()
 
-        val funcName = ""
-        val nodeTree = FunctionCall().analysis(funcName, codeDataStructs)
+        logger.info("start to analyse code: $context")
+        val codeContext = ComateSourceCodeContext.custom(
+            client,
+            context.workdir.toString(),
+            context.lang,
+            features = listOf()
+        )
+
+        codeAnalyser(context.lang, codeContext)?.analyse()
+        val apis = client.apis
+        println(apis)
+
+        logger.info("finished analyse code: ${context.workdir}")
 
         val introduction = this.introduction(context.workdir)
 
+        throw NotImplementedError()
+
         return """$introduction
-function name: $funcName            
-function calls tree: $nodeTree""".trimIndent()
+
+""".trimIndent()
+    }
+
+    companion object {
+        val logger = LoggerFactory.getLogger(ApiGovernance::class.java)
     }
 }
