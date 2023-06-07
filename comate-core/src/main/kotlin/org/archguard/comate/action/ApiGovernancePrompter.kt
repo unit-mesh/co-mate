@@ -6,7 +6,6 @@ import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.comate.wrapper.ComateArchGuardClient
 import org.archguard.comate.wrapper.ComateSourceCodeContext
-import org.archguard.meta.FakeRuleVerifier
 import org.archguard.meta.dsl.ApiRuleResult
 import org.archguard.meta.dsl.rest_api
 import org.archguard.meta.restful.RestApi
@@ -29,10 +28,10 @@ class ApiGovernancePrompter(
 2. API 应该符合基本 RESTful API 的规范，如 URI 构造、采用标准的 HTTP 方法、状态码、安全等。
 3. 如果 result 是 true，请不要返回任何信息。
 4. 如果 result 是 false，请返回不通过的原因，并根据 rule 提供符合规范的 API。
-5. 你的返回结果应该如下：
+5. 你只返回如下的结果：
 
 ###
-- API `{api uri}` 不符合 { rule name } 规范，Rule: { rule }，建议修改为 {new api}。
+- API `{api uri}` 不符合 { rule name } 规范，Rule: { rule }，建议 API 修改为 {new api}。
 ###
 """
 

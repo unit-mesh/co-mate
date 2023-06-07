@@ -3,6 +3,7 @@ package org.archguard.comate.cli
 import io.github.cdimascio.dotenv.Dotenv
 import org.archguard.comate.action.ComateCommand
 import org.archguard.comate.action.CommandContext
+import org.archguard.comate.smart.OPENAI_MODEL
 import org.archguard.comate.smart.OpenAIConnector
 import org.archguard.comate.smart.Semantic
 import org.archguard.comate.smart.cosineSimilarity
@@ -68,6 +69,8 @@ fun createConnector(): OpenAIConnector {
     val appDir = File(System.getProperty("user.home"), ".comate")
     val dotenv = Dotenv.configure().directory(appDir.toString()).load()
     val apiKey = dotenv["OPENAI_API_KEY"]
-    return OpenAIConnector(apiKey)
+    val apiProxy = dotenv["OPENAI_API_PROXY"] ?: null
+
+    return OpenAIConnector(apiKey, OPENAI_MODEL[0], apiProxy)
 }
 
