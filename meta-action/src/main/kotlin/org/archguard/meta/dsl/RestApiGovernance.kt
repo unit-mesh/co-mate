@@ -1,4 +1,4 @@
-package org.archguard.meta
+package org.archguard.meta.dsl
 
 import org.archguard.meta.restful.ApiRule
 import org.archguard.meta.restful.RestApi
@@ -13,7 +13,7 @@ enum class ApiRuleType(rule: Class<out ApiRule>) {
     URI_CONSTRUCTION(UriConstructionRule::class.java)
 }
 
-class ApiGovernance {
+class RestApiGovernance {
     var rules: List<ApiRule> = listOf()
 
     fun uri_construction(function: UriConstructionRule.() -> Unit): UriConstructionRule {
@@ -48,8 +48,8 @@ class ApiGovernance {
     }
 }
 
-fun api_governance(init: ApiGovernance.() -> Unit): ApiGovernance {
-    val html = ApiGovernance()
+fun rest_api(init: RestApiGovernance.() -> Unit): RestApiGovernance {
+    val html = RestApiGovernance()
     html.init()
     return html
 }

@@ -1,7 +1,7 @@
 package org.archguard.spec
 
 import org.archguard.comate.smart.Semantic
-import org.archguard.meta.ApiRuleType
+import org.archguard.meta.dsl.ApiRuleType
 import org.archguard.meta.AtomicAction
 
 val apiEmbeddingMap: Map<FloatArray, ApiRuleType>

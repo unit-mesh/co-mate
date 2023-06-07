@@ -1,12 +1,13 @@
 package org.archguard.meta
 
+import org.archguard.meta.dsl.rest_api
 import org.archguard.meta.restful.RestApi
 import org.junit.jupiter.api.Test
 
-class RestApiGovernanceTest {
+class RestRestApiGovernanceTest {
     @Test
     fun spec_checking() {
-        val governance = api_governance {
+        val governance = rest_api {
             uri_construction {
                 rule("http:\\/\\/[a-zA-Z0-9.\\-]+:[0-9]+\\/api\\/[a-zA-Z0-9]+\\/v[0-9]+\\/[a-zA-Z0-9\\/\\-]+")
                 example("http://127.0.0.1:8080/api/petstore/v1/pets/dogs")
