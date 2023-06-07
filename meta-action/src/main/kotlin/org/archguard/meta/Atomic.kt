@@ -5,16 +5,16 @@ package org.archguard.meta
 annotation class AtomicDsl
 
 interface AtomicAction {
-    fun exec(input: Element): Any
+
 }
 
 open class Element
 
 @AtomicDsl
 abstract class ApiRule(val name: String) : AtomicAction {
-    abstract override fun exec(input: Element): Any
+    abstract fun exec(input: RestApi): Any
 }
 
-class RestApi(uri: String) : Element() {
+class RestApi(val uri: String) : Element() {
 
 }

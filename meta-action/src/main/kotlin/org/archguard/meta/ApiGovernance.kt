@@ -14,9 +14,10 @@ class ApiGovernance {
     var rules: List<ApiRule> = listOf()
 
     fun uri_construction(function: UriConstructionRule.() -> Unit): UriConstructionRule {
-        val html = UriConstructionRule()
-        html.function()
-        return html
+        val uriRule = UriConstructionRule()
+        uriRule.function()
+        rules = rules + uriRule
+        return uriRule
     }
 
     fun http_action(vararg actions: String): HttpActionRule {

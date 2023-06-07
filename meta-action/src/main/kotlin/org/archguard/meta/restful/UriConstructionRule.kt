@@ -1,7 +1,7 @@
 package org.archguard.meta.restful
 
 import org.archguard.meta.ApiRule
-import org.archguard.meta.Element
+import org.archguard.meta.RestApi
 
 class UriConstructionRule : ApiRule("uri-construction") {
     var ruleRegex: Regex? = null
@@ -11,13 +11,18 @@ class UriConstructionRule : ApiRule("uri-construction") {
         this.ruleRegex = Regex(regex)
     }
 
-    fun sample(sample: String) {
+    fun example(sample: String) {
         this.sample = sample
     }
 
-    override fun exec(input: Element): Any {
+    override fun exec(input: RestApi): Boolean {
         println("exec: ${this.name}")
-        return ""
+        if (ruleRegex != null) {
+            val matchResult = ruleRegex!!.find(input.uri)
+            return matchResult != null
+        }
+
+        return true
     }
 }
 

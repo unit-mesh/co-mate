@@ -7,9 +7,8 @@ class RestApiGovernanceTest {
     fun spec_checking() {
         val governance = api_governance {
             uri_construction {
-                // todo: add multiple rule samples
-                rule("")
-                sample("")
+                rule("http:\\/\\/[a-zA-Z0-9.\\-]+:[0-9]+\\/api\\/[a-zA-Z0-9]+\\/v[0-9]+\\/[a-zA-Z0-9\\/\\-]+")
+                example("http://127.0.0.1:8080/api/petstore/v1/pets/dogs")
             }
 
             http_action("GET", "POST", "PUT", "DELETE")
@@ -22,7 +21,7 @@ Token Based Authentication (Recommended) Ideally, microservices should be statel
             )
         }
 
-        governance.exec(RestApi("http://localhost:8080/api/v1/users"))
+        governance.exec(RestApi("http://127.0.0.1:8080/api/petstore/v1/pets/dogs"))
     }
 }
 
