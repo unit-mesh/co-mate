@@ -15,13 +15,32 @@ typealias Embed = FloatArray
 private val logger = Logger.getLogger("comate")
 
 fun main(args: Array<String>) {
-    val basePath = Path(File(".").absolutePath)
-    val semantic = Semantic.create()
-
-    val commandEmbedMap = createEmbedMap(semantic)
-
-    // layered style
     val cmd = if (args.isEmpty()) "layered style" else args[0]
+
+    val basePath = Path(File(".").absolutePath)
+    val comateCommand = cmdToComateCommand(cmd)
+
+    logger.info("start execution ...")
+
+    val language = "java"
+    val context = CommandContext(basePath, language)
+    val promptText = when (comateCommand) {
+        ComateCommand.Intro -> ComateCommand.Intro.run(context)
+        ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.run(context)
+        ComateCommand.ApiGovernance -> ComateCommand.ApiGovernance.run(context)
+        ComateCommand.None -> null
+    } ?: return
+
+    logger.info("prompt text: $promptText")
+
+    val openAiConnector = createConnector()
+    val output = openAiConnector.prompt(promptText)
+    println(output)
+}
+
+private fun cmdToComateCommand(cmd: String): ComateCommand {
+    val semantic = Semantic.create()
+    val commandEmbedMap = createEmbedMap(semantic)
 
     val inputEmbed = semantic.embed(cmd)
 
@@ -42,22 +61,7 @@ fun main(args: Array<String>) {
         }
     }
 
-    logger.info("prompt to openai...")
-
-    val language = "java"
-    val context = CommandContext(basePath, language)
-    val promptText = when (comateCommand) {
-        ComateCommand.Intro -> ComateCommand.Intro.run(context)
-        ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.run(context)
-        ComateCommand.ApiGovernance -> ComateCommand.ApiGovernance.run(context)
-        ComateCommand.None -> null
-    } ?: return
-
-    logger.info("prompt text: $promptText")
-
-    val openAiConnector = createConnector()
-    val output = openAiConnector.prompt(promptText)
-    println(output)
+    return comateCommand
 }
 
 fun createConnector(): OpenAIConnector {
