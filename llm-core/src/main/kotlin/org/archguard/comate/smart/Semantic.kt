@@ -6,9 +6,8 @@ import ai.onnxruntime.OrtEnvironment
 import ai.onnxruntime.OrtSession
 import ai.onnxruntime.OrtUtil
 import java.net.URI
-import java.nio.file.FileSystem
-import java.nio.file.FileSystems
-import kotlin.io.path.toPath
+import java.nio.file.*
+import kotlin.io.path.absolutePathString
 
 
 class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val env: OrtEnvironment) {
@@ -42,8 +41,10 @@ class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val
 
     companion object {
         fun create(): Semantic {
-            val tokenizerPath = Companion::class.java.classLoader.getResource("model/tokenizer.json")!!.toURI()
-            val onnxPath =  Companion::class.java.classLoader.getResource("model/model.onnx")!!.toURI()
+            val classLoader = Thread.currentThread().getContextClassLoader()
+
+            val tokenizerPath = classLoader.getResource("model/tokenizer.json")!!.toURI()
+            val onnxPath =  classLoader.getResource("model/model.onnx")!!.toURI()
 
             try {
                 val env: Map<String, String> = HashMap()
@@ -53,10 +54,14 @@ class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val
 //                e.printStackTrace()
             }
 
-            val tokenizer = HuggingFaceTokenizer.newInstance(tokenizerPath.toPath())
+            val tokenizer = HuggingFaceTokenizer.newInstance(Paths.get(tokenizerPath))
             val ortEnv = OrtEnvironment.getEnvironment()
             val sessionOptions = OrtSession.SessionOptions()
-            val session = ortEnv.createSession(onnxPath.path, sessionOptions)
+
+            // load onnxPath as byte[]
+            val onnxPathAsByteArray = Files.readAllBytes(Paths.get(onnxPath))
+
+            val session = ortEnv.createSession(onnxPathAsByteArray, sessionOptions)
 
             return Semantic(tokenizer, session, ortEnv)
         }
