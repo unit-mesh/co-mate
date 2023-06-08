@@ -9,8 +9,8 @@ class RestRestApiGovernanceTest {
     fun spec_checking() {
         val governance = rest_api {
             uri_construction {
-                rule("http:\\/\\/[a-zA-Z0-9.\\-]+:[0-9]+\\/api\\/[a-zA-Z0-9]+\\/v[0-9]+\\/[a-zA-Z0-9\\/\\-]+")
-                example("http://127.0.0.1:8080/api/petstore/v1/pets/dogs")
+                rule("/api\\/[a-zA-Z0-9]+\\/v[0-9]+\\/[a-zA-Z0-9\\/\\-]+")
+                example("/api/petstore/v1/pets/dogs")
             }
 
             http_action("GET", "POST", "PUT", "DELETE")
@@ -25,7 +25,7 @@ Token Based Authentication (Recommended) Ideally, microservices should be statel
             misc("""""")
         }
 
-        val restApi = RestApi("http://127.0.0.1:8080/api/petstore/v1/pets/dogs", "GET", listOf(200, 500))
+        val restApi = RestApi("/api/petstore/v1/pets/dogs", "GET", listOf(200, 500))
         governance.context(FakeRuleVerifier())
         governance.exec(restApi)
     }
