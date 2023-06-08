@@ -1,6 +1,7 @@
 # ArchGuard Co-mate
 
-![Java Version](https://img.shields.io/badge/Java-%3E=11.0-blue)
+[![Java support](https://img.shields.io/badge/Java-11+-green?logo=java&logoColor=white)](https://openjdk.java.net/)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/archguard/co-mate)
 
 > Co-mate is an AI-powered software architecture copilot, design and governance tools.
 

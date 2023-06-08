@@ -65,6 +65,7 @@ class ApiGovernancePrompter(
             }
         }
 
+        // todo: use a better way to get the apis
         val results = apis.map { api ->
             val governance = rest_api {
                 uri_construction {

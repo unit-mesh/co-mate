@@ -53,7 +53,23 @@ allprojects {
     }
 }
 
-// !!!important for jacoco aggregation report only
+
 dependencies {
-//	jacocoAggregation(projects.factor)
+    jacocoAggregation(project(":llm-core"))
+    jacocoAggregation(project(":meta-action"))
+    jacocoAggregation(project(":comate-core"))
+    jacocoAggregation(project(":spec-partitioner"))
+    jacocoAggregation(project(":architecture"))
+}
+
+reporting {
+    reports {
+        val jacocoRootReport by creating(JacocoCoverageReport::class) {
+            testType.set(TestSuiteType.UNIT_TEST)
+        }
+    }
+}
+
+tasks.check {
+    dependsOn(tasks.named<JacocoReport>("jacocoRootReport"))
 }
