@@ -10,8 +10,7 @@ dependencies {
 
     implementation(libs.bundles.openai)
 
-    implementation("org.jetbrains.kotlinx:kotlin-deeplearning-api:0.5.2")
-    implementation("org.jetbrains.kotlinx:kotlin-deeplearning-onnx:0.5.2")
+    implementation("com.microsoft.onnxruntime:onnxruntime:1.15.0")
 
     implementation("ai.djl.huggingface:tokenizers:0.22.1")
 
