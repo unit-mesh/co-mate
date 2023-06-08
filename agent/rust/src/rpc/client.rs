@@ -18,13 +18,4 @@ impl Client {
             }),
         );
     }
-
-    pub(crate) fn set_open_ai_token(&self, p0: String) {
-        self.0.send_rpc_request(
-            "config",
-            &json!({
-                "open_ai_token": p0,
-            }),
-        ).expect("TODO: panic message");
-    }
 }

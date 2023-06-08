@@ -8,10 +8,6 @@ pub enum CoreRequest {
         open_ai_token: String,
         open_ai_url: Option<String>,
     },
-    // completion_once
-    CompletionOnce {
-        document: Document
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]

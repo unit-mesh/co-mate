@@ -1,11 +1,9 @@
 use std::sync::{Mutex, Weak};
 
 use serde_json::{self, json, Value};
-use tracing::info;
 use xi_rpc::{RemoteError, RpcPeer};
 
 use client::Client;
-use notification::CoreNotification;
 use request::CoreRequest;
 
 mod notification;
@@ -27,16 +25,6 @@ impl CoreState {
         }
     }
 
-    // pub(crate) fn client_notification(&mut self, cmd: CoreNotification) {
-    //     match cmd {
-    //         CoreNotification::Initialize { .. } => {}
-    //         CoreNotification::WorkspaceFileOpened { .. } => {}
-    //         CoreNotification::WorkspaceFileClosed { .. } => {}
-    //         CoreNotification::WorkspaceFileChanged { .. } => {}
-    //         CoreNotification::Shutdown => {}
-    //     }
-    // }
-
     pub(crate) fn client_request(&mut self, cmd: CoreRequest) -> Result<Value, RemoteError> {
         use request::CoreRequest::*;
         match cmd {
@@ -44,11 +32,6 @@ impl CoreState {
                 self.token = Some(open_ai_token);
                 Ok(json!({
                     "success": true
-                }))
-            }
-            CompletionOnce { document } => {
-                Ok(json!({
-                    "status": "todo!()"
                 }))
             }
         }
