@@ -2,17 +2,21 @@ package org.archguard.comate.governance
 
 import org.archguard.comate.smart.LlmConnector
 import org.archguard.meta.LlmRuleVerifier
+import org.slf4j.LoggerFactory
 
 class ApiRuleVerifier(val connector: LlmConnector) : LlmRuleVerifier {
     override fun check(prompt: String, input: String): Boolean {
-        val result = connector.prompt(
-            """
+        if (prompt.isBlank() || input.isBlank()) {
+            return true
+        }
+
+        val finalPrompt = """
             | You're a software architect governance expert, please verify the rule with uri. Here is the requirement:
             | 
             | 1. If API is not need authentication, just return true, no explanation.
             | 2. If it is not clear whether authentication is needed, just return true, no explanation.
             | 3. If API is need authentication, please check the authentication type, no explanation.
-            | 4. You should only return ###true### or ###false###.
+            | 4. You should only return ###true### or ###false###, no explanation.
             | 
             | Here is rule:
             | ###
@@ -24,14 +28,14 @@ class ApiRuleVerifier(val connector: LlmConnector) : LlmRuleVerifier {
             | $input
             | ###
         """.trimMargin()
-        )
+        val result = connector.prompt(finalPrompt)
 
-        logger.info("start to verify the rule: $prompt, input: $input, result: $result")
+        logger.info("start to verify the rule: $finalPrompt result: $result")
 
         return result.lowercase() == "true" || result.lowercase().contains("true")
     }
 
     companion object {
-        val logger = org.slf4j.LoggerFactory.getLogger(ApiRuleVerifier::class.java)
+        val logger = LoggerFactory.getLogger(ApiRuleVerifier::class.java)!!
     }
 }
