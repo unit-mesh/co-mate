@@ -2,6 +2,25 @@
 name = "comate-agent"
 version = "0.1.0"
 edition = "2021"
+license = "MPL-2.0"
+readme = "README.md"
+repository = "https://github.com/archguard/comate"
+documentation = "https://github.com/archguard/comate"
+homepage = "https://github.com/archguard/comate"
+description = """
+ Co-mate is an AI-powered architecture copilot, design and governance tools.
+"""
+categories = ["text-processing", "command-line-interface", "development-tools"]
+exclude = [
+    ".github/*",
+    ".gitattributes",
+    ".adr.json",
+    "guarding.guarding",
+    "_fixtures",
+    "docs",
+    "examples",
+]
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
