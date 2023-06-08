@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.jvm)
     id("jacoco-report-aggregation")
+    id("com.github.nbaztec.coveralls-jacoco") version "1.2.15"
 }
 
 jacoco {
