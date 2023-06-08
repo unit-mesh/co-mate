@@ -10,6 +10,9 @@ import org.archguard.comate.smart.cosineSimilarity
 import java.io.File
 import java.util.logging.Logger
 import kotlin.io.path.Path
+import kotlin.io.path.pathString
+import java.nio.file.Files
+import java.nio.file.Paths
 
 typealias Embed = FloatArray
 
@@ -66,8 +69,14 @@ private fun cmdToComateCommand(cmd: String): ComateCommand {
 }
 
 fun createConnector(): OpenAIConnector {
-    val appDir = File(System.getProperty("user.home"), ".comate")
-    val dotenv = Dotenv.configure().directory(appDir.toString()).load()
+    val appDir = Paths.get(System.getProperty("user.home"), ".comate")
+    val env = Paths.get(appDir.pathString, ".env")
+    if (Files.notExists(appDir)) {
+        Files.createDirectory(appDir)
+        Files.createFile(env)
+        Files.write(env, "OPENAI_API_KEY=xxx".toByteArray())
+    }
+    val dotenv = Dotenv.configure().directory(appDir.pathString).load()
     val apiKey = dotenv["OPENAI_API_KEY"]
     val apiProxy = dotenv["OPENAI_API_PROXY"] ?: null
 
