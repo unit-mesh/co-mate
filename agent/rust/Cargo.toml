@@ -21,15 +21,32 @@ exclude = [
     "examples",
 ]
 
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "agent"
 
 [dependencies]
-jni = "0.19.0"
 
-[target.'cfg(target_os = "linux")'.dependencies]
-openssl = { version = "0.10", features = ["vendored"] }
+# embedding
+ort = "1.14.6"
+tokenizers = "0.13.3"
+ndarray = "0.15"
 
+# log
+log = "0.4.18"
+tracing = "0.1.37"
+tracing-subscriber = { version = "0.3.16", features = ["env-filter", "registry"] }
 
-[lib]
-crate_type = ["cdylib"]
+# error handling
+anyhow = "1.0.68"
+thiserror = "1.0.38"
+
+# serde
+serde = "1.0.152"
+erased-serde = "0.3.25"
+serde_json = "1.0.91"
+
+# RPC Server
+fern = "0.6.2"
+xi-rpc = "0.3.0"
+chrono = "0.4.24"
+dirs = "5.0.1"
