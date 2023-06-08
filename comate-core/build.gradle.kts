@@ -19,6 +19,9 @@ dependencies {
     implementation("org.archguard.scanner:lang_java:2.0.1")
     implementation("org.archguard.scanner:feat_apicalls:2.0.1")
 
+
+    implementation("org.slf4j:slf4j-simple:2.0.7")
+
     implementation(libs.bundles.markdown)
 
     testImplementation(libs.bundles.test)
