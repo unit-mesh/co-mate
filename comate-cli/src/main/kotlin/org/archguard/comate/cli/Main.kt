@@ -8,11 +8,11 @@ import org.archguard.comate.smart.OpenAIConnector
 import org.archguard.comate.smart.Semantic
 import org.archguard.comate.smart.cosineSimilarity
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.util.logging.Logger
 import kotlin.io.path.Path
 import kotlin.io.path.pathString
-import java.nio.file.Files
-import java.nio.file.Paths
 
 typealias Embed = FloatArray
 
@@ -74,8 +74,11 @@ fun createConnector(): OpenAIConnector {
     if (Files.notExists(appDir)) {
         Files.createDirectory(appDir)
         Files.createFile(env)
+        logger.warning("please put OPENAI_API_KEY=xxx in ~/.comate/.env")
         Files.write(env, "OPENAI_API_KEY=xxx".toByteArray())
     }
+
+    // for now, create ~/.comate/.env, and put OPENAI_API_KEY=... in it
     val dotenv = Dotenv.configure().directory(appDir.pathString).load()
     val apiKey = dotenv["OPENAI_API_KEY"]
     val apiProxy = dotenv["OPENAI_API_PROXY"] ?: null

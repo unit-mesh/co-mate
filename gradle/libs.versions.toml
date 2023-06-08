@@ -193,7 +193,7 @@ commonmark-heading-anchor = "org.commonmark:commonmark-ext-gfm-tables:0.21.0"
 
 openai-gpt3 = "com.theokanning.openai-gpt3-java:service:0.12.0"
 retrofit2-converter-jackson = "com.squareup.retrofit2:converter-jackson:2.9.0"
-dotenv = "io.github.cdimascio:dotenv-kotlin:6.4.1"
+dotenv = "io.github.cdimascio:dotenv-java:3.0.0"
 
 # implementation("smart.knowly:langtorch:0.0.11")
 langtorch = "ai.knowly:langtorch:0.0.11"
