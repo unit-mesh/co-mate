@@ -19,6 +19,21 @@ OPENAI_API_KEY=xxx
 OPENAI_API_PROXY=xxxx (optional, if you had a OpenAI proxy server)
 ```
 
+## Modules
+
+- `comate-cli`: command line interface
+- `comate-gui`: graphical user interface
+
+Core modules:
+
+- `architecture`: architecture model
+- `comate-core`: core logic, handle ArchGuard API, LLM logic, etc.
+- `llm-core`: large language model core, like OpenAI call, Token calculate, Tokenizer, Embedding, Similarity for
+  Embedding, etc.
+- Architecture Spec
+    - `spec-runtime`: the Kotlin REPL/Interpreter for Architecture Spec DSL
+    - `spec-partitioner`: the partitioner for partitioning the architecture spec document
+
 ## Todo
 
 ### BAU
