@@ -33,7 +33,7 @@ springBoot = "2.7.8"
 jackson = "2.14.1"
 reactorKotlin = "1.2.1"
 
-archguard = "2.0.0-beta.5"
+archguard = "2.0.1"
 
 # feeder
 jacoco = "0.8.8"
@@ -142,6 +142,10 @@ datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version
 # archguard
 # implementation("org.archguard.aaac:dsl:2.0.0-beta.5")
 archguard-dsl = { group = "org.archguard.aaac", name = "dsl", version.ref = "archguard" }
+archguard-analyser-sca = { group = "org.archguard.scanner", name = "analyser_sca", version.ref = "archguard" }
+archguard-lang-kotlin = { group = "org.archguard.scanner", name = "lang_kotlin", version.ref = "archguard" }
+archguard-lang-java = { group = "org.archguard.scanner", name = "lang_java", version.ref = "archguard" }
+archguard-feat-apicalls = { group = "org.archguard.scanner", name = "feat_apicalls", version.ref = "archguard" }
 
 # coverage module
 jacoco-core = { group = "org.jacoco", name = "org.jacoco.core", version.ref = "jacoco" }
@@ -195,9 +199,9 @@ openai-gpt3 = "com.theokanning.openai-gpt3-java:service:0.12.0"
 retrofit2-converter-jackson = "com.squareup.retrofit2:converter-jackson:2.9.0"
 dotenv = "io.github.cdimascio:dotenv-java:3.0.0"
 
-# implementation("smart.knowly:langtorch:0.0.11")
 langtorch = "ai.knowly:langtorch:0.0.11"
 
+# log
 slf4j-simple = "org.slf4j:slf4j-simple:2.0.7"
 
 [plugins]

@@ -14,10 +14,10 @@ dependencies {
     implementation(libs.bundles.openai)
     implementation(libs.bundles.markdown)
 
-    implementation("org.archguard.scanner:analyser_sca:2.0.1")
-    implementation("org.archguard.scanner:lang_kotlin:2.0.1")
-    implementation("org.archguard.scanner:lang_java:2.0.1")
-    implementation("org.archguard.scanner:feat_apicalls:2.0.1")
+    implementation(libs.archguard.analyser.sca)
+    implementation(libs.archguard.lang.kotlin)
+    implementation(libs.archguard.lang.java)
+    implementation(libs.archguard.feat.apicalls)
 
     implementation(libs.slf4j.simple)
 
