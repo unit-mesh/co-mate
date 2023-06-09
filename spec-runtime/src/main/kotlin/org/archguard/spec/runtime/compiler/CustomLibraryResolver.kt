@@ -1,4 +1,4 @@
-package org.clickprompt.chatrepl.compiler
+package org.archguard.spec.runtime.compiler
 
 import org.jetbrains.kotlinx.jupyter.api.libraries.LibraryDefinition
 import org.jetbrains.kotlinx.jupyter.api.libraries.LibraryReference

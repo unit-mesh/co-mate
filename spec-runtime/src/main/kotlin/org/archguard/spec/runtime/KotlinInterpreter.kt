@@ -4,7 +4,7 @@ import org.archguard.spec.runtime.interpreter.api.InterpreterRequest
 import org.archguard.spec.runtime.messaging.ErrorContent
 import org.archguard.spec.runtime.messaging.Message
 import org.archguard.spec.runtime.messaging.MessageType
-import org.archguard.spec.runtime.interpreter.compiler.KotlinReplWrapper
+import org.archguard.spec.runtime.compiler.KotlinReplWrapper
 import org.jetbrains.kotlinx.jupyter.repl.EvalResultEx
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

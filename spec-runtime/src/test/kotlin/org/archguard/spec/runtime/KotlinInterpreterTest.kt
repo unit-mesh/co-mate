@@ -3,7 +3,7 @@ package org.archguard.spec.runtime
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import io.kotest.matchers.shouldBe
-import org.archguard.spec.runtime.interpreter.compiler.KotlinReplWrapper
+import org.archguard.spec.runtime.compiler.KotlinReplWrapper
 
 class KotlinInterpreterTest {
     private lateinit var compiler: KotlinReplWrapper

@@ -1,4 +1,4 @@
-package org.archguard.spec.runtime.interpreter.compiler
+package org.archguard.spec.runtime.compiler
 
 import org.jetbrains.kotlinx.jupyter.EvalRequestData
 import org.jetbrains.kotlinx.jupyter.ReplForJupyter

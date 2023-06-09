@@ -11,6 +11,8 @@ dependencies {
     implementation(projects.comateCore)
     implementation(projects.architecture)
 
+    implementation(projects.specRuntime)
+
     implementation(libs.dotenv)
     implementation(libs.bundles.openai)
     implementation(libs.bundles.markdown)

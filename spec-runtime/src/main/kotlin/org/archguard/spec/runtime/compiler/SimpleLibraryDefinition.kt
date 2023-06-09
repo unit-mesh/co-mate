@@ -1,4 +1,4 @@
-package org.archguard.spec.runtime.interpreter.compiler
+package org.archguard.spec.runtime.compiler
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
