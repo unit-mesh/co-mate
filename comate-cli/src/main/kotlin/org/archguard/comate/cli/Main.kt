@@ -7,6 +7,9 @@ import org.archguard.comate.smart.OPENAI_MODEL
 import org.archguard.comate.smart.OpenAIConnector
 import org.archguard.comate.smart.Semantic
 import org.archguard.comate.smart.cosineSimilarity
+import org.archguard.meta.dsl.rest_api
+import org.archguard.spec.runtime.KotlinInterpreter
+import org.archguard.spec.runtime.interpreter.api.InterpreterRequest
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -18,6 +21,35 @@ private val logger = Logger.getLogger("comate")
 
 fun main(args: Array<String>) {
     val cmd = if (args.isEmpty()) "检查 API 规范" else args[0]
+
+//
+//    val eval = KotlinInterpreter().eval(
+//        InterpreterRequest(
+//            code = """
+//import org.archguard.meta.dsl.*
+//
+//val governance = rest_api {
+//    uri_construction {
+//        rule("\\/api\\/[a-zA-Z0-9]+\\/v[0-9]+\\/[a-zA-Z0-9\\/\\-]+")
+//        example("/api/petstore/v1/pets/dogs")
+//    }
+//
+//    http_action("GET", "POST", "PUT", "DELETE")
+//    status_code(200, 201, 202, 204, 400, 401, 403, 404, 500, 502, 503, 504)
+//
+//    security(
+//        ""${'"'}
+//Token Based Authentication (Recommended) Ideally, microservices should be stateless so the service instances can be scaled out easily and the client requests can be routed to multiple independent service providers. A token based authentication mechanism should be used instead of session based authentication
+//""${'"'}.trimIndent()
+//    )
+//
+//    misc(""${'"'}${'"'}${'"'}${'"'})
+//}
+//
+//    """.trimIndent()
+//        )
+//    )
+//    println(eval)
 
     val basePath = Path(File(".").absolutePath)
     val comateCommand = cmdToComateCommand(cmd)

@@ -14,6 +14,7 @@ import org.jetbrains.kotlinx.jupyter.api.KotlinKernelVersion
 import org.jetbrains.kotlinx.jupyter.api.RendererHandler
 import org.jetbrains.kotlinx.jupyter.api.ThrowableRenderer
 import org.jetbrains.kotlinx.jupyter.api.libraries.ColorSchemeChangedCallback
+import org.jetbrains.kotlinx.jupyter.api.libraries.KernelRepository
 import org.jetbrains.kotlinx.jupyter.api.libraries.LibraryDefinition
 import org.jetbrains.kotlinx.jupyter.api.libraries.LibraryResource
 import org.jetbrains.kotlinx.jupyter.util.AcceptanceRule
@@ -22,7 +23,7 @@ import org.jetbrains.kotlinx.jupyter.util.AcceptanceRule
 class SimpleLibraryDefinition(
     override var imports: List<String> = emptyList(),
     override var dependencies: List<String> = emptyList(),
-    override var repositories: List<String> = emptyList()
+    override var repositories: List<KernelRepository> = emptyList()
 ) : LibraryDefinition {
     @Transient
     override var options: Map<String, String> = emptyMap()

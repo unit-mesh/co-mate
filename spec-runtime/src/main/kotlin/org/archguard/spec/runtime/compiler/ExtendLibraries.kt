@@ -13,6 +13,5 @@ val exposedLibDef = SimpleLibraryDefinition(
 
 fun extendLibraries(): LibraryResolver {
 //    val exposed = "exposed" to Json.encodeToString(exposedLibDef)
-
     return listOf<Pair<String, String>>().toLibraries()
 }

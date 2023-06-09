@@ -14,6 +14,7 @@ dependencies {
 
     implementation(libs.slf4j.simple)
 
+    implementation(libs.kotlin.scripting.jvm)
     implementation(libs.jupyter.api)
     implementation(libs.jupyter.kernel)
     implementation(libs.jupyter.shared.compiler)

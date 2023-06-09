@@ -22,6 +22,7 @@ dependencies {
     implementation(libs.slf4j.simple)
 
     implementation(libs.bundles.markdown)
+    implementation(projects.specRuntime)
 
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.test.junit.engine)

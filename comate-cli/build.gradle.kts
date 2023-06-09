@@ -10,6 +10,7 @@ dependencies {
     implementation(projects.llmCore)
     implementation(projects.comateCore)
     implementation(projects.architecture)
+    implementation(projects.metaAction)
 
     implementation(projects.specRuntime)
 
