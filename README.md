@@ -6,6 +6,19 @@
 
 > Co-mate is an AI-powered software architecture copilot, design and governance tools.
 
+## Usage
+
+1. download the latest release from [release page](https://github.com/archguard/co-mate/releases)
+2. please put `OPENAI_API_KEY=xxx` in `~/.comate/.env`
+3. run `java -jar comate-cli-*-all.jar` replace `*` with the version number
+
+`.env` file example:
+
+```
+OPENAI_API_KEY=xxx
+OPENAI_API_PROXY=xxxx (optional, if you had a OpenAI proxy server)
+```
+
 ## Todo
 
 ### BAU
