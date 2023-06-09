@@ -76,16 +76,9 @@ kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.re
 
 # Kotlinx Serialization
 serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
-jackson-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version.ref = "jackson" }
-jackson-yaml = { group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version.ref = "jackson" }
-kaml = { group = "com.charleskorn.kaml", name = "kaml", version.ref = "kaml" }
-
 
 # Coroutines
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
-coroutines-reactor = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-reactor", version.ref = "kotlinxCoroutines" }
-reactor-kotlin-ext = { group = "io.projectreactor.kotlin", name = "reactor-kotlin-extensions", version.ref = "reactorKotlin" }
-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinxCoroutines" }
 
 # chapi
 chapi-domain = { group = "com.phodal.chapi", name = "chapi-domain", version.ref = "chapi" }
@@ -110,31 +103,8 @@ jupyter-api = { group = "org.jetbrains.kotlinx", name = "kotlin-jupyter-api", ve
 jupyter-kernel = { group = "org.jetbrains.kotlinx", name = "kotlin-jupyter-kernel", version.ref = "jupyterApi" }
 jupyter-shared-compiler = { group = "org.jetbrains.kotlinx", name = "kotlin-jupyter-shared-compiler", version.ref = "jupyterApi" }
 
-# QueryDSL
-querydsl-core = { group = "com.querydsl", name = "querydsl-core", version.ref = "querydsl" }
-querydsl-apt = { group = "com.querydsl", name = "querydsl-apt", version.ref = "querydsl" }
-querydsl-kotlin = { group = "com.querydsl", name = "querydsl-kotlin", version.ref = "querydsl" }
-querydsl-mongodb = { group = "com.querydsl", name = "querydsl-mongodb", version.ref = "querydsl" }
-
-# Mongodb
-mongodb-driver-reactivestreams = { group = "org.mongodb", name = "mongodb-driver-reactivestreams", version.ref = "mongodb" }
-mongodb-morphia = { group = "org.mongodb.morphia", name = "morphia", version.ref = "mongodbMorphia" }
-
 # persistence
 javax-persistence-api = { group = "javax.persistence", name = "javax.persistence-api", version.ref = "persistence" }
-
-# reactor
-test-reactor = { module = "io.projectreactor:reactor-test", version.ref = "reactor" }
-test-embed-mongodb = { module = "de.flapdoodle.embed:de.flapdoodle.embed.mongo", version.ref = "embedMongo" }
-
-# spring
-springboot-test = { group = "org.springframework.boot", name = "spring-boot-starter-test", version.ref = "springBoot" }
-
-springboot-starter = { group = "org.springframework.boot", name = "spring-boot-starter", version.ref = "springBoot" }
-springboot-webflux = { group = "org.springframework.boot", name = "spring-boot-starter-webflux", version.ref = "springBoot" }
-springboot-mongodb-reactive = { group = "org.springframework.boot", name = "spring-boot-starter-data-mongodb-reactive", version.ref = "springBoot" }
-
-springboot-devtools = { group = "org.springframework.boot", name = "spring-boot-devtools", version.ref = "springBoot" }
 
 # Others
 datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
@@ -147,48 +117,7 @@ archguard-lang-kotlin = { group = "org.archguard.scanner", name = "lang_kotlin",
 archguard-lang-java = { group = "org.archguard.scanner", name = "lang_java", version.ref = "archguard" }
 archguard-feat-apicalls = { group = "org.archguard.scanner", name = "feat_apicalls", version.ref = "archguard" }
 
-# coverage module
-jacoco-core = { group = "org.jacoco", name = "org.jacoco.core", version.ref = "jacoco" }
-guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
-
-auto-value = { group = "com.google.auto.value", name = "auto-value", version.ref = "autoValue" }
-auto-value-annotations = { group = "com.google.auto.value", name = "auto-value-annotations", version.ref = "autoValue" }
-
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
-jcommander = { group = "com.beust", name = "jcommander", version.ref = "jcommander" }
-
-# re2
-regex-re2 = { group = "com.google.re2j", name = "re2j", version.ref = "re2j" }
-
-jgit = { group = "org.eclipse.jgit", name = "org.eclipse.jgit", version.ref = "jgit" }
-
-# cli
-clikt = { group = "com.github.ajalt.clikt", name = "clikt", version.ref = "clikt" }
-
-kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-mosaic-gradle = { module = "com.jakewharton.mosaic:mosaic-gradle-plugin", version.ref = "mosaic" }
-
-# http client
-# io.ktor:ktor-client-core:2.0.3
-ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
-ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
-ktor-serialization-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
-ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
-
-# -------------------------------------  multiple platform dependencies -------------------------------------
-mpp-uuid = { group = "com.benasher44", name = "uuid", version.ref = "uuid" }
-
-jimfs = "com.google.jimfs:jimfs:1.2"
-
-
-# arrow
-arrow-vector = { group = "org.apache.arrow", name = "arrow-vector", version.ref = "arrow" }
-# arrow-memory = { group = "org.apache.arrow", name = "arrow-memory", version.ref = "arrow" }
-arrow-memory-netty = { group = "org.apache.arrow", name = "arrow-memory-netty", version.ref = "arrow" }
-arrow-memory-unsafe = { group = "org.apache.arrow", name = "arrow-memory-unsafe", version.ref = "arrow" }
-
-dataframe = { group = "org.jetbrains.kotlinx", name = "dataframe", version.ref = "dataframe" }
-dataframe-arrow = { group = "org.jetbrains.kotlinx", name = "dataframe-arrow", version.ref = "dataframe" }
 
 # llm part
 commonmark-core = "org.commonmark:commonmark:0.21.0"

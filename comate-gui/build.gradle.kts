@@ -26,7 +26,7 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences-core:1.0.0")
 
 
-    implementation("com.google.code.gson:gson:2.9.0")
+    implementation(libs.gson)
 
     // Image loading
     // implementation("io.coil-kt:coil-compose:2.3.0")
