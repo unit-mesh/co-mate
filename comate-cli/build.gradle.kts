@@ -15,7 +15,7 @@ dependencies {
     implementation(libs.bundles.openai)
     implementation(libs.bundles.markdown)
 
-    implementation("org.slf4j:slf4j-simple:2.0.7")
+    implementation(libs.slf4j.simple)
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.langtorch)

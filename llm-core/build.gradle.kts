@@ -14,6 +14,8 @@ dependencies {
 
     implementation("ai.djl.huggingface:tokenizers:0.22.1")
 
+    implementation("com.knuddels:jtokkit:0.5.0")
+
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.test.junit.engine)
 }
