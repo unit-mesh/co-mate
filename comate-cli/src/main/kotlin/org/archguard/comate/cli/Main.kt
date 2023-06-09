@@ -7,9 +7,6 @@ import org.archguard.comate.smart.OPENAI_MODEL
 import org.archguard.comate.smart.OpenAIConnector
 import org.archguard.comate.smart.Semantic
 import org.archguard.comate.smart.cosineSimilarity
-import org.archguard.meta.dsl.rest_api
-import org.archguard.spec.runtime.KotlinInterpreter
-import org.archguard.spec.runtime.interpreter.api.InterpreterRequest
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths

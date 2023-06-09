@@ -1,6 +1,6 @@
 package org.archguard.spec.runtime.compiler
 
-import org.archguard.meta.dsl.rest_api
+import org.archguard.meta.dsl.RestApiGovernance
 import org.jetbrains.kotlinx.jupyter.EvalRequestData
 import org.jetbrains.kotlinx.jupyter.ReplForJupyter
 import org.jetbrains.kotlinx.jupyter.api.Code
@@ -10,7 +10,7 @@ import org.jetbrains.kotlinx.jupyter.messaging.NoOpDisplayHandler
 import org.jetbrains.kotlinx.jupyter.repl.creating.createRepl
 import org.slf4j.LoggerFactory
 import java.io.File
-import kotlin.script.experimental.jvm.util.KotlinJars
+import kotlin.script.experimental.jvm.util.classPathFromTypicalResourceUrls
 
 class KotlinReplWrapper {
     private val logger = LoggerFactory.getLogger(this.javaClass)
@@ -24,12 +24,11 @@ class KotlinReplWrapper {
         val property = System.getProperty("java.class.path")
         var embeddedClasspath: MutableList<File> = property.split(File.pathSeparator).map(::File).toMutableList()
 
-        embeddedClasspath = embeddedClasspath.distinctBy { it.name }
-            .filter {
-                // because it conflicts with `logback-classic-1.2.3.jar` from `kotlinx-jupyter-core`
-                !(it.name.startsWith("logback-classic-") && it.name.endsWith(".jar"))
-            }
-                as MutableList<File>
+        logger.info("dynamic add classpath for local debug")
+        val dslPath = RestApiGovernance::javaClass.javaClass.classLoader.classPathFromTypicalResourceUrls().toList()
+        embeddedClasspath.addAll(dslPath)
+
+        embeddedClasspath = embeddedClasspath.distinct().toMutableList()
 
         logger.info("classpath: $embeddedClasspath")
 
