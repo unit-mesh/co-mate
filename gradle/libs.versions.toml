@@ -204,6 +204,10 @@ langtorch = "ai.knowly:langtorch:0.0.11"
 # log
 slf4j-simple = "org.slf4j:slf4j-simple:2.0.7"
 
+onnxruntime = "com.microsoft.onnxruntime:onnxruntime:1.15.0"
+huggingface-tokenizers = "ai.djl.huggingface:tokenizers:0.22.1"
+jtokkit = "com.knuddels:jtokkit:0.5.0"
+
 [plugins]
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

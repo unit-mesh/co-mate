@@ -10,11 +10,9 @@ dependencies {
 
     implementation(libs.bundles.openai)
 
-    implementation("com.microsoft.onnxruntime:onnxruntime:1.15.0")
-
-    implementation("ai.djl.huggingface:tokenizers:0.22.1")
-
-    implementation("com.knuddels:jtokkit:0.5.0")
+    implementation(libs.onnxruntime)
+    implementation(libs.huggingface.tokenizers)
+    implementation(libs.jtokkit)
 
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.test.junit.engine)
