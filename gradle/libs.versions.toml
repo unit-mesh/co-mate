@@ -66,12 +66,6 @@ jupyter-api = { group = "org.jetbrains.kotlinx", name = "kotlin-jupyter-api", ve
 jupyter-kernel = { group = "org.jetbrains.kotlinx", name = "kotlin-jupyter-kernel", version.ref = "jupyterApi" }
 jupyter-shared-compiler = { group = "org.jetbrains.kotlinx", name = "kotlin-jupyter-shared-compiler", version.ref = "jupyterApi" }
 
-# persistence
-javax-persistence-api = { group = "javax.persistence", name = "javax.persistence-api", version.ref = "persistence" }
-
-# Others
-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
-
 # archguard
 # implementation("org.archguard.aaac:dsl:2.0.0-beta.5")
 archguard-dsl = { group = "org.archguard.aaac", name = "dsl", version.ref = "archguard" }
