@@ -14,8 +14,6 @@ import java.util.logging.Logger
 import kotlin.io.path.Path
 import kotlin.io.path.pathString
 
-typealias Embed = FloatArray
-
 private val logger = Logger.getLogger("comate")
 
 fun main(args: Array<String>) {
@@ -44,7 +42,7 @@ fun main(args: Array<String>) {
 
 private fun cmdToComateCommand(cmd: String): ComateCommand {
     val semantic = Semantic.create()
-    val commandEmbedMap = createEmbedMap(semantic)
+    val commandEmbedMap = createEmbeddingMap(semantic)
 
     val inputEmbed = semantic.embed(cmd)
 

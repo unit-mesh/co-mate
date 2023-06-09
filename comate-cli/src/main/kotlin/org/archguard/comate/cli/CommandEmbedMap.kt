@@ -3,7 +3,7 @@ package org.archguard.comate.cli
 import org.archguard.comate.action.ComateCommand
 import org.archguard.comate.smart.Semantic
 
-fun createEmbedMap(create: Semantic): Map<ComateCommand, List<Embed>> {
+fun createEmbeddingMap(create: Semantic): Map<ComateCommand, List<FloatArray>> {
     val basicIntroCommand = listOf(
         "introduction system",
         "介绍一下这个系统",
