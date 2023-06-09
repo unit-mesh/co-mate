@@ -37,5 +37,6 @@ include(":comate-gui")
 include(":comate-cli")
 
 include(":spec-partitioner")
+include(":spec-runtime")
 
 include(":meta-action")
