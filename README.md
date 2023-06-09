@@ -48,9 +48,6 @@ OPENAI_API_PROXY=xxxx (optional, if you had a OpenAI proxy server)
 
 ### Technology
 
-- [ ] Indexes and Search
-    - [ ] Embedding API for Kotlin/Java
-    - [ ] Embedding Database
 - [ ] [SentenceTransformers](https://huggingface.co/sentence-transformers) for Local Command
     - [x] Onnx Spike
         - [x] KotlinDL: [https://github.com/Kotlin/kotlindl](https://github.com/Kotlin/kotlindl)
@@ -80,6 +77,9 @@ OPENAI_API_PROXY=xxxx (optional, if you had a OpenAI proxy server)
         - SentenceTransformers
         - Onnx Runtime
         - Tiktoken: https://github.com/openai/tiktoken
+- [ ] Indexes and Search
+    - [ ] Embedding API for Kotlin/Java
+    - [ ] Embedding Database
 
 ## To Spike
 
