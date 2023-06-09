@@ -53,3 +53,6 @@ fern = "0.6.2"
 xi-rpc = "0.3.0"
 chrono = "0.4.24"
 dirs = "5.0.1"
+
+# Segmentation fault in time： https://github.com/archguard/co-mate/security/dependabot/2
+time = "=0.3.22"

@@ -60,7 +60,7 @@ impl Handler for UnitRpc {
     fn handle_notification(&mut self, ctx: &RpcCtx, rpc: Self::Notification) {
         // We allow tracing to be enabled before event `client_started`
         match rpc {
-            Initialize { ref config_dir, } => {
+            Initialize { config_dir: _ } => {
                 assert!(self.is_waiting(), "client_started can only be sent once");
                 let state = CoreState::new(ctx.get_peer());
                 let state = Arc::new(Mutex::new(state));
