@@ -6,6 +6,8 @@
 
 > Co-mate is an AI-powered software architecture copilot, design and governance tools.
 
+Project manage: https://github.com/orgs/archguard/projects/5/views/1
+
 ## Usage
 
 1. download the latest release from [release page](https://github.com/archguard/co-mate/releases)
