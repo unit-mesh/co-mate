@@ -4,7 +4,7 @@ import org.archguard.meta.dsl.rest_api
 import org.archguard.meta.restful.RestApi
 import org.junit.jupiter.api.Test
 
-class RestRestApiGovernanceTest {
+class RestRestApiDslTest {
     @Test
     fun spec_checking() {
         val governance = rest_api {

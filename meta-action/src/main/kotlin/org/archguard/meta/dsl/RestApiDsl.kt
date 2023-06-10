@@ -20,7 +20,7 @@ enum class ApiRuleType(rule: Class<out ApiRule>) {
 @Serializable
 data class ApiRuleResult(val ruleName: String, val rule: String, val result: Boolean)
 
-class RestApiGovernance {
+class RestApiDsl {
     private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
     private var rules: List<ApiRule> = listOf()
 
@@ -73,8 +73,8 @@ class RestApiGovernance {
     }
 }
 
-fun rest_api(init: RestApiGovernance.() -> Unit): RestApiGovernance {
-    val html = RestApiGovernance()
+fun rest_api(init: RestApiDsl.() -> Unit): RestApiDsl {
+    val html = RestApiDsl()
     html.init()
     return html
 }
