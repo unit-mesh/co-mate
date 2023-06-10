@@ -3,7 +3,7 @@ package org.archguard.meta.dsl
 import kotlinx.serialization.Serializable
 import org.archguard.meta.FakeRuleVerifier
 import org.archguard.meta.LlmRuleVerifier
-import org.archguard.meta.restful.ApiCheckRule
+import org.archguard.meta.restful.ApiLlmVerifyRule
 import org.archguard.meta.restful.ApiRule
 import org.archguard.meta.restful.RestApi
 import org.archguard.meta.restful.rule.*
@@ -66,7 +66,7 @@ class RestApiDsl {
     fun context(ruleVerifier: LlmRuleVerifier) {
         this.ruleVerifier = ruleVerifier
         needUpdateContextRules.forEach {
-            if (it is ApiCheckRule) {
+            if (it is ApiLlmVerifyRule) {
                 it.ruleVerifier = ruleVerifier
             }
         }

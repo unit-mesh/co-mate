@@ -9,7 +9,7 @@ abstract class ApiRule(open val name: String, open var rule: String) : AtomicAct
     abstract fun exec(input: RestApi): Any
 }
 
-abstract class ApiCheckRule(override val name: String, override var rule: String, open var ruleVerifier: LlmRuleVerifier) :
+abstract class ApiLlmVerifyRule(override val name: String, override var rule: String, open var ruleVerifier: LlmRuleVerifier) :
     ApiRule(name, rule) {
     override fun exec(input: RestApi): Boolean {
         return exec(input)
