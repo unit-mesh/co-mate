@@ -11,12 +11,18 @@ class ApiRuleVerifier(val connector: LlmConnector) : LlmRuleVerifier {
         }
 
         val finalPrompt = """
-            | You're a software architect governance expert, please verify the rule with uri. Here is the requirement:
+            | You're a software architect governance expert, please verify the rule with APIs. Here is the requirement:
             | 
-            | 1. If API is not need authentication, just return true, no explanation.
+            | 1. If APIs is not need authentication, just return true, no explanation.
             | 2. If it is not clear whether authentication is needed, just return true, no explanation.
-            | 3. If API is need authentication, please check the authentication type, no explanation.
+            | 3. If APIs is need authentication, please check the authentication type, no explanation.
             | 4. You should only return ###true### or ###false###, no explanation.
+            | 5. Here is your output format, please follow it:
+            | ###
+            | | API  | result |
+            | | ---- | ------ |
+            | | {http action} {uri} | {true or false} |
+            | ###
             | 
             | Here is rule:
             | ###
