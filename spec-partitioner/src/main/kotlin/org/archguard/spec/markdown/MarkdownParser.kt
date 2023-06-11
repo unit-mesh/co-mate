@@ -2,6 +2,7 @@ package org.archguard.spec.markdown
 
 import org.commonmark.ext.gfm.tables.TableCell
 import org.commonmark.ext.gfm.tables.TableHead
+import org.commonmark.ext.gfm.tables.TableRow
 import org.commonmark.ext.gfm.tables.TablesExtension
 import org.commonmark.node.*
 import org.commonmark.parser.Parser
@@ -59,6 +60,7 @@ class MarkdownParser {
 internal class TableHeaderVisitor : AbstractVisitor() {
     val headers = mutableMapOf<String, List<String>>()
     private var isBeforeHeadLine = true
+    private var headerIndex = 0
 
     override fun visit(customNode: CustomNode?) {
         super.visit(customNode)
@@ -72,7 +74,15 @@ internal class TableHeaderVisitor : AbstractVisitor() {
                 if (isBeforeHeadLine) {
                     val header = (customNode.firstChild as Text).literal
                     headers[header] = listOf()
+                } else {
+                    val header = headers.keys.elementAt(headerIndex)
+                    headers[header] = headers[header]!! + (customNode.firstChild as Text).literal
                 }
+
+                headerIndex++
+            }
+            is TableRow -> {
+                headerIndex = 0
             }
         }
     }

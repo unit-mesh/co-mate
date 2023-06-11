@@ -38,5 +38,8 @@ The server should always return the right HTTP status code to the client. (Recom
 """
         val result = MarkdownParser.tableToHashMap(markdown)
         result.size shouldBe 2
+
+        result["HTTP status code"] shouldBe listOf("200", "201")
+        result["Description"] shouldBe listOf("OK", "Created")
     }
 }
