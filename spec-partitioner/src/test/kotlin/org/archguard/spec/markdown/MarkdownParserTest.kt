@@ -15,7 +15,7 @@ The server should always return the right HTTP status code to the client. (Recom
         """.trimIndent()
 
         val parser = MarkdownParser()
-        val result = parser.parseAndOrganizeByTitle(markdown)
+        val result = MarkdownParser.parseAndOrganizeByTitle(markdown)
 //        assertEquals(1, result.size)
 //
 //        val contentBlocking = result[0]

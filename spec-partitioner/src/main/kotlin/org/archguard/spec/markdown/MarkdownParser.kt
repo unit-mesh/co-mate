@@ -13,18 +13,18 @@ import java.util.*
 class ContentBlocking(val subTitle: String, val content: String)
 
 class MarkdownParser {
-    fun parseAndOrganizeByTitle(markdown: String?): List<ContentBlocking> {
-        val contentBlocks: MutableList<ContentBlocking> = ArrayList()
-        val parser = Parser.builder().build()
-        val node: Node = parser.parse(markdown)
+    companion object {
+        fun parseAndOrganizeByTitle(markdown: String?): List<ContentBlocking> {
+            val contentBlocks: MutableList<ContentBlocking> = ArrayList()
+            val parser = Parser.builder().build()
+            val node: Node = parser.parse(markdown)
 
-        val text = TextContentRenderer.builder()
-            .nodeRendererFactory(CustomRenderFactory())
-            .build().render(node)
+            val text = TextContentRenderer.builder()
+                .nodeRendererFactory(CustomRenderFactory())
+                .build().render(node)
 
-        println(text)
-
-        return contentBlocks
+            return contentBlocks
+        }
     }
 }
 
