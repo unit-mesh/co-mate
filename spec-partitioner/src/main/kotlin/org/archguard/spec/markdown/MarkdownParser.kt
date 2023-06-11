@@ -1,8 +1,5 @@
 package org.archguard.spec.markdown
 
-import org.commonmark.ext.gfm.tables.TableCell
-import org.commonmark.ext.gfm.tables.TableHead
-import org.commonmark.ext.gfm.tables.TableRow
 import org.commonmark.ext.gfm.tables.TablesExtension
 import org.commonmark.node.*
 import org.commonmark.parser.Parser
@@ -41,7 +38,7 @@ class MarkdownParser {
         fun tableToHashMap(markdown: String?): Map<String, List<String>> {
             val node: Node = parser.parse(markdown)
 
-            val visitor = TableHeaderVisitor()
+            val visitor = TableToMapVisitor()
             node.accept(visitor)
 
             return visitor.headers
@@ -52,58 +49,6 @@ class MarkdownParser {
             val visitor = CodeFilter(lang)
             node.accept(visitor)
             return visitor.code
-        }
-    }
-}
-
-internal class TableHeaderVisitor : AbstractVisitor() {
-    val headers = mutableMapOf<String, List<String>>()
-    private var isBeforeHeadLine = true
-    private var headerIndex = 0
-
-    override fun visit(customNode: CustomNode?) {
-        super.visit(customNode)
-
-        when (customNode) {
-            is TableHead -> {
-                isBeforeHeadLine = false
-            }
-
-            is TableCell -> {
-                if (isBeforeHeadLine) {
-                    val header = (customNode.firstChild as Text).literal
-                    headers[header] = listOf()
-                } else {
-                    val header = headers.keys.elementAt(headerIndex)
-                    headers[header] = headers[header]!! + (customNode.firstChild as Text).literal
-                }
-
-                headerIndex++
-            }
-
-            is TableRow -> {
-                headerIndex = 0
-            }
-        }
-    }
-
-    override fun visit(customBlock: CustomBlock?) {
-        super.visit(customBlock)
-    }
-}
-
-internal class CodeFilter(private val lang: String? = null) : AbstractVisitor() {
-    var code = listOf<String>()
-
-    override fun visit(fencedCodeBlock: FencedCodeBlock?) {
-        if (fencedCodeBlock?.literal != null) {
-            if (lang == null) {
-                this.code += fencedCodeBlock.literal
-            } else {
-                if (fencedCodeBlock.info == lang) {
-                    this.code += fencedCodeBlock.literal
-                }
-            }
         }
     }
 }
