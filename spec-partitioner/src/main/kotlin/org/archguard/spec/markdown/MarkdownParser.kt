@@ -47,10 +47,9 @@ class MarkdownParser {
             return visitor.headers
         }
 
-
-        private fun parseMarkdownCodeBlock(markdown: String): List<String> {
+        fun parseMarkdownCodeBlock(markdown: String, lang: String? = null): List<String> {
             val node = parser.parse(markdown)
-            val visitor = CodeFilter(lang = "markdown")
+            val visitor = CodeFilter(lang)
             node.accept(visitor)
             return visitor.code
         }
@@ -81,6 +80,7 @@ internal class TableHeaderVisitor : AbstractVisitor() {
 
                 headerIndex++
             }
+
             is TableRow -> {
                 headerIndex = 0
             }
@@ -92,13 +92,17 @@ internal class TableHeaderVisitor : AbstractVisitor() {
     }
 }
 
-internal class CodeFilter(val lang: String) : AbstractVisitor() {
+internal class CodeFilter(private val lang: String? = null) : AbstractVisitor() {
     var code = listOf<String>()
 
     override fun visit(fencedCodeBlock: FencedCodeBlock?) {
         if (fencedCodeBlock?.literal != null) {
-            if (fencedCodeBlock.info == lang) {
+            if (lang == null) {
                 this.code += fencedCodeBlock.literal
+            } else {
+                if (fencedCodeBlock.info == lang) {
+                    this.code += fencedCodeBlock.literal
+                }
             }
         }
     }

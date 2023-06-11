@@ -42,4 +42,26 @@ The server should always return the right HTTP status code to the client. (Recom
         result["HTTP status code"] shouldBe listOf("200", "201")
         result["Description"] shouldBe listOf("OK", "Created")
     }
+
+    @Test
+    fun should_parse_code_block() {
+        val markdown = """
+```java
+public class Test {}
+```
+"""
+        val result = MarkdownParser.parseMarkdownCodeBlock(markdown, "java")
+        result.size shouldBe 1
+    }
+
+    @Test
+    fun should_return_null_when_no_match_lang_code_block() {
+        val markdown = """
+```java
+public class Test {}
+```
+"""
+        val result = MarkdownParser.parseMarkdownCodeBlock(markdown, "kotlin")
+        result.size shouldBe 0
+    }
 }
