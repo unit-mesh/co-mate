@@ -18,5 +18,4 @@ class LlmTokenCalculate(override val maxToken: Int, val modelType: String) : Tok
 
         throw IllegalArgumentException("Model type $modelType not found")
     }
-
 }
