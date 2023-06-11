@@ -1,5 +1,6 @@
 package org.archguard.spec.markdown
 
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
@@ -25,5 +26,17 @@ The server should always return the right HTTP status code to the client. (Recom
 //            "The server should always return the right HTTP status code to the client. (Recommended)"
 //
 //        )
+    }
+
+    @Test
+    fun should_pass_table_body() {
+        val markdown = """
+| HTTP status code | Description |
+| --- | --- |
+| 200 | OK |
+| 201 | Created |
+"""
+        val result = MarkdownParser.tableToHashMap(markdown)
+        result.size shouldBe 2
     }
 }
