@@ -56,12 +56,13 @@ class FoundationSpecTest {
 
     @Test
     fun should_verify_basic_class_name() {
-        val ds = CodeDataStruct("errorClassName")
+        val ds = CodeDataStruct("error_Class_Name")
         val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(ds))
         governance.context(FakeRuleVerifier())
 
         val result: Map<String, RuleResult> = governance.exec(foundation)
 
         assertEquals(result["ProjectName"]!!.result, true)
+        assertEquals(result["NamingItem for Class"]!!.result, false)
     }
 }

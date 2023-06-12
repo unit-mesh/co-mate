@@ -34,10 +34,30 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
     }
 
     override fun exec(input: FoundationElement): RuleResult {
-        // filter input by regex
         val elements = input.ds.filter {
             this.filter.matches(it.NodeName)
         }
+
+        elements.forEach {
+            val result = when (target) {
+                NamingTarget.Package -> {
+                    namingStyle.isValid(it.Package)
+                }
+
+                NamingTarget.Class -> {
+                    namingStyle.isValid(it.NodeName)
+                }
+
+                NamingTarget.Function -> {
+                    namingStyle.isValid(it.NodeName)
+                }
+            }
+
+            if (!result) {
+                return RuleResult(name, this.name, false)
+            }
+        }
+
 
         return RuleResult(name, "namingItem", true)
     }
@@ -65,5 +85,4 @@ class NamingDeclaration : BaseDeclaration<FoundationElement> {
     override fun rules(): List<AtomicAction<FoundationElement>> {
         return rules
     }
-
 }
