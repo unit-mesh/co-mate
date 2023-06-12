@@ -7,10 +7,12 @@ class DomainSpecTest {
     fun testContextMap() {
         val spec = domain {
             context_map("TicketBooking") {
-                context("Reservation") {
-                    aggregate("") {
-                        // TODO
-                    }
+                context("Reservation") {}
+                context("Ticket") {}
+
+                mapping {
+                    context("Reservation") dependedOn context("Ticket")
+                    context("Reservation") dependedOn context("Movie")
                 }
             }
         }

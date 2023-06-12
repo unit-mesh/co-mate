@@ -7,6 +7,10 @@ class Context(name: String) {
 
     }
 
+    infix fun dependedOn(context: Context) {
+
+    }
+
 }
 
 class ContextMap(name: String) {
@@ -14,6 +18,14 @@ class ContextMap(name: String) {
         val context = Context(name)
         context.function()
         return context
+    }
+
+    fun context(name: String): Context {
+        return Context(name)
+    }
+
+    fun mapping(function: () -> Unit) {
+
     }
 
 }
