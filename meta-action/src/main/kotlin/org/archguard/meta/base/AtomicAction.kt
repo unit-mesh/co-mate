@@ -10,5 +10,11 @@ interface AtomicAction<T> {
     }
 }
 
+interface BaseLlmVerifier<T : Any> : AtomicAction<T> {
+    override fun exec(input: T): RuleResult {
+        return exec(input)
+    }
+}
+
 interface Element
 

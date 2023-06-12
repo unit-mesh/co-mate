@@ -2,12 +2,13 @@ package org.archguard.meta.base
 
 import org.archguard.meta.model.RestApiElement
 
-abstract class LlmVerifyRule(
+abstract class ApiLlmVerifyRule(
     override val name: String,
     override var rule: String,
     open var ruleVerifier: LlmRuleVerifier,
-) : ApiAtomicRule(name, rule) {
+) : BaseLlmVerifier<RestApiElement>, ApiAtomicRule(name, rule) {
     override fun exec(input: RestApiElement): RuleResult {
         return exec(input)
     }
 }
+
