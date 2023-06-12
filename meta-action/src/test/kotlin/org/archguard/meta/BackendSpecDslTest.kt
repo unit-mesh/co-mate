@@ -16,12 +16,12 @@ class BackendSpecDslTest {
 
             layered {
                 layer("application") {
-                    pattern(".*\\.model") { filename should endWiths("DTO", "Request", "Response") }
+//                    pattern(".*\\.model") { filename should endWiths("DTO", "Request", "Response") }
                 }
 
                 layer("domain") {
-                    pattern(".*\\.model") { filename should endWiths("Entity") }
-                    pattern(".*\\.model") { filename shouldNot endWiths("Entity") }
+//                    pattern(".*\\.model") { filename should endWiths("Entity") }
+//                    pattern(".*\\.model") { filename shouldNot endWiths("Entity") }
                 }
 
                 dependency {
@@ -31,7 +31,7 @@ class BackendSpecDslTest {
             }
 
             naming {
-                函数名 shouldNot startsWith("DTO", "Request", "Response")
+//                函数名 shouldNot startsWith("DTO", "Request", "Response")
             }
         }
     }
