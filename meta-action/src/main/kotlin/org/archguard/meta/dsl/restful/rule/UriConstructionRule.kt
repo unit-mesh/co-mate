@@ -1,8 +1,8 @@
-package org.archguard.meta.restful.rule
+package org.archguard.meta.dsl.restful.rule
 
-import org.archguard.meta.baserule.PatternWithExampleRule
-import org.archguard.meta.restful.AtomicRule
-import org.archguard.meta.restful.RestApi
+import org.archguard.meta.base.PatternWithExampleRule
+import org.archguard.meta.dsl.restful.AtomicRule
+import org.archguard.meta.dsl.restful.RestApi
 
 class UriConstructionRule : AtomicRule("uri-construction", "uri construction regex: //TODO"), PatternWithExampleRule {
     private var ruleRegex: Regex? = null

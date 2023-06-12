@@ -1,11 +1,4 @@
-package org.archguard.meta
-
-
-@DslMarker
-annotation class AtomicDsl
-
-interface AtomicAction {
-}
+package org.archguard.meta.base
 
 /**
  * Use LLM to verify the rule
@@ -19,7 +12,3 @@ class FakeRuleVerifier : LlmRuleVerifier {
         return true
     }
 }
-
-
-open class Element
-

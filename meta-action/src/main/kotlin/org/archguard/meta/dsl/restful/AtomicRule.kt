@@ -1,8 +1,8 @@
-package org.archguard.meta.restful
+package org.archguard.meta.dsl.restful
 
-import org.archguard.meta.AtomicAction
-import org.archguard.meta.AtomicDsl
-import org.archguard.meta.LlmRuleVerifier
+import org.archguard.meta.base.AtomicAction
+import org.archguard.meta.base.AtomicDsl
+import org.archguard.meta.base.LlmRuleVerifier
 
 @AtomicDsl
 abstract class AtomicRule(open val name: String, open var rule: String) : AtomicAction {

@@ -1,6 +1,4 @@
-package org.archguard.meta.baserule
-
-import org.archguard.meta.AtomicAction
+package org.archguard.meta.base
 
 interface PatternWithExampleRule: AtomicAction {
     fun pattern(regex: String)

@@ -1,7 +1,7 @@
-package org.archguard.meta.restful
+package org.archguard.meta.dsl.restful
 
 import kotlinx.serialization.json.JsonObject
-import org.archguard.meta.Element
+import org.archguard.meta.base.Element
 
 data class RestApi(
     val uri: String,

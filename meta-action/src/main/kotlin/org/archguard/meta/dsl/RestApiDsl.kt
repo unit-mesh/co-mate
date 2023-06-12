@@ -1,12 +1,12 @@
 package org.archguard.meta.dsl
 
 import kotlinx.serialization.Serializable
-import org.archguard.meta.FakeRuleVerifier
-import org.archguard.meta.LlmRuleVerifier
-import org.archguard.meta.restful.ApiLlmVerifyRule
-import org.archguard.meta.restful.AtomicRule
-import org.archguard.meta.restful.RestApi
-import org.archguard.meta.restful.rule.*
+import org.archguard.meta.base.FakeRuleVerifier
+import org.archguard.meta.base.LlmRuleVerifier
+import org.archguard.meta.dsl.restful.ApiLlmVerifyRule
+import org.archguard.meta.dsl.restful.AtomicRule
+import org.archguard.meta.dsl.restful.RestApi
+import org.archguard.meta.dsl.restful.rule.*
 
 // todo: is for checking the rule type
 enum class ApiRuleType(rule: Class<out AtomicRule>) {

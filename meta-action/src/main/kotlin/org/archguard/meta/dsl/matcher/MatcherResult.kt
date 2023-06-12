@@ -1,4 +1,4 @@
-package org.archguard.meta.matcher
+package org.archguard.meta.dsl.matcher
 
 interface MatcherResult {
     fun passed(): Boolean

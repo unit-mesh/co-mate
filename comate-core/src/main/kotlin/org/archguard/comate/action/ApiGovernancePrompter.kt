@@ -8,7 +8,7 @@ import org.archguard.comate.wrapper.ComateArchGuardClient
 import org.archguard.comate.wrapper.ComateSourceCodeContext
 import org.archguard.meta.dsl.ApiRuleResult
 import org.archguard.meta.dsl.rest_api
-import org.archguard.meta.restful.RestApi
+import org.archguard.meta.dsl.restful.RestApi
 import org.archguard.scanner.analyser.ApiCallAnalyser
 import org.archguard.scanner.core.sourcecode.ContainerService
 import org.slf4j.LoggerFactory.getLogger

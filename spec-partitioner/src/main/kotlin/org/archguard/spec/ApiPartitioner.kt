@@ -2,7 +2,7 @@ package org.archguard.spec
 
 import org.archguard.comate.smart.Semantic
 import org.archguard.meta.dsl.ApiRuleType
-import org.archguard.meta.AtomicAction
+import org.archguard.meta.base.AtomicAction
 
 val apiEmbeddingMap: Map<FloatArray, ApiRuleType>
     get() {

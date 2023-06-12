@@ -1,6 +1,8 @@
 package org.archguard.meta
 
 import org.archguard.meta.dsl.backend
+import org.archguard.meta.dsl.matcher.shouldBe
+import org.archguard.meta.dsl.matcher.shouldNotBe
 import org.archguard.meta.matcher.*
 import org.junit.jupiter.api.Test
 
