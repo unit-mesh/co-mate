@@ -14,10 +14,9 @@ class BackendSpecDslTest {
 
             layered {
                 infrastructure {
+                    dependsOn("repository")
                     pattern(".*\\.model") {
-                        naming {
-//                            should endWiths("DTO", "Command", "Exception", "Service")
-                        }
+                        filename should endWiths("DTO")
                     }
                 }
             }

@@ -15,16 +15,17 @@ class NormalExampleRule : AtomicAction {
 }
 
 class Naming : AtomicAction {
+    val filename: String = ""
+
     private val conditions = mutableListOf<(String) -> Boolean>()
+    infix fun <T> T.should(matcher: (T) -> Unit) = matcher(this)
 
-    infix fun should(condition: (String) -> Boolean) {
-        conditions.add(condition)
-    }
-
-    fun endWiths(vararg suffixes: String) {
-        should { fileName ->
-            suffixes.any { fileName.endsWith(it) }
+    infix fun endWiths(suffixes: String): (Any) -> Unit {
+        conditions.add { file ->
+            suffixes.any { file.endsWith(it) }
         }
+
+        return { }
     }
 
     fun validate(file: String): Boolean {
@@ -45,6 +46,10 @@ class LayeredRule {
         val rule = Naming()
         rule.function()
         return rule
+    }
+
+    fun dependsOn(s: String) {
+
     }
 }
 
