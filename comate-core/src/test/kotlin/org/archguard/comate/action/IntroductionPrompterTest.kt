@@ -1,5 +1,6 @@
 package org.archguard.comate.action
 
+import io.kotest.matchers.shouldBe
 import org.archguard.comate.strategy.BasicPromptStrategy
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test

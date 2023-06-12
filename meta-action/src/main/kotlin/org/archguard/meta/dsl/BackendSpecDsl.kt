@@ -15,20 +15,30 @@ class NormalExampleRule : AtomicAction {
 }
 
 class Naming : AtomicAction {
+    private val conditions = mutableListOf<(String) -> Boolean>()
 
-    val should: Should = Should(true)
-    val shouldNot: Should = Should(false)
+    infix fun should(condition: (String) -> Boolean) {
+        conditions.add(condition)
+    }
 
-    class Should(val equal: Boolean) : AtomicAction {
-        infix fun notEndWith(listOf: List<String>) {
-
+    fun endWiths(vararg suffixes: String) {
+        should { fileName ->
+            suffixes.any { fileName.endsWith(it) }
         }
+    }
+
+    fun validate(file: String): Boolean {
+        return conditions.all { it(file) }
     }
 }
 
 class LayeredRule {
-    fun pattern(pattern: String): LayeredRule {
-        return this
+    private var pattern: String? = null
+    private var namingRules: Naming? = null
+
+    fun pattern(pattern: String, block: Naming.() -> Unit) {
+        this.pattern = pattern
+        this.namingRules = Naming().apply(block)
     }
 
     fun naming(function: Naming.() -> Unit): Naming {

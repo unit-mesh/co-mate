@@ -14,8 +14,10 @@ class BackendSpecDslTest {
 
             layered {
                 infrastructure {
-                    pattern(".*\\.model").naming {
-                        should notEndWith listOf("DTO", "Command", "Exception", "Service")
+                    pattern(".*\\.model") {
+                        naming {
+//                            should endWiths("DTO", "Command", "Exception", "Service")
+                        }
                     }
                 }
             }
