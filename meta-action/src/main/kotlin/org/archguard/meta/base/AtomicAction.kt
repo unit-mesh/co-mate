@@ -4,10 +4,11 @@ package org.archguard.meta.base
 annotation class SpecDsl
 
 interface AtomicAction<T> {
+    val name: String
     fun exec(input: T): Any {
         return false
     }
 }
 
-open class Element
+interface Element
 

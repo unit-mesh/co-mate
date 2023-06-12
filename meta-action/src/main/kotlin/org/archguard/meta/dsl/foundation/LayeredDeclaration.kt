@@ -1,10 +1,10 @@
 package org.archguard.meta.dsl.foundation
 
 import org.archguard.meta.base.AtomicAction
-import org.archguard.meta.base.AtomicRule
 import org.archguard.meta.dsl.DependencyRule
+import org.archguard.meta.model.FoundationElement
 
-class LayeredDeclaration: BaseDeclaration {
+class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     val dependencyRules = HashMap<String, List<String>>()
 
     fun layer(name: String, function: LayeredRule.() -> Unit): LayeredRule {
@@ -19,7 +19,7 @@ class LayeredDeclaration: BaseDeclaration {
         return rule
     }
 
-    override fun rules(): List<AtomicRule> {
+    override fun rules(): List<AtomicAction<FoundationElement>> {
         return listOf()
     }
 

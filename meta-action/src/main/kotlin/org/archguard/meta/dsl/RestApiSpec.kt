@@ -5,7 +5,7 @@ import org.archguard.meta.model.RestApiElement
 import org.archguard.meta.dsl.restful.rule.*
 
 // todo: is for checking the rule type
-enum class ApiRuleType(rule: Class<out AtomicRule>) {
+enum class ApiRuleType(rule: Class<out ApiAtomicRule>) {
     HTTP_ACTION(HttpActionRule::class.java),
     MISC(MiscRule::class.java),
     SECURITY(SecurityRule::class.java),
@@ -15,8 +15,8 @@ enum class ApiRuleType(rule: Class<out AtomicRule>) {
 
 class RestApiSpec : Spec<RestApiElement> {
     private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
-    private var rules: List<AtomicRule> = listOf()
-    private var needUpdateContextRules: List<AtomicRule> = listOf()
+    private var rules: List<ApiAtomicRule> = listOf()
+    private var needUpdateContextRules: List<ApiAtomicRule> = listOf()
 
     fun uri_construction(function: UriConstructionRule.() -> Unit): UriConstructionRule {
         val uriRule = UriConstructionRule()

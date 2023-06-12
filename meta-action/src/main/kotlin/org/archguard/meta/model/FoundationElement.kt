@@ -6,5 +6,5 @@ import org.archguard.meta.base.Element
 class FoundationElement(
     val projectName: String,
     val ds: List<CodeDataStruct>,
-) : Element() {
+) : Element {
 }

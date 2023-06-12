@@ -1,9 +1,11 @@
 package org.archguard.meta.dsl.foundation
 
-import org.archguard.meta.base.AtomicRule
+import org.archguard.meta.base.AtomicAction
 import org.archguard.meta.base.PatternWithExampleRule
+import org.archguard.meta.model.FoundationElement
 
-class ProjectNameDecl : PatternWithExampleRule<String>, BaseDeclaration {
+class ProjectNameDecl : PatternWithExampleRule<String>, BaseDeclaration<FoundationElement> {
+    override val name = "ProjectName"
     private var ruleRegex: Regex? = null
     private var sample = ""
 
@@ -24,7 +26,7 @@ class ProjectNameDecl : PatternWithExampleRule<String>, BaseDeclaration {
         return true
     }
 
-    override fun rules(): List<AtomicRule> {
+    override fun rules(): List<AtomicAction<FoundationElement>> {
         return listOf()
     }
 }

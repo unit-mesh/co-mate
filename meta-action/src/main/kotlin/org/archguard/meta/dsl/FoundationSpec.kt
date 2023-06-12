@@ -19,7 +19,7 @@ class DependencyRule {
 
 @SpecDsl
 class FoundationSpec : Spec<FoundationElement> {
-    val declarations = mutableListOf<BaseDeclaration>()
+    val declarations = mutableListOf<BaseDeclaration<FoundationElement>>()
 
     fun project_name(function: ProjectNameDecl.() -> Unit): ProjectNameDecl {
         val rule = ProjectNameDecl()
@@ -51,11 +51,14 @@ class FoundationSpec : Spec<FoundationElement> {
     }
 
     override fun exec(element: FoundationElement): Map<String, RuleResult> {
-        declarations.map { declaration ->
-            declaration.rules().map { rules ->
-                rules.name to rules.exec(element)
+        return declarations
+            .map { declaration ->
+                declaration.rules().map { rule ->
+                    rule.name to rule.exec(element) as RuleResult
+                }
             }
-        }
+            .flatten()
+            .toMap()
     }
 }
 

@@ -1,7 +1,9 @@
 package org.archguard.meta.dsl.foundation
 
 import org.archguard.architecture.style.NamingStyle
-import org.archguard.meta.base.AtomicRule
+import org.archguard.meta.base.ApiAtomicRule
+import org.archguard.meta.base.AtomicAction
+import org.archguard.meta.model.FoundationElement
 
 class NamingItem(val name: String = "") {
     fun style(style: String) {
@@ -15,7 +17,7 @@ class NamingItem(val name: String = "") {
     }
 }
 
-class NamingDeclaration: BaseDeclaration {
+class NamingDeclaration: BaseDeclaration<FoundationElement> {
     fun class_level(function: NamingItem.() -> Unit): NamingItem {
         val rule = NamingItem()
         rule.function()
@@ -28,7 +30,8 @@ class NamingDeclaration: BaseDeclaration {
         return rule
     }
 
-    override fun rules(): List<AtomicRule> {
+    override fun rules(): List<AtomicAction<FoundationElement>> {
         return listOf()
     }
+
 }

@@ -1,7 +1,7 @@
 package org.archguard.meta.dsl.foundation
 
-import org.archguard.meta.base.AtomicRule
+import org.archguard.meta.base.AtomicAction
 
-interface BaseDeclaration {
-    fun rules(): List<AtomicRule>
+interface BaseDeclaration<T> {
+    fun rules(): List<AtomicAction<T>>
 }
