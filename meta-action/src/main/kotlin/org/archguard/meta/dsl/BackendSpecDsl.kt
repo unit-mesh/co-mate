@@ -14,6 +14,39 @@ class NormalExampleRule : AtomicAction {
 
 }
 
+class Naming : AtomicAction {
+
+    val should: Should = Should(true)
+    val shouldNot: Should = Should(false)
+
+    class Should(val equal: Boolean) : AtomicAction {
+        infix fun notEndWith(listOf: List<String>) {
+
+        }
+    }
+}
+
+class LayeredRule {
+    fun pattern(pattern: String): LayeredRule {
+        return this
+    }
+
+    fun naming(function: Naming.() -> Unit): Naming {
+        val rule = Naming()
+        rule.function()
+        return rule
+    }
+}
+
+class LayeredDeclaration : AtomicAction {
+    fun infrastructure(function: LayeredRule.() -> Unit): LayeredRule {
+        val rule = LayeredRule()
+        rule.function()
+        return rule
+    }
+
+}
+
 class BackendSpecDsl {
     fun repository(function: NormalExampleRule.() -> Unit): NormalExampleRule {
         val rule = NormalExampleRule()
@@ -21,8 +54,10 @@ class BackendSpecDsl {
         return rule
     }
 
-    fun layered(style: String) {
-
+    fun layered(function: LayeredDeclaration.() -> Unit): LayeredDeclaration {
+        val rule = LayeredDeclaration()
+        rule.function()
+        return rule
     }
 
     fun code_style(style: String) {

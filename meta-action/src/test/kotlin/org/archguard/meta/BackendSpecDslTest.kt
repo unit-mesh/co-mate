@@ -12,9 +12,13 @@ class BackendSpecDslTest {
                 example("system1-servicecenter1-microservice1")
             }
 
-//            layered_style {
-//
-//            }
+            layered {
+                infrastructure {
+                    pattern(".*\\.model").naming {
+                        should notEndWith listOf("DTO", "Command", "Exception", "Service")
+                    }
+                }
+            }
         }
     }
 }
