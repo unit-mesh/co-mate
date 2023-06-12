@@ -20,7 +20,7 @@ enum class ApiRuleType(rule: Class<out ApiAtomicRule>) {
 @Serializable
 data class ApiRuleResult(val ruleName: String, val rule: String, val result: Boolean)
 
-class RestApiDsl {
+class RestApiSpec {
     private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
     private var rules: List<ApiAtomicRule> = listOf()
 
@@ -73,8 +73,8 @@ class RestApiDsl {
     }
 }
 
-fun rest_api(init: RestApiDsl.() -> Unit): RestApiDsl {
-    val html = RestApiDsl()
-    html.init()
-    return html
+fun rest_api(init: RestApiSpec.() -> Unit): RestApiSpec {
+    val spec = RestApiSpec()
+    spec.init()
+    return spec
 }

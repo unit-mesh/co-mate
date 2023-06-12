@@ -1,11 +1,10 @@
-package org.archguard.meta
+package org.archguard.meta.dsl
 
 import org.archguard.meta.base.FakeRuleVerifier
-import org.archguard.meta.dsl.rest_api
 import org.archguard.meta.dsl.restful.RestApi
 import org.junit.jupiter.api.Test
 
-class RestRestApiDslTest {
+class RestRestApiSpecTest {
     @Test
     fun spec_checking() {
         val governance = rest_api {

@@ -1,6 +1,6 @@
 package org.archguard.spec.runtime.compiler
 
-import org.archguard.meta.dsl.RestApiDsl
+import org.archguard.meta.dsl.RestApiSpec
 import org.jetbrains.kotlinx.jupyter.EvalRequestData
 import org.jetbrains.kotlinx.jupyter.ReplForJupyter
 import org.jetbrains.kotlinx.jupyter.api.Code
@@ -25,7 +25,7 @@ class KotlinReplWrapper {
         var embeddedClasspath: MutableList<File> = property.split(File.pathSeparator).map(::File).toMutableList()
 
         logger.info("dynamic add classpath for local debug")
-        val dslPath = RestApiDsl::javaClass.javaClass.classLoader.classPathFromTypicalResourceUrls().toList()
+        val dslPath = RestApiSpec::javaClass.javaClass.classLoader.classPathFromTypicalResourceUrls().toList()
         embeddedClasspath.addAll(dslPath)
 
         embeddedClasspath = embeddedClasspath.distinct().toMutableList()

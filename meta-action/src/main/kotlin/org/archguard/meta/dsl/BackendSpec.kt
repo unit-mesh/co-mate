@@ -1,5 +1,6 @@
 package org.archguard.meta.dsl
 
+import org.archguard.meta.base.SpecDsl
 import org.archguard.meta.dsl.foundation.LayeredDeclaration
 import org.archguard.meta.dsl.foundation.NamingDeclaration
 import org.archguard.meta.dsl.foundation.ProjectNameDecl
@@ -11,6 +12,7 @@ class DependencyRule {
     }
 }
 
+@SpecDsl
 class BackendSpec {
     fun project_name(function: ProjectNameDecl.() -> Unit): ProjectNameDecl {
         val rule = ProjectNameDecl()
@@ -30,17 +32,6 @@ class BackendSpec {
         rule.function()
         return rule
     }
-//    fun class_name_style(style: String) {
-//
-//    }
-//
-//    fun method_name_style(style: String) {
-//
-//    }
-//
-//    fun variable_name_style(style: String) {
-//
-//    }
 
     fun exception(style: String) {
 
@@ -52,7 +43,7 @@ class BackendSpec {
 }
 
 fun backend(init: BackendSpec.() -> Unit): BackendSpec {
-    val html = BackendSpec()
-    html.init()
-    return html
+    val spec = BackendSpec()
+    spec.init()
+    return spec
 }
