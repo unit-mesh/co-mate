@@ -9,7 +9,7 @@ dependencies {
     implementation(libs.kotlin.stdlib)
     implementation(libs.serialization.json)
 
-    implementation("io.kotest:kotest-assertions-shared-jvm:5.6.2")
+    implementation("io.kotest:kotest-assertions-api:5.6.2")
 
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.test.junit.engine)
