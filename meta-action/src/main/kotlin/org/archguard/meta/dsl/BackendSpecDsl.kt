@@ -1,8 +1,23 @@
 package org.archguard.meta.dsl
 
-class BackendSpecDsl {
-    fun repository_name(name: String) {
+import org.archguard.meta.AtomicAction
 
+
+class NormalExampleRule : AtomicAction {
+    fun regex(s: String) {
+    }
+
+    fun example(s: String) {
+
+    }
+
+}
+
+class BackendSpecDsl {
+    fun repository(function: NormalExampleRule.() -> Unit): NormalExampleRule {
+        val rule = NormalExampleRule()
+        rule.function()
+        return rule
     }
 
     fun layered_style(style: String) {
@@ -22,6 +37,7 @@ class BackendSpecDsl {
 //
 //    }
     }
+
     fun exception(style: String) {
 
     }
@@ -29,4 +45,10 @@ class BackendSpecDsl {
     fun security(style: String) {
 
     }
+}
+
+fun backend(init: BackendSpecDsl.() -> Unit): BackendSpecDsl {
+    val html = BackendSpecDsl()
+    html.init()
+    return html
 }
