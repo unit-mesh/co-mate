@@ -52,7 +52,7 @@ class RestApiSpec : Spec<RestApiElement> {
     }
 
     override fun exec(element: RestApiElement): Map<String, RuleResult> {
-        return rules.associate { it.name to RuleResult(it.name, it.rule, it.exec(element) as Boolean) }
+        return rules.associate { it.name to it.exec(element) }
     }
 
     override fun context(ruleVerifier: LlmRuleVerifier) {

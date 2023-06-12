@@ -7,7 +7,7 @@ abstract class LlmVerifyRule(
     override var rule: String,
     open var ruleVerifier: LlmRuleVerifier,
 ) : ApiAtomicRule(name, rule) {
-    override fun exec(input: RestApiElement): Boolean {
+    override fun exec(input: RestApiElement): RuleResult {
         return exec(input)
     }
 }

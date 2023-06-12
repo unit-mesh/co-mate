@@ -1,10 +1,12 @@
 package org.archguard.meta.dsl
 
 import org.archguard.meta.base.FakeRuleVerifier
+import org.archguard.meta.base.RuleResult
 import org.archguard.meta.dsl.matcher.shouldBe
 import org.archguard.meta.dsl.matcher.shouldNotBe
 import org.archguard.meta.model.FoundationElement
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class FoundationSpecTest {
     @Test
@@ -43,8 +45,12 @@ class FoundationSpecTest {
             }
         }
 
-        val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf())
+        val foundation = FoundationElement("error-project_name", listOf())
         governance.context(FakeRuleVerifier())
-        governance.exec(foundation)
+        val result: Map<String, RuleResult> = governance.exec(foundation)
+
+        assertEquals(result.size, 1)
+        val ruleResult = result["ProjectName"]!!
+        assertEquals(ruleResult.ruleName, "ProjectName")
     }
 }

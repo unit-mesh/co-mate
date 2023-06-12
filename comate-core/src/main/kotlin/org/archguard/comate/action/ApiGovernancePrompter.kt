@@ -59,7 +59,7 @@ class ApiGovernancePrompter(
             it.resources.map { resource ->
                 RestApiElement(
                     uri = resource.sourceUrl,
-                    action = resource.sourceHttpMethod.uppercase(),
+                    httpAction = resource.sourceHttpMethod.uppercase(),
                     statusCodes = listOf(200)
                 )
             }

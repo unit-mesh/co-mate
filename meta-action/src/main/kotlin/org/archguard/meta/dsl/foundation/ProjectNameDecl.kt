@@ -2,9 +2,10 @@ package org.archguard.meta.dsl.foundation
 
 import org.archguard.meta.base.AtomicAction
 import org.archguard.meta.base.PatternWithExampleRule
+import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.FoundationElement
 
-class ProjectNameDecl : PatternWithExampleRule<String>, BaseDeclaration<FoundationElement> {
+class ProjectNameDecl : PatternWithExampleRule<FoundationElement>, BaseDeclaration<FoundationElement> {
     override val name = "ProjectName"
     private var ruleRegex: Regex? = null
     private var sample = ""
@@ -17,16 +18,16 @@ class ProjectNameDecl : PatternWithExampleRule<String>, BaseDeclaration<Foundati
         this.sample = sample
     }
 
-    override fun exec(input: String): Boolean {
+    override fun exec(input: FoundationElement): RuleResult {
         if (ruleRegex != null) {
-            val matchResult = ruleRegex!!.find(input)
-            return matchResult != null
+            val matchResult = ruleRegex!!.find(input.projectName)
+            return RuleResult(this.name, sample, matchResult != null)
         }
 
-        return true
+        return RuleResult(this.name, sample, false)
     }
 
     override fun rules(): List<AtomicAction<FoundationElement>> {
-        return listOf()
+        return listOf(this)
     }
 }
