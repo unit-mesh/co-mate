@@ -8,7 +8,9 @@ class DomainSpecTest {
         val spec = domain {
             context_map("TicketBooking") {
                 context("Reservation") {
-
+                    aggregate("") {
+                        // TODO
+                    }
                 }
             }
         }

@@ -2,9 +2,18 @@ package org.archguard.meta.dsl
 
 import org.archguard.meta.base.SpecDsl
 
-class ContextMap(name: String) {
-    fun context(name: String, function: () -> Unit) {
+class Context(name: String) {
+    fun aggregate(name: String, function: () -> Unit) {
 
+    }
+
+}
+
+class ContextMap(name: String) {
+    fun context(name: String, function: Context.() -> Unit): Context {
+        val context = Context(name)
+        context.function()
+        return context
     }
 
 }
