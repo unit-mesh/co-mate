@@ -3,13 +3,13 @@ package org.archguard.meta.dsl
 import kotlinx.serialization.Serializable
 import org.archguard.meta.base.FakeRuleVerifier
 import org.archguard.meta.base.LlmRuleVerifier
-import org.archguard.meta.dsl.restful.ApiLlmVerifyRule
-import org.archguard.meta.dsl.restful.AtomicRule
+import org.archguard.meta.base.LlmVerifyRule
+import org.archguard.meta.base.ApiAtomicRule
 import org.archguard.meta.dsl.restful.RestApi
 import org.archguard.meta.dsl.restful.rule.*
 
 // todo: is for checking the rule type
-enum class ApiRuleType(rule: Class<out AtomicRule>) {
+enum class ApiRuleType(rule: Class<out ApiAtomicRule>) {
     HTTP_ACTION(HttpActionRule::class.java),
     MISC(MiscRule::class.java),
     SECURITY(SecurityRule::class.java),
@@ -22,9 +22,9 @@ data class ApiRuleResult(val ruleName: String, val rule: String, val result: Boo
 
 class RestApiDsl {
     private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
-    private var rules: List<AtomicRule> = listOf()
+    private var rules: List<ApiAtomicRule> = listOf()
 
-    private var needUpdateContextRules: List<AtomicRule> = listOf()
+    private var needUpdateContextRules: List<ApiAtomicRule> = listOf()
 
     fun uri_construction(function: UriConstructionRule.() -> Unit): UriConstructionRule {
         val uriRule = UriConstructionRule()
@@ -66,7 +66,7 @@ class RestApiDsl {
     fun context(ruleVerifier: LlmRuleVerifier) {
         this.ruleVerifier = ruleVerifier
         needUpdateContextRules.forEach {
-            if (it is ApiLlmVerifyRule) {
+            if (it is LlmVerifyRule) {
                 it.ruleVerifier = ruleVerifier
             }
         }

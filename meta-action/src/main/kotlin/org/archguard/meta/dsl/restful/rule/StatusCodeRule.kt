@@ -1,9 +1,9 @@
 package org.archguard.meta.dsl.restful.rule
 
-import org.archguard.meta.dsl.restful.AtomicRule
+import org.archguard.meta.base.ApiAtomicRule
 import org.archguard.meta.dsl.restful.RestApi
 
-class StatusCodeRule(private val codes: List<Int>) : AtomicRule("status-code", "supported codes: ${codes.joinToString(", ")}") {
+class StatusCodeRule(private val codes: List<Int>) : ApiAtomicRule("status-code", "supported codes: ${codes.joinToString(", ")}") {
     override fun exec(input: RestApi): Boolean {
         if (input.statusCodes.isEmpty()) {
             return false
