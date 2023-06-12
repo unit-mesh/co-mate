@@ -2,7 +2,7 @@ package org.archguard.meta.dsl.foundation
 
 import org.archguard.meta.base.AtomicAction
 
-class Naming : AtomicAction<String> {
+class Naming(val pattern: String) : AtomicAction<String> {
     override val name: String = "Naming"
 
     val filename: String = ""

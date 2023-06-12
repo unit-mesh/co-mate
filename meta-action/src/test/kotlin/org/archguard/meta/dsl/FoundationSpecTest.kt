@@ -1,5 +1,6 @@
 package org.archguard.meta.dsl
 
+import chapi.domain.core.CodeDataStruct
 import org.archguard.meta.base.FakeRuleVerifier
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.dsl.matcher.shouldBe
@@ -9,48 +10,58 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class FoundationSpecTest {
-    @Test
-    fun spec_checking() {
-        val governance = foundation {
-            project_name {
-                pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
-                example("system1-servicecenter1-microservice1")
+    private val governance = foundation {
+        project_name {
+            pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
+            example("system1-servicecenter1-microservice1")
+        }
+
+        layered {
+            layer("application") {
+                pattern(".*\\.application") { filename shouldBe endWiths("DTO", "Request", "Response") }
             }
 
-            layered {
-                layer("application") {
-                    pattern(".*\\.model") { filename shouldBe endWiths("DTO", "Request", "Response") }
-                }
-
-                layer("domain") {
-                    pattern(".*\\.model") { filename shouldBe endWiths("Entity") }
-                    pattern(".*\\.model") { filename shouldNotBe endWiths("Entity") }
-                }
-
-                dependency {
-                    "domain" dependedOn "infrastructure"
-                    "application" dependedOn "domain"
-                }
+            layer("domain") {
+                pattern(".*\\.domain") { filename shouldBe endWiths("Entity") }
             }
 
-            naming {
-                class_level {
-                    style("CamelCase")
-                    pattern(".*") { name shouldNotBe contains("$") }
-                }
-                function_level {
-                    style("CamelCase")
-                    pattern(".*") { name shouldNotBe contains("$") }
-                }
+            dependency {
+                "domain" dependedOn "infrastructure"
+                "application" dependedOn "domain"
             }
         }
 
+        naming {
+            class_level {
+                style("CamelCase")
+                pattern(".*") { name shouldNotBe contains("$") }
+            }
+            function_level {
+                style("CamelCase")
+                pattern(".*") { name shouldNotBe contains("$") }
+            }
+        }
+    }
+
+    @Test
+    fun should_equal_when_had_correct_project_name() {
         val foundation = FoundationElement("error-project_name", listOf())
         governance.context(FakeRuleVerifier())
         val result: Map<String, RuleResult> = governance.exec(foundation)
 
-        assertEquals(result.size, 1)
+        assertEquals(result["ProjectName"]!!.result, false)
         val ruleResult = result["ProjectName"]!!
         assertEquals(ruleResult.ruleName, "ProjectName")
+    }
+
+    @Test
+    fun should_verify_basic_class_name() {
+        val ds = CodeDataStruct("errorClassName")
+        val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(ds))
+        governance.context(FakeRuleVerifier())
+
+        val result: Map<String, RuleResult> = governance.exec(foundation)
+
+        assertEquals(result["ProjectName"]!!.result, true)
     }
 }
