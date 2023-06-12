@@ -1,6 +1,7 @@
 package org.archguard.meta
 
 import org.archguard.meta.dsl.backend
+import org.archguard.meta.matcher.*
 import org.junit.jupiter.api.Test
 
 class BackendSpecDslTest {
@@ -14,12 +15,12 @@ class BackendSpecDslTest {
 
             layered {
                 layer("application") {
-//                    pattern(".*\\.model") { filename should endWiths("DTO", "Request", "Response") }
+                    pattern(".*\\.model") { filename shouldBe endWiths("DTO", "Request", "Response") }
                 }
 
                 layer("domain") {
-//                    pattern(".*\\.model") { filename should endWiths("Entity") }
-//                    pattern(".*\\.model") { filename shouldNot endWiths("Entity") }
+                    pattern(".*\\.model") { filename shouldBe endWiths("Entity") }
+                    pattern(".*\\.model") { filename shouldNotBe endWiths("Entity") }
                 }
 
                 dependency {
@@ -30,7 +31,7 @@ class BackendSpecDslTest {
 
             naming {
                 style("CamelCase")
-//                函数名 shouldNot contains("$")
+                pattern(".*") { 函数名 shouldNotBe contains("$") }
             }
         }
     }

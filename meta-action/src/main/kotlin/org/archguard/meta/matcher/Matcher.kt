@@ -1,7 +1,5 @@
 package org.archguard.meta.matcher
 
-import org.archguard.meta.dsl.MatcherResult
-
 interface Matcher<in T> {
     fun test(value: T): MatcherResult
 
@@ -21,7 +19,27 @@ interface Matcher<in T> {
 
 }
 
-infix fun <T> T.shouldHave(matcher: Matcher<T>) = should(matcher)
+
+@Suppress("UNCHECKED_CAST")
+infix fun <T, U : T> T.shouldBe(expected: U?) {
+    when (expected) {
+        is Matcher<*> -> should(expected as Matcher<T>)
+        else -> {
+//            val actual = this
+//            eq(actual, expected)?.let(errorCollector::collectOrThrow)
+        }
+    }
+}
+
+@Suppress("UNCHECKED_CAST")
+infix fun <T> T.shouldNotBe(any: Any?): T {
+    when (any) {
+//        is Matcher<*> -> shouldNot(any as Matcher<T>)
+//        else -> shouldNot(equalityMatcher(any))
+    }
+    return this
+}
+
 infix fun <T> T.should(matcher: Matcher<T>) {
     invokeMatcher(this, matcher)
 }
@@ -35,7 +53,3 @@ fun <T> invokeMatcher(t: T, matcher: Matcher<T>): T {
     }
     return t
 }
-
-infix fun <T> T.shouldNotHave(matcher: Matcher<T>) = shouldNot(matcher)
-infix fun <T> T.shouldNot(matcher: Matcher<T>) = should(matcher.invert())
-infix fun <T> T.should(matcher: (T) -> Unit) = matcher(this)

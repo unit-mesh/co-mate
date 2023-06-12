@@ -15,35 +15,22 @@ class NormalExampleRule : AtomicAction {
 
 }
 
-interface MatcherResult {
-    fun passed(): Boolean
-    fun failureMessage(): String
-
-    fun negatedFailureMessage(): String
-
-    companion object {
-        operator fun invoke(
-            passed: Boolean,
-            failureMessageFn: () -> String,
-            negatedFailureMessageFn: () -> String,
-        ) = object : MatcherResult {
-            override fun passed(): Boolean = passed
-            override fun failureMessage(): String = failureMessageFn()
-            override fun negatedFailureMessage(): String = negatedFailureMessageFn()
-        }
-    }
-
-}
-
 
 class Naming : AtomicAction {
     val filename: String = ""
 
     private val conditions = mutableListOf<(String) -> Boolean>()
+
     fun endWiths(vararg suffixes: String) {
         conditions.add { file ->
             suffixes.any { file.endsWith(it) }
         }
+    }
+
+    fun startsWith(vararg symbols: String) {
+    }
+
+    fun contains(vararg symbols: String) {
     }
 }
 
@@ -60,10 +47,6 @@ class LayeredRule {
         val rule = Naming()
         rule.function()
         return rule
-    }
-
-    fun dependsOn(s: String) {
-
     }
 }
 
@@ -94,18 +77,14 @@ class LayeredDeclaration : AtomicAction {
 class NamingDeclaration {
     val `函数名`: String = ""
 
-    fun startsWith(vararg symbols: String): (Unit) -> Unit {
-        return { }
-    }
-
-    fun contains(vararg symbols: String): (Unit) -> Unit {
-        return { }
-    }
-
     fun style(style: String) {
         if (!NamingStyle.contains(style)) {
             throw IllegalArgumentException("Unknown naming style: $style. Supported styles: ${NamingStyle.valuesString()}")
         }
+    }
+
+    fun pattern(pattern: String, block: Naming.() -> Unit) {
+        Naming().apply(block)
     }
 }
 
