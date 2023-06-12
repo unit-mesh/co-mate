@@ -4,7 +4,7 @@ import org.archguard.meta.dsl.backend
 import org.archguard.meta.matcher.*
 import org.junit.jupiter.api.Test
 
-class BackendSpecDslTest {
+class BackendSpecTest {
     @Test
     fun spec_checking() {
         val governance = backend {
@@ -30,8 +30,14 @@ class BackendSpecDslTest {
             }
 
             naming {
-                style("CamelCase")
-                pattern(".*") { 函数名 shouldNotBe contains("$") }
+                class_level {
+                    style("CamelCase")
+                    pattern(".*") { name shouldNotBe contains("$") }
+                }
+                function_level {
+                    style("CamelCase")
+                    pattern(".*") { name shouldNotBe contains("$") }
+                }
             }
         }
     }

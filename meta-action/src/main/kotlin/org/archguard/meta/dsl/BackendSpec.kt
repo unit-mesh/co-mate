@@ -74,9 +74,7 @@ class LayeredDeclaration : AtomicAction {
 
 }
 
-class NamingDeclaration {
-    val `函数名`: String = ""
-
+class NamingItem(val name: String = "") {
     fun style(style: String) {
         if (!NamingStyle.contains(style)) {
             throw IllegalArgumentException("Unknown naming style: $style. Supported styles: ${NamingStyle.valuesString()}")
@@ -88,7 +86,21 @@ class NamingDeclaration {
     }
 }
 
-class BackendSpecDsl {
+class NamingDeclaration {
+    fun class_level(function: NamingItem.() -> Unit): NamingItem {
+        val rule = NamingItem()
+        rule.function()
+        return rule
+    }
+
+    fun function_level(function: NamingItem.() -> Unit): NamingItem {
+        val rule = NamingItem()
+        rule.function()
+        return rule
+    }
+}
+
+class BackendSpec {
     fun project_name(function: NormalExampleRule.() -> Unit): NormalExampleRule {
         val rule = NormalExampleRule()
         rule.function()
@@ -128,8 +140,8 @@ class BackendSpecDsl {
     }
 }
 
-fun backend(init: BackendSpecDsl.() -> Unit): BackendSpecDsl {
-    val html = BackendSpecDsl()
+fun backend(init: BackendSpec.() -> Unit): BackendSpec {
+    val html = BackendSpec()
     html.init()
     return html
 }
