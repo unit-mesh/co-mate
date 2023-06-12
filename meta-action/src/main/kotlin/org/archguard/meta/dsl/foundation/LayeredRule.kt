@@ -6,11 +6,11 @@ class LayeredRule {
 
     fun pattern(pattern: String, block: Naming.() -> Unit) {
         this.pattern = pattern
-        this.namingRules = Naming(pattern).apply(block)
+        this.namingRules = Naming().apply(block)
     }
 
     fun naming(function: Naming.() -> Unit): Naming {
-        val rule = Naming(pattern!!)
+        val rule = Naming()
         rule.function()
         return rule
     }

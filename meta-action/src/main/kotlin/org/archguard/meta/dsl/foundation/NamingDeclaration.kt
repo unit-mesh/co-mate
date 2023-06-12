@@ -5,18 +5,40 @@ import org.archguard.meta.base.AtomicAction
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.FoundationElement
 
-class NamingItem(override val name: String = "namingItem") : AtomicAction<FoundationElement> {
+enum class NamingTarget {
+    Package,
+    Class,
+    Function,
+}
+
+class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
+    override val name: String get() = "NamingItem for " + target.name
+    private var filter: Regex = Regex("")
+    private var block: Naming.() -> Unit = {}
+    private var namingStyle = NamingStyle.CamelCase
+
     fun style(style: String) {
         if (!NamingStyle.contains(style)) {
             throw IllegalArgumentException("Unknown naming style: $style. Supported styles: ${NamingStyle.valuesString()}")
         }
+
+        namingStyle = NamingStyle.valueOf(style)
     }
 
+    /**
+     * for filter element by regex
+     */
     fun pattern(pattern: String, block: Naming.() -> Unit) {
-        Naming(pattern).apply(block)
+        this.filter = Regex(pattern)
+        this.block = block
     }
 
     override fun exec(input: FoundationElement): RuleResult {
+        // filter input by regex
+        val elements = input.ds.filter {
+            this.filter.matches(it.NodeName)
+        }
+
         return RuleResult(name, "namingItem", true)
     }
 }
@@ -25,7 +47,7 @@ class NamingDeclaration : BaseDeclaration<FoundationElement> {
     val rules: MutableList<AtomicAction<FoundationElement>> = mutableListOf()
 
     fun class_level(function: NamingItem.() -> Unit): NamingItem {
-        val rule = NamingItem()
+        val rule = NamingItem(NamingTarget.Class)
         rule.function()
 
         rules.add(rule)
@@ -33,7 +55,7 @@ class NamingDeclaration : BaseDeclaration<FoundationElement> {
     }
 
     fun function_level(function: NamingItem.() -> Unit): NamingItem {
-        val rule = NamingItem()
+        val rule = NamingItem(NamingTarget.Function)
         rule.function()
 
         rules.add(rule)
