@@ -2,14 +2,15 @@ package org.archguard.meta.dsl
 
 import org.archguard.architecture.style.NamingStyle
 import org.archguard.meta.AtomicAction
+import org.archguard.meta.baserule.PatternWithExampleRule
 
 
-class NormalExampleRule : AtomicAction {
-    fun pattern(regex: String) {
+class ProjectNameDecl : PatternWithExampleRule {
+    override fun pattern(regex: String) {
 
     }
 
-    fun example(s: String) {
+    override fun example(sample: String) {
 
     }
 
@@ -101,8 +102,8 @@ class NamingDeclaration {
 }
 
 class BackendSpec {
-    fun project_name(function: NormalExampleRule.() -> Unit): NormalExampleRule {
-        val rule = NormalExampleRule()
+    fun project_name(function: ProjectNameDecl.() -> Unit): ProjectNameDecl {
+        val rule = ProjectNameDecl()
         rule.function()
         return rule
     }

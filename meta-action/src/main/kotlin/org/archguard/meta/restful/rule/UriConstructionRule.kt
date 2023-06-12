@@ -1,18 +1,19 @@
 package org.archguard.meta.restful.rule
 
+import org.archguard.meta.baserule.PatternWithExampleRule
 import org.archguard.meta.restful.AtomicRule
 import org.archguard.meta.restful.RestApi
 
-class UriConstructionRule : AtomicRule("uri-construction", "uri construction regex: //TODO") {
+class UriConstructionRule : AtomicRule("uri-construction", "uri construction regex: //TODO"), PatternWithExampleRule {
     private var ruleRegex: Regex? = null
     private var sample = ""
 
-    fun rule(regex: String) {
+    override fun pattern(regex: String) {
         this.ruleRegex = Regex(regex)
         this.rule = "uri construction regex: $regex"
     }
 
-    fun example(sample: String) {
+    override fun example(sample: String) {
         this.sample = sample
     }
 

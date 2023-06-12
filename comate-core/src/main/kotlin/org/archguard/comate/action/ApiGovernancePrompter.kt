@@ -69,7 +69,7 @@ class ApiGovernancePrompter(
         val results = apis.map { api ->
             val governance = rest_api {
                 uri_construction {
-                    rule("\\/api\\/[a-zA-Z0-9]+\\/v[0-9]+\\/[a-zA-Z0-9\\/\\-]+")
+                    pattern("\\/api\\/[a-zA-Z0-9]+\\/v[0-9]+\\/[a-zA-Z0-9\\/\\-]+")
                     example("/api/petstore/v1/pets/dogs")
                 }
 
