@@ -31,6 +31,13 @@ enum class ComateCommand(command: String) {
             return basicPrompter.execute()
         }
     },
+    ApiGen("api-gen") {
+        override fun run(context: CommandContext): String {
+            val promptStrategy = BasicPromptStrategy()
+            val basicPrompter = ApiGenPrompter(context, promptStrategy)
+            return basicPrompter.execute()
+        }
+    }
     ;
 
     abstract fun run(context: CommandContext): String

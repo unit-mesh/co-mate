@@ -60,6 +60,8 @@ fun main(args: Array<String>) {
         ComateCommand.Intro -> ComateCommand.Intro.run(context)
         ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.run(context)
         ComateCommand.ApiGovernance -> ComateCommand.ApiGovernance.run(context)
+        ComateCommand.ApiGen -> ComateCommand.ApiGen.run(context)
+        // todo: handle command by LLM
         ComateCommand.None -> null
     } ?: return
 

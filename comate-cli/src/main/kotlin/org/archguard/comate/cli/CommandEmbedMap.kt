@@ -20,10 +20,15 @@ fun createEmbeddingMap(create: Semantic): Map<ComateCommand, List<FloatArray>> {
         "治理 API ",
         "检查 API 规范",
     )
+    val apiGenCommand = listOf(
+        "api generate",
+        "生成 API",
+    )
 
     return mapOf(
         ComateCommand.Intro to basicIntroCommand.map { create.embed(it) },
         ComateCommand.LayeredStyle to archStyleCommand.map { create.embed(it) },
         ComateCommand.ApiGovernance to apiGovernanceCommand.map { create.embed(it) },
+        ComateCommand.ApiGen to apiGenCommand.map { create.embed(it) },
     )
 }
