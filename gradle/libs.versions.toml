@@ -15,8 +15,6 @@ chapi = "2.0.0"
 
 slf4j = "2.0.5"
 
-persistence = "2.2"
-
 archguard = "2.0.1"
 
 logback = "1.4.5"
