@@ -35,7 +35,7 @@ class ContextMap(name: String) {
 }
 
 @SpecDsl
-class DomainSpec: Spec {
+class DomainSpec: Spec<Any> {
     fun context_map(name: String, block: ContextMap.() -> Unit): ContextMap {
         val contextMap = ContextMap(name)
         contextMap.block()
@@ -46,7 +46,7 @@ class DomainSpec: Spec {
 
     }
 
-    override fun exec(element: RestApi): Map<String, RuleResult> {
+    override fun exec(element: Any): Map<String, RuleResult> {
         return mapOf()
     }
 }

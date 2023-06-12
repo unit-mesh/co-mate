@@ -13,7 +13,7 @@ enum class ApiRuleType(rule: Class<out ApiAtomicRule>) {
     URI_CONSTRUCTION(UriConstructionRule::class.java)
 }
 
-class RestApiSpec : Spec {
+class RestApiSpec : Spec<RestApi> {
     private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
     private var rules: List<ApiAtomicRule> = listOf()
     private var needUpdateContextRules: List<ApiAtomicRule> = listOf()

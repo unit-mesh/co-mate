@@ -1,8 +1,6 @@
 package org.archguard.meta.base
 
-import org.archguard.meta.dsl.restful.RestApi
-
-interface Spec {
+interface Spec<T> {
     fun context(ruleVerifier: LlmRuleVerifier)
-    fun exec(element: RestApi): Map<String, RuleResult>
+    fun exec(element: T): Map<String, RuleResult>
 }

@@ -1,10 +1,12 @@
 package org.archguard.meta.dsl
 
-import org.archguard.meta.base.*
+import org.archguard.meta.base.LlmRuleVerifier
+import org.archguard.meta.base.RuleResult
+import org.archguard.meta.base.Spec
+import org.archguard.meta.base.SpecDsl
 import org.archguard.meta.dsl.foundation.LayeredDeclaration
 import org.archguard.meta.dsl.foundation.NamingDeclaration
 import org.archguard.meta.dsl.foundation.ProjectNameDecl
-import org.archguard.meta.dsl.restful.RestApi
 
 class DependencyRule {
     val rules = mutableListOf<Pair<String, String>>()
@@ -14,7 +16,7 @@ class DependencyRule {
 }
 
 @SpecDsl
-class BackendSpec: Spec {
+class BackendSpec: Spec<Any> {
     fun project_name(function: ProjectNameDecl.() -> Unit): ProjectNameDecl {
         val rule = ProjectNameDecl()
         rule.function()
@@ -46,7 +48,7 @@ class BackendSpec: Spec {
 
     }
 
-    override fun exec(element: RestApi): Map<String, RuleResult> {
+    override fun exec(element: Any): Map<String, RuleResult> {
         TODO("Not yet implemented")
     }
 }
