@@ -1,6 +1,10 @@
 package org.archguard.meta.dsl
 
+import org.archguard.meta.base.LlmRuleVerifier
+import org.archguard.meta.base.RuleResult
+import org.archguard.meta.base.Spec
 import org.archguard.meta.base.SpecDsl
+import org.archguard.meta.dsl.restful.RestApi
 
 class Context(name: String) {
     fun aggregate(name: String, function: () -> Unit) {
@@ -31,11 +35,19 @@ class ContextMap(name: String) {
 }
 
 @SpecDsl
-class DomainSpec {
+class DomainSpec: Spec {
     fun context_map(name: String, block: ContextMap.() -> Unit): ContextMap {
         val contextMap = ContextMap(name)
         contextMap.block()
         return contextMap
+    }
+
+    override fun context(ruleVerifier: LlmRuleVerifier) {
+
+    }
+
+    override fun exec(element: RestApi): Map<String, RuleResult> {
+        return mapOf()
     }
 }
 

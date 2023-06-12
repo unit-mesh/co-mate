@@ -6,7 +6,7 @@ import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.comate.wrapper.ComateArchGuardClient
 import org.archguard.comate.wrapper.ComateSourceCodeContext
-import org.archguard.meta.dsl.ApiRuleResult
+import org.archguard.meta.base.RuleResult
 import org.archguard.meta.dsl.rest_api
 import org.archguard.meta.dsl.restful.RestApi
 import org.archguard.scanner.analyser.ApiCallAnalyser
@@ -14,7 +14,7 @@ import org.archguard.scanner.core.sourcecode.ContainerService
 import org.slf4j.LoggerFactory.getLogger
 
 @Serializable
-data class ApiResult(val apiUri: String, val result: Map<String, ApiRuleResult>)
+data class ApiResult(val apiUri: String, val result: Map<String, RuleResult>)
 
 class ApiGovernancePrompter(
     val context: CommandContext,

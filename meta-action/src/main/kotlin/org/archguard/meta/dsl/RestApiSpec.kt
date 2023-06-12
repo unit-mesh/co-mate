@@ -1,10 +1,6 @@
 package org.archguard.meta.dsl
 
-import kotlinx.serialization.Serializable
-import org.archguard.meta.base.FakeRuleVerifier
-import org.archguard.meta.base.LlmRuleVerifier
-import org.archguard.meta.base.LlmVerifyRule
-import org.archguard.meta.base.ApiAtomicRule
+import org.archguard.meta.base.*
 import org.archguard.meta.dsl.restful.RestApi
 import org.archguard.meta.dsl.restful.rule.*
 
@@ -17,13 +13,9 @@ enum class ApiRuleType(rule: Class<out ApiAtomicRule>) {
     URI_CONSTRUCTION(UriConstructionRule::class.java)
 }
 
-@Serializable
-data class ApiRuleResult(val ruleName: String, val rule: String, val result: Boolean)
-
-class RestApiSpec {
+class RestApiSpec : Spec {
     private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
     private var rules: List<ApiAtomicRule> = listOf()
-
     private var needUpdateContextRules: List<ApiAtomicRule> = listOf()
 
     fun uri_construction(function: UriConstructionRule.() -> Unit): UriConstructionRule {
@@ -59,11 +51,11 @@ class RestApiSpec {
         return miscRule
     }
 
-    fun exec(element: RestApi): Map<String, ApiRuleResult> {
-        return rules.associate { it.name to ApiRuleResult(it.name, it.rule, it.exec(element) as Boolean) }
+    override fun exec(element: RestApi): Map<String, RuleResult> {
+        return rules.associate { it.name to RuleResult(it.name, it.rule, it.exec(element) as Boolean) }
     }
 
-    fun context(ruleVerifier: LlmRuleVerifier) {
+    override fun context(ruleVerifier: LlmRuleVerifier) {
         this.ruleVerifier = ruleVerifier
         needUpdateContextRules.forEach {
             if (it is LlmVerifyRule) {

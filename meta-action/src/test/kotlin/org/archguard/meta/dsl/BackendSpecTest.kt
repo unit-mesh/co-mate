@@ -1,5 +1,6 @@
 package org.archguard.meta.dsl
 
+import org.archguard.meta.base.FakeRuleVerifier
 import org.archguard.meta.dsl.matcher.shouldBe
 import org.archguard.meta.dsl.matcher.shouldNotBe
 import org.junit.jupiter.api.Test
@@ -40,5 +41,8 @@ class BackendSpecTest {
                 }
             }
         }
+
+        governance.context(FakeRuleVerifier())
+
     }
 }
