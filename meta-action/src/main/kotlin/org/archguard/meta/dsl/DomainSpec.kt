@@ -4,7 +4,6 @@ import org.archguard.meta.base.LlmRuleVerifier
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.base.Spec
 import org.archguard.meta.base.SpecDsl
-import org.archguard.meta.dsl.restful.RestApi
 
 class Context(name: String) {
     fun aggregate(name: String, function: () -> Unit) {

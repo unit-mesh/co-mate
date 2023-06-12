@@ -4,9 +4,11 @@ import org.archguard.meta.base.LlmRuleVerifier
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.base.Spec
 import org.archguard.meta.base.SpecDsl
+import org.archguard.meta.dsl.foundation.BaseDeclaration
 import org.archguard.meta.dsl.foundation.LayeredDeclaration
 import org.archguard.meta.dsl.foundation.NamingDeclaration
 import org.archguard.meta.dsl.foundation.ProjectNameDecl
+import org.archguard.meta.model.FoundationElement
 
 class DependencyRule {
     val rules = mutableListOf<Pair<String, String>>()
@@ -16,16 +18,22 @@ class DependencyRule {
 }
 
 @SpecDsl
-class BackendSpec: Spec<Any> {
+class FoundationSpec : Spec<FoundationElement> {
+    val declarations = mutableListOf<BaseDeclaration>()
+
     fun project_name(function: ProjectNameDecl.() -> Unit): ProjectNameDecl {
         val rule = ProjectNameDecl()
         rule.function()
+
+        declarations.add(rule)
         return rule
     }
 
     fun layered(function: LayeredDeclaration.() -> Unit): LayeredDeclaration {
         val rule = LayeredDeclaration()
         rule.function()
+
+        declarations.add(rule)
         return rule
     }
 
@@ -33,28 +41,26 @@ class BackendSpec: Spec<Any> {
     fun naming(function: NamingDeclaration.() -> Unit): NamingDeclaration {
         val rule = NamingDeclaration()
         rule.function()
+
+        declarations.add(rule)
         return rule
-    }
-
-    fun exception(style: String) {
-
-    }
-
-    fun security(style: String) {
-
     }
 
     override fun context(ruleVerifier: LlmRuleVerifier) {
 
     }
 
-    override fun exec(element: Any): Map<String, RuleResult> {
-        TODO("Not yet implemented")
+    override fun exec(element: FoundationElement): Map<String, RuleResult> {
+        declarations.map { declaration ->
+            declaration.rules().map { rules ->
+                rules.name to rules.exec(element)
+            }
+        }
     }
 }
 
-fun backend(init: BackendSpec.() -> Unit): BackendSpec {
-    val spec = BackendSpec()
+fun foundation(init: FoundationSpec.() -> Unit): FoundationSpec {
+    val spec = FoundationSpec()
     spec.init()
     return spec
 }

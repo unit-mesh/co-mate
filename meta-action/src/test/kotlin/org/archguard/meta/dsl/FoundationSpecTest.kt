@@ -3,12 +3,13 @@ package org.archguard.meta.dsl
 import org.archguard.meta.base.FakeRuleVerifier
 import org.archguard.meta.dsl.matcher.shouldBe
 import org.archguard.meta.dsl.matcher.shouldNotBe
+import org.archguard.meta.model.FoundationElement
 import org.junit.jupiter.api.Test
 
-class BackendSpecTest {
+class FoundationSpecTest {
     @Test
     fun spec_checking() {
-        val governance = backend {
+        val governance = foundation {
             project_name {
                 pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
                 example("system1-servicecenter1-microservice1")
@@ -42,7 +43,8 @@ class BackendSpecTest {
             }
         }
 
+        val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf())
         governance.context(FakeRuleVerifier())
-//        governance.exec(restApi)
+        governance.exec(foundation)
     }
 }

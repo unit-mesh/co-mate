@@ -1,7 +1,7 @@
 package org.archguard.meta.dsl
 
 import org.archguard.meta.base.FakeRuleVerifier
-import org.archguard.meta.dsl.restful.RestApi
+import org.archguard.meta.model.RestApiElement
 import org.junit.jupiter.api.Test
 
 class RestRestApiSpecTest {
@@ -25,7 +25,7 @@ Token Based Authentication (Recommended) Ideally, microservices should be statel
             misc("""""")
         }
 
-        val restApi = RestApi("/api/petstore/v1/pets/dogs", "GET", listOf(200, 500))
+        val restApi = RestApiElement("/api/petstore/v1/pets/dogs", "GET", listOf(200, 500))
         governance.context(FakeRuleVerifier())
         governance.exec(restApi)
     }

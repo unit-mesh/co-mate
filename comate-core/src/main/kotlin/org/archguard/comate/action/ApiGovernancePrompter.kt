@@ -8,7 +8,7 @@ import org.archguard.comate.wrapper.ComateArchGuardClient
 import org.archguard.comate.wrapper.ComateSourceCodeContext
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.dsl.rest_api
-import org.archguard.meta.dsl.restful.RestApi
+import org.archguard.meta.model.RestApiElement
 import org.archguard.scanner.analyser.ApiCallAnalyser
 import org.archguard.scanner.core.sourcecode.ContainerService
 import org.slf4j.LoggerFactory.getLogger
@@ -57,7 +57,7 @@ class ApiGovernancePrompter(
 
         val apis = services.flatMap {
             it.resources.map { resource ->
-                RestApi(
+                RestApiElement(
                     uri = resource.sourceUrl,
                     action = resource.sourceHttpMethod.uppercase(),
                     statusCodes = listOf(200)

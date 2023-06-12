@@ -1,11 +1,11 @@
 package org.archguard.meta.dsl
 
 import org.archguard.meta.base.*
-import org.archguard.meta.dsl.restful.RestApi
+import org.archguard.meta.model.RestApiElement
 import org.archguard.meta.dsl.restful.rule.*
 
 // todo: is for checking the rule type
-enum class ApiRuleType(rule: Class<out ApiAtomicRule>) {
+enum class ApiRuleType(rule: Class<out AtomicRule>) {
     HTTP_ACTION(HttpActionRule::class.java),
     MISC(MiscRule::class.java),
     SECURITY(SecurityRule::class.java),
@@ -13,10 +13,10 @@ enum class ApiRuleType(rule: Class<out ApiAtomicRule>) {
     URI_CONSTRUCTION(UriConstructionRule::class.java)
 }
 
-class RestApiSpec : Spec<RestApi> {
+class RestApiSpec : Spec<RestApiElement> {
     private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
-    private var rules: List<ApiAtomicRule> = listOf()
-    private var needUpdateContextRules: List<ApiAtomicRule> = listOf()
+    private var rules: List<AtomicRule> = listOf()
+    private var needUpdateContextRules: List<AtomicRule> = listOf()
 
     fun uri_construction(function: UriConstructionRule.() -> Unit): UriConstructionRule {
         val uriRule = UriConstructionRule()
@@ -51,7 +51,7 @@ class RestApiSpec : Spec<RestApi> {
         return miscRule
     }
 
-    override fun exec(element: RestApi): Map<String, RuleResult> {
+    override fun exec(element: RestApiElement): Map<String, RuleResult> {
         return rules.associate { it.name to RuleResult(it.name, it.rule, it.exec(element) as Boolean) }
     }
 
