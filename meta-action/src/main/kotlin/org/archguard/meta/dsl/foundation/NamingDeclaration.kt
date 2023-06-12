@@ -36,11 +36,15 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
     override fun exec(input: FoundationElement): List<RuleResult> {
         val results = mutableListOf<RuleResult>()
 
-        val elements = input.ds.filter {
-            this.filter.matches(it.NodeName)
-        }
+        results += verifyNodeName(input)
 
-        elements.forEach {
+        return results
+    }
+
+    private fun verifyNodeName(input: FoundationElement) =
+        input.ds.filter {
+            filter.matches(it.NodeName)
+        }.map {
             val result = when (target) {
                 NamingTarget.Package -> {
                     namingStyle.isValid(it.Package)
@@ -55,12 +59,8 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
                 }
             }
 
-            results.add(RuleResult(name, this.name, result))
+            RuleResult(name, this.name, result)
         }
-
-
-        return results
-    }
 }
 
 class NamingDeclaration : BaseDeclaration<FoundationElement> {
