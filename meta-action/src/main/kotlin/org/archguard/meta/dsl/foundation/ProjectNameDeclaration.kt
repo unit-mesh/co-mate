@@ -25,15 +25,15 @@ class ProjectNameDeclaration : PatternWithExampleRule<FoundationElement>, BaseDe
         this.sample = sample
     }
 
-    override fun exec(input: FoundationElement): RuleResult {
+    override fun exec(input: FoundationElement): List<RuleResult> {
         val ruleExplain = "regex: " + this.originRegex + "sample: " + sample
 
         if (ruleRegex != null) {
             val matchResult = ruleRegex!!.find(input.projectName)
-            return RuleResult(this.name, ruleExplain, matchResult != null)
+            return listOf(RuleResult(this.name, ruleExplain, matchResult != null))
         }
 
-        return RuleResult(this.name, ruleExplain, false)
+        return listOf(RuleResult(this.name, ruleExplain, false))
     }
 
     override fun rules(): List<AtomicAction<FoundationElement>> {

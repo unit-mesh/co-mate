@@ -5,7 +5,8 @@ import org.archguard.meta.base.ApiAtomicRule
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.RestApiElement
 
-class UriConstructionRule : ApiAtomicRule("uri-construction", "uri construction regex: //TODO"), PatternWithExampleRule<RestApiElement> {
+class UriConstructionRule : ApiAtomicRule("uri-construction", "uri construction regex: //TODO"),
+    PatternWithExampleRule<RestApiElement> {
     private var ruleRegex: Regex? = null
     private var sample = ""
 
@@ -18,13 +19,13 @@ class UriConstructionRule : ApiAtomicRule("uri-construction", "uri construction 
         this.sample = sample
     }
 
-    override fun exec(input: RestApiElement): RuleResult {
+    override fun exec(input: RestApiElement): List<RuleResult> {
         if (ruleRegex != null) {
             val matchResult = ruleRegex!!.find(input.uri)
-            return RuleResult(this.name, sample, matchResult != null)
+            return listOf(RuleResult(this.name, sample, matchResult != null))
         }
 
-        return RuleResult(this.name, sample, false)
+        return listOf(RuleResult(this.name, sample, false))
     }
 }
 

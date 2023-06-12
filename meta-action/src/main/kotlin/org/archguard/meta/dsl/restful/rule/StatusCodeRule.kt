@@ -5,9 +5,9 @@ import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.RestApiElement
 
 class StatusCodeRule(private val codes: List<Int>) : ApiAtomicRule("status-code", "supported codes: ${codes.joinToString(", ")}") {
-    override fun exec(input: RestApiElement): RuleResult {
+    override fun exec(input: RestApiElement): List<RuleResult> {
         if (input.statusCodes.isEmpty()) {
-            return RuleResult(this.name, this.rule, false)
+            return listOf(RuleResult(this.name, this.rule, false))
         }
 
         val statusCode = input.statusCodes
@@ -18,6 +18,6 @@ class StatusCodeRule(private val codes: List<Int>) : ApiAtomicRule("status-code"
             statusCode.containsAll(codes)
         }
 
-        return RuleResult(this.name, this.rule, isEqual)
+        return listOf(RuleResult(this.name, this.rule, isEqual))
     }
 }

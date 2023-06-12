@@ -33,7 +33,9 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
         this.block = block
     }
 
-    override fun exec(input: FoundationElement): RuleResult {
+    override fun exec(input: FoundationElement): List<RuleResult> {
+        val results = mutableListOf<RuleResult>()
+
         val elements = input.ds.filter {
             this.filter.matches(it.NodeName)
         }
@@ -53,13 +55,11 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
                 }
             }
 
-            if (!result) {
-                return RuleResult(name, this.name, false)
-            }
+            results.add(RuleResult(name, this.name, result))
         }
 
 
-        return RuleResult(name, "namingItem", true)
+        return results
     }
 }
 
