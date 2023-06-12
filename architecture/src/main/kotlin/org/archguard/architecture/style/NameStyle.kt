@@ -1,16 +1,15 @@
-package org.archguard.architecture.naming
+package org.archguard.architecture.style
 
 enum class NamingStyle(val value: String) {
     CamelCase("CamelCase"),
-    SnakeCase("snake_case"),
-    KebabCase("kebab-case"),
-    Unknown("unknown")
+    SnakeCase("SnakeCase"),
+    KebabCase("KebabCase")
     ;
 
     companion object {
         fun contains(string: String): Boolean {
             val lowercase = string.lowercase()
-            return NamingStyle.values().any { it.value == lowercase }
+            return NamingStyle.values().any { it.value.lowercase() == lowercase }
         }
 
         fun valuesString(): String {

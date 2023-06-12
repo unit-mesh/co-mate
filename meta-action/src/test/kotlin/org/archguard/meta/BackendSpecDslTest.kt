@@ -1,8 +1,6 @@
 package org.archguard.meta
 
 import org.archguard.meta.dsl.backend
-import org.archguard.meta.dsl.should
-import org.archguard.meta.dsl.shouldNot
 import org.junit.jupiter.api.Test
 
 class BackendSpecDslTest {
