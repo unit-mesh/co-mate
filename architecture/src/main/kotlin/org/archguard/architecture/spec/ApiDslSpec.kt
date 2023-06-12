@@ -12,13 +12,14 @@ enum class ApiDslSpec {
      */
     URIConstruction() {
         override fun description(): String {
-            TODO("Not yet implemented")
+            return """
+                example: http://[host]:[port]/api/{service name}]/v{version number}/{resource}""".trimIndent()
         }
 
     },
     Versioning() {
         override fun description(): String {
-            TODO("Not yet implemented")
+            return """"""
         }
     },
     StatusCode() {
@@ -38,7 +39,7 @@ enum class ApiDslSpec {
          * 500 – Internal Server Error – API developers should avoid this error. If an error occurs in the global catch blog, the stracktrace should be logged and not returned as in the response.
          */
         override fun description(): String {
-            TODO("Not yet implemented")
+            return """Status code is """
         }
 
     },
@@ -47,7 +48,7 @@ enum class ApiDslSpec {
          * check is Authentication API ?
          */
         override fun description(): String {
-            return "Check is Authentication API ?"
+            return ""
         }
 
     }
