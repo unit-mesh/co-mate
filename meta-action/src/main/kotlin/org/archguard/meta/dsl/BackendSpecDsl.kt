@@ -20,16 +20,15 @@ class Naming : AtomicAction {
     private val conditions = mutableListOf<(String) -> Boolean>()
     infix fun <T> T.should(matcher: (T) -> Unit) = matcher(this)
 
-    infix fun endWiths(suffixes: String): (Any) -> Unit {
+    // todo: add support for shouldNot
+    infix fun <T> T.shouldNot(matcher: (T) -> Unit) = should(matcher)
+
+    fun endWiths(vararg suffixes: String): (Any) -> Unit {
         conditions.add { file ->
             suffixes.any { file.endsWith(it) }
         }
 
         return { }
-    }
-
-    fun validate(file: String): Boolean {
-        return conditions.all { it(file) }
     }
 }
 
@@ -53,9 +52,24 @@ class LayeredRule {
     }
 }
 
+class DependencyRule {
+    val rules = mutableListOf<Pair<String, String>>()
+    infix fun String.dependedOn(to: String) {
+        rules.add(this to to)
+    }
+}
+
 class LayeredDeclaration : AtomicAction {
-    fun infrastructure(function: LayeredRule.() -> Unit): LayeredRule {
+    val dependencyRules = HashMap<String, List<String>>()
+
+    fun layer(name: String, function: LayeredRule.() -> Unit): LayeredRule {
         val rule = LayeredRule()
+        rule.function()
+        return rule
+    }
+
+    fun dependency(function: DependencyRule.() -> Unit): DependencyRule {
+        val rule = DependencyRule()
         rule.function()
         return rule
     }
@@ -63,7 +77,7 @@ class LayeredDeclaration : AtomicAction {
 }
 
 class BackendSpecDsl {
-    fun repository(function: NormalExampleRule.() -> Unit): NormalExampleRule {
+    fun project_name(function: NormalExampleRule.() -> Unit): NormalExampleRule {
         val rule = NormalExampleRule()
         rule.function()
         return rule
