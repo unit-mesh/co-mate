@@ -14,15 +14,17 @@ class NormalExampleRule : AtomicAction {
 
 }
 
+
+infix fun <T> T.should(matcher: (T) -> Unit) = matcher(this)
+
+// todo: add support for shouldNot
+infix fun <T> T.shouldNot(matcher: (Unit) -> Unit) = should(matcher)
+
+
 class Naming : AtomicAction {
     val filename: String = ""
 
     private val conditions = mutableListOf<(String) -> Boolean>()
-    infix fun <T> T.should(matcher: (T) -> Unit) = matcher(this)
-
-    // todo: add support for shouldNot
-    infix fun <T> T.shouldNot(matcher: (T) -> Unit) = should(matcher)
-
     fun endWiths(vararg suffixes: String): (Any) -> Unit {
         conditions.add { file ->
             suffixes.any { file.endsWith(it) }
@@ -76,6 +78,14 @@ class LayeredDeclaration : AtomicAction {
 
 }
 
+class NamingDeclaration {
+    val `函数名`: String = ""
+
+    fun startsWith(vararg symbols: String): (Unit) -> Unit {
+
+    }
+}
+
 class BackendSpecDsl {
     fun project_name(function: NormalExampleRule.() -> Unit): NormalExampleRule {
         val rule = NormalExampleRule()
@@ -89,7 +99,12 @@ class BackendSpecDsl {
         return rule
     }
 
-    fun code_style(style: String) {
+
+    fun naming(function: NamingDeclaration.() -> Unit): NamingDeclaration {
+        val rule = NamingDeclaration()
+        rule.function()
+        return rule
+    }
 //    fun class_name_style(style: String) {
 //
 //    }
@@ -101,7 +116,6 @@ class BackendSpecDsl {
 //    fun variable_name_style(style: String) {
 //
 //    }
-    }
 
     fun exception(style: String) {
 

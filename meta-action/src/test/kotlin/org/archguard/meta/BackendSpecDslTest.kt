@@ -1,6 +1,8 @@
 package org.archguard.meta
 
 import org.archguard.meta.dsl.backend
+import org.archguard.meta.dsl.should
+import org.archguard.meta.dsl.shouldNot
 import org.junit.jupiter.api.Test
 
 class BackendSpecDslTest {
@@ -26,6 +28,10 @@ class BackendSpecDslTest {
                     "domain" dependedOn "infrastructure"
                     "application" dependedOn "domain"
                 }
+            }
+
+            naming {
+                函数名 shouldNot startsWith("DTO", "Request", "Response")
             }
         }
     }
