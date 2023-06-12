@@ -6,18 +6,18 @@ package org.archguard.architecture.rest
  * dynamic checking function with DSL ?
  *
  */
-enum class ApiDocumentGovernance {
+enum class ApiDslSpec {
     /**
      * URI structure http://[host]:[port]/api/{service name}]/v{version number}/{resource}
      */
     URIConstruction() {
-        override fun checking(): String {
+        override fun description(): String {
             TODO("Not yet implemented")
         }
 
     },
     Versioning() {
-        override fun checking(): String {
+        override fun description(): String {
             TODO("Not yet implemented")
         }
     },
@@ -37,7 +37,7 @@ enum class ApiDocumentGovernance {
          *
          * 500 – Internal Server Error – API developers should avoid this error. If an error occurs in the global catch blog, the stracktrace should be logged and not returned as in the response.
          */
-        override fun checking(): String {
+        override fun description(): String {
             TODO("Not yet implemented")
         }
 
@@ -46,12 +46,12 @@ enum class ApiDocumentGovernance {
         /**
          * check is Authentication API ?
          */
-        override fun checking(): String {
-            TODO("Not yet implemented")
+        override fun description(): String {
+            return "Check is Authentication API ?"
         }
 
     }
     ;
 
-    abstract fun checking(): String
+    abstract fun description(): String
 }

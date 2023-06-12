@@ -6,7 +6,7 @@ import java.nio.file.Path
 
 data class CommandContext(val workdir: Path, val lang: String, val connector: OpenAIConnector?)
 
-enum class ComateCommand(command: String) {
+enum class ComateCommand(val command: String) {
     None("") {
         override fun run(context: CommandContext): String = ""
     },
@@ -41,4 +41,10 @@ enum class ComateCommand(command: String) {
     ;
 
     abstract fun run(context: CommandContext): String
+
+    companion object {
+        fun valuesString(): String {
+            return values().joinToString(", ") { it.command }
+        }
+    }
 }
