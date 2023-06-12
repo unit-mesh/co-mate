@@ -2,14 +2,17 @@ package org.archguard.meta.dsl
 
 import org.archguard.meta.base.SpecDsl
 
-class ContextMap {
+class ContextMap(name: String) {
+    fun context(name: String, function: () -> Unit) {
+
+    }
 
 }
 
 @SpecDsl
 class DomainSpec {
-    fun context_map(block: ContextMap.() -> Unit): ContextMap {
-        val contextMap = ContextMap()
+    fun context_map(name: String, block: ContextMap.() -> Unit): ContextMap {
+        val contextMap = ContextMap(name)
         contextMap.block()
         return contextMap
     }

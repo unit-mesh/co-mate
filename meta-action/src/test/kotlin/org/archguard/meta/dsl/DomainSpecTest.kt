@@ -6,8 +6,10 @@ class DomainSpecTest {
     @Test
     fun testContextMap() {
         val spec = domain {
-            context_map {
+            context_map("TicketBooking") {
+                context("Reservation") {
 
+                }
             }
         }
     }
