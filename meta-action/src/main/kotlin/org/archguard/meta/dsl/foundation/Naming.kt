@@ -5,17 +5,15 @@ import org.archguard.meta.base.AtomicAction
 class Naming : AtomicAction<String> {
     val filename: String = ""
 
-    private val conditions = mutableListOf<(String) -> Boolean>()
-
-    fun endWiths(vararg suffixes: String) {
-        conditions.add { file ->
-            suffixes.any { file.endsWith(it) }
-        }
+    fun endWiths(vararg suffixes: String) : Boolean {
+        return suffixes.any { filename.endsWith(it) }
     }
 
-    fun startsWith(vararg symbols: String) {
+    fun startsWith(vararg symbols: String): Boolean {
+        return symbols.any { filename.startsWith(it) }
     }
 
-    fun contains(vararg symbols: String) {
+    fun contains(vararg symbols: String): Boolean {
+        return symbols.any { filename.contains(it) }
     }
 }
