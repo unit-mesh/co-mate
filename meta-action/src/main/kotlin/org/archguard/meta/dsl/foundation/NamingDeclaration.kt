@@ -13,8 +13,8 @@ enum class NamingTarget {
 
 class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
     override val name: String get() = "NamingItem for " + target.name
-    private var filter: Regex = Regex("")
-    private var block: Naming.() -> Unit = {}
+    private var filter: Regex = Regex(".*")
+    private var naming: Naming? = null
     private var namingStyle = NamingStyle.CamelCase
 
     fun style(style: String) {
@@ -30,7 +30,7 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
      */
     fun pattern(pattern: String, block: Naming.() -> Unit) {
         this.filter = Regex(pattern)
-        this.block = block
+        this.naming = Naming().apply(block)
     }
 
     override fun exec(input: FoundationElement): List<RuleResult> {
@@ -38,13 +38,19 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
 
         results += verifyNodeName(input)
 
+        if (naming != null) {
+            val filterPattern = input.ds.filter {
+                filter.matches(it.NodeName)
+            }.map {
+                naming!!.exec(it.NodeName)
+            }
+        }
+
         return results
     }
 
-    private fun verifyNodeName(input: FoundationElement) =
-        input.ds.filter {
-            filter.matches(it.NodeName)
-        }.map {
+    private fun verifyNodeName(input: FoundationElement): List<RuleResult> {
+        return input.ds.map {
             val result = when (target) {
                 NamingTarget.Package -> {
                     namingStyle.isValid(it.Package)
@@ -61,6 +67,7 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
 
             RuleResult(name, this.name, result)
         }
+    }
 }
 
 class NamingDeclaration : BaseDeclaration<FoundationElement> {
