@@ -8,9 +8,10 @@ class BackendSpecDslTest {
     fun spec_checking() {
         val governance = backend {
             repository {
-                regex("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
+                pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
                 example("system1-servicecenter1-microservice1")
             }
+
 //            layered_style {
 //
 //            }

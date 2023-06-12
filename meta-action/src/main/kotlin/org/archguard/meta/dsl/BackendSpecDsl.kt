@@ -4,7 +4,8 @@ import org.archguard.meta.AtomicAction
 
 
 class NormalExampleRule : AtomicAction {
-    fun regex(s: String) {
+    fun pattern(regex: String) {
+
     }
 
     fun example(s: String) {
@@ -20,7 +21,7 @@ class BackendSpecDsl {
         return rule
     }
 
-    fun layered_style(style: String) {
+    fun layered(style: String) {
 
     }
 
