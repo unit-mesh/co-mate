@@ -5,6 +5,7 @@ plugins {
 }
 
 dependencies {
+    implementation(projects.architecture)
     implementation(libs.kotlin.stdlib)
     implementation(libs.serialization.json)
 

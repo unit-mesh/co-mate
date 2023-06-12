@@ -31,7 +31,8 @@ class BackendSpecDslTest {
             }
 
             naming {
-//                函数名 shouldNot startsWith("DTO", "Request", "Response")
+                style("CamelCase")
+//                函数名 shouldNot contains("$")
             }
         }
     }

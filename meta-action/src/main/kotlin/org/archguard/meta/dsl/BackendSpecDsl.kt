@@ -1,5 +1,6 @@
 package org.archguard.meta.dsl
 
+import org.archguard.architecture.naming.NamingStyle
 import org.archguard.meta.AtomicAction
 
 
@@ -24,7 +25,7 @@ interface MatcherResult {
         operator fun invoke(
             passed: Boolean,
             failureMessageFn: () -> String,
-            negatedFailureMessageFn: () -> String
+            negatedFailureMessageFn: () -> String,
         ) = object : MatcherResult {
             override fun passed(): Boolean = passed
             override fun failureMessage(): String = failureMessageFn()
@@ -133,6 +134,16 @@ class NamingDeclaration {
 
     fun startsWith(vararg symbols: String): (Unit) -> Unit {
         return { }
+    }
+
+    fun contains(vararg symbols: String): (Unit) -> Unit {
+        return { }
+    }
+
+    fun style(style: String) {
+        if (!NamingStyle.contains(style)) {
+            throw IllegalArgumentException("Unknown naming style: $style. Supported styles: ${NamingStyle.valuesString()}")
+        }
     }
 }
 
