@@ -1,9 +1,9 @@
 package org.archguard.meta.restful.rule
 
-import org.archguard.meta.restful.ApiRule
+import org.archguard.meta.restful.AtomicRule
 import org.archguard.meta.restful.RestApi
 
-class UriConstructionRule : ApiRule("uri-construction", "uri construction regex: //TODO") {
+class UriConstructionRule : AtomicRule("uri-construction", "uri construction regex: //TODO") {
     private var ruleRegex: Regex? = null
     private var sample = ""
 

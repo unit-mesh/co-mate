@@ -4,12 +4,12 @@ import kotlinx.serialization.Serializable
 import org.archguard.meta.FakeRuleVerifier
 import org.archguard.meta.LlmRuleVerifier
 import org.archguard.meta.restful.ApiLlmVerifyRule
-import org.archguard.meta.restful.ApiRule
+import org.archguard.meta.restful.AtomicRule
 import org.archguard.meta.restful.RestApi
 import org.archguard.meta.restful.rule.*
 
 // todo: is for checking the rule type
-enum class ApiRuleType(rule: Class<out ApiRule>) {
+enum class ApiRuleType(rule: Class<out AtomicRule>) {
     HTTP_ACTION(HttpActionRule::class.java),
     MISC(MiscRule::class.java),
     SECURITY(SecurityRule::class.java),
@@ -22,9 +22,9 @@ data class ApiRuleResult(val ruleName: String, val rule: String, val result: Boo
 
 class RestApiDsl {
     private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
-    private var rules: List<ApiRule> = listOf()
+    private var rules: List<AtomicRule> = listOf()
 
-    private var needUpdateContextRules: List<ApiRule> = listOf()
+    private var needUpdateContextRules: List<AtomicRule> = listOf()
 
     fun uri_construction(function: UriConstructionRule.() -> Unit): UriConstructionRule {
         val uriRule = UriConstructionRule()
