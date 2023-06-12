@@ -5,13 +5,20 @@ import org.archguard.meta.base.PatternWithExampleRule
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.FoundationElement
 
-class ProjectNameDecl : PatternWithExampleRule<FoundationElement>, BaseDeclaration<FoundationElement> {
+class ProjectNameDeclaration : PatternWithExampleRule<FoundationElement>, BaseDeclaration<FoundationElement> {
     override val name = "ProjectName"
+    private var originRegex: String = ""
     private var ruleRegex: Regex? = null
+
     private var sample = ""
 
     override fun pattern(regex: String) {
-        this.ruleRegex = Regex(regex)
+        this.originRegex = regex
+        try {
+            this.ruleRegex = Regex(regex)
+        } catch (e: Exception) {
+            throw Exception("Invalid regex: $regex")
+        }
     }
 
     override fun example(sample: String) {
@@ -19,12 +26,14 @@ class ProjectNameDecl : PatternWithExampleRule<FoundationElement>, BaseDeclarati
     }
 
     override fun exec(input: FoundationElement): RuleResult {
+        val ruleExplain = "regex: " + this.originRegex + "sample: " + sample
+
         if (ruleRegex != null) {
             val matchResult = ruleRegex!!.find(input.projectName)
-            return RuleResult(this.name, sample, matchResult != null)
+            return RuleResult(this.name, ruleExplain, matchResult != null)
         }
 
-        return RuleResult(this.name, sample, false)
+        return RuleResult(this.name, ruleExplain, false)
     }
 
     override fun rules(): List<AtomicAction<FoundationElement>> {

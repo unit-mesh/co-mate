@@ -7,7 +7,7 @@ import org.archguard.meta.base.SpecDsl
 import org.archguard.meta.dsl.foundation.BaseDeclaration
 import org.archguard.meta.dsl.foundation.LayeredDeclaration
 import org.archguard.meta.dsl.foundation.NamingDeclaration
-import org.archguard.meta.dsl.foundation.ProjectNameDecl
+import org.archguard.meta.dsl.foundation.ProjectNameDeclaration
 import org.archguard.meta.model.FoundationElement
 
 class DependencyRule {
@@ -21,8 +21,8 @@ class DependencyRule {
 class FoundationSpec : Spec<FoundationElement> {
     val declarations = mutableListOf<BaseDeclaration<FoundationElement>>()
 
-    fun project_name(function: ProjectNameDecl.() -> Unit): ProjectNameDecl {
-        val rule = ProjectNameDecl()
+    fun project_name(function: ProjectNameDeclaration.() -> Unit): ProjectNameDeclaration {
+        val rule = ProjectNameDeclaration()
         rule.function()
 
         declarations.add(rule)
