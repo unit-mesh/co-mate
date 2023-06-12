@@ -4,7 +4,7 @@ import org.archguard.meta.base.PatternWithExampleRule
 import org.archguard.meta.base.ApiAtomicRule
 import org.archguard.meta.dsl.restful.RestApi
 
-class UriConstructionRule : ApiAtomicRule("uri-construction", "uri construction regex: //TODO"), PatternWithExampleRule {
+class UriConstructionRule : ApiAtomicRule("uri-construction", "uri construction regex: //TODO"), PatternWithExampleRule<RestApi> {
     private var ruleRegex: Regex? = null
     private var sample = ""
 

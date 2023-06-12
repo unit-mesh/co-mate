@@ -3,7 +3,7 @@ package org.archguard.meta.dsl.foundation
 import org.archguard.meta.base.AtomicAction
 import org.archguard.meta.dsl.DependencyRule
 
-class LayeredDeclaration : AtomicAction {
+class LayeredDeclaration {
     val dependencyRules = HashMap<String, List<String>>()
 
     fun layer(name: String, function: LayeredRule.() -> Unit): LayeredRule {
