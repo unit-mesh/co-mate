@@ -52,33 +52,57 @@ Example:
 layered {
   application {
     package {
-      pattern ".*\\.dto"
-      pattern ".*\\.command"
-      pattern ".*\\.exception"
-      pattern ".*\\.service"
+      pattern ".*\\.dto" namingRule {
+        should endWith "DTO"
+      }
+      pattern ".*\\.command" namingRule {
+        should endWith "Command"
+      }
+      pattern ".*\\.exception" namingRule {
+        should endWith "Exception"
+      }
+      pattern ".*\\.service" namingRule {
+        should endWith "Service"
+      }
     }
   }
 
   domain {
     package {
-      pattern ".*\\.model"
-      pattern ".*\\.repository"
-      pattern ".*\\.client"
-      pattern ".*\\.event"
+      pattern ".*\\.model" namingRule {
+        should notEndWith "DTO", "Command", "Exception", "Service"
+      }
+      pattern ".*\\.repository" namingRule {
+        should endWith "Repository"
+      }
+      pattern ".*\\.client" namingRule {
+        should endWith "Client"
+      }
+      pattern ".*\\.event" namingRule {
+        should endWith "Event"
+      }
     }
   }
 
   infrastructure {
     package {
-      pattern ".*\\.impl"
-      pattern ".*\\.converter"
-      pattern ".*\\.entity"
+      pattern ".*\\.impl" namingRule {
+        should endWith "Impl"
+      }
+      pattern ".*\\.converter" namingRule {
+        should endWith "Converter"
+      }
+      pattern ".*\\.entity" namingRule {
+        should endWith "PO"
+      }
     }
   }
 
   interface {
     package {
-      pattern ".*\\.interface"
+      pattern ".*\\.interface" namingRule {
+        should endWith "Request", "Response"
+      }
     }
   }
 
@@ -87,22 +111,6 @@ layered {
     from interface to application, domain, infrastructure
     from application to domain, infrastructure
     from domain to infrastructure
-  }
-
-  // 检查命名规则
-  check NamingRule {
-    in interface, package ".*\\.interface", should endWith "Request", "Response"
-    in application, package ".*\\.dto", should endWith "DTO"
-    in application, package ".*\\.command", should endWith "Command"
-    in application, package ".*\\.exception", should endWith "Exception"
-    in application, package ".*\\.service", should endWith "Service"
-    in domain, package ".*\\.model", should notEndWith "DTO", "Command", "Exception", "Service"
-    in domain, package ".*\\.repository", should endWith "Repository"
-    in domain, package ".*\\.client", should endWith "Client"
-    in domain, package ".*\\.event", should endWith "Event"
-    in infrastructure, package ".*\\.impl", should endWith "Impl"
-    in infrastructure, package ".*\\.converter", should endWith "Converter"
-    in infrastructure, package ".*\\.entity", should endWith "PO"
   }
 }
 ```
