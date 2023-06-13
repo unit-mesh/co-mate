@@ -54,13 +54,15 @@ allprojects {
     }
 }
 
-
 dependencies {
+    jacocoAggregation(project(":architecture"))
+    jacocoAggregation(project(":comate-core"))
+
     jacocoAggregation(project(":llm-core"))
     jacocoAggregation(project(":meta-action"))
-    jacocoAggregation(project(":comate-core"))
+
     jacocoAggregation(project(":spec-partitioner"))
-    jacocoAggregation(project(":architecture"))
+    jacocoAggregation(project(":spec-runtime"))
 }
 
 reporting {
