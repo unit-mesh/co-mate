@@ -17,7 +17,7 @@ class UmlConverterTest {
         assertEquals("""
             @startuml
             class TicketBooking {
-                
+                void reverse()
             }
             @enduml
         """.trimIndent(), uml)
