@@ -127,7 +127,11 @@ class FoundationSpecTest {
 
     @Test
     fun should_return_false_when_depends_on_incorrect() {
-        val domainDs = CodeDataStruct("MetaAction", Package = "org.archguard.domain", Imports = arrayOf(CodeImport("org.archguard.application.DemoService")))
+        val domainDs = CodeDataStruct(
+            "MetaAction",
+            Package = "org.archguard.domain",
+            Imports = arrayOf(CodeImport("org.archguard.application.DemoService"))
+        )
         val applicationDs = CodeDataStruct("DemoService", Package = "org.archguard.application")
         val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(domainDs, applicationDs))
 
@@ -138,14 +142,15 @@ class FoundationSpecTest {
     }
 
     @Test
-    fun should_return_true_when_depends_on_correct() {
-        val domainDs = CodeDataStruct("DemoApp", Package = "org.archguard.application", Imports = arrayOf(CodeImport("org.archguard.domain.MetaAction")))
+    fun should_no_error_when_depends_on_correct() {
+        val imports = arrayOf(CodeImport("org.archguard.domain.MetaAction"))
+        val domainDs = CodeDataStruct("DemoApp", Package = "org.archguard.application", Imports = imports)
         val applicationDs = CodeDataStruct("MetaAction", Package = "org.archguard.domain")
         val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(domainDs, applicationDs))
 
         val result: List<RuleResult> = governance.exec(foundation)
 
         val errorResult = result.filter { it.ruleName == "DependencyRule" && !it.result }
-        assertEquals(errorResult.size, 1)
+        assertEquals(errorResult.size, 0)
     }
 }

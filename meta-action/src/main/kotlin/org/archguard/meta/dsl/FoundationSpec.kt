@@ -25,29 +25,29 @@ class DependencyRule : Rule<FoundationElement> {
 
         this.rules.forEach { (from, targetPkg) ->
             val currentPkg = layerRegexMap[from] ?: return@forEach
-            targetPkg.forEach { to ->
-                val toRegex = layerRegexMap[to] ?: return@forEach
+            val targetList = targetPkg.map { to -> layerRegexMap[to] }
 
-                input.ds
-                    .filter {
-                        currentPkg.matches(it.Package)
+            input.ds.forEach { ds ->
+                val pkg = ds.Package
+                if (currentPkg.matches(pkg)) {
+                    if (ds.Imports.isEmpty()) {
+                        return@forEach
                     }
-                    .forEach {
-                        it.Imports.forEach { import ->
-                            val source = import.Source.substringBeforeLast(".")
 
-                            if (source.isEmpty()) {
-                                return@forEach
-                            }
-
-                            val matched = toRegex.matches(source)
-                            results.add(RuleResult("DependencyRule", "DependencyRule: $from -> $to", matched))
+                    val hasMatch = targetList.any { target ->
+                        ds.Imports.any { imp ->
+                            target!!.matches(imp.Source.substringBeforeLast("."))
                         }
                     }
+
+                    if (!hasMatch) {
+                        val rule = "Package ${ds.Package} should not depend on ${targetPkg.joinToString(", ")}"
+                        results.add(RuleResult(this.actionName, rule, false))
+                    }
+                }
             }
         }
 
-        println(results)
         return results
     }
 }
