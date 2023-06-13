@@ -35,10 +35,13 @@ class LayeredStylePrompt(
             }
         }
 
+        // if value is empty, remove it
+        val cleanPackageInOut = packageInOut.filter { it.value.isNotEmpty() }
+
         val introduction = this.introduction(context.workdir)
         return """$introduction
 
-package fan in: $packageInOut
+package fan in: $cleanPackageInOut
 """
             .trimIndent()
 
