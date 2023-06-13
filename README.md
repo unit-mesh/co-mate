@@ -21,13 +21,6 @@ OPENAI_API_KEY=xxx
 OPENAI_API_PROXY=xxxx (optional, if you had a OpenAI proxy server)
 ```
 
-## Specification DSL
-
-- Foundation (WIP). basic spec, like Project naming, Package and Class and Function naming.
-- RestApi. spec for RESTful API.
-- Domain (TODO). spec for Domain Driven Design.
-- ....
-
 ## Modules
 
 - `comate-cli`: command line interface
@@ -44,6 +37,96 @@ Core modules:
     - `spec-partitioner`: the partitioner for partitioning the architecture spec document
 - Architecture Define
    - `architecture`: architecture model
+
+
+## Specification DSL
+
+- Domain (TODO). spec for Domain Driven Design.
+- Foundation (WIP). basic spec, like Project naming, Package and Class and Function naming.
+- RestApi. spec for RESTful API.
+- ....
+
+### Domain
+
+```kotlin
+domain {
+    context_map("TicketBooking") {
+        context("Reservation") {}
+        context("Ticket") {}
+
+        mapping {
+            context("Reservation") dependedOn context("Ticket")
+            context("Reservation") dependedOn context("Movie")
+        }
+    }
+}
+```
+
+### Foundation
+
+```kotlin
+foundation {
+    project_name {
+        pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
+        example("system1-servicecenter1-microservice1")
+    }
+
+    layered {
+        layer("application") {
+            pattern(".*\\.application") { name shouldBe endWiths("DTO", "Request", "Response") }
+        }
+        layer("domain") {
+            pattern(".*\\.domain") { name shouldBe endWiths("Entity") }
+        }
+        layer("infrastructure") {
+            pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
+        }
+        layer("interface") {
+            pattern(".*\\.interface") { name shouldBe endWiths("Controller", "Service") }
+        }
+
+        dependency {
+            "application" dependedOn "domain"
+            "application" dependedOn "interface"
+            "domain" dependedOn "infrastructure"
+            "interface" dependedOn "domain"
+        }
+    }
+
+    naming {
+        class_level {
+            style("CamelCase")
+            pattern(".*") { name shouldNotBe contains("$") }
+        }
+        function_level {
+            style("CamelCase")
+            pattern(".*") { name shouldNotBe contains("$") }
+        }
+    }
+}
+```
+
+### REST API
+
+```kotlin
+rest_api {
+    uri_construction {
+        pattern("/api\\/[a-zA-Z0-9]+\\/v[0-9]+\\/[a-zA-Z0-9\\/\\-]+")
+        example("/api/petstore/v1/pets/dogs")
+    }
+
+    http_action("GET", "POST", "PUT", "DELETE")
+    status_code(200, 201, 202, 204, 400, 401, 403, 404, 500, 502, 503, 504)
+
+    security(
+        """
+Token Based Authentication (Recommended) Ideally, microservices should be stateless so the service instances can be scaled out easily and the client requests can be routed to multiple independent service providers. A token based authentication mechanism should be used instead of session based authentication
+        """.trimIndent()
+    )
+
+    misc("""""")
+}
+```
 
 License
 ---
