@@ -7,7 +7,7 @@ infix fun <T, U : T> T.shouldBe(expected: DelayCompare?): Serializable? {
         expected.equal = true
     }
 
-    return false
+    return ""
 }
 
 infix fun <T> T.shouldNotBe(any: DelayCompare?): Serializable? {
@@ -15,5 +15,5 @@ infix fun <T> T.shouldNotBe(any: DelayCompare?): Serializable? {
         any.equal = false
     }
 
-    return false
+    return ""
 }

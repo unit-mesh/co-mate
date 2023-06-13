@@ -1,9 +1,13 @@
 package org.archguard.meta.dsl
 
-import org.archguard.meta.base.*
+import org.archguard.meta.base.FakeRuleVerifier
+import org.archguard.meta.base.LlmRuleVerifier
+import org.archguard.meta.base.RuleResult
+import org.archguard.meta.base.Spec
+import org.archguard.meta.dsl.restful.ApiAtomicRule
 import org.archguard.meta.dsl.restful.ApiLlmVerifyRule
-import org.archguard.meta.model.RestApiElement
 import org.archguard.meta.dsl.restful.rule.*
+import org.archguard.meta.model.RestApiElement
 
 // todo: is for checking the rule type
 enum class ApiRuleType(rule: Class<out ApiAtomicRule>) {
