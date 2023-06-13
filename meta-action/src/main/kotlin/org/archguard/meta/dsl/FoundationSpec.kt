@@ -1,19 +1,25 @@
 package org.archguard.meta.dsl
 
-import org.archguard.meta.base.LlmRuleVerifier
-import org.archguard.meta.base.RuleResult
-import org.archguard.meta.base.Spec
-import org.archguard.meta.base.SpecDsl
-import org.archguard.meta.base.BaseDeclaration
+import org.archguard.meta.base.*
 import org.archguard.meta.dsl.foundation.declaration.LayeredDeclaration
 import org.archguard.meta.dsl.foundation.declaration.NamingDeclaration
 import org.archguard.meta.dsl.foundation.declaration.ProjectNameDeclaration
 import org.archguard.meta.model.FoundationElement
 
-class DependencyRule {
-    val rules = mutableListOf<Pair<String, String>>()
+class DependencyRule : AtomicAction<FoundationElement> {
+    override val actionName: String get() = "DependencyRule"
+    private val rules = mutableListOf<Pair<String, String>>()
     infix fun String.dependedOn(to: String) {
         rules.add(this to to)
+    }
+
+    override fun exec(input: FoundationElement): List<RuleResult> {
+        val results = mutableListOf<RuleResult>()
+        rules.forEach { (from, to) ->
+           println("from: $from, to: $to")
+        }
+
+        return results
     }
 }
 

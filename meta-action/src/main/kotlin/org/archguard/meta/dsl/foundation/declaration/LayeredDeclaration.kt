@@ -20,10 +20,11 @@ class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     fun dependency(function: DependencyRule.() -> Unit): DependencyRule {
         val rule = DependencyRule()
         rule.function()
+        dependencyRules.add(rule)
         return rule
     }
 
     override fun rules(element: FoundationElement): List<AtomicAction<FoundationElement>> {
-        return layerRules
+        return layerRules + dependencyRules
     }
 }

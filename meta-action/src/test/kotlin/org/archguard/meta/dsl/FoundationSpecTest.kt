@@ -2,6 +2,7 @@ package org.archguard.meta.dsl
 
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
+import chapi.domain.core.CodeImport
 import org.archguard.meta.base.FakeRuleVerifier
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.dsl.matcher.shouldBe
@@ -122,5 +123,15 @@ class FoundationSpecTest {
 
         val errorResult = result.filter { !it.result }
         assertEquals(errorResult.size, 0)
+    }
+
+    @Test
+    fun should_return_false_when_depends_on_incorrect() {
+        val domainDs = CodeDataStruct("MetaAction", Package = "org.archguard.domain", Imports = arrayOf(CodeImport("org.archguard.application.DemoService")))
+        val applicationDs = CodeDataStruct("DemoService", Package = "org.archguard.application")
+        val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(domainDs, applicationDs))
+
+        val result: List<RuleResult> = governance.exec(foundation)
+        println(result)
     }
 }
