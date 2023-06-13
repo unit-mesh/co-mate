@@ -3,6 +3,8 @@ package org.archguard.comate.uml
 import chapi.domain.core.CodeDataStruct
 
 class UmlConverter {
+    private val indent = """            """
+
     fun byFile(element: CodeDataStruct): String {
         return """
             @startuml
@@ -25,16 +27,17 @@ class UmlConverter {
         val packageMap = elements.groupBy { it.Package }
 
         return """
-            @startuml
-            ${byPackage(packageMap)}
-            @enduml
+${indent}@startuml
+${byPackage(packageMap)}
+${indent}@enduml
         """.trimIndent()
     }
 
-    private fun byPackage(packageMap: Map<String, List<CodeDataStruct>>) =
-        packageMap.map { (packageName, structs) ->
-            """package "$packageName" {
-                ${structs.joinToString("\n") { "class ${it.NodeName}" }}
-            }""".trimIndent()
+    private fun byPackage(packageMap: Map<String, List<CodeDataStruct>>): String {
+        return packageMap.map { (packageName, structs) ->
+            """${indent}package "$packageName" {
+${structs.joinToString("\n") { "$indent    class ${it.NodeName}" }}
+${indent}}"""
         }.joinToString("\n")
+    }
 }

@@ -2,6 +2,7 @@ package org.archguard.comate.action
 
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
+import org.archguard.comate.uml.UmlConverter
 import org.archguard.comate.wrapper.ComateSourceCodeContext
 
 class LayeredStylePrompt(
@@ -29,12 +30,12 @@ digraph G {
 
     override fun getExtendData(): String {
         val codeContext = ComateSourceCodeContext.create(context.workdir.toString(), context.lang)
-        val codeDataStructs = codeAnalyser(context.lang, codeContext)?.analyse()
+        val codeDataStructs = codeAnalyser(context.lang, codeContext)?.analyse() ?: emptyList()
 
-        val packageList = codeDataStructs?.map { it.Package }?.distinct() ?: emptyList()
+        val packageList = codeDataStructs.map { it.Package }.distinct()
         val packageInOut = mutableMapOf<String, List<String>>()
 
-        codeDataStructs?.forEach {
+        codeDataStructs.forEach {
             val packageIn = it.Package
             if (packageIn.isEmpty()) return@forEach
 
@@ -50,6 +51,8 @@ digraph G {
                 }
             }
         }
+
+        println(UmlConverter().byPackage(codeDataStructs))
 
         // if value is empty, remove it
         val cleanPackageInOut = packageInOut.filter { it.value.isNotEmpty() }
