@@ -1,7 +1,4 @@
-package org.archguard.comate.action
-
-import org.archguard.scanner.core.sca.CompositionDependency
-import java.nio.file.Path
+package org.archguard.comate.action.base
 
 interface BaseTemplate {
     fun getRole(): String = ""

@@ -1,6 +1,6 @@
 package org.archguard.comate.strategy
 
-import org.archguard.comate.action.BaseTemplate
+import org.archguard.comate.action.base.BaseTemplate
 import org.archguard.comate.document.ReadmeParser
 import org.archguard.comate.wrapper.ComateScaContext
 import org.archguard.scanner.analyser.JavaAnalyser

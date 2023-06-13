@@ -1,6 +1,6 @@
 package org.archguard.comate.strategy
 
-import org.archguard.comate.action.BaseTemplate
+import org.archguard.comate.action.base.BaseTemplate
 
 class BasicPromptStrategy : Strategy {
     override fun prompt(template: BaseTemplate): String {
