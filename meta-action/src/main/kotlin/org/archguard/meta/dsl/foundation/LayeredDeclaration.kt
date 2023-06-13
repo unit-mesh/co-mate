@@ -8,7 +8,7 @@ class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     private val dependencyRules = mutableListOf<Pair<String, String>>()
 
     fun layer(name: String, function: LayeredRule.() -> Unit): LayeredRule {
-        val rule = LayeredRule()
+        val rule = LayeredRule(name)
         rule.function()
         return rule
     }

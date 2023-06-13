@@ -3,7 +3,7 @@ package org.archguard.meta.dsl.foundation
 import org.archguard.meta.base.AtomicAction
 import org.archguard.meta.model.FoundationElement
 
-class LayeredRule : AtomicAction<FoundationElement> {
+class LayeredRule(val name: String) : AtomicAction<FoundationElement> {
     private var pattern: String? = null
     private var namingRules: Naming? = null
     override val actionName: String get() = "LayeredRule: $pattern"

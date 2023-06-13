@@ -20,14 +20,21 @@ class FoundationSpecTest {
             layer("application") {
                 pattern(".*\\.application") { name shouldBe endWiths("DTO", "Request", "Response") }
             }
-
             layer("domain") {
                 pattern(".*\\.domain") { name shouldBe endWiths("Entity") }
             }
+            layer("infrastructure") {
+                pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
+            }
+            layer("interface") {
+                pattern(".*\\.interface") { name shouldBe endWiths("Controller", "Service") }
+            }
 
             dependency {
-                "domain" dependedOn "infrastructure"
                 "application" dependedOn "domain"
+                "application" dependedOn "interface"
+                "domain" dependedOn "infrastructure"
+                "interface" dependedOn "domain"
             }
         }
 

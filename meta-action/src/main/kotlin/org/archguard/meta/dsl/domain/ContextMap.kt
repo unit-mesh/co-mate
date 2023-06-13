@@ -1,5 +1,7 @@
 package org.archguard.meta.dsl.domain
 
+class Mapping {}
+
 class ContextMap(name: String) {
     fun context(name: String, function: Context.() -> Unit): Context {
         val context = Context(name)
@@ -11,8 +13,9 @@ class ContextMap(name: String) {
         return Context(name)
     }
 
-    fun mapping(function: () -> Unit) {
-
+    fun mapping(function: () -> Unit): Mapping {
+        val mapping = Mapping()
+        function()
+        return mapping
     }
-
 }
