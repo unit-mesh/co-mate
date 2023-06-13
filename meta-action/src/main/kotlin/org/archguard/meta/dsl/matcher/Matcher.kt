@@ -1,31 +1,33 @@
 package org.archguard.meta.dsl.matcher
 
+import io.kotest.assertions.eq.eq
 import io.kotest.matchers.Matcher
+import io.kotest.matchers.equalityMatcher
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
+import java.io.Serializable
 
 @Suppress("UNCHECKED_CAST")
-infix fun <T, U : T> T.shouldBe(expected: U?): Boolean {
+infix fun <T, U : T> T.shouldBe(expected: U?): Serializable? {
     when (expected) {
         is Matcher<*> -> should(expected as Matcher<T>)
         else -> {
             val actual = this
-//            eq(actual, expected)?.let(errorCollector::collectOrThrow)
+            return eq(actual, expected)?.let { it }
         }
     }
 
-    // todo: make it better
-    return true
+    return false
 }
 
 @Suppress("UNCHECKED_CAST")
-infix fun <T> T.shouldNotBe(any: Any?): T {
+infix fun <T> T.shouldNotBe(any: Any?): Serializable {
     when (any) {
         is Matcher<*> -> shouldNot(any as Matcher<T>)
         else -> {
-//            shouldNot(equalityMatcher(any))
+            shouldNot(equalityMatcher(any))
         }
     }
 
-    return this
+    return false
 }

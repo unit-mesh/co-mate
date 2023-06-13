@@ -2,9 +2,10 @@ package org.archguard.meta.dsl.foundation
 
 import org.archguard.meta.base.AtomicAction
 import org.archguard.meta.base.RuleResult
+import java.io.Serializable
 
 
-typealias NamingRule = Naming.() -> Boolean
+typealias NamingRule = Naming.() -> Serializable?
 
 enum class CompareType {
     END_WITHS,
@@ -32,21 +33,27 @@ data class DelayCompare(var left: String, val compareType: CompareType, val righ
 
 class Naming : AtomicAction<String> {
     override val actionName: String = "Naming"
-    val name: Boolean = true
+    val name: Any = "<placeholder>"
     var string: String = ""
 
     private var delayCompare: DelayCompare? = null
 
-    fun endWiths(vararg suffixes: String) {
-        this.delayCompare = DelayCompare(string, CompareType.END_WITHS, suffixes.toList())
+    fun endWiths(vararg suffixes: String): DelayCompare {
+        val compare = DelayCompare(string, CompareType.END_WITHS, suffixes.toList())
+        this.delayCompare = compare
+        return compare
     }
 
-    fun startsWith(vararg symbols: String) {
-        this.delayCompare = DelayCompare(string, CompareType.STARTS_WITH, symbols.toList())
+    fun startsWith(vararg symbols: String): DelayCompare {
+        val compare = DelayCompare(string, CompareType.STARTS_WITH, symbols.toList())
+        this.delayCompare = compare
+        return compare
     }
 
-    fun contains(vararg symbols: String) {
-        this.delayCompare = DelayCompare(string, CompareType.CONTAINS, symbols.toList())
+    fun contains(vararg symbols: String) : DelayCompare {
+        val compare = DelayCompare(string, CompareType.CONTAINS, symbols.toList())
+        this.delayCompare = compare
+        return compare
     }
 
     fun delayBlock(block: NamingRule) {
