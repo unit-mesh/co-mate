@@ -3,17 +3,17 @@ package org.archguard.architecture.style
 enum class NamingStyle(val value: String) {
     CamelCase("CamelCase") {
         override fun isValid(string: String): Boolean {
-            return string.matches(Regex("[a-z]+([A-Z][a-z]+)*"))
+            return string.matches(Regex("[a-zA-Z]+([A-Za-z0-9]+)*"))
         }
     },
     SnakeCase("SnakeCase") {
         override fun isValid(string: String): Boolean {
-            return string.matches(Regex("[a-z]+(_[a-z]+)*"))
+            return string.matches(Regex("[a-z]+(_[a-z0-9]+)*"))
         }
     },
     KebabCase("KebabCase") {
         override fun isValid(string: String): Boolean {
-            return string.matches(Regex("[a-z]+(-[a-z]+)*"))
+            return string.matches(Regex("[a-z]+(-[a-z0-9]+)*"))
         }
     }
     ;

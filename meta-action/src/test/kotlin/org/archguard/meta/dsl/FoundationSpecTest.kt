@@ -1,6 +1,7 @@
 package org.archguard.meta.dsl
 
 import chapi.domain.core.CodeDataStruct
+import chapi.domain.core.CodeFunction
 import org.archguard.meta.base.FakeRuleVerifier
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.dsl.matcher.shouldBe
@@ -93,5 +94,21 @@ class FoundationSpecTest {
         result.filter { it.ruleName == "Naming" }.forEach {
             assertEquals(it.result, true)
         }
+    }
+
+    @Test
+    fun should_return_false_when_function_name_contains_dollar() {
+        val ds = CodeDataStruct("ClassName")
+        ds.Functions += CodeFunction("function_name$1")
+
+        val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(ds))
+        governance.setVerifier(FakeRuleVerifier())
+
+        val result: List<RuleResult> = governance.exec(foundation)
+
+        val errorResult = result.filter { !it.result }
+
+        assertEquals(errorResult.size, 1)
+        assertEquals(errorResult[0].ruleName, "Naming for Function")
     }
 }

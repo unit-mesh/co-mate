@@ -15,7 +15,7 @@ enum class NamingTarget {
 }
 
 class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
-    override val actionName: String get() = "NamingItem for " + target.name
+    override val actionName: String get() = "Naming for " + target.name
     private var filter: Regex = Regex(".*")
     private var namingRule: NamingRule? = null
     private var namingStyle = NamingStyle.CamelCase
@@ -44,13 +44,16 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
         results += verifyNodeName(input)
 
         if (namingRule != null) {
-            input.ds.filter {
-                filter.matches(it.NodeName)
-            }.map {
-                namingRule!!.exec(it.NodeName)
-            }.flatten().forEach {
-                results.add(it)
-            }
+            input.ds
+                .filter {
+                    filter.matches(it.NodeName)
+                }
+                .map {
+                    namingRule!!.exec(it.NodeName)
+                }
+                .flatten().forEach {
+                    results.add(it)
+                }
         }
 
         return results
@@ -58,22 +61,24 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
 
     private fun verifyNodeName(input: FoundationElement): List<RuleResult> {
         return input.ds.map {
-            val result = when (target) {
+            val rule = "Level: $target, NamingStyle: $namingStyle"
+
+            when (target) {
                 NamingTarget.Package -> {
-                    namingStyle.isValid(it.Package)
+                    listOf(RuleResult(actionName, rule, namingStyle.isValid(it.Package)))
                 }
 
                 NamingTarget.Class -> {
-                    namingStyle.isValid(it.NodeName)
+                    listOf(RuleResult(actionName, rule, namingStyle.isValid(it.NodeName)))
                 }
 
                 NamingTarget.Function -> {
-                    namingStyle.isValid(it.NodeName)
+                    it.Functions.map {
+                        RuleResult(actionName, rule, namingStyle.isValid(it.Name))
+                    }
                 }
             }
-
-            RuleResult(actionName, this.actionName, result)
-        }
+        }.flatten()
     }
 }
 
