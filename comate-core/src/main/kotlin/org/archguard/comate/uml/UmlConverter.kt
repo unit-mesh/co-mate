@@ -8,9 +8,20 @@ class UmlConverter {
     fun byFile(element: CodeDataStruct): String {
         return """
             @startuml
-            class ${element.NodeName} {
-                ${element.Functions.joinToString("\n") { "${it.ReturnType} ${it.Name}()" }}
-            }
+${byElement(element)}
+            @enduml
+        """.trimIndent()
+    }
+
+    private fun byElement(element: CodeDataStruct) =
+"""            class ${element.NodeName} {
+${element.Functions.joinToString("\n") { "                ${it.ReturnType} ${it.Name}()" }}
+            }"""
+
+    fun byFiles(elements: List<CodeDataStruct>): String {
+        return """
+            @startuml
+${elements.joinToString("\n") { byElement(it) }}
             @enduml
         """.trimIndent()
     }
@@ -24,7 +35,7 @@ class UmlConverter {
      * @enduml
      */
     fun byPackage(elements: List<CodeDataStruct>): String {
-        val packageMap = elements.filter { it.Package.isNotEmpty() }.groupBy { it.Package!! }
+        val packageMap = elements.filter { it.Package.isNotEmpty() }.groupBy { it.Package }
 
         return """
 ${indent}@startuml

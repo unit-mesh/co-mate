@@ -12,6 +12,5 @@ class LayeredStylePromptTest {
 
         val output = basicPrompter.execute()
         println(output)
-
     }
 }
