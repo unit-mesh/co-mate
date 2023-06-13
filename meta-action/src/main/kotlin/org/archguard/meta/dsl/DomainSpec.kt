@@ -45,8 +45,8 @@ class DomainSpec: Spec<Any> {
 
     }
 
-    override fun exec(element: Any): Map<String, RuleResult> {
-        return mapOf()
+    override fun exec(element: Any): List<RuleResult> {
+        return listOf()
     }
 }
 

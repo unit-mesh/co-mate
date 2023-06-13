@@ -14,7 +14,7 @@ import org.archguard.scanner.core.sourcecode.ContainerService
 import org.slf4j.LoggerFactory.getLogger
 
 @Serializable
-data class ApiResult(val apiUri: String, val result: Map<String, RuleResult>)
+data class ApiResult(val apiUri: String, val result: List<RuleResult>)
 
 class ApiGovernancePrompter(
     val context: CommandContext,

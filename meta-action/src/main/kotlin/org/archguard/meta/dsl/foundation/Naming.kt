@@ -13,9 +13,14 @@ enum class CompareType {
     CONTAINS
 }
 
-data class DelayCompare(var left: String, val compareType: CompareType, val right: List<String>) {
+data class DelayCompare(
+    var left: String,
+    val compareType: CompareType,
+    val right: List<String>,
+    var equal: Boolean = true,
+) {
     fun compare(): Boolean {
-        return when (compareType) {
+        val result = when (compareType) {
             CompareType.END_WITHS -> {
                 right.any { left.endsWith(it) }
             }
@@ -28,6 +33,8 @@ data class DelayCompare(var left: String, val compareType: CompareType, val righ
                 right.any { left.contains(it) }
             }
         }
+
+        return if (equal) result else !result
     }
 }
 
@@ -50,7 +57,7 @@ class Naming : AtomicAction<String> {
         return compare
     }
 
-    fun contains(vararg symbols: String) : DelayCompare {
+    fun contains(vararg symbols: String): DelayCompare {
         val compare = DelayCompare(string, CompareType.CONTAINS, symbols.toList())
         this.delayCompare = compare
         return compare

@@ -41,10 +41,12 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
         results += verifyNodeName(input)
 
         if (naming != null) {
-            val filterPattern = input.ds.filter {
+            input.ds.filter {
                 filter.matches(it.NodeName)
             }.map {
                 naming!!.exec(it.NodeName)
+            }.flatten().forEach {
+                results.add(it)
             }
         }
 

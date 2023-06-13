@@ -51,16 +51,10 @@ class RestApiSpec : Spec<RestApiElement> {
         return miscRule
     }
 
-    override fun exec(element: RestApiElement): Map<String, RuleResult> {
-        val result = mutableMapOf<String, RuleResult>()
-        rules.forEach { rule ->
-            rule.exec(element).forEach {
-                result[rule.actionName] = it
-            }
-        }
-
-        return result
-    }
+    override fun exec(element: RestApiElement): List<RuleResult> =
+        rules
+            .map { rule -> rule.exec(element) }
+            .flatten()
 
     override fun context(ruleVerifier: LlmRuleVerifier) {
         this.ruleVerifier = ruleVerifier

@@ -50,15 +50,11 @@ class FoundationSpec : Spec<FoundationElement> {
 
     }
 
-    override fun exec(element: FoundationElement): Map<String, RuleResult> {
+    override fun exec(element: FoundationElement): List<RuleResult> {
         val rules = declarations.map { declaration -> declaration.rules() }.flatten()
-        val result = mutableMapOf<String, RuleResult>()
-        rules.forEach { rule ->
-            val ruleResult = rule.exec(element) as List<RuleResult>
-            ruleResult.forEach { result[rule.actionName] = it }
-        }
-
-        return result
+        return rules.map { rule ->
+            rule.exec(element) as List<RuleResult>
+        }.flatten()
     }
 }
 
