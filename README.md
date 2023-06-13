@@ -10,11 +10,9 @@ Project manage: https://github.com/orgs/archguard/projects/5/views/1
 
 ## Design Principles
 
-1. Unique Language: Use a Domain-Specific Language (DSL) to empower efficient communication between humans and machines.
-2. LLM Orchestrates DSL: Utilize a Language Model (LLM) as atomic capabilities to create complex behavior within the
-   DSL.
-3. Dynamic Context by Layered Approach: Divide the context into layers to handle complexities effectively through the
-   LLM.
+1. DSL as Unique Language: Empower efficient communication between humans and machines by employing a Domain-Specific Language (DSL).
+2. Atomic LLM for Orchestration: Harness the atomic capabilities of a Language Model (LLM) to construct intricate behaviors within the DSL.
+3. Dynamic Context by Layered: Divide the context into layers to handle complexities effectively through the LLM.
 
 ## Usage
 
