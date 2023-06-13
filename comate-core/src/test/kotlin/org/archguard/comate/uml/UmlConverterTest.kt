@@ -14,13 +14,15 @@ class UmlConverterTest {
         dataStruct.Functions += CodeFunction("reverse", ReturnType = "void")
 
         val uml = converter.byFile(dataStruct)
-        assertEquals("""
+        assertEquals(
+            """
             @startuml
             class TicketBooking {
                 void reverse()
             }
             @enduml
-        """.trimIndent(), uml)
+        """.trimIndent(), uml
+        )
     }
 
     @Test
@@ -30,14 +32,14 @@ class UmlConverterTest {
         dataStruct.Functions += CodeFunction("reverse", ReturnType = "void")
 
         val uml = converter.byPackage(listOf(dataStruct))
-        assertEquals("""
+        assertEquals(
+            """
             @startuml
-
             package "com.example" {
                 class TicketBooking
             }
-
             @enduml
-        """.trimIndent(), uml)
+        """.trimIndent(), uml
+        )
     }
 }

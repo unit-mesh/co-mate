@@ -26,16 +26,15 @@ class UmlConverter {
 
         return """
             @startuml
-            ${
-            packageMap.map { (packageName, structs) ->
-                """
-            package "$packageName" {
-                ${structs.joinToString("\n") { "class ${it.NodeName}" }}
-            }
-            """
-            }.joinToString("\n")
-        }
+            ${byPackage(packageMap)}
             @enduml
         """.trimIndent()
     }
+
+    private fun byPackage(packageMap: Map<String, List<CodeDataStruct>>) =
+        packageMap.map { (packageName, structs) ->
+            """package "$packageName" {
+                ${structs.joinToString("\n") { "class ${it.NodeName}" }}
+            }""".trimIndent()
+        }.joinToString("\n")
 }
