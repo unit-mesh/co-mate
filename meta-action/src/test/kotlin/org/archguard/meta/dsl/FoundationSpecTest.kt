@@ -132,6 +132,20 @@ class FoundationSpecTest {
         val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(domainDs, applicationDs))
 
         val result: List<RuleResult> = governance.exec(foundation)
-        println(result)
+
+        val errorResult = result.filter { it.ruleName == "DependencyRule" && !it.result }
+        assertEquals(errorResult.size, 1)
+    }
+
+    @Test
+    fun should_return_true_when_depends_on_correct() {
+        val domainDs = CodeDataStruct("DemoApp", Package = "org.archguard.application", Imports = arrayOf(CodeImport("org.archguard.domain.MetaAction")))
+        val applicationDs = CodeDataStruct("MetaAction", Package = "org.archguard.domain")
+        val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(domainDs, applicationDs))
+
+        val result: List<RuleResult> = governance.exec(foundation)
+
+        val errorResult = result.filter { it.ruleName == "DependencyRule" && !it.result }
+        assertEquals(errorResult.size, 1)
     }
 }

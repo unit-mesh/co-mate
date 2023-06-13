@@ -5,7 +5,7 @@ import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.FoundationElement
 
 class LayeredDef(val name: String) : Rule<FoundationElement> {
-    private var pattern: String? = null
+    var pattern: String? = null
     private var namingRule: NamingRule? = null
     private var filterPattern: Regex = Regex(".*")
     override val actionName: String get() = "LayeredRule: $pattern"

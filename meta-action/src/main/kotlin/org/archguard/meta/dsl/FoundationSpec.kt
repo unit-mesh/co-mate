@@ -4,6 +4,7 @@ import org.archguard.meta.base.*
 import org.archguard.meta.dsl.foundation.declaration.LayeredDeclaration
 import org.archguard.meta.dsl.foundation.declaration.NamingDeclaration
 import org.archguard.meta.dsl.foundation.declaration.ProjectNameDeclaration
+import org.archguard.meta.dsl.foundation.rule.LayeredDef
 import org.archguard.meta.model.FoundationElement
 
 class DependencyRule : Rule<FoundationElement> {
@@ -17,8 +18,36 @@ class DependencyRule : Rule<FoundationElement> {
 
     override fun exec(input: FoundationElement): List<RuleResult> {
         val results = mutableListOf<RuleResult>()
-        println(rules)
 
+        val layerRegexMap: Map<String, Regex> = input.layeredDefs.map {
+            it.name to Regex(it.pattern!!)
+        }.toMap()
+
+        this.rules.forEach { (from, targetPkg) ->
+            val currentPkg = layerRegexMap[from] ?: return@forEach
+            targetPkg.forEach { to ->
+                val toRegex = layerRegexMap[to] ?: return@forEach
+
+                input.ds
+                    .filter {
+                        currentPkg.matches(it.Package)
+                    }
+                    .forEach {
+                        it.Imports.forEach { import ->
+                            val source = import.Source.substringBeforeLast(".")
+
+                            if (source.isEmpty()) {
+                                return@forEach
+                            }
+
+                            val matched = toRegex.matches(source)
+                            results.add(RuleResult("DependencyRule", "DependencyRule: $from -> $to", matched))
+                        }
+                    }
+            }
+        }
+
+        println(results)
         return results
     }
 }
@@ -60,7 +89,8 @@ class FoundationSpec : Spec<FoundationElement> {
             declaration.rules(element)
         }.flatten()
 
-        //
+        // update context
+        element.layeredDefs = rules.filterIsInstance<LayeredDef>()
 
         return rules.map { rule ->
             rule.exec(element) as List<RuleResult>
