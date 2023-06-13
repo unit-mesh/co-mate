@@ -20,7 +20,6 @@ infix fun <T> T.shouldNotBe(any: Any?): T {
     when (any) {
         is Matcher<*> -> shouldNot(any as Matcher<T>)
         else -> {
-
 //            shouldNot(equalityMatcher(any))
         }
     }
