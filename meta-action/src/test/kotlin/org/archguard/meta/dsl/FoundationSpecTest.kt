@@ -98,8 +98,7 @@ class FoundationSpecTest {
 
     @Test
     fun should_return_false_when_function_name_contains_dollar() {
-        val ds = CodeDataStruct("ClassName")
-        ds.Functions += CodeFunction("function_name$1")
+        val ds = CodeDataStruct("ClassName", Functions = arrayOf(CodeFunction("function_name$1")))
 
         val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(ds))
         governance.setVerifier(FakeRuleVerifier())
@@ -114,8 +113,7 @@ class FoundationSpecTest {
 
     @Test
     fun should_return_false_when_layered_error() {
-        val ds = CodeDataStruct("NotMatchClassName")
-        ds.Package = "com.example.application"
+        val ds = CodeDataStruct("NotMatchClassName", Package = "com.example.application")
 
         val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(ds))
         governance.setVerifier(FakeRuleVerifier())
@@ -130,8 +128,7 @@ class FoundationSpecTest {
 
     @Test
     fun should_return_true_when_application_name_correctly() {
-        val ds = CodeDataStruct("BlogRequest")
-        ds.Package = "com.example.application"
+        val ds = CodeDataStruct("BlogRequest", Package = "com.example.application")
 
         val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(ds))
         governance.setVerifier(FakeRuleVerifier())
