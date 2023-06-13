@@ -4,34 +4,7 @@ import org.archguard.meta.base.LlmRuleVerifier
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.base.Spec
 import org.archguard.meta.base.SpecDsl
-
-class Context(name: String) {
-    fun aggregate(name: String, function: () -> Unit) {
-
-    }
-
-    infix fun dependedOn(context: Context) {
-
-    }
-
-}
-
-class ContextMap(name: String) {
-    fun context(name: String, function: Context.() -> Unit): Context {
-        val context = Context(name)
-        context.function()
-        return context
-    }
-
-    fun context(name: String): Context {
-        return Context(name)
-    }
-
-    fun mapping(function: () -> Unit) {
-
-    }
-
-}
+import org.archguard.meta.dsl.domain.ContextMap
 
 @SpecDsl
 class DomainSpec: Spec<Any> {
