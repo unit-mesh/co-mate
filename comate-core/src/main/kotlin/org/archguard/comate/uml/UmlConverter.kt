@@ -24,7 +24,7 @@ class UmlConverter {
      * @enduml
      */
     fun byPackage(elements: List<CodeDataStruct>): String {
-        val packageMap = elements.groupBy { it.Package }
+        val packageMap = elements.filter { it.Package.isNotEmpty() }.groupBy { it.Package!! }
 
         return """
 ${indent}@startuml
