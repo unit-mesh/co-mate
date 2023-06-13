@@ -57,9 +57,8 @@ class FoundationSpecTest {
         governance.setVerifier(FakeRuleVerifier())
         val results: List<RuleResult> = governance.exec(foundation)
 
-        results.filter { it.ruleName == "ProjectName" }.forEach {
-            assertEquals(it.result, false)
-        }
+        val projectNameResult = results.filter { it.ruleName == "ProjectName" }
+        assertEquals(projectNameResult[0].result, false)
     }
 
     @Test
@@ -68,14 +67,13 @@ class FoundationSpecTest {
         val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(ds))
         governance.setVerifier(FakeRuleVerifier())
 
-        val result: List<RuleResult> = governance.exec(foundation)
+        val results: List<RuleResult> = governance.exec(foundation)
 
-        result.filter { it.ruleName == "ProjectName" }.forEach {
-            assertEquals(it.result, true)
-        }
-        result.filter { it.ruleName == "NamingItem for Class" }.forEach {
-            assertEquals(it.result, false)
-        }
+        val projectNameResult = results.filter { it.ruleName == "ProjectName" }
+        assertEquals(projectNameResult[0].result, true)
+
+        val namingResult = results.filter { it.ruleName == "Naming for Class" && !it.result }
+        assertEquals(namingResult.size, 1)
     }
 
     @Test
@@ -84,16 +82,13 @@ class FoundationSpecTest {
         val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(ds))
         governance.setVerifier(FakeRuleVerifier())
 
-        val result: List<RuleResult> = governance.exec(foundation)
+        val results: List<RuleResult> = governance.exec(foundation)
 
-        result.filter { it.ruleName == "ProjectName" }.forEach {
-            assertEquals(it.result, true)
-        }
+        val projectNameResult = results.filter { it.ruleName == "ProjectName" }
+        assertEquals(projectNameResult[0].result, true)
 
-        // todo: make it works better
-        result.filter { it.ruleName == "Naming" }.forEach {
-            assertEquals(it.result, true)
-        }
+        val namingResult = results.filter { it.ruleName == "Naming" }
+        assertEquals(namingResult[0].result, true)
     }
 
     @Test
