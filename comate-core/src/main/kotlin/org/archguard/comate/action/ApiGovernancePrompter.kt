@@ -85,7 +85,7 @@ Token Based Authentication (Recommended) Ideally, microservices should be statel
                 misc("""""")
             }
 
-            governance.context(ApiRuleVerifier(context.connector!!))
+            governance.setVerifier(ApiRuleVerifier(context.connector!!))
             val result = governance.exec(api)
 
             ApiResult(api.uri, result)

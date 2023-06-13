@@ -14,7 +14,7 @@ class DomainSpec: Spec<Any> {
         return contextMap
     }
 
-    override fun context(ruleVerifier: LlmRuleVerifier) {
+    override fun setVerifier(ruleVerifier: LlmRuleVerifier) {
 
     }
 

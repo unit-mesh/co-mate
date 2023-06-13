@@ -56,7 +56,7 @@ class RestApiSpec : Spec<RestApiElement> {
             .map { rule -> rule.exec(element) }
             .flatten()
 
-    override fun context(ruleVerifier: LlmRuleVerifier) {
+    override fun setVerifier(ruleVerifier: LlmRuleVerifier) {
         this.ruleVerifier = ruleVerifier
         needUpdateContextRules.forEach {
             if (it is ApiLlmVerifyRule) {

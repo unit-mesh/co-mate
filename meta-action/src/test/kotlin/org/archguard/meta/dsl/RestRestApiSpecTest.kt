@@ -26,7 +26,7 @@ Token Based Authentication (Recommended) Ideally, microservices should be statel
         }
 
         val restApi = RestApiElement("/api/petstore/v1/pets/dogs", "GET", listOf(200, 500))
-        governance.context(FakeRuleVerifier())
+        governance.setVerifier(FakeRuleVerifier())
         governance.exec(restApi)
     }
 }

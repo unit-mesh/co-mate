@@ -46,7 +46,7 @@ class FoundationSpec : Spec<FoundationElement> {
         return rule
     }
 
-    override fun context(ruleVerifier: LlmRuleVerifier) {
+    override fun setVerifier(ruleVerifier: LlmRuleVerifier) {
 
     }
 
