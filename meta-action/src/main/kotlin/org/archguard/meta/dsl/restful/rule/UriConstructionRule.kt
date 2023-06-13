@@ -22,10 +22,10 @@ class UriConstructionRule : ApiAtomicRule("uri-construction", "uri construction 
     override fun exec(input: RestApiElement): List<RuleResult> {
         if (ruleRegex != null) {
             val matchResult = ruleRegex!!.find(input.uri)
-            return listOf(RuleResult(this.name, sample, matchResult != null))
+            return listOf(RuleResult(this.actionName, sample, matchResult != null))
         }
 
-        return listOf(RuleResult(this.name, sample, false))
+        return listOf(RuleResult(this.actionName, sample, false))
     }
 }
 

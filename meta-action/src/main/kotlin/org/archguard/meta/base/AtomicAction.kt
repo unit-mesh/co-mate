@@ -1,12 +1,10 @@
 package org.archguard.meta.base
 
-import org.archguard.meta.dsl.foundation.Naming
-
 @DslMarker
 annotation class SpecDsl
 
 interface AtomicAction<T> {
-    val name: String
+    val actionName: String
     fun exec(input: T): Any {
         return false
     }

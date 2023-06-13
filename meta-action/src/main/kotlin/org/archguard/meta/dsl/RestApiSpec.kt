@@ -55,7 +55,7 @@ class RestApiSpec : Spec<RestApiElement> {
         val result = mutableMapOf<String, RuleResult>()
         rules.forEach { rule ->
             rule.exec(element).forEach {
-                result[rule.name] = it
+                result[rule.actionName] = it
             }
         }
 

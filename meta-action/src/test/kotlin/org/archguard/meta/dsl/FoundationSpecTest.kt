@@ -18,11 +18,11 @@ class FoundationSpecTest {
 
         layered {
             layer("application") {
-                pattern(".*\\.application") { string shouldBe endWiths("DTO", "Request", "Response") }
+                pattern(".*\\.application") { name shouldBe endWiths("DTO", "Request", "Response") }
             }
 
             layer("domain") {
-                pattern(".*\\.domain") { string shouldBe endWiths("Entity") }
+                pattern(".*\\.domain") { name shouldBe endWiths("Entity") }
             }
 
             dependency {

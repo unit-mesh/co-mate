@@ -8,6 +8,6 @@ import org.archguard.meta.model.RestApiElement
 class MiscRule(private val ruleContent: String, override var ruleVerifier: LlmRuleVerifier) :
     ApiLlmVerifyRule("security", ruleContent, ruleVerifier) {
     override fun exec(input: RestApiElement): List<RuleResult> {
-        return listOf(RuleResult(this.name, this.rule, ruleVerifier.check(ruleContent, input.toString())))
+        return listOf(RuleResult(this.actionName, this.rule, ruleVerifier.check(ruleContent, input.toString())))
     }
 }

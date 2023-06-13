@@ -6,7 +6,7 @@ import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.FoundationElement
 
 class ProjectNameDeclaration : PatternWithExampleRule<FoundationElement>, BaseDeclaration<FoundationElement> {
-    override val name = "ProjectName"
+    override val actionName = "ProjectName"
     private var originRegex: String = ""
     private var ruleRegex: Regex? = null
 
@@ -30,10 +30,10 @@ class ProjectNameDeclaration : PatternWithExampleRule<FoundationElement>, BaseDe
 
         if (ruleRegex != null) {
             val matchResult = ruleRegex!!.find(input.projectName)
-            return listOf(RuleResult(this.name, ruleExplain, matchResult != null))
+            return listOf(RuleResult(this.actionName, ruleExplain, matchResult != null))
         }
 
-        return listOf(RuleResult(this.name, ruleExplain, false))
+        return listOf(RuleResult(this.actionName, ruleExplain, false))
     }
 
     override fun rules(): List<AtomicAction<FoundationElement>> {

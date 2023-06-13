@@ -55,7 +55,7 @@ class FoundationSpec : Spec<FoundationElement> {
         val result = mutableMapOf<String, RuleResult>()
         rules.forEach { rule ->
             val ruleResult = rule.exec(element) as List<RuleResult>
-            ruleResult.forEach { result[rule.name] = it }
+            ruleResult.forEach { result[rule.actionName] = it }
         }
 
         return result

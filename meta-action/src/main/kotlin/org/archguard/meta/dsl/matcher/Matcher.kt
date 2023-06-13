@@ -5,7 +5,7 @@ import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
 
 @Suppress("UNCHECKED_CAST")
-infix fun <T, U : T> T.shouldBe(expected: U?) {
+infix fun <T, U : T> T.shouldBe(expected: U?): Boolean {
     when (expected) {
         is Matcher<*> -> should(expected as Matcher<T>)
         else -> {
@@ -13,6 +13,9 @@ infix fun <T, U : T> T.shouldBe(expected: U?) {
 //            eq(actual, expected)?.let(errorCollector::collectOrThrow)
         }
     }
+
+    // todo: make it better
+    return true
 }
 
 @Suppress("UNCHECKED_CAST")
