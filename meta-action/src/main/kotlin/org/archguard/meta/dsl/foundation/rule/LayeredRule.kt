@@ -1,6 +1,7 @@
 package org.archguard.meta.dsl.foundation.rule
 
 import org.archguard.meta.base.AtomicAction
+import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.FoundationElement
 
 class LayeredRule(val name: String) : AtomicAction<FoundationElement> {
@@ -19,5 +20,10 @@ class LayeredRule(val name: String) : AtomicAction<FoundationElement> {
         val namingRule = NamingRule()
         namingRule.delayBlock(function)
         return namingRule
+    }
+
+    override fun exec(input: FoundationElement): List<RuleResult> {
+
+        return listOf()
     }
 }

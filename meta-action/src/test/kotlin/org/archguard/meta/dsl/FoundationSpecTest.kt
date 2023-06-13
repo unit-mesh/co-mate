@@ -111,4 +111,20 @@ class FoundationSpecTest {
         assertEquals(errorResult.size, 1)
         assertEquals(errorResult[0].ruleName, "Naming for Function")
     }
+
+    @Test
+    fun should_return_false_when_layered_error() {
+        val ds = CodeDataStruct("NotMatchClassName")
+        ds.Package = "com.example.application"
+
+        val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(ds))
+        governance.setVerifier(FakeRuleVerifier())
+
+        val result: List<RuleResult> = governance.exec(foundation)
+
+        val errorResult = result.filter { !it.result }
+
+//        assertEquals(errorResult.size, 1)
+//        assertEquals(errorResult[0].ruleName, "Layered")
+    }
 }

@@ -37,7 +37,7 @@ class ProjectNameDeclaration : PatternWithExampleRule<FoundationElement>, BaseDe
         return listOf(RuleResult(this.actionName, ruleExplain, false))
     }
 
-    override fun rules(): List<AtomicAction<FoundationElement>> {
+    override fun rules(element: FoundationElement): List<AtomicAction<FoundationElement>> {
         return listOf(this)
     }
 }

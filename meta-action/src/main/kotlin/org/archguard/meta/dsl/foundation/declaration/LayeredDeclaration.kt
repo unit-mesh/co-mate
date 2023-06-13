@@ -8,10 +8,12 @@ import org.archguard.meta.model.FoundationElement
 
 class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     private val dependencyRules = mutableListOf<Pair<String, String>>()
+    private val layerRules = mutableListOf<LayeredRule>()
 
     fun layer(name: String, function: LayeredRule.() -> Unit): LayeredRule {
         val rule = LayeredRule(name)
         rule.function()
+        layerRules.add(rule)
         return rule
     }
 
@@ -22,7 +24,10 @@ class LayeredDeclaration : BaseDeclaration<FoundationElement> {
         return rule
     }
 
-    override fun rules(): List<AtomicAction<FoundationElement>> {
+    override fun rules(element: FoundationElement): List<AtomicAction<FoundationElement>> {
+        layerRules.forEach {
+            it.exec(element)
+        }
         return listOf()
     }
 }

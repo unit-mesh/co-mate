@@ -101,7 +101,7 @@ class NamingDeclaration : BaseDeclaration<FoundationElement> {
         return rule
     }
 
-    override fun rules(): List<AtomicAction<FoundationElement>> {
+    override fun rules(element: FoundationElement): List<AtomicAction<FoundationElement>> {
         return rules
     }
 }

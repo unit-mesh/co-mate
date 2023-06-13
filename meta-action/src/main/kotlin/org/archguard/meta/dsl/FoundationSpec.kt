@@ -51,7 +51,7 @@ class FoundationSpec : Spec<FoundationElement> {
     }
 
     override fun exec(element: FoundationElement): List<RuleResult> {
-        val rules = declarations.map { declaration -> declaration.rules() }.flatten()
+        val rules = declarations.map { declaration -> declaration.rules(element) }.flatten()
         return rules.map { rule ->
             rule.exec(element) as List<RuleResult>
         }.flatten()
