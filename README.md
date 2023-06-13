@@ -8,6 +8,14 @@
 
 Project manage: https://github.com/orgs/archguard/projects/5/views/1
 
+## Design Principles
+
+1. Unique Language: Use a Domain-Specific Language (DSL) to empower efficient communication between humans and machines.
+2. LLM Orchestrates DSL: Utilize a Language Model (LLM) as atomic capabilities to create complex behavior within the
+   DSL.
+3. Dynamic Context by Layered Approach: Divide the context into layers to handle complexities effectively through the
+   LLM.
+
 ## Usage
 
 1. download the latest release from [release page](https://github.com/archguard/co-mate/releases)
@@ -31,13 +39,12 @@ Core modules:
 - `comate-core`: core logic, handle ArchGuard API, LLM logic, etc.
 - LLM modules:
     - `llm-core`: large language model core, like OpenAI call, Token calculate, Tokenizer, Embedding, Similarity for
-  Embedding, etc.
+      Embedding, etc.
 - Architecture Spec
     - `spec-runtime`: the Kotlin REPL/Interpreter for Architecture Spec DSL
     - `spec-partitioner`: the partitioner for partitioning the architecture spec document
 - Architecture Define
-   - `architecture`: architecture model
-
+    - `architecture`: architecture model
 
 ## Specification DSL
 
