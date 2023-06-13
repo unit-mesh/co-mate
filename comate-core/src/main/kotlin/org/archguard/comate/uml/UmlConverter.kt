@@ -13,18 +13,24 @@ ${byElement(element)}
         """.trimIndent()
     }
 
-    private fun byElement(element: CodeDataStruct) =
-"""            class ${element.NodeName} {
-${element.Functions.joinToString("\n") { "                ${it.ReturnType} ${it.Name}()" }}
-            }"""
-
     fun byFiles(elements: List<CodeDataStruct>): String {
         return """
             @startuml
-${elements.joinToString("\n") { byElement(it) }}
+${renderElements(elements)}
             @enduml
         """.trimIndent()
     }
+
+    private fun renderElements(elements: List<CodeDataStruct>) =
+        elements.joinToString("\n") { byElement(it) }
+
+    private fun byElement(element: CodeDataStruct) =
+        """            class ${element.NodeName} {
+${renderFunctions(element)}
+            }"""
+
+    private fun renderFunctions(element: CodeDataStruct) =
+        element.Functions.joinToString("\n") { "                ${it.ReturnType} ${it.Name}()" }
 
     /**
      * output example:
