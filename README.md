@@ -21,6 +21,13 @@ OPENAI_API_KEY=xxx
 OPENAI_API_PROXY=xxxx (optional, if you had a OpenAI proxy server)
 ```
 
+## Specification DSL
+
+- Foundation (WIP). basic spec, like Project naming, Package and Class and Function naming.
+- RestApi. spec for RESTful API.
+- Domain (TODO). spec for Domain Driven Design.
+- ....
+
 ## Modules
 
 - `comate-cli`: command line interface
