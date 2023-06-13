@@ -5,7 +5,7 @@ import org.archguard.meta.dsl.DependencyRule
 import org.archguard.meta.model.FoundationElement
 
 class LayeredDeclaration : BaseDeclaration<FoundationElement> {
-    val dependencyRules = HashMap<String, List<String>>()
+    private val dependencyRules = mutableListOf<Pair<String, String>>()
 
     fun layer(name: String, function: LayeredRule.() -> Unit): LayeredRule {
         val rule = LayeredRule()
@@ -16,6 +16,7 @@ class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     fun dependency(function: DependencyRule.() -> Unit): DependencyRule {
         val rule = DependencyRule()
         rule.function()
+        dependencyRules.addAll(rule.rules)
         return rule
     }
 
