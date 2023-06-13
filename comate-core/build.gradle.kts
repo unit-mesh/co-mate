@@ -19,6 +19,9 @@ dependencies {
     implementation(libs.archguard.lang.java)
     implementation(libs.archguard.feat.apicalls)
 
+    implementation(libs.chapi.domain)
+    implementation(libs.plantuml)
+
     implementation(libs.slf4j.simple)
 
     implementation(libs.bundles.markdown)

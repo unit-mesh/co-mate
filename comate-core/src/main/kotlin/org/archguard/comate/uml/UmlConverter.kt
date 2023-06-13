@@ -6,8 +6,8 @@ class UmlConverter {
     fun fromChapi(element: CodeDataStruct): String {
         return """
             @startuml
-            ${element.NodeName} {
-            
+            class ${element.NodeName} {
+                ${element.Functions.joinToString("\n") { "${it.ReturnType} ${it.Name}()" }}
             }
             @enduml
         """.trimIndent()
