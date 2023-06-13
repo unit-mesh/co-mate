@@ -4,10 +4,10 @@ import org.archguard.meta.base.LlmRuleVerifier
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.base.Spec
 import org.archguard.meta.base.SpecDsl
-import org.archguard.meta.dsl.foundation.BaseDeclaration
-import org.archguard.meta.dsl.foundation.LayeredDeclaration
-import org.archguard.meta.dsl.foundation.NamingDeclaration
-import org.archguard.meta.dsl.foundation.ProjectNameDeclaration
+import org.archguard.meta.base.BaseDeclaration
+import org.archguard.meta.dsl.foundation.declaration.LayeredDeclaration
+import org.archguard.meta.dsl.foundation.declaration.NamingDeclaration
+import org.archguard.meta.dsl.foundation.declaration.ProjectNameDeclaration
 import org.archguard.meta.model.FoundationElement
 
 class DependencyRule {

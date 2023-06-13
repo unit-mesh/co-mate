@@ -1,44 +1,11 @@
-package org.archguard.meta.dsl.foundation
+package org.archguard.meta.dsl.foundation.rule
 
 import org.archguard.meta.base.AtomicAction
 import org.archguard.meta.base.RuleResult
-import java.io.Serializable
+import org.archguard.meta.dsl.matcher.CompareType
+import org.archguard.meta.dsl.matcher.DelayCompare
 
-
-typealias NamingRule = Naming.() -> Serializable?
-
-enum class CompareType {
-    END_WITHS,
-    STARTS_WITH,
-    CONTAINS
-}
-
-data class DelayCompare(
-    var left: String,
-    val compareType: CompareType,
-    val right: List<String>,
-    var equal: Boolean = true,
-) {
-    fun compare(): Boolean {
-        val result = when (compareType) {
-            CompareType.END_WITHS -> {
-                right.any { left.endsWith(it) }
-            }
-
-            CompareType.STARTS_WITH -> {
-                right.any { left.startsWith(it) }
-            }
-
-            CompareType.CONTAINS -> {
-                right.any { left.contains(it) }
-            }
-        }
-
-        return if (equal) result else !result
-    }
-}
-
-class Naming : AtomicAction<String> {
+class NamingRule : AtomicAction<String> {
     override val actionName: String = "Naming"
     val name: Any = "<placeholder>"
     var string: String = ""
@@ -63,7 +30,7 @@ class Naming : AtomicAction<String> {
         return compare
     }
 
-    fun delayBlock(block: NamingRule) {
+    fun delayBlock(block: NamingExpression) {
         block(this)
     }
 

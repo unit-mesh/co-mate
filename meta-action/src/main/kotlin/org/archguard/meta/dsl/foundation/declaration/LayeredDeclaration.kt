@@ -1,7 +1,9 @@
-package org.archguard.meta.dsl.foundation
+package org.archguard.meta.dsl.foundation.declaration
 
 import org.archguard.meta.base.AtomicAction
+import org.archguard.meta.base.BaseDeclaration
 import org.archguard.meta.dsl.DependencyRule
+import org.archguard.meta.dsl.foundation.rule.LayeredRule
 import org.archguard.meta.model.FoundationElement
 
 class LayeredDeclaration : BaseDeclaration<FoundationElement> {
@@ -23,5 +25,4 @@ class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     override fun rules(): List<AtomicAction<FoundationElement>> {
         return listOf()
     }
-
 }

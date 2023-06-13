@@ -1,8 +1,11 @@
-package org.archguard.meta.dsl.foundation
+package org.archguard.meta.dsl.foundation.declaration
 
 import org.archguard.architecture.style.NamingStyle
 import org.archguard.meta.base.AtomicAction
+import org.archguard.meta.base.BaseDeclaration
 import org.archguard.meta.base.RuleResult
+import org.archguard.meta.dsl.foundation.rule.NamingExpression
+import org.archguard.meta.dsl.foundation.rule.NamingRule
 import org.archguard.meta.model.FoundationElement
 
 enum class NamingTarget {
@@ -14,7 +17,7 @@ enum class NamingTarget {
 class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
     override val actionName: String get() = "NamingItem for " + target.name
     private var filter: Regex = Regex(".*")
-    private var naming: Naming? = null
+    private var namingRule: NamingRule? = null
     private var namingStyle = NamingStyle.CamelCase
 
     fun style(style: String) {
@@ -28,11 +31,11 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
     /**
      * for filter element by regex
      */
-    fun pattern(pattern: String, block: NamingRule) {
+    fun pattern(pattern: String, block: NamingExpression) {
         this.filter = Regex(pattern)
-        val naming = Naming()
-        naming.delayBlock(block)
-        this.naming = naming
+        val namingRule = NamingRule()
+        namingRule.delayBlock(block)
+        this.namingRule = namingRule
     }
 
     override fun exec(input: FoundationElement): List<RuleResult> {
@@ -40,11 +43,11 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
 
         results += verifyNodeName(input)
 
-        if (naming != null) {
+        if (namingRule != null) {
             input.ds.filter {
                 filter.matches(it.NodeName)
             }.map {
-                naming!!.exec(it.NodeName)
+                namingRule!!.exec(it.NodeName)
             }.flatten().forEach {
                 results.add(it)
             }

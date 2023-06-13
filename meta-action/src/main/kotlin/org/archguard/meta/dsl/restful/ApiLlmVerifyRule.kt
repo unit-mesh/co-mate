@@ -1,5 +1,8 @@
-package org.archguard.meta.base
+package org.archguard.meta.dsl.restful
 
+import org.archguard.meta.base.BaseLlmVerifier
+import org.archguard.meta.base.LlmRuleVerifier
+import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.RestApiElement
 
 abstract class ApiLlmVerifyRule(

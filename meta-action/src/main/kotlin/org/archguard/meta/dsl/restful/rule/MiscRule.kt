@@ -1,7 +1,7 @@
 package org.archguard.meta.dsl.restful.rule
 
 import org.archguard.meta.base.LlmRuleVerifier
-import org.archguard.meta.base.ApiLlmVerifyRule
+import org.archguard.meta.dsl.restful.ApiLlmVerifyRule
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.RestApiElement
 

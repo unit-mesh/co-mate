@@ -1,6 +1,5 @@
 package org.archguard.meta.dsl.matcher
 
-import org.archguard.meta.dsl.foundation.DelayCompare
 import java.io.Serializable
 
 infix fun <T, U : T> T.shouldBe(expected: DelayCompare?): Serializable? {
