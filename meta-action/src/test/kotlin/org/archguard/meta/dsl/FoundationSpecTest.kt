@@ -6,6 +6,7 @@ import org.archguard.meta.base.RuleResult
 import org.archguard.meta.dsl.matcher.shouldBe
 import org.archguard.meta.dsl.matcher.shouldNotBe
 import org.archguard.meta.model.FoundationElement
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -55,7 +56,7 @@ class FoundationSpecTest {
     }
 
     @Test
-    fun should_verify_basic_class_name() {
+    fun should_return_false_when_class_error() {
         val ds = CodeDataStruct("error_Class_Name")
         val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(ds))
         governance.context(FakeRuleVerifier())
@@ -64,5 +65,20 @@ class FoundationSpecTest {
 
         assertEquals(result["ProjectName"]!!.result, true)
         assertEquals(result["NamingItem for Class"]!!.result, false)
+    }
+
+    @Test
+    @Disabled
+    fun should_return_true_when_class_name_correct() {
+        val ds = CodeDataStruct("ClassName")
+        val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(ds))
+        governance.context(FakeRuleVerifier())
+
+        val result: Map<String, RuleResult> = governance.exec(foundation)
+
+        println(result)
+
+        assertEquals(result["ProjectName"]!!.result, true)
+        assertEquals(result["NamingItem for Class"]!!.result, true)
     }
 }
