@@ -30,7 +30,9 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
      */
     fun pattern(pattern: String, block: Naming.() -> Unit) {
         this.filter = Regex(pattern)
-        this.naming = Naming(block)
+        val naming = Naming()
+        naming.delayBlock(block)
+        this.naming = naming
     }
 
     override fun exec(input: FoundationElement): List<RuleResult> {

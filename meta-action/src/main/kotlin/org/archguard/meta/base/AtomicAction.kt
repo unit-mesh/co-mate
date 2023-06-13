@@ -1,5 +1,7 @@
 package org.archguard.meta.base
 
+import org.archguard.meta.dsl.foundation.Naming
+
 @DslMarker
 annotation class SpecDsl
 

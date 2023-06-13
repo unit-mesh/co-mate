@@ -10,10 +10,14 @@ class LayeredRule : AtomicAction<FoundationElement> {
 
     fun pattern(pattern: String, block: Naming.() -> Unit) {
         this.pattern = pattern
-        this.namingRules = Naming(block)
+        val naming = Naming()
+        naming.delayBlock(block)
+        this.namingRules = naming
     }
 
     fun naming(function: Naming.() -> Unit): Naming {
-        return Naming(function)
+        val naming = Naming()
+        naming.delayBlock(function)
+        return naming
     }
 }

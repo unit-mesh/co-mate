@@ -3,7 +3,7 @@ package org.archguard.meta.dsl.foundation
 import org.archguard.meta.base.AtomicAction
 import org.archguard.meta.base.RuleResult
 
-class Naming(val block: Naming.() -> Unit) : AtomicAction<String> {
+class Naming : AtomicAction<String> {
     override val name: String = "Naming"
 
     var string: String = ""
@@ -20,9 +20,13 @@ class Naming(val block: Naming.() -> Unit) : AtomicAction<String> {
         return symbols.any { string.contains(it) }
     }
 
+    fun delayBlock(block: Naming.() -> Unit) {
+        block()
+    }
+
     override fun exec(input: String): List<RuleResult> {
-        println("input: $input, block: $block")
-        println(block())
+        println("input: $input")
+//        println(block())
         return listOf()
     }
 }
