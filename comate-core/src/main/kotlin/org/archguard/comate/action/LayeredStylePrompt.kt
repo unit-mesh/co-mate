@@ -52,7 +52,7 @@ digraph G {
             }
         }
 
-        println(UmlConverter().byPackage(codeDataStructs))
+//        println(UmlConverter().byPackage(codeDataStructs))
 
         // if value is empty, remove it
         val cleanPackageInOut = packageInOut.filter { it.value.isNotEmpty() }

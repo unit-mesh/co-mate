@@ -7,7 +7,7 @@ import org.archguard.meta.dsl.foundation.rule.LayeredRule
 import org.archguard.meta.model.FoundationElement
 
 class LayeredDeclaration : BaseDeclaration<FoundationElement> {
-    private val dependencyRules = mutableListOf<Pair<String, String>>()
+    private val dependencyRules = mutableListOf<DependencyRule>()
     private val layerRules = mutableListOf<LayeredRule>()
 
     fun layer(name: String, function: LayeredRule.() -> Unit): LayeredRule {
@@ -20,14 +20,10 @@ class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     fun dependency(function: DependencyRule.() -> Unit): DependencyRule {
         val rule = DependencyRule()
         rule.function()
-        dependencyRules.addAll(rule.rules)
         return rule
     }
 
     override fun rules(element: FoundationElement): List<AtomicAction<FoundationElement>> {
-        layerRules.forEach {
-            it.exec(element)
-        }
-        return listOf()
+        return layerRules
     }
 }

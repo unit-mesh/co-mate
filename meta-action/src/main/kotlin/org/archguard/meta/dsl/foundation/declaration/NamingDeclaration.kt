@@ -16,7 +16,7 @@ enum class NamingTarget {
 
 class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
     override val actionName: String get() = "Naming for " + target.name
-    private var filter: Regex = Regex(".*")
+    private var filterPattern: Regex = Regex(".*")
     private var namingRule: NamingRule? = null
     private var namingStyle = NamingStyle.CamelCase
 
@@ -32,7 +32,7 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
      * for filter element by regex
      */
     fun pattern(pattern: String, block: NamingExpression) {
-        this.filter = Regex(pattern)
+        this.filterPattern = Regex(pattern)
         val namingRule = NamingRule()
         namingRule.delayBlock(block)
         this.namingRule = namingRule
@@ -46,7 +46,7 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
         if (namingRule != null) {
             input.ds
                 .filter {
-                    filter.matches(it.NodeName)
+                    filterPattern.matches(it.NodeName)
                 }
                 .map {
                     namingRule!!.exec(it.NodeName)

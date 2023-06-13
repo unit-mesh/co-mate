@@ -124,7 +124,7 @@ class FoundationSpecTest {
 
         val errorResult = result.filter { !it.result }
 
-//        assertEquals(errorResult.size, 1)
-//        assertEquals(errorResult[0].ruleName, "Layered")
+        assertEquals(errorResult.size, 1)
+        assertEquals(errorResult[0].ruleName, "Layered for application")
     }
 }

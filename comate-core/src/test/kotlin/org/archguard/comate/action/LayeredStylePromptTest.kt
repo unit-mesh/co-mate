@@ -11,6 +11,6 @@ class LayeredStylePromptTest {
         val basicPrompter = LayeredStylePrompt(CommandContext(Path("../"), "kotlin", null), promptStrategy)
 
         val output = basicPrompter.execute()
-        println(output)
+//        println(output)
     }
 }
