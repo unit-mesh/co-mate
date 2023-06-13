@@ -21,14 +21,13 @@ class LayeredStylePrompt(
         val codeContext = ComateSourceCodeContext.create(context.workdir.toString(), context.lang)
         val codeDataStructs = codeAnalyser(context.lang, codeContext)?.analyse()
 
-        val funcName = "org.archguard.comate.cli.MainKt.main"
+        val funcName = context.extArgs["funcName"] ?: throw Exception("funcName is required")
 
         val nodeTree = if (codeDataStructs != null) {
             FunctionCall().analysis(funcName, codeDataStructs)
         } else {
             null
         }
-
 
         val introduction = this.introduction(context.workdir)
 
