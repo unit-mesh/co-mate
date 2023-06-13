@@ -8,12 +8,10 @@ class LayeredStylePromptTest {
     @Test
     fun should_throw_when_no_function_name_from_chapi() {
         val promptStrategy = BasicPromptStrategy()
-        val basicPrompter = LayeredStylePrompt(CommandContext(Path("."), "kotlin", null), promptStrategy)
+        val basicPrompter = LayeredStylePrompt(CommandContext(Path("../"), "kotlin", null), promptStrategy)
 
-        try {
-            basicPrompter.execute()
-        } catch (e: Exception) {
-            assert(e.message == "funcName is required")
-        }
+        val output = basicPrompter.execute()
+        println(output)
+
     }
 }

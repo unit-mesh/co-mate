@@ -40,7 +40,7 @@ interface CodePromptStrategy : BaseTemplate {
             val readme = readmeFile.readText()
             val readmeParser = ReadmeParser(readme)
             val introduction = readmeParser.introduction()
-            instr = "\nProject Instruction: ${introduction.content}\n"
+            instr = "\nProject introduction: ${introduction.content}\n"
         }
 
         return instr
