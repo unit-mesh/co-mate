@@ -6,18 +6,18 @@ import org.archguard.meta.dsl.foundation.declaration.NamingDeclaration
 import org.archguard.meta.dsl.foundation.declaration.ProjectNameDeclaration
 import org.archguard.meta.model.FoundationElement
 
-class DependencyRule : AtomicAction<FoundationElement> {
+class DependencyRule : Rule<FoundationElement> {
     override val actionName: String get() = "DependencyRule"
-    private val rules = mutableListOf<Pair<String, String>>()
+    private val rules: HashMap<String, List<String>> = hashMapOf()
+
     infix fun String.dependedOn(to: String) {
-        rules.add(this to to)
+        val list = rules.getOrDefault(this, listOf())
+        rules[this] = list + to
     }
 
     override fun exec(input: FoundationElement): List<RuleResult> {
         val results = mutableListOf<RuleResult>()
-        rules.forEach { (from, to) ->
-           println("from: $from, to: $to")
-        }
+        println(rules)
 
         return results
     }
@@ -25,7 +25,7 @@ class DependencyRule : AtomicAction<FoundationElement> {
 
 @SpecDsl
 class FoundationSpec : Spec<FoundationElement> {
-    val declarations = mutableListOf<BaseDeclaration<FoundationElement>>()
+    private val declarations = mutableListOf<BaseDeclaration<FoundationElement>>()
 
     fun project_name(function: ProjectNameDeclaration.() -> Unit): ProjectNameDeclaration {
         val rule = ProjectNameDeclaration()
@@ -43,7 +43,6 @@ class FoundationSpec : Spec<FoundationElement> {
         return rule
     }
 
-
     fun naming(function: NamingDeclaration.() -> Unit): NamingDeclaration {
         val rule = NamingDeclaration()
         rule.function()
@@ -60,6 +59,8 @@ class FoundationSpec : Spec<FoundationElement> {
         val rules = declarations.map { declaration ->
             declaration.rules(element)
         }.flatten()
+
+        //
 
         return rules.map { rule ->
             rule.exec(element) as List<RuleResult>

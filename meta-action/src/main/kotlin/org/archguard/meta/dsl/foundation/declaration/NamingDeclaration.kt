@@ -1,7 +1,7 @@
 package org.archguard.meta.dsl.foundation.declaration
 
 import org.archguard.architecture.style.NamingStyle
-import org.archguard.meta.base.AtomicAction
+import org.archguard.meta.base.Rule
 import org.archguard.meta.base.BaseDeclaration
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.dsl.foundation.rule.NamingExpression
@@ -14,7 +14,7 @@ enum class NamingTarget {
     Function,
 }
 
-class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
+class NamingItem(val target: NamingTarget) : Rule<FoundationElement> {
     override val actionName: String get() = "Naming for " + target.name
     private var filterPattern: Regex = Regex(".*")
     private var namingRule: NamingRule? = null
@@ -83,7 +83,7 @@ class NamingItem(val target: NamingTarget) : AtomicAction<FoundationElement> {
 }
 
 class NamingDeclaration : BaseDeclaration<FoundationElement> {
-    val rules: MutableList<AtomicAction<FoundationElement>> = mutableListOf()
+    val rules: MutableList<Rule<FoundationElement>> = mutableListOf()
 
     fun class_level(function: NamingItem.() -> Unit): NamingItem {
         val rule = NamingItem(NamingTarget.Class)
@@ -101,7 +101,7 @@ class NamingDeclaration : BaseDeclaration<FoundationElement> {
         return rule
     }
 
-    override fun rules(element: FoundationElement): List<AtomicAction<FoundationElement>> {
+    override fun rules(element: FoundationElement): List<Rule<FoundationElement>> {
         return rules
     }
 }

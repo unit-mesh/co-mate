@@ -1,7 +1,7 @@
 package org.archguard.spec
 
-import org.archguard.meta.base.AtomicAction
+import org.archguard.meta.base.Rule
 
 interface Partitioner {
-    fun partition(): List<AtomicAction<Any>>
+    fun partition(): List<Rule<Any>>
 }

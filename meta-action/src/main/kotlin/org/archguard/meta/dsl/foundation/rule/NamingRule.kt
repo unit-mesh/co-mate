@@ -1,11 +1,11 @@
 package org.archguard.meta.dsl.foundation.rule
 
-import org.archguard.meta.base.AtomicAction
+import org.archguard.meta.base.Rule
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.dsl.matcher.CompareType
 import org.archguard.meta.dsl.matcher.DelayCompare
 
-class NamingRule : AtomicAction<String> {
+class NamingRule : Rule<String> {
     override val actionName: String = "Naming"
     val name: Any = "<placeholder>"
     var string: String = ""

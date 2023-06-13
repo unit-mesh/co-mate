@@ -1,6 +1,6 @@
 package org.archguard.meta.dsl.foundation.declaration
 
-import org.archguard.meta.base.AtomicAction
+import org.archguard.meta.base.Rule
 import org.archguard.meta.base.BaseDeclaration
 import org.archguard.meta.base.PatternWithExampleRule
 import org.archguard.meta.base.RuleResult
@@ -37,7 +37,7 @@ class ProjectNameDeclaration : PatternWithExampleRule<FoundationElement>, BaseDe
         return listOf(RuleResult(this.actionName, ruleExplain, false))
     }
 
-    override fun rules(element: FoundationElement): List<AtomicAction<FoundationElement>> {
+    override fun rules(element: FoundationElement): List<Rule<FoundationElement>> {
         return listOf(this)
     }
 }

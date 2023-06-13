@@ -2,7 +2,7 @@ package org.archguard.spec
 
 import org.archguard.comate.smart.Semantic
 import org.archguard.meta.dsl.ApiRuleType
-import org.archguard.meta.base.AtomicAction
+import org.archguard.meta.base.Rule
 
 val apiEmbeddingMap: Map<FloatArray, ApiRuleType>
     get() {
@@ -36,7 +36,7 @@ val apiEmbeddingMap: Map<FloatArray, ApiRuleType>
 class ApiPartitioner(document: String) : Partitioner {
 //    val embeddingMap: Map<FloatArray, ApiRuleType> = apiEmbeddingMap
 
-    override fun partition(): List<AtomicAction<Any>> {
+    override fun partition(): List<Rule<Any>> {
         return listOf()
     }
 }
