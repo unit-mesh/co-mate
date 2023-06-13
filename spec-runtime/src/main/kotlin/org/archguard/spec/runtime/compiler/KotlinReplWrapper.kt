@@ -27,7 +27,6 @@ class KotlinReplWrapper {
         logger.info("dynamic add classpath for local debug")
         val dslPath = RestApiSpec::javaClass.javaClass.classLoader.classPathFromTypicalResourceUrls().toList()
         embeddedClasspath.addAll(dslPath)
-
         embeddedClasspath = embeddedClasspath.distinct().toMutableList()
 
         logger.info("classpath: $embeddedClasspath")
