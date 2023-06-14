@@ -1,4 +1,4 @@
-package org.archguard.meta.dsl.restful
+package org.archguard.meta.dsl.restapi
 
 import org.archguard.meta.base.Rule
 import org.archguard.meta.base.RuleResult

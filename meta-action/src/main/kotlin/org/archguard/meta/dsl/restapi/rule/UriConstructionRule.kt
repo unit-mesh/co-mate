@@ -1,8 +1,8 @@
-package org.archguard.meta.dsl.restful.rule
+package org.archguard.meta.dsl.restapi.rule
 
 import org.archguard.meta.base.PatternWithExampleRule
 import org.archguard.meta.base.RuleResult
-import org.archguard.meta.dsl.restful.ApiAtomicRule
+import org.archguard.meta.dsl.restapi.ApiAtomicRule
 import org.archguard.meta.model.RestApiElement
 
 class UriConstructionRule : ApiAtomicRule("uri-construction", "uri construction regex: //TODO"),

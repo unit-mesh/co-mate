@@ -1,7 +1,7 @@
-package org.archguard.meta.dsl.restful.rule
+package org.archguard.meta.dsl.restapi.rule
 
 import org.archguard.meta.base.RuleResult
-import org.archguard.meta.dsl.restful.ApiAtomicRule
+import org.archguard.meta.dsl.restapi.ApiAtomicRule
 import org.archguard.meta.model.RestApiElement
 
 class StatusCodeRule(private val codes: List<Int>) : ApiAtomicRule("status-code", "supported codes: ${codes.joinToString(", ")}") {
