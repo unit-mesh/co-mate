@@ -1,21 +1,17 @@
 package org.archguard.comate.action
 
-import kotlinx.serialization.Serializable
+import org.archguard.comate.action.model.ApiResult
 import org.archguard.comate.command.CommandContext
 import org.archguard.comate.governance.ApiRuleVerifier
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.comate.wrapper.ComateArchGuardClient
 import org.archguard.comate.wrapper.ComateSourceCodeContext
-import org.archguard.meta.base.RuleResult
 import org.archguard.meta.dsl.rest_api
 import org.archguard.meta.model.RestApiElement
 import org.archguard.scanner.analyser.ApiCallAnalyser
 import org.archguard.scanner.core.sourcecode.ContainerService
 import org.slf4j.LoggerFactory.getLogger
-
-@Serializable
-data class ApiResult(val apiUri: String, val result: List<RuleResult>)
 
 class ApiGovernancePrompter(
     val context: CommandContext,
