@@ -1,6 +1,6 @@
 package org.archguard.comate.cli
 
-import org.archguard.comate.action.ComateCommand
+import org.archguard.comate.command.ComateCommand
 import org.archguard.comate.smart.Semantic
 
 fun createFunctionCallingEmbedding(semantic: Semantic): Map<ComateCommand, List<FloatArray>> {

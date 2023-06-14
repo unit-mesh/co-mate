@@ -1,8 +1,8 @@
 package org.archguard.comate.cli
 
 import io.github.cdimascio.dotenv.Dotenv
-import org.archguard.comate.action.ComateCommand
-import org.archguard.comate.action.CommandContext
+import org.archguard.comate.command.ComateCommand
+import org.archguard.comate.command.CommandContext
 import org.archguard.comate.smart.OPENAI_MODEL
 import org.archguard.comate.smart.OpenAIConnector
 import org.archguard.comate.smart.Semantic

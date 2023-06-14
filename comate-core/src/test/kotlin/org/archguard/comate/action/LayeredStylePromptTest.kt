@@ -1,5 +1,6 @@
 package org.archguard.comate.action
 
+import org.archguard.comate.command.CommandContext
 import org.archguard.comate.strategy.BasicPromptStrategy
 import org.junit.jupiter.api.Test
 import kotlin.io.path.Path

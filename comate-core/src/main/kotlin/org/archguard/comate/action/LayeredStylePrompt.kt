@@ -1,8 +1,8 @@
 package org.archguard.comate.action
 
+import org.archguard.comate.command.CommandContext
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
-import org.archguard.comate.uml.UmlConverter
 import org.archguard.comate.wrapper.ComateSourceCodeContext
 
 class LayeredStylePrompt(

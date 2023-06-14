@@ -1,15 +1,7 @@
-package org.archguard.comate.action
+package org.archguard.comate.command
 
-import org.archguard.comate.smart.OpenAIConnector
+import org.archguard.comate.action.*
 import org.archguard.comate.strategy.BasicPromptStrategy
-import java.nio.file.Path
-
-data class CommandContext(
-    val workdir: Path,
-    val lang: String,
-    val connector: OpenAIConnector?,
-    val extArgs: Map<String, String> = emptyMap(),
-)
 
 enum class ComateCommand(val command: String) {
     None("") {
@@ -53,10 +45,4 @@ enum class ComateCommand(val command: String) {
     ;
 
     abstract fun run(context: CommandContext): String
-
-    companion object {
-        fun valuesString(): String {
-            return values().joinToString(", ") { it.command }
-        }
-    }
 }
