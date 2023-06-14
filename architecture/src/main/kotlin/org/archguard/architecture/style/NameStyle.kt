@@ -1,6 +1,11 @@
 package org.archguard.architecture.style
 
 enum class NamingStyle(val value: String) {
+    UpperCamelCase("UpperCamelCase") {
+        override fun isValid(string: String): Boolean {
+            return string.matches(Regex("[A-Z][a-zA-Z0-9]+"))
+        }
+    },
     CamelCase("CamelCase") {
         override fun isValid(string: String): Boolean {
             return string.matches(Regex("[a-zA-Z]+([A-Za-z0-9]+)*"))
