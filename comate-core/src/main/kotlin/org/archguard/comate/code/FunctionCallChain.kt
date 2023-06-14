@@ -28,7 +28,7 @@ data class NodeTree(val node: String, val children: List<Leaf>) {
     }
 }
 
-class FunctionCall {
+class FunctionCallChain {
     private var loopCount = 0
     private var maxLoopCount = 6
 

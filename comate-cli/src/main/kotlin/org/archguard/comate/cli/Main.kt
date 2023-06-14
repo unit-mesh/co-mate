@@ -17,14 +17,15 @@ import kotlin.io.path.pathString
 private val logger = Logger.getLogger("comate")
 
 fun main(args: Array<String>) {
+    // todo: use clikt to parse command line arguments
     val cmd = if (args.isEmpty()) "检查 API 规范" else args[0]
+    val language = "java"
 
     val basePath = Path(File(".").absolutePath)
     val comateCommand = cmdToComateCommand(cmd)
 
     logger.info("start execution ...")
 
-    val language = "java"
     val openAiConnector = createConnector()
     val context = CommandContext(basePath, language, openAiConnector)
     val summarizePrompt = when (comateCommand) {
@@ -45,7 +46,7 @@ fun main(args: Array<String>) {
 
 private fun cmdToComateCommand(cmd: String): ComateCommand {
     val semantic = Semantic.create()
-    val commandEmbedMap = createEmbeddingMap(semantic)
+    val commandEmbedMap = createFunctionCallingEmbedding(semantic)
 
     val inputEmbed = semantic.embed(cmd)
 
