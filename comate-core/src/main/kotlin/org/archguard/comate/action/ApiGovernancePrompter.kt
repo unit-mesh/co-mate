@@ -11,7 +11,8 @@ import org.archguard.meta.dsl.rest_api
 import org.archguard.meta.model.RestApiElement
 import org.archguard.scanner.analyser.ApiCallAnalyser
 import org.archguard.scanner.core.sourcecode.ContainerService
-import org.slf4j.LoggerFactory.getLogger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class ApiGovernancePrompter(
     val context: CommandContext,
@@ -92,6 +93,6 @@ Token Based Authentication (Recommended) Ideally, microservices should be statel
     }
 
     companion object {
-        val logger = getLogger(ApiGovernancePrompter::class.java)
+        val logger: Logger = LoggerFactory.getLogger(ApiGovernancePrompter::class.java)!!
     }
 }

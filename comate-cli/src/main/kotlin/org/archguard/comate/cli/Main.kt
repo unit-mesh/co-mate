@@ -56,6 +56,8 @@ private fun cmdToComateCommand(cmd: String): ComateCommand {
             embeds.forEach {
                 try {
                     val similarity = cosineSimilarity(it, inputEmbed)
+                    // todo: 1. make this threshold configurable a
+                    // todo: 2. choose the command with highest similarity
                     if (similarity > 0.6) {
                         comateCommand = command
                         return@breaking
