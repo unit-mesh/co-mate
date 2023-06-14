@@ -22,18 +22,22 @@ fun main(args: Array<String>) {
     val language = "java"
 
     val basePath = Path(File(".").absolutePath)
-    val comateCommand = cmdToComateCommand(cmd)
+    val comateCommand = textToComateCommand(cmd)
 
     logger.info("start execution ...")
 
     val openAiConnector = createConnector()
     val context = CommandContext(basePath, language, openAiConnector)
+
     val summarizePrompt = when (comateCommand) {
         ComateCommand.Intro -> ComateCommand.Intro.run(context)
         ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.run(context)
         ComateCommand.ApiGovernance -> ComateCommand.ApiGovernance.run(context)
         ComateCommand.FoundationGovernance -> ComateCommand.FoundationGovernance.run(context)
+
+        // todo: thinking on split generate api into other command
         ComateCommand.ApiGen -> ComateCommand.ApiGen.run(context)
+
         // todo: handle command by LLM
         ComateCommand.None -> null
     } ?: return
@@ -44,7 +48,7 @@ fun main(args: Array<String>) {
     println(output)
 }
 
-private fun cmdToComateCommand(cmd: String): ComateCommand {
+private fun textToComateCommand(cmd: String): ComateCommand {
     val semantic = Semantic.create()
     val commandEmbedMap = createFunctionCallingEmbedding(semantic)
 
