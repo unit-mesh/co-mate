@@ -6,7 +6,10 @@
 
 > Co-mate is an AI-powered software architecture copilot, design and governance tools.
 
-Project manage: https://github.com/orgs/archguard/projects/5/views/1
+Project Kanban: https://github.com/orgs/archguard/projects/5/views/1
+
+Supported languages by [ArchGuard](https://github.com/archguard/archguard) and [Chapi](https://github.com/modernizing/chapi):
+Java, Kotlin, TypeScript/JavaScript, Golang, Python
 
 ## Design Principles
 

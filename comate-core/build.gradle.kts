@@ -15,8 +15,13 @@ dependencies {
     implementation(libs.bundles.markdown)
 
     implementation(libs.archguard.analyser.sca)
+
     implementation(libs.archguard.lang.kotlin)
     implementation(libs.archguard.lang.java)
+    implementation(libs.archguard.lang.typescript)
+    implementation(libs.archguard.lang.golang)
+    implementation(libs.archguard.lang.python)
+
     implementation(libs.archguard.feat.apicalls)
 
     implementation(libs.chapi.domain)

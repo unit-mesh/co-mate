@@ -3,9 +3,7 @@ package org.archguard.comate.strategy
 import org.archguard.comate.action.base.BaseTemplate
 import org.archguard.comate.document.ReadmeParser
 import org.archguard.comate.wrapper.ComateScaContext
-import org.archguard.scanner.analyser.JavaAnalyser
-import org.archguard.scanner.analyser.KotlinAnalyser
-import org.archguard.scanner.analyser.ScaAnalyser
+import org.archguard.scanner.analyser.*
 import org.archguard.scanner.core.sourcecode.LanguageSourceCodeAnalyser
 import org.archguard.scanner.core.sourcecode.SourceCodeContext
 import java.nio.file.Path
@@ -26,6 +24,15 @@ interface CodePromptStrategy : BaseTemplate {
             }
             "kotlin" -> {
                 KotlinAnalyser(context)
+            }
+            "javascript", "typescript" -> {
+                TypeScriptAnalyser(context)
+            }
+            "golang" -> {
+                GoAnalyser(context)
+            }
+            "python" -> {
+                PythonAnalyser(context)
             }
             else -> {
                 null

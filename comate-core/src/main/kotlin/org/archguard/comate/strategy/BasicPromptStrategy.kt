@@ -26,8 +26,6 @@ class BasicPromptStrategy : Strategy {
             output += "${template.getExtendData()}\n"
         }
 
-
-
         return output
     }
 }

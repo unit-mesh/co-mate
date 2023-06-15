@@ -68,7 +68,12 @@ archguard-dsl = { group = "org.archguard.aaac", name = "dsl", version.ref = "arc
 archguard-analyser-sca = { group = "org.archguard.scanner", name = "analyser_sca", version.ref = "archguard" }
 archguard-lang-kotlin = { group = "org.archguard.scanner", name = "lang_kotlin", version.ref = "archguard" }
 archguard-lang-java = { group = "org.archguard.scanner", name = "lang_java", version.ref = "archguard" }
+archguard-lang-python = { group = "org.archguard.scanner", name = "lang_python", version.ref = "archguard" }
+archguard-lang-typescript = { group = "org.archguard.scanner", name = "lang_typescript", version.ref = "archguard" }
+archguard-lang-golang = { group = "org.archguard.scanner", name = "lang_golang", version.ref = "archguard" }
+
 archguard-feat-apicalls = { group = "org.archguard.scanner", name = "feat_apicalls", version.ref = "archguard" }
+archguard-feat-datamap = { group = "org.archguard.scanner", name = "feat_datamap", version.ref = "archguard" }
 
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
