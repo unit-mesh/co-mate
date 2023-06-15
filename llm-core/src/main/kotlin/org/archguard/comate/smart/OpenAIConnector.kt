@@ -7,6 +7,10 @@ import com.theokanning.openai.completion.chat.ChatMessageRole
 import com.theokanning.openai.service.OpenAiService
 import com.theokanning.openai.service.OpenAiService.defaultClient
 import com.theokanning.openai.service.OpenAiService.defaultObjectMapper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
@@ -17,7 +21,7 @@ class OpenAIConnector(
     val openAiKey: String,
     val openAiVersion: String = OPENAI_MODEL[0],
     val openAiProxy: String? = null,
-): LlmConnector {
+) : LlmConnector {
     private var service: OpenAiService
 
     init {
@@ -70,4 +74,34 @@ class OpenAIConnector(
 
         return output
     }
+
+    fun stream(promptText: String): Flow<String> {
+        val systemMessage = ChatMessage(ChatMessageRole.USER.value(), promptText)
+
+        messages.add(systemMessage)
+
+        val completionRequest = ChatCompletionRequest.builder()
+            .model(openAiVersion)
+            .temperature(0.0)
+            .messages(messages)
+            .build()
+
+        return callbackFlow {
+            withContext(Dispatchers.IO) {
+                service.streamChatCompletion(completionRequest)
+                    .doOnError(Throwable::printStackTrace)
+                    .blockingForEach { response ->
+                        val completion = response.choices[0].message
+                        if (completion != null && completion.content != null) {
+                            trySend(completion.content)
+                        }
+                    }
+
+                service.shutdownExecutor()
+
+                close()
+            }
+        }
+    }
+
 }

@@ -29,7 +29,7 @@ enum class DynamicContext(val value: String) {
     }
     ;
 
-    abstract fun explain(): String;
+    abstract fun explain(): String
 
     companion object {
         fun from(value: String): DynamicContext? {

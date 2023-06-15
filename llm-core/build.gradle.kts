@@ -7,6 +7,7 @@ plugins {
 dependencies {
     implementation(projects.metaAction)
     implementation(libs.kotlin.stdlib)
+    implementation(libs.coroutines.core)
 
     implementation(libs.bundles.openai)
 

@@ -42,7 +42,7 @@ class ConversationViewModel(
         // todo: maintain conversation in local
         createConversationRemote(message)
 
-        val newMessageModel: MessageModel = MessageModel(
+        val newMessageModel = MessageModel(
             question = message,
             answer = "Let me thinking...",
             conversationId = _currentConversation.value,

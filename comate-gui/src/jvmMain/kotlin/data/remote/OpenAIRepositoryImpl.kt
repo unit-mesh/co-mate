@@ -11,7 +11,7 @@ import model.TextCompletionsParam
 import kotlin.String
 
 
-class OpenAIRepositoryImpl(var token: String = "") {
+class OpenAIRepositoryImpl(private var token: String = "") {
     fun textCompletionsWithStream(params: TextCompletionsParam): Flow<String> {
         val service = OpenAiService(token)
         val messages: MutableList<ChatMessage> = mutableListOf()
