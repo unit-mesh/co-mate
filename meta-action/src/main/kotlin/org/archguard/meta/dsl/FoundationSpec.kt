@@ -3,61 +3,16 @@ package org.archguard.meta.dsl
 import org.archguard.meta.base.*
 import org.archguard.meta.dsl.foundation.declaration.LayeredDeclaration
 import org.archguard.meta.dsl.foundation.declaration.NamingDeclaration
-import org.archguard.meta.dsl.foundation.declaration.ProjectNameDeclaration
-import org.archguard.meta.dsl.foundation.rule.LayeredDef
+import org.archguard.meta.dsl.foundation.rule.ProjectNameRule
+import org.archguard.meta.dsl.foundation.declaration.LayeredDefine
 import org.archguard.meta.model.FoundationElement
-
-class DependencyRule : Rule<FoundationElement> {
-    override val actionName: String get() = "DependencyRule"
-    private val rules: HashMap<String, List<String>> = hashMapOf()
-
-    infix fun String.dependedOn(to: String) {
-        val list = rules.getOrDefault(this, listOf())
-        rules[this] = list + to
-    }
-
-    override fun exec(input: FoundationElement): List<RuleResult> {
-        val results = mutableListOf<RuleResult>()
-
-        val layerRegexMap: Map<String, Regex> = input.layeredDefs.map {
-            it.name to Regex(it.pattern!!)
-        }.toMap()
-
-        this.rules.forEach { (from, targetPkg) ->
-            val currentPkg = layerRegexMap[from] ?: return@forEach
-            val targetList = targetPkg.map { to -> layerRegexMap[to] }
-
-            input.ds.forEach { ds ->
-                val pkg = ds.Package
-                if (currentPkg.matches(pkg)) {
-                    if (ds.Imports.isEmpty()) {
-                        return@forEach
-                    }
-
-                    val hasMatch = targetList.any { target ->
-                        ds.Imports.any { imp ->
-                            target!!.matches(imp.Source.substringBeforeLast("."))
-                        }
-                    }
-
-                    if (!hasMatch) {
-                        val rule = "Package ${ds.Package} should not depend on ${targetPkg.joinToString(", ")}"
-                        results.add(RuleResult(this.actionName, rule, false))
-                    }
-                }
-            }
-        }
-
-        return results
-    }
-}
 
 @SpecDsl
 class FoundationSpec : Spec<FoundationElement> {
     private val declarations = mutableListOf<BaseDeclaration<FoundationElement>>()
 
-    fun project_name(function: ProjectNameDeclaration.() -> Unit): ProjectNameDeclaration {
-        val rule = ProjectNameDeclaration()
+    fun project_name(function: ProjectNameRule.() -> Unit): ProjectNameRule {
+        val rule = ProjectNameRule()
         rule.function()
 
         declarations.add(rule)
@@ -90,7 +45,7 @@ class FoundationSpec : Spec<FoundationElement> {
         }.flatten()
 
         // update context
-        element.layeredDefs = rules.filterIsInstance<LayeredDef>()
+        element.layeredDefines = rules.filterIsInstance<LayeredDefine>()
 
         return rules.map { rule ->
             rule.exec(element) as List<RuleResult>

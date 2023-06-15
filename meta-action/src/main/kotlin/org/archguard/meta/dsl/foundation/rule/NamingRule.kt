@@ -2,6 +2,7 @@ package org.archguard.meta.dsl.foundation.rule
 
 import org.archguard.meta.base.Rule
 import org.archguard.meta.base.RuleResult
+import org.archguard.meta.dsl.foundation.expression.NamingExpression
 import org.archguard.meta.dsl.matcher.CompareType
 import org.archguard.meta.dsl.matcher.DelayCompare
 

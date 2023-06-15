@@ -1,4 +1,4 @@
-package org.archguard.meta.dsl.foundation.declaration
+package org.archguard.meta.dsl.foundation.rule
 
 import org.archguard.meta.base.Rule
 import org.archguard.meta.base.BaseDeclaration
@@ -6,7 +6,7 @@ import org.archguard.meta.base.PatternWithExampleRule
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.FoundationElement
 
-class ProjectNameDeclaration : PatternWithExampleRule<FoundationElement>, BaseDeclaration<FoundationElement> {
+class ProjectNameRule : PatternWithExampleRule<FoundationElement>, BaseDeclaration<FoundationElement> {
     override val actionName = "ProjectName"
     private var originRegex: String = ""
     private var ruleRegex: Regex? = null

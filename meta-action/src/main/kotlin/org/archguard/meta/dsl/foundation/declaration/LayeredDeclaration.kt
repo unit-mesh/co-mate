@@ -2,16 +2,15 @@ package org.archguard.meta.dsl.foundation.declaration
 
 import org.archguard.meta.base.Rule
 import org.archguard.meta.base.BaseDeclaration
-import org.archguard.meta.dsl.DependencyRule
-import org.archguard.meta.dsl.foundation.rule.LayeredDef
+import org.archguard.meta.dsl.foundation.rule.DependencyRule
 import org.archguard.meta.model.FoundationElement
 
 class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     private val dependencyRules = mutableListOf<DependencyRule>()
-    private val layerRules = mutableListOf<LayeredDef>()
+    private val layerRules = mutableListOf<LayeredDefine>()
 
-    fun layer(name: String, function: LayeredDef.() -> Unit): LayeredDef {
-        val rule = LayeredDef(name)
+    fun layer(name: String, function: LayeredDefine.() -> Unit): LayeredDefine {
+        val rule = LayeredDefine(name)
         rule.function()
         layerRules.add(rule)
         return rule

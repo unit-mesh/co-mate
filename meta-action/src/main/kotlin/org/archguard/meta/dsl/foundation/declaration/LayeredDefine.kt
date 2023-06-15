@@ -1,10 +1,12 @@
-package org.archguard.meta.dsl.foundation.rule
+package org.archguard.meta.dsl.foundation.declaration
 
 import org.archguard.meta.base.Rule
 import org.archguard.meta.base.RuleResult
+import org.archguard.meta.dsl.foundation.expression.NamingExpression
+import org.archguard.meta.dsl.foundation.rule.NamingRule
 import org.archguard.meta.model.FoundationElement
 
-class LayeredDef(val name: String) : Rule<FoundationElement> {
+class LayeredDefine(val name: String) : Rule<FoundationElement> {
     var pattern: String? = null
     private var namingRule: NamingRule? = null
     private var filterPattern: Regex = Regex(".*")
