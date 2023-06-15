@@ -19,12 +19,14 @@ class FoundationGovernancePrompter(
     """.trimIndent()
 
     override fun getExtendData(): String {
-        val codeContext = ComateSourceCodeContext.create(context.workdir.toString(), context.lang)
-        val codeDataStructs = codeAnalyser(context.lang, codeContext)?.analyse()
+        val codeContext = ComateSourceCodeContext.create(context)
+        val codeDataStructs = codeAnalyser(context.language, codeContext)?.analyse()
 
         val governance = foundation {
 
         }
+
+//        governance.exec(codeDataStructs)
 
         val introduction = this.introduction(context.workdir)
         return """$introduction

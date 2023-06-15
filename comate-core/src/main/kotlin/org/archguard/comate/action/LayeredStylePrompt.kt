@@ -29,8 +29,8 @@ digraph G {
 """
 
     override fun getExtendData(): String {
-        val codeContext = ComateSourceCodeContext.create(context.workdir.toString(), context.lang)
-        val codeDataStructs = codeAnalyser(context.lang, codeContext)?.analyse() ?: emptyList()
+        val codeContext = ComateSourceCodeContext.create(context)
+        val codeDataStructs = codeAnalyser(context.language, codeContext)?.analyse() ?: emptyList()
 
         val packageList = codeDataStructs.map { it.Package }.distinct()
         val packageInOut = mutableMapOf<String, List<String>>()

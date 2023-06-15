@@ -5,7 +5,6 @@ import org.archguard.comate.command.CommandContext
 import org.archguard.comate.governance.ApiRuleVerifier
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
-import org.archguard.comate.wrapper.ComateArchGuardClient
 import org.archguard.comate.wrapper.ComateSourceCodeContext
 import org.archguard.meta.dsl.rest_api
 import org.archguard.meta.model.RestApiElement
@@ -34,17 +33,10 @@ class ApiGovernancePrompter(
 """
 
     override fun getExtendData(): String {
-        val client = ComateArchGuardClient()
-
         logger.info("start to analyse code: $context")
-        val codeContext = ComateSourceCodeContext.custom(
-            client,
-            context.workdir.toString(),
-            context.lang,
-            features = listOf()
-        )
+        val codeContext = ComateSourceCodeContext.create(context)
 
-        val codeDataStructs = codeAnalyser(context.lang, codeContext)?.analyse()
+        val codeDataStructs = codeAnalyser(context.language, codeContext)?.analyse()
         val services: List<ContainerService> = if (codeDataStructs != null) {
             ApiCallAnalyser(codeContext).analyse(codeDataStructs)
         } else {

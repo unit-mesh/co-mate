@@ -27,7 +27,7 @@ class IntroductionCodePrompt(
     }
 
     override fun getExtendData(): String {
-        val dep = dependencies(context.workdir, context.lang)
+        val dep = dependencies(context.workdir, context.language)
         val depMap: Map<String, List<String>> = dep.groupBy {
             val relativePath = Path(it.path).relativeTo(context.workdir).toString()
             relativePath

@@ -1,5 +1,6 @@
 package org.archguard.comate.wrapper
 
+import org.archguard.comate.command.CommandContext
 import org.archguard.scanner.core.client.ArchGuardClient
 import org.archguard.scanner.core.client.EmptyArchGuardClient
 import org.archguard.scanner.core.sca.ScaContext
@@ -28,6 +29,10 @@ class ComateSourceCodeContext(
     companion object {
         fun create(path: String, language: String, features: List<String> = listOf()): SourceCodeContext {
             return ComateSourceCodeContext(archGuardClient, features, language, path)
+        }
+
+        fun create(context: CommandContext): SourceCodeContext {
+            return ComateSourceCodeContext(archGuardClient, listOf(), context.language, context.workdir.toString())
         }
 
         fun custom(client: ArchGuardClient, path: String, language: String, features: List<String> = listOf()): SourceCodeContext {

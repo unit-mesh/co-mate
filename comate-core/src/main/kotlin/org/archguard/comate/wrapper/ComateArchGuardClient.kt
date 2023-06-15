@@ -11,11 +11,7 @@ import org.archguard.scanner.core.sourcecode.CodeDatabaseRelation
 import org.archguard.scanner.core.sourcecode.ContainerService
 
 class ComateArchGuardClient : ArchGuardClient {
-    var apis = mutableListOf<ContainerService>()
-    override fun saveApi(apis: List<ContainerService>) {
-        this.apis = apis.toMutableList()
-    }
-
+    override fun saveApi(apis: List<ContainerService>) {}
     override fun saveDataStructure(codes: List<CodeDataStruct>) = Unit
     override fun saveDependencies(dependencies: List<CompositionDependency>) = Unit
     override fun saveDiffs(calls: List<ChangedCall>) = Unit
