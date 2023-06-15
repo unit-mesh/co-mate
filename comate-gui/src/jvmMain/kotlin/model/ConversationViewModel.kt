@@ -1,15 +1,15 @@
 package model
 
 import cafe.adriel.voyager.core.model.ScreenModel
-import data.remote.OpenAIRepositoryImpl
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import org.archguard.comate.smart.LlmConnector
 import java.util.*
 
 class ConversationViewModel(
-    private val openAIRepo: OpenAIRepositoryImpl,
+    private val openAIRepo: LlmConnector,
 ) : ScreenModel {
     private val _currentConversation: MutableStateFlow<String> =
         MutableStateFlow(Date().time.toString())
@@ -48,10 +48,8 @@ class ConversationViewModel(
             conversationId = _currentConversation.value,
         )
 
-        val flow: Flow<String> = openAIRepo.textCompletionsWithStream(
-            TextCompletionsParam(
-                promptText = newMessageModel.question,
-            )
+        val flow: Flow<String> = openAIRepo.stream(
+            newMessageModel.question
         )
 
         var answerFromGPT = ""

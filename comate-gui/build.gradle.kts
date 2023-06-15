@@ -14,6 +14,8 @@ version = "1.0-SNAPSHOT"
 dependencies {
     implementation(libs.serialization.json)
 
+    implementation(projects.llmCore)
+
     implementation(libs.dotenv)
     implementation(libs.bundles.openai)
     implementation(libs.bundles.markdown)

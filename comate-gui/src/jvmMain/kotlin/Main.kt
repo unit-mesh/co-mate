@@ -14,9 +14,10 @@ import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.navigator.Navigator
 import component.MessageList
 import component.TextInput
-import data.remote.OpenAIRepositoryImpl
 import io.github.cdimascio.dotenv.Dotenv
 import model.ConversationViewModel
+import org.archguard.comate.smart.OPENAI_MODEL
+import org.archguard.comate.smart.OpenAIConnector
 import org.kodein.di.DI
 import org.kodein.di.bindSingleton
 import org.kodein.di.instance
@@ -56,11 +57,13 @@ fun main() = application {
 
     // for now, create ~/.comate/.env, and put OPENAI_API_KEY=... in it
     val dotenv = Dotenv.configure().directory(appDir.toString()).load()
-    val token = dotenv["OPENAI_API_KEY"]
+    val apiKey = dotenv["OPENAI_API_KEY"]
+    val apiProxy = dotenv["OPENAI_API_PROXY"] ?: null
+
 
     val di = DI {
         bindSingleton<ConversationViewModel> {
-            ConversationViewModel(OpenAIRepositoryImpl(token))
+            ConversationViewModel(OpenAIConnector(apiKey, OPENAI_MODEL[0], apiProxy))
         }
     }
 

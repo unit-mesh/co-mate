@@ -1,5 +1,6 @@
 package org.archguard.comate.smart
 
+import kotlinx.coroutines.flow.Flow
 import java.time.Duration
 
 interface LlmConnector {
@@ -7,4 +8,5 @@ interface LlmConnector {
         get() = Duration.ofSeconds(600)
 
     fun prompt(promptText: String): String
+    fun stream(promptText: String): Flow<String>
 }

@@ -75,7 +75,7 @@ class OpenAIConnector(
         return output
     }
 
-    fun stream(promptText: String): Flow<String> {
+    override fun stream(promptText: String): Flow<String> {
         val systemMessage = ChatMessage(ChatMessageRole.USER.value(), promptText)
 
         messages.add(systemMessage)
@@ -96,8 +96,6 @@ class OpenAIConnector(
                             trySend(completion.content)
                         }
                     }
-
-                service.shutdownExecutor()
 
                 close()
             }
