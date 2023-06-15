@@ -1,4 +1,4 @@
-package org.archguard.comate.smart
+package org.archguard.comate.connector
 
 import com.theokanning.openai.OpenAiApi
 import com.theokanning.openai.completion.chat.ChatCompletionRequest
@@ -18,9 +18,9 @@ import retrofit2.converter.jackson.JacksonConverterFactory
 val OPENAI_MODEL = arrayOf("gpt-3.5-turbo", "gpt-4.0")
 
 class OpenAIConnector(
-    val openAiKey: String,
-    val openAiVersion: String = OPENAI_MODEL[0],
-    val openAiProxy: String? = null,
+    private val openAiKey: String,
+    private val openAiVersion: String = OPENAI_MODEL[0],
+    private val openAiProxy: String? = null,
 ) : LlmConnector {
     private var service: OpenAiService
 
@@ -48,7 +48,7 @@ class OpenAIConnector(
     }
 
     val messages: MutableList<ChatMessage> = ArrayList()
-    var historyMessageLength: Int = 0
+    private var historyMessageLength: Int = 0
 
     override fun prompt(promptText: String): String {
         val systemMessage = ChatMessage(ChatMessageRole.USER.value(), promptText)

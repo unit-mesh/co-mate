@@ -1,4 +1,4 @@
-package org.archguard.comate.smart
+package org.archguard.comate.connector
 
 import kotlinx.coroutines.flow.Flow
 import java.time.Duration

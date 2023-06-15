@@ -1,6 +1,6 @@
 package org.archguard.comate.command
 
-import org.archguard.comate.smart.OpenAIConnector
+import org.archguard.comate.connector.OpenAIConnector
 import java.nio.file.Path
 
 data class CommandContext(

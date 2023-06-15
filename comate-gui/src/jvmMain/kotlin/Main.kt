@@ -16,8 +16,8 @@ import component.MessageList
 import component.TextInput
 import io.github.cdimascio.dotenv.Dotenv
 import model.ConversationViewModel
-import org.archguard.comate.smart.OPENAI_MODEL
-import org.archguard.comate.smart.OpenAIConnector
+import org.archguard.comate.connector.OPENAI_MODEL
+import org.archguard.comate.connector.OpenAIConnector
 import org.kodein.di.DI
 import org.kodein.di.bindSingleton
 import org.kodein.di.instance

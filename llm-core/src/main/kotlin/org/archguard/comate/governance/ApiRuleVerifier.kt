@@ -1,6 +1,6 @@
 package org.archguard.comate.governance
 
-import org.archguard.comate.smart.LlmConnector
+import org.archguard.comate.connector.LlmConnector
 import org.archguard.meta.base.LlmRuleVerifier
 import org.slf4j.LoggerFactory
 
