@@ -3,6 +3,7 @@ package org.archguard.comate.cli
 import org.archguard.comate.command.ComateCommand
 import org.archguard.comate.smart.Semantic
 
+// todo: maybe we can built local function calling embedding map
 fun createFunctionCallingEmbedding(semantic: Semantic): Map<ComateCommand, List<FloatArray>> {
     val basicIntroCommand = listOf(
         "introduction system",
@@ -25,10 +26,15 @@ fun createFunctionCallingEmbedding(semantic: Semantic): Map<ComateCommand, List<
         "生成 API",
     )
 
+    val foundationGovernanceCommand = listOf(
+        "检查基础规范情况"
+    )
+
     return mapOf(
         ComateCommand.Intro to basicIntroCommand.map { semantic.embed(it) },
         ComateCommand.LayeredStyle to archStyleCommand.map { semantic.embed(it) },
         ComateCommand.ApiGovernance to apiGovernanceCommand.map { semantic.embed(it) },
         ComateCommand.ApiGen to apiGenCommand.map { semantic.embed(it) },
+        ComateCommand.FoundationGovernance to foundationGovernanceCommand.map { semantic.embed(it) },
     )
 }
