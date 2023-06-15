@@ -1,4 +1,4 @@
-package org.archguard.meta.base
+package org.archguard.meta.base.verifier
 
 /**
  * Use LLM to verify the rule

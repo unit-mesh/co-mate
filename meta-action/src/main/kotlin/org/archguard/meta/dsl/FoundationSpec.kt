@@ -1,6 +1,9 @@
 package org.archguard.meta.dsl
 
 import org.archguard.meta.base.*
+import org.archguard.meta.base.verifier.LlmRuleVerifier
+import org.archguard.meta.dsl.base.BaseDeclaration
+import org.archguard.meta.dsl.base.Spec
 import org.archguard.meta.dsl.foundation.declaration.LayeredDeclaration
 import org.archguard.meta.dsl.foundation.declaration.NamingDeclaration
 import org.archguard.meta.dsl.foundation.rule.ProjectNameRule

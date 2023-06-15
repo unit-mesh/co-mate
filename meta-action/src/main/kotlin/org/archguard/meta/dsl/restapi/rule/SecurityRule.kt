@@ -1,6 +1,6 @@
 package org.archguard.meta.dsl.restapi.rule
 
-import org.archguard.meta.base.LlmRuleVerifier
+import org.archguard.meta.base.verifier.LlmRuleVerifier
 import org.archguard.meta.dsl.restapi.ApiLlmVerifyRule
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.RestApiElement

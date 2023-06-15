@@ -1,7 +1,7 @@
 package org.archguard.meta.dsl.foundation.declaration
 
 import org.archguard.meta.base.Rule
-import org.archguard.meta.base.BaseDeclaration
+import org.archguard.meta.dsl.base.BaseDeclaration
 import org.archguard.meta.dsl.foundation.rule.DependencyRule
 import org.archguard.meta.model.FoundationElement
 

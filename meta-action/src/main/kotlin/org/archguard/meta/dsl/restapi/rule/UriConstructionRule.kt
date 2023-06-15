@@ -1,6 +1,6 @@
 package org.archguard.meta.dsl.restapi.rule
 
-import org.archguard.meta.base.PatternWithExampleRule
+import org.archguard.meta.dsl.base.PatternWithExampleRule
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.dsl.restapi.ApiAtomicRule
 import org.archguard.meta.model.RestApiElement

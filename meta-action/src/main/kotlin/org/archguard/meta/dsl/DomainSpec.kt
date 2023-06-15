@@ -1,8 +1,8 @@
 package org.archguard.meta.dsl
 
-import org.archguard.meta.base.LlmRuleVerifier
+import org.archguard.meta.base.verifier.LlmRuleVerifier
 import org.archguard.meta.base.RuleResult
-import org.archguard.meta.base.Spec
+import org.archguard.meta.dsl.base.Spec
 import org.archguard.meta.base.SpecDsl
 import org.archguard.meta.dsl.domain.declaration.ContextMapDeclaration
 

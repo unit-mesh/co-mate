@@ -3,7 +3,7 @@ package org.archguard.meta.dsl
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction
 import chapi.domain.core.CodeImport
-import org.archguard.meta.base.FakeRuleVerifier
+import org.archguard.meta.base.verifier.FakeRuleVerifier
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.dsl.matcher.shouldBe
 import org.archguard.meta.dsl.matcher.shouldNotBe

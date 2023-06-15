@@ -1,6 +1,6 @@
 package org.archguard.meta.dsl
 
-import org.archguard.meta.base.FakeRuleVerifier
+import org.archguard.meta.base.verifier.FakeRuleVerifier
 import org.archguard.meta.model.RestApiElement
 import org.junit.jupiter.api.Test
 

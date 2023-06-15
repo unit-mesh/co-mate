@@ -1,7 +1,7 @@
 package org.archguard.comate.governance
 
 import org.archguard.comate.connector.LlmConnector
-import org.archguard.meta.base.LlmRuleVerifier
+import org.archguard.meta.base.verifier.LlmRuleVerifier
 import org.slf4j.LoggerFactory
 
 class ApiRuleVerifier(val connector: LlmConnector) : LlmRuleVerifier {

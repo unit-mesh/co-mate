@@ -1,9 +1,9 @@
 package org.archguard.meta.dsl
 
-import org.archguard.meta.base.FakeRuleVerifier
-import org.archguard.meta.base.LlmRuleVerifier
+import org.archguard.meta.base.verifier.FakeRuleVerifier
+import org.archguard.meta.base.verifier.LlmRuleVerifier
 import org.archguard.meta.base.RuleResult
-import org.archguard.meta.base.Spec
+import org.archguard.meta.dsl.base.Spec
 import org.archguard.meta.dsl.restapi.ApiAtomicRule
 import org.archguard.meta.dsl.restapi.ApiLlmVerifyRule
 import org.archguard.meta.dsl.restapi.rule.*

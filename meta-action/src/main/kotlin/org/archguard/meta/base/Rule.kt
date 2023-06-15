@@ -10,11 +10,5 @@ interface Rule<T> {
     }
 }
 
-interface BaseLlmVerifier<T : Any> : Rule<T> {
-    override fun exec(input: T): List<RuleResult> {
-        return exec(input)
-    }
-}
-
 interface Element
 

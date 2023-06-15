@@ -1,8 +1,8 @@
 package org.archguard.meta.dsl.foundation.rule
 
 import org.archguard.meta.base.Rule
-import org.archguard.meta.base.BaseDeclaration
-import org.archguard.meta.base.PatternWithExampleRule
+import org.archguard.meta.dsl.base.BaseDeclaration
+import org.archguard.meta.dsl.base.PatternWithExampleRule
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.model.FoundationElement
 
