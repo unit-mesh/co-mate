@@ -1,6 +1,6 @@
 package org.archguard.meta
 
-enum class DynamicPromptContext(val value: String) {
+enum class DynamicContext(val value: String) {
     API_SPECIFICATION("ApiSpecification") {
         override fun explain(): String {
             return """ApiSpecification is a specification of a REST API.""".trimIndent()
@@ -12,9 +12,9 @@ enum class DynamicPromptContext(val value: String) {
             return """FoundationSpecification is a specification of a naming style, package naming, class naming..""".trimIndent()
         }
     },
-    LAYERED("Layered") {
+    DOMAIN_SPECIFICATION("DomainSpecification") {
         override fun explain(): String {
-            return """Layered is a define for layered architecture.""".trimIndent()
+            return """DomainSpecification is a specification of a domain model.""".trimIndent()
         }
     },
     SERVICE_MAP("ServiceMap") {
@@ -32,7 +32,7 @@ enum class DynamicPromptContext(val value: String) {
     abstract fun explain(): String;
 
     companion object {
-        fun from(value: String): DynamicPromptContext? {
+        fun from(value: String): DynamicContext? {
             return values().find { it.value == value }
         }
 
@@ -46,9 +46,17 @@ enum class DynamicPromptContext(val value: String) {
                     "FoundationSpecification"
                 }
 
-                LAYERED -> "Layered"
-                SERVICE_MAP -> "ServiceMap"
-                DOMAIN_MODEL -> "DomainModel"
+                DOMAIN_SPECIFICATION -> {
+                    "DomainSpecification"
+                }
+
+                SERVICE_MAP -> {
+                    "ServiceMap"
+                }
+
+                DOMAIN_MODEL -> {
+                    "DomainModel"
+                }
             }
         }
 
