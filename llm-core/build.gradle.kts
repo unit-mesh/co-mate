@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.metaAction)
+    implementation(projects.specLang)
     implementation(libs.kotlin.stdlib)
     implementation(libs.coroutines.core)
 

@@ -42,12 +42,13 @@ Core modules:
     - `llm-core`: large language model core, like OpenAI call, Token calculate, Tokenizer, Embedding, Similarity for
       Embedding, etc.
 - Architecture Spec
+    - `spec-lang`: the Kotlin DSL for architecture's specification, like: Domain Driven Design, RESTful API, etc.
     - `spec-runtime`: the Kotlin REPL/Interpreter for Architecture Spec DSL
     - `spec-partitioner`: the partitioner for partitioning the architecture spec document
 - Architecture Define
     - `architecture`: architecture model
 
-## Specification DSL
+## Specification Language/DSL
 
 - Domain (TODO). spec for Domain Driven Design.
 - Foundation (WIP). basic spec, like Project naming, Package and Class and Function naming.

@@ -59,8 +59,8 @@ dependencies {
     jacocoAggregation(project(":comate-core"))
 
     jacocoAggregation(project(":llm-core"))
-    jacocoAggregation(project(":meta-action"))
 
+    jacocoAggregation(project(":spec-lang"))
     jacocoAggregation(project(":spec-partitioner"))
     jacocoAggregation(project(":spec-runtime"))
 }

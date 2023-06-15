@@ -9,7 +9,7 @@ dependencies {
 
     implementation(projects.architecture)
     implementation(projects.llmCore)
-    implementation(projects.metaAction)
+    implementation(projects.specLang)
 
     implementation(libs.bundles.openai)
     implementation(libs.bundles.markdown)

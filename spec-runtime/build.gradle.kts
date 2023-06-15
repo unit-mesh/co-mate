@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.metaAction)
+    implementation(projects.specLang)
     implementation(projects.llmCore)
 
     implementation(libs.serialization.json)
