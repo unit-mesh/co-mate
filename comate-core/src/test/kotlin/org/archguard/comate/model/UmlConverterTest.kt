@@ -1,4 +1,4 @@
-package org.archguard.comate.uml
+package org.archguard.comate.model
 
 import chapi.domain.core.CodeDataStruct
 import chapi.domain.core.CodeFunction

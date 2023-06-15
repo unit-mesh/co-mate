@@ -1,4 +1,4 @@
-package org.archguard.spec
+package org.archguard.comate
 
 enum class DynamicContext(val value: String) {
     API_SPECIFICATION("ApiSpecification") {
@@ -32,29 +32,29 @@ enum class DynamicContext(val value: String) {
     abstract fun explain(): String
 
     companion object {
-        fun from(value: String): org.archguard.spec.DynamicContext? {
+        fun from(value: String): DynamicContext? {
             return values().find { it.value == value }
         }
 
-        fun build(values: List<String>): List<String> = values.mapNotNull(org.archguard.spec.DynamicContext.Companion::from).map {
+        fun build(values: List<String>): List<String> = values.mapNotNull(Companion::from).map {
             when (it) {
-                org.archguard.spec.DynamicContext.API_SPECIFICATION -> {
+                API_SPECIFICATION -> {
                     "ApiSpecification"
                 }
 
-                org.archguard.spec.DynamicContext.FOUNDATION_SPECIFICATION -> {
+                FOUNDATION_SPECIFICATION -> {
                     "FoundationSpecification"
                 }
 
-                org.archguard.spec.DynamicContext.DOMAIN_SPECIFICATION -> {
+                DOMAIN_SPECIFICATION -> {
                     "DomainSpecification"
                 }
 
-                org.archguard.spec.DynamicContext.SERVICE_MAP -> {
+                SERVICE_MAP -> {
                     "ServiceMap"
                 }
 
-                org.archguard.spec.DynamicContext.DOMAIN_MODEL -> {
+                DOMAIN_MODEL -> {
                     "DomainModel"
                 }
             }
