@@ -5,7 +5,6 @@ enum class DynamicContext(val value: String) {
         override fun explain(): String {
             return """ApiSpecification is a specification of a REST API.""".trimIndent()
         }
-
     },
     FOUNDATION_SPECIFICATION("FoundationSpecification") {
         override fun explain(): String {
