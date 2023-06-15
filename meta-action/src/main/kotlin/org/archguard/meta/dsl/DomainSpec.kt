@@ -4,14 +4,14 @@ import org.archguard.meta.base.LlmRuleVerifier
 import org.archguard.meta.base.RuleResult
 import org.archguard.meta.base.Spec
 import org.archguard.meta.base.SpecDsl
-import org.archguard.meta.dsl.domain.ContextMap
+import org.archguard.meta.dsl.domain.declaration.ContextMapDeclaration
 
 @SpecDsl
 class DomainSpec: Spec<Any> {
-    fun context_map(name: String, block: ContextMap.() -> Unit): ContextMap {
-        val contextMap = ContextMap(name)
-        contextMap.block()
-        return contextMap
+    fun context_map(name: String, block: ContextMapDeclaration.() -> Unit): ContextMapDeclaration {
+        val contextMapDeclaration = ContextMapDeclaration(name)
+        contextMapDeclaration.block()
+        return contextMapDeclaration
     }
 
     override fun setVerifier(ruleVerifier: LlmRuleVerifier) {
