@@ -63,7 +63,7 @@ jupyter-kernel = { group = "org.jetbrains.kotlinx", name = "kotlin-jupyter-kerne
 jupyter-shared-compiler = { group = "org.jetbrains.kotlinx", name = "kotlin-jupyter-shared-compiler", version.ref = "jupyterApi" }
 
 # archguard
-# implementation("org.archguard.aaac:dsl:2.0.0-beta.5")
+# implementation("org.archguard.aaac:lang:2.0.0-beta.5")
 archguard-dsl = { group = "org.archguard.aaac", name = "dsl", version.ref = "archguard" }
 archguard-analyser-sca = { group = "org.archguard.scanner", name = "analyser_sca", version.ref = "archguard" }
 archguard-lang-kotlin = { group = "org.archguard.scanner", name = "lang_kotlin", version.ref = "archguard" }

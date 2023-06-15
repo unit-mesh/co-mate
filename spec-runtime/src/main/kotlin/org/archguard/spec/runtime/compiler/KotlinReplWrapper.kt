@@ -1,6 +1,6 @@
 package org.archguard.spec.runtime.compiler
 
-import org.archguard.meta.dsl.RestApiSpec
+import org.archguard.spec.lang.RestApiSpec
 import org.jetbrains.kotlinx.jupyter.EvalRequestData
 import org.jetbrains.kotlinx.jupyter.ReplForJupyter
 import org.jetbrains.kotlinx.jupyter.api.Code

@@ -1,5 +1,6 @@
 package org.archguard.spec
 
+import org.archguard.spec.partition.ApiPartitioner
 import org.junit.jupiter.api.Test
 
 class ApiPartitionerTest {

@@ -4,7 +4,7 @@ import org.archguard.comate.command.CommandContext
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.comate.wrapper.ComateSourceCodeContext
-import org.archguard.meta.dsl.foundation
+import org.archguard.spec.lang.foundation
 
 class FoundationGovernancePrompter(
     val context: CommandContext,
