@@ -27,3 +27,8 @@ fun CodeDataStruct.Companion.packageInOut(codeDataStructs: List<CodeDataStruct>)
     val cleanPackageInOut = packageInOut.filter { it.value.isNotEmpty() }
     return cleanPackageInOut
 }
+
+fun CodeDataStruct.Companion.packageInString(codeDataStructs: List<CodeDataStruct>): String {
+    val packageInOut = this.packageInOut(codeDataStructs)
+    return """package fan in: $packageInOut"""
+}

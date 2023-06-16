@@ -1,5 +1,7 @@
 package org.archguard.comate
 
+import chapi.domain.core.CodeDataStruct
+import org.archguard.comate.code.packageInString
 import org.archguard.comate.command.ComateWorkspace
 import org.archguard.comate.model.DomainModelFactory
 import org.archguard.spec.lang.DomainSpec
@@ -51,7 +53,7 @@ enum class DynamicContext(val value: String) {
             return values().find { it.value == value }
         }
 
-        fun build(values: List<String>, command: ComateWorkspace): List<String> =
+        fun build(values: List<String>, workspace: ComateWorkspace): List<String> =
             values.mapNotNull(Companion::from).map {
                 // TODO: load specification from file
                 when (it) {
@@ -61,9 +63,9 @@ enum class DynamicContext(val value: String) {
 
                     // TODO: load service map from file
                     SERVICE_MAP -> "ServiceMap"
-                    DOMAIN_MODEL -> DomainModelFactory.generate("mvc", listOf())
+                    DOMAIN_MODEL -> DomainModelFactory.generate("mvc", workspace.ds)
                     LAYERED_STYLE -> "LayeredStyle"
-                    PACKAGE_INFO -> TODO()
+                    PACKAGE_INFO -> CodeDataStruct.packageInString(workspace.ds)
                 }
             }
 
