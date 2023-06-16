@@ -1,4 +1,4 @@
-package org.archguard.comate
+package org.archguard.comate.dynamic
 
 import chapi.domain.core.CodeDataStruct
 import org.archguard.comate.code.packageInString
