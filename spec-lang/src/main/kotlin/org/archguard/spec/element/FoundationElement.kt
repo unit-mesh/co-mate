@@ -1,7 +1,6 @@
 package org.archguard.spec.element
 
 import chapi.domain.core.CodeDataStruct
-import org.archguard.spec.base.Element
 import org.archguard.spec.lang.foundation.declaration.LayeredDefine
 
 class FoundationElement(

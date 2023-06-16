@@ -9,15 +9,7 @@ import org.archguard.spec.lang.restapi.ApiLlmVerifyRule
 import org.archguard.spec.lang.restapi.rule.*
 import org.archguard.spec.element.RestApiElement
 
-// todo: is for checking the rule type
-enum class ApiRuleType(rule: Class<out ApiAtomicRule>) {
-    HTTP_ACTION(HttpActionRule::class.java),
-    MISC(MiscRule::class.java),
-    SECURITY(SecurityRule::class.java),
-    STATUS_CODE(StatusCodeRule::class.java),
-    URI_CONSTRUCTION(UriConstructionRule::class.java)
-}
-
+@SpecDsl
 class RestApiSpec : Spec<RestApiElement> {
     private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
     private var rules: List<ApiAtomicRule> = listOf()

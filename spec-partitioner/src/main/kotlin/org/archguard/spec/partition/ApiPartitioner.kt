@@ -1,8 +1,18 @@
 package org.archguard.spec.partition
 
 import org.archguard.comate.smart.Semantic
-import org.archguard.spec.lang.ApiRuleType
 import org.archguard.spec.base.Rule
+import org.archguard.spec.lang.restapi.ApiAtomicRule
+import org.archguard.spec.lang.restapi.rule.*
+
+// todo: is for checking the rule type
+enum class ApiRuleType(rule: Class<out ApiAtomicRule>) {
+    HTTP_ACTION(HttpActionRule::class.java),
+    MISC(MiscRule::class.java),
+    SECURITY(SecurityRule::class.java),
+    STATUS_CODE(StatusCodeRule::class.java),
+    URI_CONSTRUCTION(UriConstructionRule::class.java)
+}
 
 val apiEmbeddingMap: Map<FloatArray, ApiRuleType>
     get() {

@@ -1,7 +1,6 @@
 package org.archguard.spec.element
 
 import kotlinx.serialization.json.JsonObject
-import org.archguard.spec.base.Element
 
 data class RestApiElement(
     val uri: String,

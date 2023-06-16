@@ -3,7 +3,6 @@ package org.archguard.spec.lang
 import org.archguard.spec.base.verifier.LlmRuleVerifier
 import org.archguard.spec.base.RuleResult
 import org.archguard.spec.lang.base.Spec
-import org.archguard.spec.base.SpecDsl
 import org.archguard.spec.lang.domain.declaration.ContextMapDeclaration
 
 @SpecDsl
