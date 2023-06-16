@@ -1,6 +1,5 @@
-package org.archguard.comate.cli
+package org.archguard.comate.command
 
-import org.archguard.comate.command.ComateCommand
 import org.archguard.comate.smart.Semantic
 
 // todo: maybe we can built local function calling embedding map

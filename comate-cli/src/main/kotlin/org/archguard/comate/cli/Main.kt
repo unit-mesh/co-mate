@@ -5,8 +5,6 @@ import org.archguard.comate.command.ComateCommand
 import org.archguard.comate.command.ComateWorkspace
 import org.archguard.comate.connector.OPENAI_MODEL
 import org.archguard.comate.connector.OpenAIConnector
-import org.archguard.comate.smart.Semantic
-import org.archguard.comate.smart.cosineSimilarity
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -22,7 +20,7 @@ fun main(args: Array<String>) {
     val language = "java"
 
     val basePath = Path(File(".").absolutePath)
-    val comateCommand = textToComateCommand(cmd)
+    val comateCommand = ComateCommand.fromText(cmd)
 
     logger.info("start execution ...")
 
@@ -46,34 +44,6 @@ fun main(args: Array<String>) {
 
     val output = openAiConnector.prompt(summarizePrompt)
     println(output)
-}
-
-private fun textToComateCommand(cmd: String): ComateCommand {
-    val semantic = Semantic.create()
-    val commandEmbedMap = createFunctionCallingEmbedding(semantic)
-
-    val inputEmbed = semantic.embed(cmd)
-
-    var comateCommand = ComateCommand.None
-    run breaking@{
-        commandEmbedMap.forEach { (command, embeds) ->
-            embeds.forEach {
-                try {
-                    val similarity = cosineSimilarity(it, inputEmbed)
-                    // todo: 1. make this threshold configurable a
-                    // todo: 2. choose the command with highest similarity
-                    if (similarity > 0.6) {
-                        comateCommand = command
-                        return@breaking
-                    }
-                } catch (e: Exception) {
-//                println(e)
-                }
-            }
-        }
-    }
-
-    return comateCommand
 }
 
 fun createConnector(): OpenAIConnector {

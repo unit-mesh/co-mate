@@ -8,6 +8,10 @@ class ContextFunction {
         return ""
     }
 
+    fun introduction_system(url: String): String {
+        return ""
+    }
+
     fun functions(): List<String> {
         return this.javaClass.methods
             .filter { it.name.contains("_") }

@@ -2,6 +2,8 @@ package org.archguard.comate.command
 
 import org.archguard.comate.action.*
 import org.archguard.comate.code.IntroductionCodePrompt
+import org.archguard.comate.smart.Semantic
+import org.archguard.comate.smart.cosineSimilarity
 import org.archguard.comate.strategy.BasicPromptStrategy
 
 enum class ComateCommand(val command: String) {
@@ -46,4 +48,34 @@ enum class ComateCommand(val command: String) {
     ;
 
     abstract fun run(context: ComateWorkspace): String
+
+    companion object {
+        fun fromText(cmd: String): ComateCommand {
+            val semantic = Semantic.create()
+            val commandEmbedMap = createFunctionCallingEmbedding(semantic)
+
+            val inputEmbed = semantic.embed(cmd)
+
+            var comateCommand = ComateCommand.None
+            run breaking@{
+                commandEmbedMap.forEach { (command, embeds) ->
+                    embeds.forEach {
+                        try {
+                            val similarity = cosineSimilarity(it, inputEmbed)
+                            // todo: 1. make this threshold configurable a
+                            // todo: 2. choose the command with highest similarity
+                            if (similarity > 0.6) {
+                                comateCommand = command
+                                return@breaking
+                            }
+                        } catch (e: Exception) {
+//                println(e)
+                        }
+                    }
+                }
+            }
+
+            return comateCommand
+        }
+    }
 }
