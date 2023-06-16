@@ -1,7 +1,7 @@
 package org.archguard.spec.lang
 
 import org.archguard.spec.base.verifier.FakeRuleVerifier
-import org.archguard.spec.model.RestApiElement
+import org.archguard.spec.element.RestApiElement
 import org.junit.jupiter.api.Test
 
 class RestRestApiSpecTest {

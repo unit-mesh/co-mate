@@ -6,7 +6,7 @@
   - [ ] cosine similarits: https://huggingface.co/tasks/sentence-similarity
 
 ```kotlin
-val model = OnnxInferenceModel("model/model.onnx")
+val model = OnnxInferenceModel("element/element.onnx")
 val detections = model.inferAndCloseUsing(ExecutionProvider.CPU()) {
     //
 }

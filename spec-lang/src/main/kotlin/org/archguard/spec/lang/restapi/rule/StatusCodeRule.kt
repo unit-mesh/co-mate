@@ -2,7 +2,7 @@ package org.archguard.spec.lang.restapi.rule
 
 import org.archguard.spec.base.RuleResult
 import org.archguard.spec.lang.restapi.ApiAtomicRule
-import org.archguard.spec.model.RestApiElement
+import org.archguard.spec.element.RestApiElement
 
 class StatusCodeRule(private val codes: List<Int>) : ApiAtomicRule("status-code", "supported codes: ${codes.joinToString(", ")}") {
     override fun exec(input: RestApiElement): List<RuleResult> {

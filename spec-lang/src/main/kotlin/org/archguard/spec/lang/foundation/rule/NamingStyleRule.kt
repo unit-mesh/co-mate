@@ -5,7 +5,7 @@ import org.archguard.spec.base.Rule
 import org.archguard.spec.base.RuleResult
 import org.archguard.spec.lang.foundation.declaration.NamingTarget
 import org.archguard.spec.lang.foundation.expression.NamingExpression
-import org.archguard.spec.model.FoundationElement
+import org.archguard.spec.element.FoundationElement
 
 class NamingStyleRule(val target: NamingTarget) : Rule<FoundationElement> {
     override val actionName: String get() = "Naming for " + target.name

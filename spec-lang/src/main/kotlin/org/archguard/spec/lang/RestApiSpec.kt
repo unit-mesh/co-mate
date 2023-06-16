@@ -7,7 +7,7 @@ import org.archguard.spec.lang.base.Spec
 import org.archguard.spec.lang.restapi.ApiAtomicRule
 import org.archguard.spec.lang.restapi.ApiLlmVerifyRule
 import org.archguard.spec.lang.restapi.rule.*
-import org.archguard.spec.model.RestApiElement
+import org.archguard.spec.element.RestApiElement
 
 // todo: is for checking the rule type
 enum class ApiRuleType(rule: Class<out ApiAtomicRule>) {

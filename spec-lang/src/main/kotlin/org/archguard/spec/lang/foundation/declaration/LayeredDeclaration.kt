@@ -3,7 +3,7 @@ package org.archguard.spec.lang.foundation.declaration
 import org.archguard.spec.base.Rule
 import org.archguard.spec.lang.base.BaseDeclaration
 import org.archguard.spec.lang.foundation.rule.DependencyRule
-import org.archguard.spec.model.FoundationElement
+import org.archguard.spec.element.FoundationElement
 
 class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     private val dependencyRules = mutableListOf<DependencyRule>()

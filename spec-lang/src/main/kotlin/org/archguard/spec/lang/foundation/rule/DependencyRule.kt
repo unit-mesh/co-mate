@@ -2,7 +2,7 @@ package org.archguard.spec.lang.foundation.rule
 
 import org.archguard.spec.base.Rule
 import org.archguard.spec.base.RuleResult
-import org.archguard.spec.model.FoundationElement
+import org.archguard.spec.element.FoundationElement
 
 class DependencyRule : Rule<FoundationElement> {
     override val actionName: String get() = "DependencyRule"

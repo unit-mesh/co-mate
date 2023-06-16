@@ -3,7 +3,7 @@ package org.archguard.spec.lang.restapi.rule
 import org.archguard.spec.lang.base.PatternWithExampleRule
 import org.archguard.spec.base.RuleResult
 import org.archguard.spec.lang.restapi.ApiAtomicRule
-import org.archguard.spec.model.RestApiElement
+import org.archguard.spec.element.RestApiElement
 
 class UriConstructionRule : ApiAtomicRule("uri-construction", "uri construction regex: //TODO"),
     PatternWithExampleRule<RestApiElement> {

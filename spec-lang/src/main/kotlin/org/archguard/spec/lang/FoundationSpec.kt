@@ -8,7 +8,7 @@ import org.archguard.spec.lang.foundation.declaration.LayeredDeclaration
 import org.archguard.spec.lang.foundation.declaration.NamingDeclaration
 import org.archguard.spec.lang.foundation.rule.ProjectNameRule
 import org.archguard.spec.lang.foundation.declaration.LayeredDefine
-import org.archguard.spec.model.FoundationElement
+import org.archguard.spec.element.FoundationElement
 
 @SpecDsl
 class FoundationSpec : Spec<FoundationElement> {

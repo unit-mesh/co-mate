@@ -13,7 +13,7 @@ enum class DynamicContext(val value: String) {
     },
     DOMAIN_SPECIFICATION("DomainSpecification") {
         override fun explain(): String {
-            return """DomainSpecification is a specification of a domain model.""".trimIndent()
+            return """DomainSpecification is a specification of a domain element.""".trimIndent()
         }
     },
     SERVICE_MAP("ServiceMap") {
@@ -23,7 +23,7 @@ enum class DynamicContext(val value: String) {
     },
     DOMAIN_MODEL("DomainModel") {
         override fun explain(): String {
-            return """DomainModel is a define for domain model.""".trimIndent()
+            return """DomainModel is a define for domain element.""".trimIndent()
         }
     }
     ;

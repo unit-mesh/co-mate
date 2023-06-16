@@ -4,7 +4,7 @@ import org.archguard.spec.base.Rule
 import org.archguard.spec.lang.base.BaseDeclaration
 import org.archguard.spec.lang.base.PatternWithExampleRule
 import org.archguard.spec.base.RuleResult
-import org.archguard.spec.model.FoundationElement
+import org.archguard.spec.element.FoundationElement
 
 class ProjectNameRule : PatternWithExampleRule<FoundationElement>, BaseDeclaration<FoundationElement> {
     override val actionName = "ProjectName"

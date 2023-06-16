@@ -1,4 +1,4 @@
-package org.archguard.spec.model
+package org.archguard.spec.element
 
 import chapi.domain.core.CodeDataStruct
 import org.archguard.spec.base.Element

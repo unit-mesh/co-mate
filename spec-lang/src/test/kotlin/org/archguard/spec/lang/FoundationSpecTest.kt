@@ -7,7 +7,7 @@ import org.archguard.spec.base.verifier.FakeRuleVerifier
 import org.archguard.spec.base.RuleResult
 import org.archguard.spec.lang.matcher.shouldBe
 import org.archguard.spec.lang.matcher.shouldNotBe
-import org.archguard.spec.model.FoundationElement
+import org.archguard.spec.element.FoundationElement
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 

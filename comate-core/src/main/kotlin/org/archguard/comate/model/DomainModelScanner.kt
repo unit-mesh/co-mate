@@ -1,17 +1,14 @@
 package org.archguard.comate.model
 
 import chapi.domain.core.CodeDataStruct
-
-interface DomainModelScanner {
-    fun scan(): List<CodeDataStruct>
-    fun toUml(ds: List<CodeDataStruct>): String = UmlConverter().byFiles(ds)
-}
+import org.archguard.spec.execute.DomainModelScanner
 
 class DddDomainModelScanner(
     private val ds: List<CodeDataStruct>,
 ) : DomainModelScanner {
+    override fun toUml(ds: List<CodeDataStruct>): String = UmlConverter().byFiles(ds)
     override fun scan(): List<CodeDataStruct> {
-        val regex = Regex("(domain[s]?|model[s]?)(\\.)?", RegexOption.IGNORE_CASE)
+        val regex = Regex("(domain[s]?|element[s]?)(\\.)?", RegexOption.IGNORE_CASE)
         return ds.filter { regex.containsMatchIn(it.Package) }
     }
 }
@@ -22,8 +19,9 @@ class DddDomainModelScanner(
 class MvcDomainModelScanner(
     private val ds: List<CodeDataStruct>,
 ) : DomainModelScanner {
+    override fun toUml(ds: List<CodeDataStruct>): String = UmlConverter().byFiles(ds)
     override fun scan(): List<CodeDataStruct> {
-        val regex = Regex("(model[s]?|domain)(\\.)?", RegexOption.IGNORE_CASE)
+        val regex = Regex("(element[s]?|domain)(\\.)?", RegexOption.IGNORE_CASE)
         return ds.filter { regex.containsMatchIn(it.Package) }
     }
 }

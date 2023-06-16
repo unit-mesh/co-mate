@@ -7,7 +7,7 @@ import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.comate.wrapper.ComateSourceCodeContext
 import org.archguard.spec.lang.rest_api
-import org.archguard.spec.model.RestApiElement
+import org.archguard.spec.element.RestApiElement
 import org.archguard.scanner.analyser.ApiCallAnalyser
 import org.archguard.scanner.core.sourcecode.ContainerService
 import org.slf4j.Logger

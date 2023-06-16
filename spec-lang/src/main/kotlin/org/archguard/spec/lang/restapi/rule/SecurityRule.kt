@@ -3,7 +3,7 @@ package org.archguard.spec.lang.restapi.rule
 import org.archguard.spec.base.verifier.LlmRuleVerifier
 import org.archguard.spec.lang.restapi.ApiLlmVerifyRule
 import org.archguard.spec.base.RuleResult
-import org.archguard.spec.model.RestApiElement
+import org.archguard.spec.element.RestApiElement
 
 class SecurityRule(private val ruleContent: String, override var ruleVerifier: LlmRuleVerifier) :
     ApiLlmVerifyRule("security", ruleContent, ruleVerifier) {

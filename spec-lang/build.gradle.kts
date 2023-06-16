@@ -9,7 +9,7 @@ dependencies {
     implementation(libs.kotlin.stdlib)
     implementation(libs.serialization.json)
 
-    // for backend code model
+    // for backend code element
     implementation(libs.chapi.domain)
 
     testImplementation(libs.bundles.test)
