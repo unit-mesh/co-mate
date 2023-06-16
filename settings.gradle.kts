@@ -32,9 +32,11 @@ plugins {
 
 include(":architecture")
 include(":llm-core")
+
 include(":comate-core")
 include(":comate-gui")
 include(":comate-cli")
+include(":comate-server")
 
 include(":spec-lang")
 include(":spec-partitioner")
