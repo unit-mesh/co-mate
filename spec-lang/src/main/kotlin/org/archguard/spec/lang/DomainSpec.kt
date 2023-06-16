@@ -6,7 +6,7 @@ import org.archguard.spec.lang.base.Spec
 import org.archguard.spec.lang.domain.declaration.ContextMapDeclaration
 
 @SpecDsl
-class DomainSpec: Spec<Any> {
+class DomainSpec : Spec<Any> {
     fun context_map(name: String, block: ContextMapDeclaration.() -> Unit): ContextMapDeclaration {
         val contextMapDeclaration = ContextMapDeclaration(name)
         contextMapDeclaration.block()
@@ -15,6 +15,21 @@ class DomainSpec: Spec<Any> {
 
     override fun setVerifier(ruleVerifier: LlmRuleVerifier) {
 
+    }
+
+    override fun default(): String {
+        return """domain {
+        context_map("TicketBooking") {
+            context("Reservation") {}
+            context("Ticket") {}
+
+            mapping {
+                context("Reservation") dependedOn context("Ticket")
+                context("Reservation") dependedOn context("Movie")
+            }
+        }
+    }
+"""
     }
 
     override fun exec(element: Any): List<RuleResult> {

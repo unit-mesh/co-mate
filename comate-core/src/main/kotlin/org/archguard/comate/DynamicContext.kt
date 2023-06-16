@@ -1,19 +1,23 @@
 package org.archguard.comate
 
+import org.archguard.spec.lang.DomainSpec
+import org.archguard.spec.lang.FoundationSpec
+import org.archguard.spec.lang.RestApiSpec
+
 enum class DynamicContext(val value: String) {
-    API_SPECIFICATION("ApiSpecification") {
+    REST_API_SPECIFICATION("ApiSpecification") {
         override fun explain(): String {
             return """ApiSpecification is a specification of a REST API.""".trimIndent()
         }
     },
     FOUNDATION_SPECIFICATION("FoundationSpecification") {
         override fun explain(): String {
-            return """FoundationSpecification is a specification of a naming style, package naming, class naming..""".trimIndent()
+            return """FoundationSpecification is a specification of layered architecture, naming style, package naming, class naming.""".trimIndent()
         }
     },
     DOMAIN_SPECIFICATION("DomainSpecification") {
         override fun explain(): String {
-            return """DomainSpecification is a specification of a domain element.""".trimIndent()
+            return """DomainSpecification is a specification of a domain model element.""".trimIndent()
         }
     },
     SERVICE_MAP("ServiceMap") {
@@ -36,20 +40,14 @@ enum class DynamicContext(val value: String) {
         }
 
         fun build(values: List<String>): List<String> = values.mapNotNull(Companion::from).map {
+            // TODO: load specification from file
             when (it) {
-                API_SPECIFICATION -> {
-                    "ApiSpecification"
-                }
-
-                FOUNDATION_SPECIFICATION -> {
-                    "FoundationSpecification"
-                }
-
-                DOMAIN_SPECIFICATION -> {
-                    "DomainSpecification"
-                }
+                REST_API_SPECIFICATION -> RestApiSpec().default()
+                FOUNDATION_SPECIFICATION -> FoundationSpec().default()
+                DOMAIN_SPECIFICATION -> DomainSpec().default()
 
                 SERVICE_MAP -> {
+                    // TODO: load service map from file
                     "ServiceMap"
                 }
 

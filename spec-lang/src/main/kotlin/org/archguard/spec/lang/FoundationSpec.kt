@@ -42,6 +42,49 @@ class FoundationSpec : Spec<FoundationElement> {
 
     }
 
+    override fun default(): String {
+        return """foundation {
+        project_name {
+            pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\${'$'}")
+            example("system1-servicecenter1-microservice1")
+        }
+
+        layered {
+            layer("application") {
+                pattern(".*\\.application") { name shouldBe endWiths("DTO", "Request", "Response") }
+            }
+            layer("domain") {
+                pattern(".*\\.domain") { name shouldBe endWiths("Entity") }
+            }
+            layer("infrastructure") {
+                pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
+            }
+            layer("interface") {
+                pattern(".*\\.interface") { name shouldBe endWiths("Controller", "Service") }
+            }
+
+            dependency {
+                "application" dependedOn "domain"
+                "application" dependedOn "interface"
+                "domain" dependedOn "infrastructure"
+                "interface" dependedOn "domain"
+            }
+        }
+
+        naming {
+            class_level {
+                style("CamelCase")
+                pattern(".*") { name shouldNotBe contains("${'$'}") }
+            }
+            function_level {
+                style("CamelCase")
+                pattern(".*") { name shouldNotBe contains("${'$'}") }
+            }
+        }
+    }
+"""
+    }
+
     override fun exec(element: FoundationElement): List<RuleResult> {
         val rules = declarations.map { declaration ->
             declaration.rules(element)
