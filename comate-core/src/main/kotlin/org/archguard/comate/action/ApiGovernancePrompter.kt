@@ -43,8 +43,6 @@ class ApiGovernancePrompter(
             listOf()
         }
 
-        logger.info("finished analyse code: ${context.workdir}")
-
         val apis = services.flatMap {
             it.resources.map { resource ->
                 RestApiElement(
@@ -54,6 +52,8 @@ class ApiGovernancePrompter(
                 )
             }
         }
+
+        logger.info("finished analyse code: ${context.workdir}")
 
         // todo: use a better way to get the apis
         val results = apis.map { api ->

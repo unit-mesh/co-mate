@@ -32,6 +32,11 @@ enum class DynamicContext(val value: String) {
             return """LayeredStyle is a define for layered architecture.""".trimIndent()
         }
     },
+    PACKAGE_INFO("PackageInfo") {
+        override fun explain(): String {
+            return """PackageInfo is a define for ALL package info.""".trimIndent()
+        }
+    },
     DOMAIN_MODEL("DomainModel") {
         override fun explain(): String {
             return """DomainModel is a define for domain element.""".trimIndent()
@@ -58,6 +63,7 @@ enum class DynamicContext(val value: String) {
                     SERVICE_MAP -> "ServiceMap"
                     DOMAIN_MODEL -> DomainModelFactory.generate("mvc", listOf())
                     LAYERED_STYLE -> "LayeredStyle"
+                    PACKAGE_INFO -> TODO()
                 }
             }
 

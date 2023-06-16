@@ -1,6 +1,7 @@
 package org.archguard.comate.command
 
 import org.archguard.comate.action.*
+import org.archguard.comate.code.IntroductionCodePrompt
 import org.archguard.comate.strategy.BasicPromptStrategy
 
 enum class ComateCommand(val command: String) {

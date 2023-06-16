@@ -1,5 +1,7 @@
 package org.archguard.comate.action
 
+import chapi.domain.core.CodeDataStruct
+import org.archguard.comate.code.packageInOut
 import org.archguard.comate.command.ComateWorkspace
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
@@ -32,30 +34,7 @@ digraph G {
         val codeContext = ComateSourceCodeContext.create(context)
         val codeDataStructs = codeAnalyser(context.language, codeContext)?.analyse() ?: emptyList()
 
-        val packageList = codeDataStructs.map { it.Package }.distinct()
-        val packageInOut = mutableMapOf<String, List<String>>()
-
-        codeDataStructs.forEach {
-            val packageIn = it.Package
-            if (packageIn.isEmpty()) return@forEach
-
-            packageInOut[packageIn] = packageInOut[packageIn].orEmpty().toMutableList().apply {
-                val elements = it.Imports.map { import -> import.Source }
-                    .map { source -> source.substringBeforeLast(".") }
-                    .filter { source -> packageList.contains(source) }
-
-                elements.forEach { element ->
-                    if (!this.contains(element)) {
-                        this.add(element)
-                    }
-                }
-            }
-        }
-
-//        println(UmlConverter().byPackage(codeDataStructs))
-
-        // if value is empty, remove it
-        val cleanPackageInOut = packageInOut.filter { it.value.isNotEmpty() }
+        val cleanPackageInOut = CodeDataStruct.packageInOut(codeDataStructs)
 
         val introduction = this.introduction(context.workdir)
         return """$introduction
@@ -65,4 +44,6 @@ package fan in: $cleanPackageInOut
             .trimIndent()
 
     }
+
 }
+
