@@ -14,4 +14,10 @@ fun main() {
             }
         }
     }.start(wait = true)
+
+    // runBlocking {
+    //    client.webSocket(method = HttpMethod.Get, host = "127.0.0.1", port = 8080, path = "/echo") {
+    //        // this: DefaultClientWebSocketSession
+    //    }
+    //}
 }
