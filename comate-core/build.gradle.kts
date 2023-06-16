@@ -21,10 +21,11 @@ dependencies {
     implementation(libs.archguard.lang.typescript)
     implementation(libs.archguard.lang.golang)
     implementation(libs.archguard.lang.python)
-
     implementation(libs.archguard.feat.apicalls)
-
     implementation(libs.chapi.domain)
+
+    implementation(libs.kotlin.reflect)
+
     implementation(libs.plantuml)
 
     implementation(libs.slf4j.simple)
