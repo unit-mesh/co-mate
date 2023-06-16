@@ -27,18 +27,12 @@ fun main(args: Array<String>) {
     val openAiConnector = createConnector()
     val context = ComateWorkspace(basePath, language, openAiConnector)
 
-    val summarizePrompt = when (comateCommand) {
-        ComateCommand.Intro -> ComateCommand.Intro.run(context)
-        ComateCommand.LayeredStyle -> ComateCommand.LayeredStyle.run(context)
-        ComateCommand.ApiGovernance -> ComateCommand.ApiGovernance.run(context)
-        ComateCommand.FoundationGovernance -> ComateCommand.FoundationGovernance.run(context)
+    val summarizePrompt = comateCommand.run(context)
 
-        // todo: thinking on split generate api into other command
-        ComateCommand.ApiGen -> ComateCommand.ApiGen.run(context)
-
-        // todo: handle command by LLM
-        ComateCommand.None -> null
-    } ?: return
+    if (summarizePrompt.isEmpty()) {
+        logger.warning("summarize prompt is empty")
+        return
+    }
 
     logger.info("summarize prompt text: $summarizePrompt")
 

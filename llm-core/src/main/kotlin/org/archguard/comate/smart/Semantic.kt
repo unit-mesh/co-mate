@@ -43,8 +43,8 @@ class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val
         fun create(): Semantic {
             val classLoader = Thread.currentThread().getContextClassLoader()
 
-            val tokenizerPath = classLoader.getResource("element/tokenizer.json")!!.toURI()
-            val onnxPath =  classLoader.getResource("element/element.onnx")!!.toURI()
+            val tokenizerPath = classLoader.getResource("model/tokenizer.json")!!.toURI()
+            val onnxPath =  classLoader.getResource("model/model.onnx")!!.toURI()
 
             try {
                 val env: Map<String, String> = HashMap()
