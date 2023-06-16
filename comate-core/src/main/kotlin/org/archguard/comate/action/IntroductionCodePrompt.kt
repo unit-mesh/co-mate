@@ -1,14 +1,14 @@
 package org.archguard.comate.action
 
 import org.archguard.architecture.layered.ChannelType
-import org.archguard.comate.command.CommandContext
+import org.archguard.comate.command.ComateWorkspace
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import kotlin.io.path.Path
 import kotlin.io.path.relativeTo
 
 class IntroductionCodePrompt(
-    val context: CommandContext,
+    val context: ComateWorkspace,
     override val strategy: Strategy,
 ) : CodePromptStrategy {
     override fun getRole(): String = "Architecture"

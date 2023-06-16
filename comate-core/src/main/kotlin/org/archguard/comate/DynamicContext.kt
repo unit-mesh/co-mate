@@ -1,5 +1,7 @@
 package org.archguard.comate
 
+import org.archguard.comate.command.ComateWorkspace
+import org.archguard.comate.model.DomainModelFactory
 import org.archguard.spec.lang.DomainSpec
 import org.archguard.spec.lang.FoundationSpec
 import org.archguard.spec.lang.RestApiSpec
@@ -25,6 +27,11 @@ enum class DynamicContext(val value: String) {
             return """ServiceMap is a define for service map.""".trimIndent()
         }
     },
+    LAYERED_STYLE("LayeredStyle") {
+        override fun explain(): String {
+            return """LayeredStyle is a define for layered architecture.""".trimIndent()
+        }
+    },
     DOMAIN_MODEL("DomainModel") {
         override fun explain(): String {
             return """DomainModel is a define for domain element.""".trimIndent()
@@ -39,23 +46,20 @@ enum class DynamicContext(val value: String) {
             return values().find { it.value == value }
         }
 
-        fun build(values: List<String>): List<String> = values.mapNotNull(Companion::from).map {
-            // TODO: load specification from file
-            when (it) {
-                REST_API_SPECIFICATION -> RestApiSpec().default()
-                FOUNDATION_SPECIFICATION -> FoundationSpec().default()
-                DOMAIN_SPECIFICATION -> DomainSpec().default()
+        fun build(values: List<String>, command: ComateWorkspace): List<String> =
+            values.mapNotNull(Companion::from).map {
+                // TODO: load specification from file
+                when (it) {
+                    REST_API_SPECIFICATION -> RestApiSpec().default()
+                    FOUNDATION_SPECIFICATION -> FoundationSpec().default()
+                    DOMAIN_SPECIFICATION -> DomainSpec().default()
 
-                SERVICE_MAP -> {
                     // TODO: load service map from file
-                    "ServiceMap"
-                }
-
-                DOMAIN_MODEL -> {
-                    "DomainModel"
+                    SERVICE_MAP -> "ServiceMap"
+                    DOMAIN_MODEL -> DomainModelFactory.generate("mvc", listOf())
+                    LAYERED_STYLE -> "LayeredStyle"
                 }
             }
-        }
 
         /**
          * With this method, you can get all the explanations of the context.

@@ -25,3 +25,17 @@ class MvcDomainModelScanner(
         return ds.filter { regex.containsMatchIn(it.Package) }
     }
 }
+
+class DomainModelFactory {
+    companion object {
+        fun generate(layeredStyle: String, ds: List<CodeDataStruct>): String {
+            val scanner = when (layeredStyle) {
+                "ddd" -> DddDomainModelScanner(ds)
+                "mvc" -> MvcDomainModelScanner(ds)
+                else -> throw IllegalArgumentException("domain model type $layeredStyle is not supported")
+            }
+
+            return scanner.toUml(scanner.scan())
+        }
+    }
+}

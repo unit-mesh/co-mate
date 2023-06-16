@@ -1,7 +1,7 @@
 package org.archguard.comate.action
 
 import org.archguard.comate.action.model.ApiResult
-import org.archguard.comate.command.CommandContext
+import org.archguard.comate.command.ComateWorkspace
 import org.archguard.comate.governance.ApiRuleVerifier
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
@@ -14,7 +14,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 class ApiGovernancePrompter(
-    val context: CommandContext,
+    val context: ComateWorkspace,
     override val strategy: Strategy,
 ) : CodePromptStrategy {
     override fun getRole(): String = "Architecture Governance Expert"

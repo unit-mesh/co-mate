@@ -1,6 +1,6 @@
 package org.archguard.comate.action
 
-import org.archguard.comate.command.CommandContext
+import org.archguard.comate.command.ComateWorkspace
 import org.archguard.comate.strategy.BasicPromptStrategy
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -13,7 +13,7 @@ class IntroductionPrompterTest {
     @Ignore
     fun should_generate_correct_prompt_test() {
         val workdir = javaClass.classLoader.getResource("hello-world")?.path.orEmpty()
-        val introduction = IntroductionCodePrompt(CommandContext(Path.of(workdir), "kotlin", null), BasicPromptStrategy())
+        val introduction = IntroductionCodePrompt(ComateWorkspace(Path.of(workdir), "kotlin", null), BasicPromptStrategy())
 
         assertEquals(
             """
