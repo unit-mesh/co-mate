@@ -1,6 +1,7 @@
 package org.archguard.comate.dynamic.functions
 
-class AnalysisSystem(private val url: String) : Function {
+@ComateFunction
+class IntroductionSystem(private val url: String) : DyFunction {
     override fun execute(): Boolean {
         return true
     }
