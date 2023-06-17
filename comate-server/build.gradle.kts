@@ -1,8 +1,13 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
+    application
     alias(libs.plugins.jvm)
     alias(libs.plugins.serialization)
     id("io.ktor.plugin") version "2.3.1"
+}
+
+application {
+    mainClass.set("io.ktor.server.netty.EngineMain")
 }
 
 repositories {
