@@ -1,10 +1,8 @@
 package org.archguard.comate.dynamic.functions
 
 @ComateFunction
-class IntroductionSystem(private var url: String) : DyFunction {
-    // TODO: Add a constructor with no parameters
+class ApiGovernance(private var url: String) : DyFunction {
     constructor() : this("https://github.com/archguard/co-mate") {
-
     }
 
     override fun execute(): Boolean {

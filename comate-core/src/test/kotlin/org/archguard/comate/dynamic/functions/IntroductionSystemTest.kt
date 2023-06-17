@@ -8,6 +8,6 @@ class IntroductionSystemTest {
     fun should_get_analysis_system_function() {
         val introductionSystem = IntroductionSystem("http://localhost:8080")
         val defineFunc = introductionSystem.define()
-        assertEquals("analysis_system(url: String)", defineFunc)
+        assertEquals("introduction_system(url: String)", defineFunc)
     }
 }
