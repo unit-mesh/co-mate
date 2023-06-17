@@ -40,16 +40,5 @@ interface CodePromptStrategy : BaseTemplate {
         }
     }
 
-    fun introduction(workdir: Path): String {
-        var instr = "";
-        val readmeFile = Path(workdir.toString(), "README.md")
-        if (readmeFile.exists()) {
-            val readme = readmeFile.readText()
-            val readmeParser = ReadmeParser(readme)
-            val introduction = readmeParser.introduction()
-            instr = "\nProject introduction: ${introduction.content}\n"
-        }
-
-        return instr
-    }
+    fun introduction(workdir: Path): String = ReadmeParser.introduction(workdir)
 }

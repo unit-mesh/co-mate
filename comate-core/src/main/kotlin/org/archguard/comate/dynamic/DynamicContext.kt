@@ -3,6 +3,7 @@ package org.archguard.comate.dynamic
 import chapi.domain.core.CodeDataStruct
 import org.archguard.comate.code.packageInString
 import org.archguard.comate.command.ComateWorkspace
+import org.archguard.comate.document.ReadmeParser
 import org.archguard.comate.model.DomainModelFactory
 import org.archguard.spec.lang.DomainSpec
 import org.archguard.spec.lang.FoundationSpec
@@ -40,6 +41,11 @@ enum class DynamicContext(val value: String) {
             return """PackageInfo is a define for ALL package info.""".trimIndent()
         }
     },
+    README("README") {
+        override fun explain(): String {
+            return """README file contain project introduction.""".trimIndent()
+        }
+    },
     DOMAIN_MODEL("DomainModel") {
         override fun explain(): String {
             return """DomainModel is a define for domain element.""".trimIndent()
@@ -67,6 +73,7 @@ enum class DynamicContext(val value: String) {
 //                    LAYERED_STYLE -> "LayeredStyle"
                     DOMAIN_MODEL -> DomainModelFactory.generate("mvc", workspace.ds)
                     PACKAGE_INFO -> CodeDataStruct.packageInString(workspace.ds)
+                    README -> ReadmeParser.introduction(workspace.workdir)
                 }
             }
 
