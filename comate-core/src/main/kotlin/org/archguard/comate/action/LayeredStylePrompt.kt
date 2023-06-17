@@ -12,7 +12,9 @@ class LayeredStylePrompt(
     override val strategy: Strategy,
 ) : CodePromptStrategy {
     override fun getRole(): String = "Software Architecture"
-    override fun getInstruction(): String = "根据下面的信息，分析项目的分层是否符合业内的通用规范？并绘制 Graphviz 图来表示。"
+    override fun getInstruction(): String =
+        "根据下面的信息，分析项目的分层是否符合业内的通用规范？并绘制 Graphviz 图来表示。"
+
     override fun getRequirements(): String = """
 1. 如果存在相互引用，请用红线展示出来。
 2. 只展示重要的分层，不要展示过多的细节。
@@ -31,12 +33,10 @@ digraph G {
 """
 
     override fun getExtendData(): String {
-        val codeContext = ComateSourceCodeContext.create(context)
-        val codeDataStructs = codeAnalyser(context.language, codeContext)?.analyse() ?: emptyList()
-
+        val codeDataStructs = context.getDs()
         val cleanPackageInOut = CodeDataStruct.packageInOut(codeDataStructs)
 
-        val introduction = this.introduction(context.workdir)
+        val introduction = context.getReadmeIntroduction()
         return """$introduction
 
 package fan in: $cleanPackageInOut

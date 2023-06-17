@@ -32,10 +32,7 @@ class ApiGovernancePrompter(
 
     override fun getExtendData(): String {
         logger.info("start to analyse code: $context")
-        val codeContext = ComateSourceCodeContext.create(context)
-
-        val codeDataStructs = codeAnalyser(context.language, codeContext)?.analyse()
-        val apis = ServicesMap.scanApis(codeDataStructs, codeContext)
+        val apis = context.getApis()
 
         logger.info("finished analyse code: ${context.workdir}")
 
