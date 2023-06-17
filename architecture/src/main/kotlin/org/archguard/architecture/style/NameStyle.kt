@@ -1,5 +1,7 @@
 package org.archguard.architecture.style
 
+import java.util.*
+
 enum class NamingStyle(val value: String) {
     UpperCamelCase("UpperCamelCase") {
         override fun isValid(string: String): Boolean {
@@ -31,6 +33,10 @@ enum class NamingStyle(val value: String) {
 
         fun valuesString(): String {
             return NamingStyle.values().joinToString(", ") { it.value }
+        }
+
+        fun toSnakeCase(string: String): String {
+            return string.replace(Regex("([a-z])([A-Z]+)"), "$1_$2").lowercase(Locale.getDefault())
         }
     }
 

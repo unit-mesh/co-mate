@@ -24,16 +24,17 @@ enum class DynamicContext(val value: String) {
             return """DomainSpecification is a specification of a domain model element.""".trimIndent()
         }
     },
-    SERVICE_MAP("ServiceMap") {
-        override fun explain(): String {
-            return """ServiceMap is a define for service map.""".trimIndent()
-        }
-    },
-    LAYERED_STYLE("LayeredStyle") {
-        override fun explain(): String {
-            return """LayeredStyle is a define for layered architecture.""".trimIndent()
-        }
-    },
+
+    //    SERVICE_MAP("ServiceMap") {
+//        override fun explain(): String {
+//            return """ServiceMap is a define for service map.""".trimIndent()
+//        }
+//    },
+//    LAYERED_STYLE("LayeredStyle") {
+//        override fun explain(): String {
+//            return """LayeredStyle is a defined for layered architecture.""".trimIndent()
+//        }
+//    },
     PACKAGE_INFO("PackageInfo") {
         override fun explain(): String {
             return """PackageInfo is a define for ALL package info.""".trimIndent()
@@ -49,7 +50,7 @@ enum class DynamicContext(val value: String) {
     abstract fun explain(): String
 
     companion object {
-        fun from(value: String): DynamicContext? {
+        private fun from(value: String): DynamicContext? {
             return values().find { it.value == value }
         }
 
@@ -62,9 +63,9 @@ enum class DynamicContext(val value: String) {
                     DOMAIN_SPECIFICATION -> DomainSpec().default()
 
                     // TODO: load service map from file
-                    SERVICE_MAP -> "ServiceMap"
+//                    SERVICE_MAP -> "ServiceMap"
+//                    LAYERED_STYLE -> "LayeredStyle"
                     DOMAIN_MODEL -> DomainModelFactory.generate("mvc", workspace.ds)
-                    LAYERED_STYLE -> "LayeredStyle"
                     PACKAGE_INFO -> CodeDataStruct.packageInString(workspace.ds)
                 }
             }
