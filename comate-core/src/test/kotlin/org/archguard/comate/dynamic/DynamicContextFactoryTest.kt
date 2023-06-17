@@ -4,6 +4,7 @@ import org.archguard.comate.command.ComateContext
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import kotlin.io.path.Path
+import kotlin.test.assertNotNull
 
 class DynamicContextFactoryTest {
     @Test
@@ -17,7 +18,11 @@ class DynamicContextFactoryTest {
 
 
     @Test
-    fun should_return_all_explains() {
+    fun should_find_by_function_name() {
+        val context = ComateContext(Path("."), "kotlin", null)
+        val dynamicContextFactory = DynamicContextFactory(context)
 
+        val introduceSystemFunction = dynamicContextFactory.findByName("introduce_system")
+        assertNotNull(introduceSystemFunction)
     }
 }

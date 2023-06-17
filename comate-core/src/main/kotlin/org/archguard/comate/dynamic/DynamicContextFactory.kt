@@ -6,7 +6,6 @@ import org.archguard.comate.dynamic.functions.DyFunction
 import org.archguard.comate.dynamic.functions.toSnakeCase
 import org.reflections.Reflections
 
-// Assuming you want to scan classes in the current package
 fun findClasses(): List<Class<out DyFunction>> {
     val packageName = DyFunction::class.java.`package`.name
     val reflections = Reflections(packageName)
@@ -33,5 +32,9 @@ class DynamicContextFactory(val context: ComateContext) {
         return this.classMap.map {
             it.value.define()
         }
+    }
+
+    fun findByName(name: String): DyFunction? {
+        return this.classMap[name]
     }
 }
