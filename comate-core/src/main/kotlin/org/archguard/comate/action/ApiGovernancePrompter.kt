@@ -1,15 +1,13 @@
 package org.archguard.comate.action
 
 import org.archguard.comate.action.model.ApiResult
+import org.archguard.comate.code.ServicesMap
 import org.archguard.comate.command.ComateWorkspace
 import org.archguard.comate.governance.ApiRuleVerifier
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.comate.wrapper.ComateSourceCodeContext
 import org.archguard.spec.lang.rest_api
-import org.archguard.spec.element.RestApiElement
-import org.archguard.scanner.analyser.ApiCallAnalyser
-import org.archguard.scanner.core.sourcecode.ContainerService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -37,21 +35,7 @@ class ApiGovernancePrompter(
         val codeContext = ComateSourceCodeContext.create(context)
 
         val codeDataStructs = codeAnalyser(context.language, codeContext)?.analyse()
-        val services: List<ContainerService> = if (codeDataStructs != null) {
-            ApiCallAnalyser(codeContext).analyse(codeDataStructs)
-        } else {
-            listOf()
-        }
-
-        val apis = services.flatMap {
-            it.resources.map { resource ->
-                RestApiElement(
-                    uri = resource.sourceUrl,
-                    httpAction = resource.sourceHttpMethod.uppercase(),
-                    statusCodes = listOf(200)
-                )
-            }
-        }
+        val apis = ServicesMap.scanApis(codeDataStructs, codeContext)
 
         logger.info("finished analyse code: ${context.workdir}")
 
@@ -88,3 +72,4 @@ Token Based Authentication (Recommended) Ideally, microservices should be statel
         val logger: Logger = LoggerFactory.getLogger(ApiGovernancePrompter::class.java)!!
     }
 }
+
