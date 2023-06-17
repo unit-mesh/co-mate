@@ -14,6 +14,7 @@ annotation class ComateFunction
  * 2. Should have default constructor with no parameters
  */
 interface DyFunction {
+    fun explain(): String
     /**
      * return true if the function is executed successfully
      */
