@@ -18,6 +18,7 @@ interface DyFunction {
     val context: ComateContext
 
     fun explain(): String
+
     /**
      * return true if the function is executed successfully
      */
@@ -27,8 +28,7 @@ interface DyFunction {
      * function definition for LLM to select the best function
      */
     fun define(): String {
-        val pureJavaName = this.javaClass.name.split(".").last()
-        val functionName = NamingStyle.toSnakeCase(pureJavaName).replace("_function", "")
+        val functionName = javaClass.name.toSnakeCase()
 
         val params = this.parameters()
         val paramsString = params.map {
@@ -42,4 +42,8 @@ interface DyFunction {
      * What parameters does the function need?
      */
     fun parameters(): HashMap<String, String>
+}
+
+fun String.toSnakeCase(): String {
+    return NamingStyle.toSnakeCase(this.split(".").last()).replace("_function", "")
 }

@@ -4,7 +4,6 @@ import org.archguard.comate.command.ComateContext
 import org.archguard.comate.dynamic.functions.ComateFunction
 import org.archguard.comate.dynamic.functions.DyFunction
 import org.reflections.Reflections
-import kotlin.reflect.full.primaryConstructor
 
 // Assuming you want to scan classes in the current package
 fun findClasses(): List<Class<out DyFunction>> {
@@ -19,26 +18,10 @@ fun findClasses(): List<Class<out DyFunction>> {
 
 
 class DynamicContextFactory(val context: ComateContext) {
-//    private var classes: List<Class<out DyFunction>>
-//
-//    init {
-//        this.classes = findClasses()
-//    }
-
     fun functions(): List<String> {
         return findClasses().map { clazz ->
-            val dyFunction = clazz::class.primaryConstructor?.call(context)
-            dyFunction?.newInstance()?.define() ?: ""
+            val dyFunction = clazz.declaredConstructors[0].newInstance(context) as DyFunction
+            dyFunction.define()
         }
     }
-
-//    fun runByFunctionName(functionName: String): Boolean {
-//        val clazz = findClasses().find { clazz ->
-//            val dyFunction = clazz::class.primaryConstructor?.call(context)
-//            dyFunction?.newInstance()?.define() == functionName
-//        }
-//
-//        val dyFunction = clazz?.primaryConstructor?.call(context)
-//        return dyFunction?.newInstance()?.execute() ?: false
-//    }
 }
