@@ -1,5 +1,6 @@
 package org.archguard.comate.dynamic
 
+import org.archguard.comate.dynamic.functions.AnalysisSystem
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -8,7 +9,7 @@ class DynamicContextFactoryTest {
     fun should_get_analysis_system_function() {
         val analysisSystem = AnalysisSystem("http://localhost:8080")
         val defineFunc = analysisSystem.define()
-        assertEquals("analysis_system", defineFunc)
+        assertEquals("analysis_system(url: String)", defineFunc)
     }
 
     @Test
