@@ -25,6 +25,7 @@ dependencies {
     implementation(libs.chapi.domain)
 
     implementation(libs.kotlin.reflect)
+    implementation(libs.reflections)
 
     implementation(libs.plantuml)
 

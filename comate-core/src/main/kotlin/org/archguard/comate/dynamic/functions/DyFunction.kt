@@ -2,9 +2,17 @@ package org.archguard.comate.dynamic.functions
 
 import org.archguard.architecture.style.NamingStyle
 
+@Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS)
 annotation class ComateFunction
 
+/**
+ * A dynamic function is a function that can be executed by the dynamic context
+ * and can be defined by the LLM.
+ *
+ * 1. it needs to be annotated with @ComateFunction
+ * 2. Should have default constructor with no parameters
+ */
 interface DyFunction {
     /**
      * return true if the function is executed successfully

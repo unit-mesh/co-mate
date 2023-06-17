@@ -1,7 +1,11 @@
 package org.archguard.comate.dynamic.functions
 
 @ComateFunction
-class IntroductionSystem(private val url: String) : DyFunction {
+class IntroductionSystem(private var url: String) : DyFunction {
+    // TODO: Add a constructor with no parameters
+    constructor() : this("http://localhost:8080") {
+    }
+
     override fun execute(): Boolean {
         return true
     }
