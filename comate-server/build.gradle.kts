@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.jvm)
     alias(libs.plugins.serialization)
+    id("io.ktor.plugin") version "2.3.1"
 }
 
 repositories {
@@ -19,4 +20,5 @@ dependencies {
     // websocket
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:2.3.1")
     implementation("io.ktor:ktor-client-websockets:2.3.1")
+    implementation("io.ktor:ktor-server-websockets:2.3.1")
 }
