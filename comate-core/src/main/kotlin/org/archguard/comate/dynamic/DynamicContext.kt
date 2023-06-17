@@ -41,6 +41,11 @@ enum class DynamicContext(val value: String) {
             return """PackageInfo is a define for ALL package info.""".trimIndent()
         }
     },
+    PROJECT_DEPENDENCY("ProjectDependency") {
+        override fun explain(): String {
+            return """ProjectDependency include all used defines""".trimIndent()
+        }
+    },
     README("README") {
         override fun explain(): String {
             return """README file contain project introduction.""".trimIndent()
@@ -74,6 +79,7 @@ enum class DynamicContext(val value: String) {
                     DOMAIN_MODEL -> DomainModelFactory.generate("mvc", workspace.ds)
                     PACKAGE_INFO -> CodeDataStruct.packageInString(workspace.ds)
                     README -> ReadmeParser.introduction(workspace.workdir)
+                    PROJECT_DEPENDENCY -> TODO()
                 }
             }
 

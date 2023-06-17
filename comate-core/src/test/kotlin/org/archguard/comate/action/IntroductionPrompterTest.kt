@@ -1,6 +1,5 @@
 package org.archguard.comate.action
 
-import org.archguard.comate.code.IntroductionCodePrompt
 import org.archguard.comate.command.ComateWorkspace
 import org.archguard.comate.strategy.BasicPromptStrategy
 import org.junit.jupiter.api.Assertions.assertEquals

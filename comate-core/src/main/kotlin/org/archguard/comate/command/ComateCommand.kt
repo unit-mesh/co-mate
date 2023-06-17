@@ -1,7 +1,7 @@
 package org.archguard.comate.command
 
 import org.archguard.comate.action.*
-import org.archguard.comate.code.IntroductionCodePrompt
+import org.archguard.comate.action.IntroductionCodePrompt
 import org.archguard.comate.smart.Semantic
 import org.archguard.comate.smart.cosineSimilarity
 import org.archguard.comate.strategy.BasicPromptStrategy
