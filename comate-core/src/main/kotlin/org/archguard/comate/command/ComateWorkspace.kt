@@ -23,15 +23,14 @@ data class ComateWorkspace(
     private val projectDependencies: List<CompositionDependency> = emptyList(),
     private val apis: List<RestApiElement> = emptyList(),
 ) {
-    val codeContext = ComateSourceCodeContext.create(this)
+    private val codeContext = ComateSourceCodeContext.create(this)
 
     fun getDs(forceScan: Boolean = false): List<CodeDataStruct> {
         if (ds.isNotEmpty() && !forceScan) {
             return ds
         }
 
-        val codeDataStructs = Companion.codeAnalyser(language, codeContext)?.analyse()
-
+        val codeDataStructs = codeAnalyser(language, codeContext)?.analyse()
         return codeDataStructs ?: emptyList()
     }
 
@@ -40,7 +39,8 @@ data class ComateWorkspace(
             return projectDependencies
         }
 
-        return ScaAnalyser(ComateScaContext.create(workdir.toString(), this.language)).analyse()
+        val scaContext = ComateScaContext.create(workdir.toString(), this.language)
+        return ScaAnalyser(scaContext).analyse()
     }
 
     fun getPackageDependencies(forceScan: Boolean = false): Map<String, List<String>> {

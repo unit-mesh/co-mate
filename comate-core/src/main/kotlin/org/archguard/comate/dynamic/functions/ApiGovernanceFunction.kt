@@ -1,7 +1,7 @@
 package org.archguard.comate.dynamic.functions
 
 @ComateFunction
-class ApiGovernance(private var url: String) : DyFunction {
+class ApiGovernanceFunction(private var url: String) : DyFunction {
     constructor() : this("https://github.com/archguard/co-mate") {
     }
 

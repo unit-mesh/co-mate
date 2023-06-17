@@ -24,7 +24,7 @@ interface DyFunction {
      */
     fun define(): String {
         val pureJavaName = this.javaClass.name.split(".").last()
-        val functionName = NamingStyle.toSnakeCase(pureJavaName)
+        val functionName = NamingStyle.toSnakeCase(pureJavaName).replace("_function", "")
 
         val params = this.parameters()
         val paramsString = params.map {
