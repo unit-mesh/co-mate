@@ -20,7 +20,7 @@ dependencies {
     implementation(libs.bundles.openai)
     implementation(libs.bundles.markdown)
 
-    implementation("androidx.compose.material3:material3:1.1.0-alpha06")
+    implementation("androidx.compose.material3:material3:1.1.0")
 
     implementation("io.reactivex.rxjava3:rxjava:3.1.6")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
