@@ -2,13 +2,13 @@ package org.archguard.comate.action
 
 import org.archguard.architecture.layered.ChannelType
 import org.archguard.comate.code.dependencyMapping
-import org.archguard.comate.command.ComateWorkspace
+import org.archguard.comate.command.ComateContext
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.scanner.core.sca.CompositionDependency
 
 class IntroductionCodePrompt(
-    val context: ComateWorkspace,
+    val context: ComateContext,
     override val strategy: Strategy,
 ) : CodePromptStrategy {
     override fun getRole(): String = "Architecture"

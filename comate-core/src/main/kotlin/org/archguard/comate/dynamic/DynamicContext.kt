@@ -2,7 +2,7 @@ package org.archguard.comate.dynamic
 
 import chapi.domain.core.CodeDataStruct
 import org.archguard.comate.code.packageInString
-import org.archguard.comate.command.ComateWorkspace
+import org.archguard.comate.command.ComateContext
 import org.archguard.comate.document.ReadmeParser
 import org.archguard.comate.model.DomainModelFactory
 import org.archguard.spec.lang.DomainSpec
@@ -65,7 +65,7 @@ enum class DynamicContext(val value: String) {
             return values().find { it.value == value }
         }
 
-        fun build(values: List<String>, workspace: ComateWorkspace): List<String> =
+        fun build(values: List<String>, workspace: ComateContext): List<String> =
             values.mapNotNull(Companion::from).map {
                 // TODO: load specification from file
                 when (it) {

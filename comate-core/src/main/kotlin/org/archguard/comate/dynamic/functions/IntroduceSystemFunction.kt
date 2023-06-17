@@ -1,12 +1,9 @@
 package org.archguard.comate.dynamic.functions
 
+import org.archguard.comate.command.ComateContext
+
 @ComateFunction
-class IntroduceSystemFunction(private var url: String) : DyFunction {
-    // TODO: Add a constructor with no parameters
-    constructor() : this("https://github.com/archguard/co-mate") {
-
-    }
-
+class IntroduceSystemFunction(override val context: ComateContext) : DyFunction {
     override fun explain(): String {
         return "Introduce system based on README.md, project dependencies."
     }
@@ -16,6 +13,6 @@ class IntroduceSystemFunction(private var url: String) : DyFunction {
     }
 
     override fun parameters(): HashMap<String, String> = hashMapOf(
-        ::url.name to "String"
+
     )
 }

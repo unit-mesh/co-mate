@@ -2,7 +2,7 @@ package org.archguard.comate.cli
 
 import io.github.cdimascio.dotenv.Dotenv
 import org.archguard.comate.command.ComateCommand
-import org.archguard.comate.command.ComateWorkspace
+import org.archguard.comate.command.ComateContext
 import org.archguard.comate.connector.OPENAI_MODEL
 import org.archguard.comate.connector.OpenAIConnector
 import java.io.File
@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
     logger.info("start execution ...")
 
     val openAiConnector = createConnector()
-    val context = ComateWorkspace(basePath, language, openAiConnector)
+    val context = ComateContext(basePath, language, openAiConnector)
 
     val summarizePrompt = comateCommand.run(context)
 

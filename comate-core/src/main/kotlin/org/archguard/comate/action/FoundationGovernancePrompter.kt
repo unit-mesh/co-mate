@@ -1,12 +1,12 @@
 package org.archguard.comate.action
 
-import org.archguard.comate.command.ComateWorkspace
+import org.archguard.comate.command.ComateContext
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.spec.lang.foundation
 
 class FoundationGovernancePrompter(
-    val context: ComateWorkspace,
+    val context: ComateContext,
     override val strategy: Strategy,
 ) : CodePromptStrategy {
     override fun getRole(): String = "Architecture"

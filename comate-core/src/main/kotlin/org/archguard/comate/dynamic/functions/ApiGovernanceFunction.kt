@@ -1,10 +1,9 @@
 package org.archguard.comate.dynamic.functions
 
-@ComateFunction
-class ApiGovernanceFunction(private var url: String) : DyFunction {
-    constructor() : this("https://github.com/archguard/co-mate") {
-    }
+import org.archguard.comate.command.ComateContext
 
+@ComateFunction
+class ApiGovernanceFunction(override val context: ComateContext) : DyFunction {
     override fun explain(): String {
         return "REST API Governance function, based on API Specification."
     }
@@ -14,6 +13,6 @@ class ApiGovernanceFunction(private var url: String) : DyFunction {
     }
 
     override fun parameters(): HashMap<String, String> = hashMapOf(
-        ::url.name to "String"
+
     )
 }

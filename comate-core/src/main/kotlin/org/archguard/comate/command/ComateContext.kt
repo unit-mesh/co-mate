@@ -14,7 +14,7 @@ import org.archguard.scanner.core.sourcecode.SourceCodeContext
 import org.archguard.spec.element.RestApiElement
 import java.nio.file.Path
 
-data class ComateWorkspace(
+data class ComateContext(
     val workdir: Path,
     val language: String,
     val connector: OpenAIConnector?,

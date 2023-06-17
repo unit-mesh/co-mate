@@ -1,6 +1,7 @@
 package org.archguard.comate.dynamic.functions
 
 import org.archguard.architecture.style.NamingStyle
+import org.archguard.comate.command.ComateContext
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS)
@@ -14,6 +15,8 @@ annotation class ComateFunction
  * 2. Should have default constructor with no parameters
  */
 interface DyFunction {
+    val context: ComateContext
+
     fun explain(): String
     /**
      * return true if the function is executed successfully
