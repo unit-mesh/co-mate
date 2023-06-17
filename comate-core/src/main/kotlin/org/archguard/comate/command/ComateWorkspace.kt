@@ -2,6 +2,7 @@ package org.archguard.comate.command
 
 import chapi.domain.core.CodeDataStruct
 import org.archguard.comate.code.ServicesMap
+import org.archguard.comate.code.generatePackageDependencies
 import org.archguard.comate.connector.OpenAIConnector
 import org.archguard.comate.document.ReadmeParser
 import org.archguard.comate.wrapper.ComateScaContext
@@ -19,7 +20,7 @@ data class ComateWorkspace(
     val connector: OpenAIConnector?,
     val extArgs: Map<String, String> = emptyMap(),
     private val ds: List<CodeDataStruct> = emptyList(),
-    private val dependencies: List<CompositionDependency> = emptyList(),
+    private val projectDependencies: List<CompositionDependency> = emptyList(),
     private val apis: List<RestApiElement> = emptyList(),
 ) {
     val codeContext = ComateSourceCodeContext.create(this)
@@ -34,12 +35,17 @@ data class ComateWorkspace(
         return codeDataStructs ?: emptyList()
     }
 
-    fun getDependencies(forceScan: Boolean = false): List<CompositionDependency> {
-        if (dependencies.isNotEmpty() && !forceScan) {
-            return dependencies
+    fun getProjectDependencies(forceScan: Boolean = false): List<CompositionDependency> {
+        if (projectDependencies.isNotEmpty() && !forceScan) {
+            return projectDependencies
         }
 
         return ScaAnalyser(ComateScaContext.create(workdir.toString(), this.language)).analyse()
+    }
+
+    fun getPackageDependencies(forceScan: Boolean = false): Map<String, List<String>> {
+        val codeDataStructs = this.getDs()
+        return CodeDataStruct.generatePackageDependencies(codeDataStructs)
     }
 
     fun getApis(forceScan: Boolean = false): List<RestApiElement> {

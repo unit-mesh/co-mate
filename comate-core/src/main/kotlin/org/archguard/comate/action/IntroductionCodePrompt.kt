@@ -27,7 +27,7 @@ class IntroductionCodePrompt(
     }
 
     override fun getExtendData(): String {
-        val dep = context.getDependencies()
+        val dep = context.getProjectDependencies()
         val depMap: Map<String, List<String>> = CompositionDependency.dependencyMapping(dep, context.workdir)
 
         val instr = context.getReadmeIntroduction()

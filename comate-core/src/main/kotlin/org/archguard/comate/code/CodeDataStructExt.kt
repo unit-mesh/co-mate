@@ -2,7 +2,7 @@ package org.archguard.comate.code
 
 import chapi.domain.core.CodeDataStruct
 
-fun CodeDataStruct.Companion.packageInOut(codeDataStructs: List<CodeDataStruct>): Map<String, List<String>> {
+fun CodeDataStruct.Companion.generatePackageDependencies(codeDataStructs: List<CodeDataStruct>): Map<String, List<String>> {
     val packageList = codeDataStructs.map { it.Package }.distinct()
     val packageInOut = mutableMapOf<String, List<String>>()
 
@@ -29,6 +29,6 @@ fun CodeDataStruct.Companion.packageInOut(codeDataStructs: List<CodeDataStruct>)
 }
 
 fun CodeDataStruct.Companion.packageInString(codeDataStructs: List<CodeDataStruct>): String {
-    val packageInOut = this.packageInOut(codeDataStructs)
+    val packageInOut = this.generatePackageDependencies(codeDataStructs)
     return """package fan in: $packageInOut"""
 }

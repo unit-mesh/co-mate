@@ -1,11 +1,8 @@
 package org.archguard.comate.action
 
-import chapi.domain.core.CodeDataStruct
-import org.archguard.comate.code.packageInOut
 import org.archguard.comate.command.ComateWorkspace
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
-import org.archguard.comate.wrapper.ComateSourceCodeContext
 
 class LayeredStylePrompt(
     val context: ComateWorkspace,
@@ -33,13 +30,10 @@ digraph G {
 """
 
     override fun getExtendData(): String {
-        val codeDataStructs = context.getDs()
-        val cleanPackageInOut = CodeDataStruct.packageInOut(codeDataStructs)
-
         val introduction = context.getReadmeIntroduction()
         return """$introduction
 
-package fan in: $cleanPackageInOut
+package fan in: ${context.getPackageDependencies()}
 """
             .trimIndent()
 
