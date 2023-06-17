@@ -1,7 +1,7 @@
 package org.archguard.comate.dynamic.functions
 
 @ComateFunction
-class IntroductionSystemFunction(private var url: String) : DyFunction {
+class IntroduceSystemFunction(private var url: String) : DyFunction {
     // TODO: Add a constructor with no parameters
     constructor() : this("https://github.com/archguard/co-mate") {
 

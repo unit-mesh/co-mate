@@ -13,4 +13,10 @@ class DynamicContextFactoryTest {
 //        assertEquals(2, functions.size)
 //        assertEquals(functions.contains("analysis_system"), true)
     }
+
+
+    @Test
+    fun should_return_all_explains() {
+
+    }
 }
