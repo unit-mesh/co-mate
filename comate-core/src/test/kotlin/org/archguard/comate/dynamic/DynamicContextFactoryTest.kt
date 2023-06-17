@@ -1,6 +1,7 @@
 package org.archguard.comate.dynamic
 
 import org.archguard.comate.command.ComateContext
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import kotlin.io.path.Path
 
@@ -11,10 +12,7 @@ class DynamicContextFactoryTest {
         val dynamicContextFactory = DynamicContextFactory(context)
         val functions = dynamicContextFactory.functions()
 
-        println(functions)
-
-//        assertEquals(2, functions.size)
-//        assertEquals(functions.contains("analysis_system"), true)
+        assertEquals(functions.contains("introduce_system()"), true)
     }
 
 

@@ -3,6 +3,7 @@ package org.archguard.comate.dynamic
 import org.archguard.comate.command.ComateContext
 import org.archguard.comate.dynamic.functions.ComateFunction
 import org.archguard.comate.dynamic.functions.DyFunction
+import org.archguard.comate.dynamic.functions.toSnakeCase
 import org.reflections.Reflections
 
 // Assuming you want to scan classes in the current package
@@ -18,10 +19,19 @@ fun findClasses(): List<Class<out DyFunction>> {
 
 
 class DynamicContextFactory(val context: ComateContext) {
+    private var classMap: Map<String, DyFunction> = mapOf()
+
+    init {
+        classMap = findClasses().associate { clazz ->
+            val defaultConstructor = clazz.declaredConstructors[0]
+            val dyFunction = defaultConstructor.newInstance(context) as DyFunction
+            clazz.name.toSnakeCase() to dyFunction
+        }
+    }
+
     fun functions(): List<String> {
-        return findClasses().map { clazz ->
-            val dyFunction = clazz.declaredConstructors[0].newInstance(context) as DyFunction
-            dyFunction.define()
+        return this.classMap.map {
+            it.value.define()
         }
     }
 }
