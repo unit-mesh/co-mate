@@ -8,13 +8,16 @@
 
 Project Kanban: https://github.com/orgs/archguard/projects/5/views/1
 
-Supported languages by [ArchGuard](https://github.com/archguard/archguard) and [Chapi](https://github.com/modernizing/chapi):
+Supported languages by [ArchGuard](https://github.com/archguard/archguard)
+and [Chapi](https://github.com/modernizing/chapi):
 Java, Kotlin, TypeScript/JavaScript, Golang, Python
 
 ## Design Principles
 
-1. DSL as Ubiquitous Language: Empower efficient communication between humans and machines by employing a Domain-Specific Language (DSL).
-2. Atomic LLM for Orchestration: Harness the atomic capabilities of a Language Model (LLM) to construct intricate behaviors within the DSL.
+1. DSL as Ubiquitous Language: Empower efficient communication between humans and machines by employing a
+   Domain-Specific Language (DSL).
+2. Atomic LLM for Orchestration: Harness the atomic capabilities of a Language Model (LLM) to construct intricate
+   behaviors within the DSL.
 3. Dynamic Context by Layered: Divide the context into layers to handle complexities effectively through the LLM.
 
 ## Usage
@@ -32,8 +35,9 @@ OPENAI_API_PROXY=xxxx (optional, if you had a OpenAI proxy server)
 
 ## Modules
 
-- `comate-cli`: command line interface
-- `comate-gui`: graphical user interface
+- `comate-server`: server side [todo]
+- `comate-cli`: command line interface  [todo]
+- `comate-gui`: graphical user interface  [todo]
 
 Core modules:
 
