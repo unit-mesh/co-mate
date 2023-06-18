@@ -63,7 +63,7 @@ data class ComateContext(
 
     companion object {
         fun codeAnalyser(lang: String, context: SourceCodeContext): LanguageSourceCodeAnalyser? {
-            return when (lang) {
+            return when (lang.lowercase()) {
                 "java" -> {
                     JavaAnalyser(context)
                 }
