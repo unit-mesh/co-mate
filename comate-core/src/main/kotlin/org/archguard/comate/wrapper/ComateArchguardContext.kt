@@ -34,9 +34,5 @@ class ComateSourceCodeContext(
         fun create(context: ComateContext): SourceCodeContext {
             return ComateSourceCodeContext(archGuardClient, listOf(), context.language, context.workdir.toString())
         }
-
-        fun custom(client: ArchGuardClient, path: String, language: String, features: List<String> = listOf()): SourceCodeContext {
-            return ComateSourceCodeContext(client, features, language, path)
-        }
     }
 }
