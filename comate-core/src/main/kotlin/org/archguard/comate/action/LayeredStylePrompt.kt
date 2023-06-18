@@ -30,10 +30,10 @@ digraph G {
 """
 
     override fun getExtendData(): String {
-        val introduction = context.getReadmeIntroduction()
+        val introduction = context.fetchReadmeIntroduction()
         return """$introduction
 
-package fan in: ${context.getPackageDependencies()}
+package fan in: ${context.fetchPackageDependencies()}
 """
             .trimIndent()
 

@@ -27,10 +27,10 @@ class IntroductionCodePrompt(
     }
 
     override fun getExtendData(): String {
-        val dep = context.getProjectDependencies()
+        val dep = context.fetchProjectDependencies()
         val depMap: Map<String, List<String>> = CompositionDependency.dependencyMapping(dep, context.workdir)
 
-        val instr = context.getReadmeIntroduction()
+        val instr = context.fetchReadmeIntroduction()
 
         val items = depMap.map { "| ${it.key} | ${it.value.joinToString(", ")} |" }.joinToString("\n")
         val channels = ChannelType.allValues()

@@ -25,7 +25,7 @@ data class ComateContext(
 ) {
     private val codeContext = ComateSourceCodeContext.create(this)
 
-    fun getDs(forceScan: Boolean = false): List<CodeDataStruct> {
+    fun fetchDs(forceScan: Boolean = false): List<CodeDataStruct> {
         if (ds.isNotEmpty() && !forceScan) {
             return ds
         }
@@ -34,7 +34,7 @@ data class ComateContext(
         return codeDataStructs ?: emptyList()
     }
 
-    fun getProjectDependencies(forceScan: Boolean = false): List<CompositionDependency> {
+    fun fetchProjectDependencies(forceScan: Boolean = false): List<CompositionDependency> {
         if (projectDependencies.isNotEmpty() && !forceScan) {
             return projectDependencies
         }
@@ -43,21 +43,21 @@ data class ComateContext(
         return ScaAnalyser(scaContext).analyse()
     }
 
-    fun getPackageDependencies(forceScan: Boolean = false): Map<String, List<String>> {
-        val codeDataStructs = this.getDs()
+    fun fetchPackageDependencies(forceScan: Boolean = false): Map<String, List<String>> {
+        val codeDataStructs = this.fetchDs()
         return CodeDataStruct.generatePackageDependencies(codeDataStructs)
     }
 
-    fun getApis(forceScan: Boolean = false): List<RestApiElement> {
+    fun fetchApis(forceScan: Boolean = false): List<RestApiElement> {
         if (apis.isNotEmpty() && !forceScan) {
             return apis
         }
 
-        val codeDataStructs = this.getDs()
+        val codeDataStructs = this.fetchDs()
         return ServicesMap.scanApis(codeDataStructs, codeContext)
     }
 
-    fun getReadmeIntroduction(): String {
+    fun fetchReadmeIntroduction(): String {
         return ReadmeParser.introduction(workdir)
     }
 

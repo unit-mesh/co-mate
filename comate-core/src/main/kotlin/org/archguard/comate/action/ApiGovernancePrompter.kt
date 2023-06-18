@@ -30,7 +30,7 @@ class ApiGovernancePrompter(
 
     override fun getExtendData(): String {
         logger.info("start to analyse code: $context")
-        val apis = context.getApis()
+        val apis = context.fetchApis()
 
         logger.info("finished analyse code: ${context.workdir}")
 

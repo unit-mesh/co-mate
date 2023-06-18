@@ -18,7 +18,7 @@ class FoundationGovernancePrompter(
     """.trimIndent()
 
     override fun getExtendData(): String {
-        val codeDataStructs = context.getDs()
+        val codeDataStructs = context.fetchDs()
 
         val governance = foundation {
 
@@ -26,7 +26,7 @@ class FoundationGovernancePrompter(
 
 //        governance.exec(codeDataStructs)
 
-        val introduction = context.getReadmeIntroduction()
+        val introduction = context.fetchReadmeIntroduction()
         return """$introduction
 
 """.trimIndent()

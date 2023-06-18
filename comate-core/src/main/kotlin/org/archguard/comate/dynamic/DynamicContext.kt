@@ -76,8 +76,8 @@ enum class DynamicContext(val value: String) {
                     // TODO: load service map from file
 //                    SERVICE_MAP -> "ServiceMap"
 //                    LAYERED_STYLE -> "LayeredStyle"
-                    DOMAIN_MODEL -> DomainModelFactory.generate("mvc", workspace.getDs())
-                    PACKAGE_INFO -> CodeDataStruct.packageInString(workspace.getDs())
+                    DOMAIN_MODEL -> DomainModelFactory.generate("mvc", workspace.fetchDs())
+                    PACKAGE_INFO -> CodeDataStruct.packageInString(workspace.fetchDs())
                     README -> ReadmeParser.introduction(workspace.workdir)
                     PROJECT_DEPENDENCY -> TODO()
                 }
