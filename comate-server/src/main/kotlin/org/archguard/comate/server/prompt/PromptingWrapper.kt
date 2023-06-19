@@ -16,7 +16,7 @@ class PromptingWrapper {
     Thought: I now know the final answer
     Final Answer: the final answer to the original input question""".trimIndent()
 
-    private fun functionsIntruction(toolNames: String) = """
+    private fun functionsInstruction(toolNames: String) = """
     Use the following format:
 
     Question: the input question you must answer
@@ -48,7 +48,7 @@ ${suffix(text)}"""
     fun functionSearch(text: String, tools: List<BaseTool>): String {
         val toolStrings = tools.joinToString("\n") { "${it.name}: ${it.description}" }
         val toolNames = tools.joinToString(", ") { it.name }
-        val formatInstructions = functionsIntruction(toolNames)
+        val formatInstructions = functionsInstruction(toolNames)
 
         return """$PREFIX
 
