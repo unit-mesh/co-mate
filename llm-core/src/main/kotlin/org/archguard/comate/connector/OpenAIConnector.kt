@@ -50,10 +50,10 @@ class OpenAIConnector(
     val messages: MutableList<ChatMessage> = ArrayList()
     private var historyMessageLength: Int = 0
 
-    override fun prompt(promptText: String): String {
-        val systemMessage = ChatMessage(ChatMessageRole.USER.value(), promptText)
+    override fun prompt(text: String): String {
+        val systemMessage = ChatMessage(ChatMessageRole.USER.value(), text)
 
-        historyMessageLength += promptText.length
+        historyMessageLength += text.length
 
         // todo: 4096 is the max length of history message, need to find a better way to handle thiss
         if (historyMessageLength > 4096) {
@@ -75,8 +75,8 @@ class OpenAIConnector(
         return output
     }
 
-    override fun stream(promptText: String): Flow<String> {
-        val systemMessage = ChatMessage(ChatMessageRole.USER.value(), promptText)
+    override fun stream(text: String): Flow<String> {
+        val systemMessage = ChatMessage(ChatMessageRole.USER.value(), text)
 
         messages.add(systemMessage)
 
@@ -121,7 +121,7 @@ class OpenAIConnector(
     Question: $input
 """.trimIndent()
 
-    override fun promptTemplate(tools: List<BaseTool>, input: String): String {
+    override fun promptTemplate(text: String, tools: List<BaseTool>): String {
         // todo: spike for elements
         val toolStrings = tools.joinToString("\n") { "${it.name}: ${it.description}" }
         val toolNames = tools.joinToString(", ") { it.name }
@@ -133,6 +133,6 @@ $toolStrings
 
 $formatInstructions
 
-${suffix(input)}"""
+${suffix(text)}"""
     }
 }

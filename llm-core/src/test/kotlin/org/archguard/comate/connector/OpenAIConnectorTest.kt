@@ -8,9 +8,12 @@ class OpenAIConnectorTest {
     fun should_create_similar_prompt_text() {
         val aiConnector = OpenAIConnector("openAiKey", "", "")
         val input = "Introduce the following system: https://github.com/archguard/ddd-monolithic-code-sample"
-        val output = aiConnector.promptTemplate(listOf(BaseTool("introduce_system", "introduce_system is a function to introduce a system.")), input)
+        val baseTools = listOf(BaseTool("introduce_system", "introduce_system is a function to introduce a system."))
 
-        assertEquals(output, """Answer the following questions as best you can. You have access to the following tools:
+        val output = aiConnector.promptTemplate(input, baseTools)
+
+        assertEquals(
+            output, """Answer the following questions as best you can. You have access to the following tools:
 
 introduce_system: introduce_system is a function to introduce a system.
 
@@ -27,6 +30,7 @@ Final Answer: the final answer to the original input question
 
 Begin!
 
-Question: Introduce the following system: https://github.com/archguard/ddd-monolithic-code-sample""")
+Question: Introduce the following system: https://github.com/archguard/ddd-monolithic-code-sample"""
+        )
     }
 }

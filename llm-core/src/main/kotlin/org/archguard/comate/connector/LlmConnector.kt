@@ -9,7 +9,7 @@ interface LlmConnector {
     val timeout: Duration
         get() = Duration.ofSeconds(600)
 
-    fun prompt(promptText: String): String
-    fun stream(promptText: String): Flow<String>
-    fun promptTemplate(tools: List<BaseTool>, input: String): String
+    fun prompt(text: String): String
+    fun stream(text: String): Flow<String>
+    fun promptTemplate(text: String, tools: List<BaseTool>): String
 }
