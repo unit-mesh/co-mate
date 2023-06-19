@@ -1,4 +1,4 @@
-package org.archguard.comate.server
+package org.archguard.comate.server.socket
 
 import io.ktor.websocket.*
 import java.util.concurrent.atomic.*

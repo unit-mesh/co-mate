@@ -1,4 +1,4 @@
-package org.archguard.comate.server.plugins
+package org.archguard.comate.server.socket
 
 import io.ktor.network.sockets.*
 import io.ktor.websocket.*
@@ -8,7 +8,6 @@ import io.ktor.server.websocket.*
 import java.time.*
 import java.util.*
 import kotlin.collections.LinkedHashSet
-import org.archguard.comate.server.Connection
 
 fun Application.configureSockets() {
     install(WebSockets) {
@@ -20,7 +19,6 @@ fun Application.configureSockets() {
     routing {
         val connections = Collections.synchronizedSet<Connection?>(LinkedHashSet())
         webSocket("/chat") {
-            println("Adding user!")
             val thisConnection = Connection(this)
             connections += thisConnection
             try {
