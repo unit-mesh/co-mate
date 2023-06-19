@@ -20,16 +20,18 @@ repositories {
 
 dependencies {
     implementation(projects.llmCore)
+    implementation(projects.comateCore)
 
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
     implementation("io.ktor:ktor-server-status-pages:$ktor_version")
     implementation("io.ktor:ktor-server-default-headers:$ktor_version")
 
-    // websocket
+    implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-    implementation("io.ktor:ktor-client-websockets:$ktor_version")
     implementation("io.ktor:ktor-server-websockets:$ktor_version")
+
+    implementation("ch.qos.logback:logback-classic:1.4.5")
 
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
     testImplementation(libs.bundles.test)

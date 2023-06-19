@@ -34,6 +34,12 @@ class DynamicContextFactory(val context: ComateContext) {
         }
     }
 
+    fun tools(): Map<String, String> {
+        return this.classMap.map {
+            it.key to it.value.define()
+        }.toMap()
+    }
+
     fun findByName(name: String): DyFunction? {
         return this.classMap[name]
     }

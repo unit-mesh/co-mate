@@ -1,14 +1,22 @@
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import { Configuration, OpenAIApi } from 'openai-edge'
+import { searchTooling } from "@/app/api/common/search-tooling";
 
 // import { auth } from '@/auth'
 // import { nanoid } from '@/lib/utils'
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 export async function POST(req: Request) {
   const json = await req.json()
   const { messages, previewToken } = json
+
+  if (messages.length == 1) {
+    // post to /api/prompt
+    let output = await searchTooling(messages[0].content);
+    return;
+  }
+
   // const session = await auth()
 
   // if (process.env.VERCEL_ENV !== 'preview') {
