@@ -16,14 +16,22 @@ class PromptingWrapper {
     Thought: I now know the final answer
     Final Answer: the final answer to the original input question""".trimIndent()
 
+    private fun functionsIntruction(toolNames: String) = """
+    Use the following format:
+
+    Question: the input question you must answer
+    Thought: you should always think about what to do
+    Action: the action to take, should be one of [${toolNames}]
+    Action Input: the input to the action
+    """.trimIndent()
+
     private fun suffix(input: String) = """
     Begin!
 
     Question: $input
-""".trimIndent()
+    """.trimIndent()
 
     fun defaultChain(text: String, tools: List<BaseTool>): String {
-        // todo: spike for elements
         val toolStrings = tools.joinToString("\n") { "${it.name}: ${it.description}" }
         val toolNames = tools.joinToString(", ") { it.name }
         val formatInstructions = formatInstructions(toolNames)
@@ -37,7 +45,17 @@ $formatInstructions
 ${suffix(text)}"""
     }
 
-    fun functionSearch(text: String): String {
-        return "functionSearch"
+    fun functionSearch(text: String, tools: List<BaseTool>): String {
+        val toolStrings = tools.joinToString("\n") { "${it.name}: ${it.description}" }
+        val toolNames = tools.joinToString(", ") { it.name }
+        val formatInstructions = functionsIntruction(toolNames)
+
+        return """$PREFIX
+
+$toolStrings
+
+$formatInstructions
+
+${suffix(text)}"""
     }
 }
