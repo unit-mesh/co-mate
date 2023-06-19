@@ -19,8 +19,14 @@ export async function POST(req: Request) {
 
   // wrapper text to our server
 
+  let basePath = process.env.PROXY_URL
+  if (basePath == null) {
+    basePath = 'https://api.openai.com'
+  }
+
   const configuration = new Configuration({
-    apiKey: previewToken || process.env.OPENAI_API_KEY
+    apiKey: previewToken || process.env.OPENAI_API_KEY,
+    basePath
   })
 
   const openai = new OpenAIApi(configuration)
