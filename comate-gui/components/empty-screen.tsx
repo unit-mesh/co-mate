@@ -6,16 +6,16 @@ import { IconArrowRight } from '@/components/ui/icons'
 
 const exampleMessages = [
   {
-    heading: 'Introduction a system',
+    heading: 'First, Introduction a system as context',
     message: `Introduce the following system: https://github.com/archguard/ddd-monolithic-code-sample`
   },
   {
-    heading: 'Summarize an article',
-    message: 'Summarize the following article for a 2nd grader: \n'
+    heading: 'Summarize the architecture',
+    message: 'Summarize the architecture for this system.'
   },
   {
-    heading: 'Draft an email',
-    message: `Draft an email to my boss about the following: \n`
+    heading: 'Check REST API Specification',
+    message: `Check REST API specification for this system.`
   }
 ]
 
