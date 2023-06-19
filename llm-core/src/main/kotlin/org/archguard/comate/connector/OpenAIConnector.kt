@@ -103,7 +103,8 @@ class OpenAIConnector(
     }
 
     val PREFIX = """Answer the following questions as best you can. You have access to the following tools:"""
-    private fun formatInstructions(toolNames: String) = """Use the following format:
+    private fun formatInstructions(toolNames: String) = """
+    Use the following format:
 
     Question: the input question you must answer
     Thought: you should always think about what to do
@@ -114,19 +115,24 @@ class OpenAIConnector(
     Thought: I now know the final answer
     Final Answer: the final answer to the original input question""".trimIndent()
 
-    private fun suffix(input: String) = """Begin!
+    private fun suffix(input: String) = """
+    Begin!
 
     Question: $input
-"""
+""".trimIndent()
 
     override fun chain(tools: List<BaseTool>, input: String): String {
         // todo: spike for elements
         val toolStrings = tools.joinToString("\n") { "${it.name}: ${it.description}" }
         val toolNames = tools.joinToString(", ") { it.name }
         val formatInstructions = formatInstructions(toolNames)
-        val SUFFIX = suffix(input)
-        val template = "$PREFIX\n\n$toolStrings\n\n$formatInstructions\n\n$SUFFIX"
 
-        return template
+        return """$PREFIX
+
+$toolStrings
+
+$formatInstructions
+
+${suffix(input)}"""
     }
 }
