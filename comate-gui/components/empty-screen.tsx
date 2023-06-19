@@ -6,7 +6,7 @@ import { IconArrowRight } from '@/components/ui/icons'
 
 const exampleMessages = [
   {
-    heading: 'First, Introduction a system as context',
+    heading: 'First, import a system as context',
     message: `Introduce the following system: https://github.com/archguard/ddd-monolithic-code-sample`
   },
   {
@@ -42,7 +42,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
               className="h-auto p-0 text-base"
               onClick={() => setInput(message.message)}
             >
-              <IconArrowRight className="mr-2 text-muted-foreground" />
+              <IconArrowRight className="mr-2 text-muted-foreground"/>
               {message.heading}
             </Button>
           ))}
