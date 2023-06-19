@@ -26,7 +26,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version("0.4.0")
+    id("org.gradle.toolchains.foojay-resolver-convention") version ("0.4.0")
 }
 
 
@@ -34,7 +34,7 @@ include(":architecture")
 include(":llm-core")
 
 include(":comate-core")
-include(":comate-gui")
+//include(":comate-gui")
 include(":comate-cli")
 include(":comate-server")
 
