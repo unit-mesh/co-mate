@@ -17,6 +17,8 @@ export async function POST(req: Request) {
   //   }
   // }
 
+  // wrapper text to our server
+
   const configuration = new Configuration({
     apiKey: previewToken || process.env.OPENAI_API_KEY
   })
