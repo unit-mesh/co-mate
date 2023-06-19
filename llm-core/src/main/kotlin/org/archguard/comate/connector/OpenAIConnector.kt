@@ -102,4 +102,35 @@ class OpenAIConnector(
         }
     }
 
+    val PREFIX = """Answer the following questions as best you can. You have access to the following tools:"""
+    val FORMAT_INSTRUCTIONS = """Use the following format:
+
+    Question: the input question you must answer
+    Thought: you should always think about what to do
+    Action: the action to take, should be one of [{tool_names}]
+    Action Input: the input to the action
+    Observation: the result of the action
+    ... (this Thought/Action/Action Input/Observation can repeat N times)
+    Thought: I now know the final answer
+    Final Answer: the final answer to the original input question"""
+    val SUFFIX = """Begin!
+
+    Question: {input}
+    Thought:{agent_scratchpad}"""
+
+    override fun chain(tools: List<BaseTool>, inputVariables: List<String>): PromptTemplate {
+        val toolStrings = tools.joinToString("\n") { "${it.name}: ${it.description}" }
+        val toolNames = tools.joinToString(", ") { it.name }
+        val formatInstructions = FORMAT_INSTRUCTIONS.format(toolNames)
+        val template = "$PREFIX\n\n$toolStrings\n\n$formatInstructions\n\n$SUFFIX"
+
+        // todo: spike for elements
+        val variables = inputVariables.toMutableList()
+        if (variables.isEmpty()) {
+            variables.add("input")
+            variables.add("agent_scratchpad")
+        }
+
+        return PromptTemplate(template, variables)
+    }
 }
