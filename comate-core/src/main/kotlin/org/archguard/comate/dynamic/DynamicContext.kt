@@ -71,19 +71,15 @@ enum class DynamicContext(val value: String) {
 
         fun build(values: List<String>, workspace: ComateContext): List<String> =
             values.mapNotNull(Companion::from).map {
-                // TODO: load specification from file
                 when (it) {
                     REST_API_SPECIFICATION -> RestApiSpec().default()
                     FOUNDATION_SPECIFICATION -> FoundationSpec().default()
                     DOMAIN_SPECIFICATION -> DomainSpec().default()
 
-                    // TODO: load service map from file
-//                    SERVICE_MAP -> "ServiceMap"
-//                    LAYERED_STYLE -> "LayeredStyle"
                     DOMAIN_MODEL -> DomainModelFactory.generate("mvc", workspace.fetchDs())
                     PACKAGE_INFO -> CodeDataStruct.packageInString(workspace.fetchDs())
                     README -> ReadmeParser.introduction(workspace.workdir)
-                    PROJECT_DEPENDENCY -> TODO()
+                    PROJECT_DEPENDENCY -> workspace.fetchProjectDependencies().joinToString("\n")
                 }
             }
 
