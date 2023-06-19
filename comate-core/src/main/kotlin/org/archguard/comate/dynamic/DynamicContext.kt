@@ -9,6 +9,21 @@ import org.archguard.spec.lang.DomainSpec
 import org.archguard.spec.lang.FoundationSpec
 import org.archguard.spec.lang.RestApiSpec
 
+enum class SecondContext(val value: String) {
+    SERVICE_MAP("ServiceMap") {
+        override fun explain(): String {
+            return """ServiceMap is a define for service map.""".trimIndent()
+        }
+    },
+    LAYERED_STYLE("LayeredStyle") {
+        override fun explain(): String {
+            return """LayeredStyle is a defined for layered architecture.""".trimIndent()
+        }
+    };
+
+    abstract fun explain(): String
+}
+
 enum class DynamicContext(val value: String) {
     REST_API_SPECIFICATION("ApiSpecification") {
         override fun explain(): String {
@@ -25,17 +40,6 @@ enum class DynamicContext(val value: String) {
             return """DomainSpecification is a specification of a domain model element.""".trimIndent()
         }
     },
-
-    //    SERVICE_MAP("ServiceMap") {
-//        override fun explain(): String {
-//            return """ServiceMap is a define for service map.""".trimIndent()
-//        }
-//    },
-//    LAYERED_STYLE("LayeredStyle") {
-//        override fun explain(): String {
-//            return """LayeredStyle is a defined for layered architecture.""".trimIndent()
-//        }
-//    },
     PACKAGE_INFO("PackageInfo") {
         override fun explain(): String {
             return """PackageInfo is a define for ALL package info.""".trimIndent()
