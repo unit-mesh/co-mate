@@ -37,7 +37,7 @@ OPENAI_API_PROXY=xxxx (optional, if you had a OpenAI proxy server)
 
 - `comate-server`: server side [todo]
 - `comate-cli`: command line interface  [todo]
-- `comate-gui`: graphical user interface  [todo]
+- `comate-gui` [deprecated]: graphical user interface  [todo]
 
 Core modules:
 
