@@ -7,9 +7,9 @@ class OpenAIConnectorTest {
     @Test
     fun should_create_similar_prompt_text() {
         val aiConnector = OpenAIConnector("openAiKey", "", "")
-        val output = aiConnector.chain(listOf(BaseTool("introduction", "blabla")), listOf())
+        val output = aiConnector.chain(listOf(BaseTool("introduction", "blabla")), "some input")
 
-        assertEquals(output.template, """Answer the following questions as best you can. You have access to the following tools:
+        assertEquals(output, """Answer the following questions as best you can. You have access to the following tools:
 
 introduction: blabla
 
@@ -17,7 +17,7 @@ Use the following format:
 
     Question: the input question you must answer
     Thought: you should always think about what to do
-    Action: the action to take, should be one of [{tool_names}]
+    Action: the action to take, should be one of [introduction]
     Action Input: the input to the action
     Observation: the result of the action
     ... (this Thought/Action/Action Input/Observation can repeat N times)
@@ -26,7 +26,7 @@ Use the following format:
 
 Begin!
 
-    Question: {input}
-    Thought:{agent_scratchpad}""")
+    Question: some input
+""")
     }
 }
