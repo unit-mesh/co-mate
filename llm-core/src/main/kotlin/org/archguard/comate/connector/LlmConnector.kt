@@ -11,5 +11,5 @@ interface LlmConnector {
 
     fun prompt(promptText: String): String
     fun stream(promptText: String): Flow<String>
-    fun chain(tools: List<BaseTool>, input: String): String
+    fun promptTemplate(tools: List<BaseTool>, input: String): String
 }

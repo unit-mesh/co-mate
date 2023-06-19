@@ -121,7 +121,7 @@ class OpenAIConnector(
     Question: $input
 """.trimIndent()
 
-    override fun chain(tools: List<BaseTool>, input: String): String {
+    override fun promptTemplate(tools: List<BaseTool>, input: String): String {
         // todo: spike for elements
         val toolStrings = tools.joinToString("\n") { "${it.name}: ${it.description}" }
         val toolNames = tools.joinToString(", ") { it.name }
