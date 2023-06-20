@@ -20,30 +20,32 @@ export function renderMessage(message: Message) {
   let splitContent = content.split('\n').filter((line) => line.trim() !== "");
   let firstLine = splitContent[0];
 
-  console.log(thoughtRegex.test(firstLine));
-  if (splitContent.length >= 1 && thoughtRegex.test(firstLine)) {
-    let thought = thoughtRegex.exec(firstLine)?.[1] ?? "";
-    let action = ""
-    if (splitContent.length >= 2) {
-      action = actionRegex.exec(splitContent[1])?.[1] ?? "";
-    }
-
-    let actionInput = ""
-    if (splitContent.length >= 3) {
-      actionInput = actionInputRegex.exec(splitContent[2])?.[1] ?? "";
-    }
-
-    let toolingThought: ToolingThought = {
-      thought: thought,
-      action: action,
-      actionInput: actionInput
-    }
-
-    let others = splitContent.slice(3);
-
-    content = `${thought}\n | Action | Action Input |\n | ------ | ------------ |\n | ${action} | ${actionInput} | \n\n ${others.join('\n')}`;
+  let isOurThoughtTree = splitContent.length < 1 || !thoughtRegex.test(firstLine);
+  if (isOurThoughtTree) {
+    return renderMarkdown(content);
   }
 
+  let thought = thoughtRegex.exec(firstLine)?.[1] ?? "";
+  let action = ""
+  if (splitContent.length >= 2) {
+    action = actionRegex.exec(splitContent[1])?.[1] ?? "";
+  }
+
+  let actionInput = ""
+  if (splitContent.length >= 3) {
+    actionInput = actionInputRegex.exec(splitContent[2])?.[1] ?? "";
+  }
+
+  let toolingThought: ToolingThought = {
+    thought: thought,
+    action: action,
+    actionInput: actionInput
+  }
+
+  let others = splitContent.slice(3);
+
+  content = `${thought}\n | Action | Action Input |\n | ------ | ------------ |\n | ${action} | ${actionInput} | \n\n ${others.join('\n')}`;
   console.log(content)
+
   return renderMarkdown(content);
 }
