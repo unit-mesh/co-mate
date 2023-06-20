@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 export async function searchTooling(text: string | undefined) {
   let baseUrl = process.env.COMATE_BACKEND || 'http://localhost:8844';
-  let url = `${baseUrl}/prompt/tooling`
+  let url = `${baseUrl}/api/prompt/tooling`
 
   const res = await fetch(url, {
     method: 'POST',

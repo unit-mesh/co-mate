@@ -20,10 +20,10 @@ fun Route.routeByPrompt() {
         BaseTool(it.key, it.value)
     }
 
-    get("/prompt/tooling") {
+    get("/api/prompt/tooling") {
         call.respond(PromptToolingRes("", tools))
     }
-    post("/prompt/tooling") {
+    post("/api/prompt/tooling") {
         val tooling = call.receive<PromptToolingReq>()
         val prompt = PromptingWrapper().functionSearch(tooling.text, tools)
 
