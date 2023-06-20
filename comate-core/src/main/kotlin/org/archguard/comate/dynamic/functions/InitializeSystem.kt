@@ -3,7 +3,9 @@ package org.archguard.comate.dynamic.functions
 import org.archguard.action.checkout.GitCommandManager
 import org.archguard.action.checkout.GitSourceSettings
 import org.archguard.action.checkout.doCheckout
+import org.archguard.action.io.FileExt.mkdir
 import org.archguard.comate.command.ComateContext
+import java.io.File
 import kotlin.io.path.Path
 
 @ComateFunction
@@ -16,7 +18,11 @@ class InitializeSystem(override val context: ComateContext) : DyFunction {
 
     override fun execute(): Boolean {
         val settings = GitSourceSettings(context.projectRepo)
-        val git = GitCommandManager(settings.repositoryPath)
+        // mkdir temp
+        mkdir("temp")
+        val workingDirectory = File("temp", settings.repositoryPath)
+        println(workingDirectory)
+        val git = GitCommandManager(workingDirectory.toString())
         doCheckout(git, settings)
         context.workdir = Path(settings.repositoryPath)
         return true
