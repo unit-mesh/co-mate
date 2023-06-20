@@ -30,7 +30,7 @@ function renderMessage(message: Message) {
 
   let content = message.content;
 
-  let splitContent = content.split('\n');
+  let splitContent = content.split('\n').filter((line) => line.trim() !== "");
   let firstLine = splitContent[0];
 
   console.log(thoughtRegex.test(firstLine));
@@ -52,7 +52,9 @@ function renderMessage(message: Message) {
       actionInput: actionInput
     }
 
-    content = `${thought}\n | Action | Action Input |\n | ------ | ------------ |\n | ${action} | ${actionInput} |`;
+    let others = splitContent.slice(3);
+
+    content = `${thought}\n | Action | Action Input |\n | ------ | ------------ |\n | ${action} | ${actionInput} | \n\n ${others.join('\n')}`;
   }
 
   console.log(content)

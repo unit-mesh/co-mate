@@ -7,7 +7,7 @@ import { IconArrowRight } from '@/components/ui/icons'
 const exampleMessages = [
   {
     heading: 'First, import a system as context',
-    message: `Introduce the following system: https://github.com/archguard/ddd-monolithic-code-sample`
+    message: `Introduce the system for following repository: https://github.com/archguard/ddd-monolithic-code-sample`
   },
   {
     heading: 'Summarize the architecture',
