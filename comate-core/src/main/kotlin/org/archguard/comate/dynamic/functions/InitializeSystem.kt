@@ -7,12 +7,11 @@ import org.archguard.action.checkout.helper.RefHelper
 import org.archguard.action.checkout.logger
 import org.archguard.action.io.FileExt
 import org.archguard.comate.command.ComateContext
-import org.archguard.comate.command.fakeComateContext
 import java.io.File
 import kotlin.io.path.Path
 
 @ComateFunction
-class InitializeSystem(override val context: ComateContext = fakeComateContext()) : DyFunction {
+class InitializeSystem(override val context: ComateContext) : DyFunction {
     override val hidden: Boolean get() = true
 
     override fun explain(): String {
@@ -30,7 +29,6 @@ class InitializeSystem(override val context: ComateContext = fakeComateContext()
         return hashMapOf()
     }
 }
-
 
 // todo: release CodeDB checkout to new version for comate
 fun executeGitCheckout(settings: GitSourceSettings) {

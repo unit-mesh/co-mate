@@ -6,6 +6,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.Serializable
 import org.archguard.comate.command.ComateContext
+import org.archguard.comate.command.fakeComateContext
 import org.archguard.comate.dynamic.DynamicContextFactory
 import kotlin.io.path.Path
 
@@ -16,7 +17,7 @@ data class PromptToolingReq(val text: String)
 data class PromptToolingRes(val prompt: String, val tools: List<BaseTool>)
 
 fun Route.routeByPrompt() {
-    val fakeFactory = DynamicContextFactory(ComateContext(Path("."), "java", null))
+    val fakeFactory = DynamicContextFactory(fakeComateContext())
     val tools: List<BaseTool> = fakeFactory.tools().map {
         BaseTool(it.key, it.value)
     }
