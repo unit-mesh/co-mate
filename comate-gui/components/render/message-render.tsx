@@ -2,6 +2,7 @@ import { Message } from "ai";
 import { MarkdownRender } from "@/components/render/markdown-render";
 import { Button } from "@/components/ui/button";
 import * as React from "react";
+import { fetcher } from "@/lib/utils";
 
 export interface ToolingThought {
   thought: string
@@ -36,6 +37,20 @@ function messageToThought(firstLine: string, splitContent: string[]) {
   return tooling;
 }
 
+function ActionButton({ isPending, tooling }: { isPending: boolean, tooling: ToolingThought }) {
+  return <Button
+    variant="outline"
+    disabled={isPending}
+    onClick={async () => {
+      await fetcher("/api/tooling/action", {
+        method: "POST",
+        body: JSON.stringify(tooling),
+      }).then((response) => {
+        console.log(response)
+      });
+    }}>{isPending ? "Pending..." : "Run"}</Button>;
+}
+
 export function MessageRender({ message }: { message: Message }) {
   const [isPending, setIsPending] = React.useState(false)
 
@@ -67,7 +82,7 @@ export function MessageRender({ message }: { message: Message }) {
       <tr>
         <td>{tooling.action}</td>
         <td>{tooling.actionInput}</td>
-        <td><Button variant="outline" disabled={isPending}>{isPending ? "Pending..." : "Run"}</Button></td>
+        <td><ActionButton isPending={isPending} tooling={tooling}/></td>
       </tr>
       </tbody>
     </table>
