@@ -13,6 +13,7 @@ import org.archguard.scanner.core.sourcecode.LanguageSourceCodeAnalyser
 import org.archguard.scanner.core.sourcecode.SourceCodeContext
 import org.archguard.spec.element.RestApiElement
 import java.nio.file.Path
+import kotlin.io.path.Path
 
 data class ComateContext(
     val workdir: Path,
@@ -90,4 +91,8 @@ data class ComateContext(
             }
         }
     }
+}
+
+fun fakeComateContext(): ComateContext {
+    return ComateContext(Path(path = "."), "java", null)
 }
