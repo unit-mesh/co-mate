@@ -24,8 +24,8 @@ dependencies {
     implementation(libs.archguard.feat.apicalls)
     implementation(libs.chapi.domain)
 
-    compileOnly("org.archguard.codedb:action-toolkit:0.1.0")
-    implementation("org.archguard.codedb:checkout:0.1.0")
+    compileOnly("org.archguard.codedb:action-toolkit:0.1.2")
+    implementation("org.archguard.codedb:checkout:0.1.2")
 
     implementation(libs.kotlin.reflect)
     implementation(libs.reflections)
