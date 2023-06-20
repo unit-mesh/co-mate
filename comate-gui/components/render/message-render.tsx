@@ -42,7 +42,7 @@ function ActionButton({ isPending, tooling }: { isPending: boolean, tooling: Too
     variant="outline"
     disabled={isPending}
     onClick={async () => {
-      await fetcher("/api/tooling/action", {
+      await fetcher("/api/action/tooling", {
         method: "POST",
         body: JSON.stringify(tooling),
       }).then((response) => {
