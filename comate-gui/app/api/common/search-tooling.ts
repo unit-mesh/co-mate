@@ -1,6 +1,16 @@
 import fetch from 'node-fetch';
 
-export async function searchTooling(text: string | undefined) {
+type BaseTool = {
+  name: string,
+  description: string,
+}
+
+type ToolingResponse = {
+  prompt: string,
+  tools: BaseTool[],
+}
+
+export async function searchTooling(text: string | undefined): Promise<ToolingResponse> {
   let baseUrl = process.env.COMATE_BACKEND || 'http://localhost:8844';
   let url = `${baseUrl}/api/prompt/tooling`
 
@@ -12,9 +22,7 @@ export async function searchTooling(text: string | undefined) {
     body: JSON.stringify({ text: text })
   });
 
-  console.log(res);
-
-  // const json = await res.json()
-  // console.log(json)
-  return {};
+  const json = await res.json()
+  console.log(json)
+  return json as ToolingResponse;
 }

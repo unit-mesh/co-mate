@@ -9,6 +9,7 @@ import org.archguard.comate.command.ComateContext
 import org.archguard.comate.dynamic.DynamicContextFactory
 import kotlin.io.path.Path
 
+@Serializable
 data class PromptToolingReq(val text: String)
 
 @Serializable

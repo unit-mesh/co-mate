@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   if (messages.length == 1) {
     // post to /api/prompt
     let output = await searchTooling(messages[0].content);
-    return;
+    messages[0].content = output.prompt;
   }
 
   // const session = await auth()
