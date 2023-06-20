@@ -25,7 +25,6 @@ fun Route.routeForAction() {
         val toolingThought = call.receive<ToolingThought>()
         println(toolingThought)
 
-
         call.respond(ActionResult("ok", ToolingAction.INTRODUCE_SYSTEM.toString()))
     }
 }

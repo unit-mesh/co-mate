@@ -16,9 +16,10 @@ import java.nio.file.Path
 import kotlin.io.path.Path
 
 data class ComateContext(
-    val workdir: Path,
+    var workdir: Path,
     val language: String,
     val connector: OpenAIConnector?,
+    val projectRepo: String = "",
     val extArgs: Map<String, String> = emptyMap(),
     private val ds: List<CodeDataStruct> = emptyList(),
     private val projectDependencies: List<CompositionDependency> = emptyList(),
