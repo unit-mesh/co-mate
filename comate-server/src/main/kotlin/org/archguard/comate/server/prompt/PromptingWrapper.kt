@@ -25,7 +25,8 @@ class PromptingWrapper {
     Question: the input question you must answer
     Thought: you should always think about what to do
     Action: the action to take, should be one of [${toolNames}]
-    Action Input: the input to the action (parse from the questions)
+    Action Input: the input to the action (parse from the user input, no explicit input needed)
+    // end in here. the tool will handle the rest
     """.trimIndent()
 
     private fun suffix(input: String) = """
