@@ -1,5 +1,6 @@
 import { Message } from "ai";
 import { renderMarkdown } from "@/components/render/render-markdown";
+import { Button } from "@/components/ui/button";
 
 export interface ToolingThought {
   thought: string
@@ -43,9 +44,28 @@ export function renderMessage(message: Message) {
   }
 
   let others = splitContent.slice(3);
+  let isPending = false;
 
-  content = `${thought}\n | Action | Action Input |\n | ------ | ------------ |\n | ${action} | ${actionInput} | \n\n ${others.join('\n')}`;
-  console.log(content)
+  return <>
+    {renderMarkdown(thought)}
 
-  return renderMarkdown(content);
+    <table>
+      <thead>
+      <tr>
+        <th>Action</th>
+        <th>Action Input</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{action}</td>
+        <td>{actionInput}</td>
+        <td><Button variant="outline" disabled={isPending}>{isPending ? "Pending..." : "Run"}</Button></td>
+      </tr>
+      </tbody>
+    </table>
+
+    {renderMarkdown(others.join('\n'))}
+  </>;
 }
