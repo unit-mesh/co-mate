@@ -23,6 +23,5 @@ export async function searchTooling(text: string | undefined): Promise<ToolingRe
   });
 
   const json = await res.json()
-  console.log(json)
   return json as ToolingResponse;
 }
