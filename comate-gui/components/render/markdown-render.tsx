@@ -3,7 +3,7 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { CodeBlock } from "@/components/ui/codeblock";
 
-export function renderMarkdown(content: string) {
+export function MarkdownRender({ content }: { content: string }) {
   return <MemoizedReactMarkdown
     className="prose whitespace-pre-wrap break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
     remarkPlugins={[remarkGfm, remarkMath]}

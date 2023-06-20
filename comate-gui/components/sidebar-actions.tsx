@@ -141,6 +141,7 @@ export function SidebarActions({
             <Button
               disabled={isSharePending}
               onClick={() => {
+                // @ts-ignore
                 startShareTransition(async () => {
                   if (chat.sharePath) {
                     await new Promise(resolve => setTimeout(resolve, 500))
@@ -188,6 +189,7 @@ export function SidebarActions({
               disabled={isRemovePending}
               onClick={event => {
                 event.preventDefault()
+                // @ts-ignore
                 startRemoveTransition(async () => {
                   const result = await removeChat({
                     id: chat.id,

@@ -3,7 +3,7 @@ import { Message } from 'ai'
 import { cn } from '@/lib/utils'
 import { IconOpenAI, IconUser } from '@/components/ui/icons'
 import { ChatMessageActions } from '@/components/chat-message-actions'
-import { renderMessage } from "@/components/render/render-message";
+import { MessageRender } from "@/components/render/message-render";
 
 export interface ChatMessageProps {
   message: Message
@@ -27,7 +27,7 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
         {message.role === 'user' ? <IconUser/> : <IconOpenAI/>}
       </div>
       <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
-        {renderMessage(message)}
+        <MessageRender message={message}/>
         <ChatMessageActions message={message}/>
       </div>
     </div>

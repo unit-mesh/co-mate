@@ -1,6 +1,7 @@
 import { Message } from "ai";
-import { renderMarkdown } from "@/components/render/render-markdown";
+import { MarkdownRender } from "@/components/render/markdown-render";
 import { Button } from "@/components/ui/button";
+import * as React from "react";
 
 export interface ToolingThought {
   thought: string
@@ -15,17 +16,7 @@ const thoughtRegex = /\s*Thought:\s*(.*(?:\n(?!\s*\/\/).*)*)/i;
 const actionRegex = /\s*Action:\s*(.*(?:\n(?!\s*\/\/).*)*)/i;
 const actionInputRegex = /\s*Action\s*Input:\s*(.*(?:\n(?!\s*\/\/).*)*)/i;
 
-export function renderMessage(message: Message) {
-  let content = message.content;
-
-  let splitContent = content.split('\n').filter((line) => line.trim() !== "");
-  let firstLine = splitContent[0];
-
-  let isOurThoughtTree = splitContent.length < 1 || !thoughtRegex.test(firstLine);
-  if (isOurThoughtTree) {
-    return renderMarkdown(content);
-  }
-
+function messageToThought(firstLine: string, splitContent: string[]) {
   let thought = thoughtRegex.exec(firstLine)?.[1] ?? "";
   let action = ""
   if (splitContent.length >= 2) {
@@ -37,17 +28,32 @@ export function renderMessage(message: Message) {
     actionInput = actionInputRegex.exec(splitContent[2])?.[1] ?? "";
   }
 
-  let toolingThought: ToolingThought = {
+  let tooling: ToolingThought = {
     thought: thought,
     action: action,
     actionInput: actionInput
   }
+  return tooling;
+}
 
+export function MessageRender({ message }: { message: Message }) {
+  const [isPending, setIsPending] = React.useState(false)
+
+  let content = message.content;
+
+  let splitContent = content.split('\n').filter((line) => line.trim() !== "");
+  let firstLine = splitContent[0];
+
+  let isOurThoughtTree = splitContent.length < 1 || !thoughtRegex.test(firstLine);
+  if (isOurThoughtTree) {
+    return <MarkdownRender content={content}/>;
+  }
+
+  let tooling = messageToThought(firstLine, splitContent);
   let others = splitContent.slice(3);
-  let isPending = false;
 
   return <>
-    {renderMarkdown(thought)}
+    <MarkdownRender content={tooling.thought}/>
 
     <table>
       <thead>
@@ -59,13 +65,13 @@ export function renderMessage(message: Message) {
       </thead>
       <tbody>
       <tr>
-        <td>{action}</td>
-        <td>{actionInput}</td>
+        <td>{tooling.action}</td>
+        <td>{tooling.actionInput}</td>
         <td><Button variant="outline" disabled={isPending}>{isPending ? "Pending..." : "Run"}</Button></td>
       </tr>
       </tbody>
     </table>
 
-    {renderMarkdown(others.join('\n'))}
+    <MarkdownRender content={others.join('\n')}/>
   </>;
 }
