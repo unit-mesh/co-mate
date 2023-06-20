@@ -16,6 +16,7 @@ annotation class ComateFunction
  */
 interface DyFunction {
     val context: ComateContext
+    val hidden: Boolean get() = false
 
     fun explain(): String
 

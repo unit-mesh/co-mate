@@ -5,6 +5,8 @@ import org.archguard.comate.command.fakeComateContext
 
 @ComateFunction
 class InitializeSystem(override val context: ComateContext = fakeComateContext()) : DyFunction {
+    override val hidden: Boolean get() = true
+
     override fun explain(): String {
         return "Initialize system will clone the repository and setup it."
     }
