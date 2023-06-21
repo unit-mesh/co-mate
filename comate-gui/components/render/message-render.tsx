@@ -18,8 +18,8 @@ const thoughtRegex = /\s*Thought:\s*(.*(?:\n(?!\s*\/\/).*)*)/i;
 const actionRegex = /\s*Action:\s*(.*(?:\n(?!\s*\/\/).*)*)/i;
 const actionInputRegex = /\s*Action\s*Input:\s*(.*(?:\n(?!\s*\/\/).*)*)/i;
 
-function messageToThought(firstLine: string, splitContent: string[]) {
-  let thought = thoughtRegex.exec(firstLine)?.[1] ?? "";
+function messageToThought(splitContent: string[]) {
+  let thought = thoughtRegex.exec(splitContent[0])?.[1] ?? "";
   let action = ""
   if (splitContent.length >= 2) {
     action = actionRegex.exec(splitContent[1])?.[1] ?? "";
@@ -35,6 +35,8 @@ function messageToThought(firstLine: string, splitContent: string[]) {
     action: action,
     actionInput: actionInput
   }
+
+  console.log(tooling);
   return tooling;
 }
 
@@ -47,13 +49,19 @@ export function MessageRender({ message, appendToChat, chatId }: MessageRenderPr
   let firstLine = splitContent[0];
 
   let isNoMatch = splitContent.length < 1 || !hasMatchFunctionRegex.test(firstLine);
-  let result = hasMatchFunctionRegex.exec(firstLine)?.[1] ?? "";
-  if (isNoMatch || result !== "true") {
+  if (isNoMatch) {
     return <MarkdownRender content={content}/>;
   }
+  let result = hasMatchFunctionRegex.exec(firstLine)?.[1] ?? "";
+
+  // render show only?
+  if (result !== "true") {
+    return <MarkdownRender content={content}/>;
+  }
+
   splitContent = splitContent.slice(1);
 
-  let tooling = messageToThought(firstLine, splitContent);
+  let tooling = messageToThought(splitContent);
   let others = splitContent.slice(3);
 
   return <>

@@ -6,6 +6,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.Serializable
 import org.archguard.comate.command.fakeComateContext
+import org.archguard.comate.dynamic.functions.ApiGovernanceFunction
 import org.archguard.comate.dynamic.functions.FunctionResult
 import org.archguard.comate.dynamic.functions.InitializeSystemFunction
 import org.archguard.comate.dynamic.functions.IntroduceSystemFunction
@@ -19,7 +20,12 @@ enum class ToolingAction(val action: String) {
             InitializeSystemFunction(context).execute()
             return IntroduceSystemFunction(context).execute()
         }
-    }
+    },
+    REST_API_GOVERNANCE(action = "rest_api_governance") {
+        override fun execute(input: String): FunctionResult.Success<Any> {
+            return ApiGovernanceFunction(context).execute()
+        }
+    },
     ;
 
     abstract fun execute(input: String): FunctionResult.Success<Any>

@@ -31,9 +31,7 @@ export async function requestToOpenAi(previewToken: string, messages: Message[],
     return res
   }
 
-  const stream = OpenAIStream(res, {
-
-  })
+  const stream = OpenAIStream(res, {})
 
   return new StreamingTextResponse(stream)
 }
@@ -42,10 +40,12 @@ export async function POST(req: Request) {
   const json = await req.json()
   const { messages, previewToken } = json
 
-  if (messages.length == 1) {
-    let output = await searchTooling(messages[0].content);
-    messages[0].content = output.prompt;
-  }
+  // if (messages.length == 1) {
+  // get last messages
+  let lastMessage = messages[messages.length - 1]
+  let output = await searchTooling(lastMessage.content);
+  lastMessage.content = output.prompt;
+  // }
 
   // const session = await auth()
 
