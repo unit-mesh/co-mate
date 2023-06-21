@@ -7,10 +7,10 @@ import { MessageRender } from "@/components/render/message-render";
 
 export interface ChatMessageProps {
   message: Message
+  chatId?: string
 }
 
-
-export function ChatMessage({ message, ...props }: ChatMessageProps) {
+export function ChatMessage({ message, chatId, ...props }: ChatMessageProps) {
   return (
     <div
       className={cn('group relative mb-4 flex items-start md:-ml-12')}
@@ -27,7 +27,7 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
         {message.role === 'user' ? <IconUser/> : <IconOpenAI/>}
       </div>
       <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
-        <MessageRender message={message}/>
+        <MessageRender message={message} chat-id={chatId}/>
         <ChatMessageActions message={message}/>
       </div>
     </div>

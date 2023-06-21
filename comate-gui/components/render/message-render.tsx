@@ -52,7 +52,6 @@ function ActionButton({ isPending, tooling, onResult }: {
         method: "POST",
         body: JSON.stringify(tooling),
       }).then(async (response: any) => {
-        console.log(response.body);
         let result = ""
         const reader = response.body.getReader()
         while (true) {
@@ -70,7 +69,8 @@ function ActionButton({ isPending, tooling, onResult }: {
     }}>{isPending ? "Pending..." : "Run"}</Button>;
 }
 
-export function MessageRender({ message }: { message: Message }) {
+export function MessageRender({ message, chatId }: { message: Message, chatId: String }) {
+  console.log("chatId", chatId);
   const [isPending, setIsPending] = React.useState(false)
   const [actionResult, setActionResult] = React.useState("")
 
@@ -105,7 +105,6 @@ export function MessageRender({ message }: { message: Message }) {
         <td>
           <ActionButton isPending={isPending} tooling={tooling} onResult={
             (output: string) => {
-              console.log(output);
               setActionResult(output)
             }
           }/></td>
