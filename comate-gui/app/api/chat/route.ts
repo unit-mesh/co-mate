@@ -8,7 +8,7 @@ import { searchTooling } from "@/app/api/common/search-tooling";
 // export const runtime = 'edge'
 
 export async function requestToOpenAi(previewToken: string, messages: Message[], isStream: boolean = true) {
-  let basePath = process.env.PROXY_URL
+  let basePath = process.env.OPENAI_PROXY_URL
   if (basePath == null) {
     basePath = 'https://api.openai.com'
   }
