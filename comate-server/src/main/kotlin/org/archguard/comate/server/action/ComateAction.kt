@@ -6,7 +6,8 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.Serializable
 import org.archguard.comate.command.fakeComateContext
-import org.archguard.comate.dynamic.functions.InitializeSystem
+import org.archguard.comate.dynamic.functions.InitializeSystemFunction
+import org.archguard.comate.dynamic.functions.IntroduceSystemFunction
 
 val context = fakeComateContext()
 
@@ -14,7 +15,8 @@ enum class ToolingAction(val action: String) {
     INTRODUCE_SYSTEM(action = "introduce_system") {
         override fun execute(input: String): String {
             context.projectRepo = input
-            InitializeSystem(context).execute()
+            InitializeSystemFunction(context).execute()
+            IntroduceSystemFunction(context).execute()
             return ""
         }
     }

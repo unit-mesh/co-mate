@@ -9,7 +9,7 @@ import java.io.File
 import kotlin.io.path.Path
 
 @ComateFunction
-class InitializeSystem(override val context: ComateContext) : DyFunction {
+class InitializeSystemFunction(override val context: ComateContext) : DyFunction {
     override val hidden: Boolean get() = true
 
     override fun explain(): String {
