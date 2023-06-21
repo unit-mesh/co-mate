@@ -39,8 +39,6 @@ function messageToThought(firstLine: string, splitContent: string[]) {
 type MessageRenderProps = { message: Message, chatId?: string, appendToChat?: (message: Message) => void };
 
 export function MessageRender({ message, appendToChat, chatId }: MessageRenderProps) {
-  const [isPending, setIsPending] = React.useState(false)
-
   let content = message.content;
 
   let splitContent = content.split('\n').filter((line) => line.trim() !== "");
@@ -70,7 +68,7 @@ export function MessageRender({ message, appendToChat, chatId }: MessageRenderPr
         <td>{tooling.action}</td>
         <td>{tooling.actionInput}</td>
         <td>
-          <ActionButton isPending={isPending} tooling={tooling} onResult={
+          <ActionButton tooling={tooling} onResult={
             (output: any) => {
               appendToChat?.({
                 id: chatId!!,
