@@ -42,10 +42,16 @@ export async function POST(req: Request) {
 
   // if (messages.length == 1) {
   // get last messages
+
   let lastMessage = messages[messages.length - 1]
-  let output = await searchTooling(lastMessage.content);
-  lastMessage.content = output.prompt;
-  // }
+  // console.log(lastMessage)
+
+  let isComatePrompt = lastMessage.content.startsWith("You\\'re an Architecture");
+  if (!isComatePrompt) {
+    // if output.prompt includes "HasMatchFunction: true" then we need to add a new message to the messages array
+    let output = await searchTooling(lastMessage.content);
+    lastMessage.content = output.prompt;
+  }
 
   // const session = await auth()
 

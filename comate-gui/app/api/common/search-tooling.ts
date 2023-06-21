@@ -12,6 +12,8 @@ export async function searchTooling(text: string | undefined): Promise<ToolingRe
   let baseUrl = process.env.COMATE_BACKEND || 'http://localhost:8844';
   let url = `${baseUrl}/api/prompt/tooling`
 
+  console.log("searchTooling text: " + text);
+
   const res = await fetch(url, {
     method: 'POST',
     headers: {
