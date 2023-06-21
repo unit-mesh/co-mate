@@ -21,8 +21,10 @@ class InitializeSystem(override val context: ComateContext) : DyFunction {
         // mkdir temp
         mkdir("temp")
         val workingDirectory = File("temp", settings.repositoryPath)
-        println(workingDirectory)
+
+        mkdir(workingDirectory.toString())
         val git = GitCommandManager(workingDirectory.toString())
+
         doCheckout(git, settings)
         context.workdir = Path(settings.repositoryPath)
         return true

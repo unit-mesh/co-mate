@@ -13,6 +13,7 @@ val context = fakeComateContext()
 enum class ToolingAction(val action: String) {
     INTRODUCE_SYSTEM(action = "introduce_system") {
         override fun execute(input: String): String {
+            context.projectRepo = input
             InitializeSystem(context).execute()
             return ""
         }

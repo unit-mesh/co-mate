@@ -19,7 +19,7 @@ data class ComateContext(
     var workdir: Path,
     val language: String,
     val connector: OpenAIConnector?,
-    val projectRepo: String = "",
+    var projectRepo: String = "",
     val extArgs: Map<String, String> = emptyMap(),
     private val ds: List<CodeDataStruct> = emptyList(),
     private val projectDependencies: List<CompositionDependency> = emptyList(),
