@@ -8,6 +8,7 @@ export function ActionButton({ tooling, onResult }: {
   onResult: (result: string) => void
 }) {
   const [isAnalysing, setIsAnalysing] = React.useState(false)
+  console.log("actionButton: " + tooling)
 
   return <Button
     variant="outline"

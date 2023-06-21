@@ -45,6 +45,10 @@ type MessageRenderProps = { message: Message, chatId?: string, appendToChat?: (m
 export function MessageRender({ message, appendToChat, chatId }: MessageRenderProps) {
   let content = message.content;
 
+  if (content === undefined) {
+    return <></>;
+  }
+
   let splitContent = content.split('\n').filter((line) => line.trim() !== "");
   let firstLine = splitContent[0];
 
@@ -82,6 +86,11 @@ export function MessageRender({ message, appendToChat, chatId }: MessageRenderPr
         <td>
           <ActionButton tooling={tooling} onResult={
             (output: any) => {
+              console.log(output);
+              if (output.action == undefined || output.action === "") {
+                return;
+              }
+
               appendToChat?.({
                 id: chatId!!,
                 content: output.action,

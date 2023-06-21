@@ -46,7 +46,8 @@ export async function POST(req: Request) {
   let lastMessage = messages[messages.length - 1]
   // console.log(lastMessage)
 
-  let isComatePrompt = lastMessage.content.startsWith("You\\'re an Architecture");
+  // todo: define prompt for our ai
+  let isComatePrompt = lastMessage.content && lastMessage.content.startsWith("You're an Architecture");
   if (!isComatePrompt) {
     // if output.prompt includes "HasMatchFunction: true" then we need to add a new message to the messages array
     let output = await searchTooling(lastMessage.content);
