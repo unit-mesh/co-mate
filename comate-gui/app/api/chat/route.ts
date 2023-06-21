@@ -27,7 +27,6 @@ export async function requestToOpenAi(previewToken: string, messages: Message[],
     stream: isStream
   })
 
-  console.log("isStream", isStream)
   if (!isStream) {
     return res
   }

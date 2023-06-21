@@ -1,14 +1,11 @@
 import { NextResponse } from "next/server";
 import { requestToOpenAi } from "@/app/api/chat/route";
-import { Message } from "ai";
 
 export const runtime = 'edge'
 
 export async function POST(req: Request) {
   const json = await req.json()
   const { previewToken } = json
-
-  console.log(previewToken);
 
   let baseUrl = process.env.COMATE_BACKEND || 'http://localhost:8844';
   let url = `${baseUrl}/api/action/tooling`
@@ -29,6 +26,7 @@ export async function POST(req: Request) {
       role: 'user'
     })
 
+    // todo: add to conversation ?
     console.log("tooling, newAction", newAction);
     return requestToOpenAi(previewToken, messages)
   } catch (e) {
