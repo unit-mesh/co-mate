@@ -8,9 +8,10 @@ import { MessageRender } from "@/components/render/message-render";
 export interface ChatMessageProps {
   message: Message
   chatId?: string
+  appendToChat?: (message: Message) => void
 }
 
-export function ChatMessage({ message, chatId, ...props }: ChatMessageProps) {
+export function ChatMessage({ message, chatId, appendToChat, ...props }: ChatMessageProps) {
   return (
     <div
       className={cn('group relative mb-4 flex items-start md:-ml-12')}
@@ -27,7 +28,7 @@ export function ChatMessage({ message, chatId, ...props }: ChatMessageProps) {
         {message.role === 'user' ? <IconUser/> : <IconOpenAI/>}
       </div>
       <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
-        <MessageRender message={message} chatId={chatId}/>
+        <MessageRender message={message} chatId={chatId} appendToChat={appendToChat}/>
         <ChatMessageActions message={message}/>
       </div>
     </div>

@@ -51,28 +51,30 @@ function ActionButton({ isPending, tooling, onResult }: {
       await fetch("/api/action/tooling", {
         method: "POST",
         body: JSON.stringify(tooling),
-      }).then(async (response: any) => {
-        let result = ""
-        const reader = response.body.getReader()
-        while (true) {
-          const { done, value } = await reader.read()
-          if (done) {
-            break
-          }
-
-          result += decodeAIStreamChunk(value)
-          onResult(result)
-        }
+      }).then(async response => {
+        onResult(await response.json())
+        // let result = ""
+        // const reader = response.body.getReader()
+        // while (true) {
+        //   const { done, value } = await reader.read()
+        //   if (done) {
+        //     break
+        //   }
+        //
+        //   result += decodeAIStreamChunk(value)
+        //   onResult(result)
+        // }
 
         isPending = false
       });
     }}>{isPending ? "Pending..." : "Run"}</Button>;
 }
 
-export function MessageRender({ message, chatId }: { message: Message, chatId?: String }) {
-  console.log("chatId", chatId);
+type MessageRenderProps = { message: Message, chatId?: string, appendToChat?: (message: Message) => void };
+
+export function MessageRender({ message, appendToChat, chatId }: MessageRenderProps) {
   const [isPending, setIsPending] = React.useState(false)
-  const [actionResult, setActionResult] = React.useState("")
+  // const [actionResult, setActionResult] = React.useState("")
 
   let content = message.content;
 
@@ -104,15 +106,21 @@ export function MessageRender({ message, chatId }: { message: Message, chatId?: 
         <td>{tooling.actionInput}</td>
         <td>
           <ActionButton isPending={isPending} tooling={tooling} onResult={
-            (output: string) => {
-              setActionResult(output)
+            (output: any) => {
+              console.log(output);
+              // setActionResult(output)
+              appendToChat?.({
+                id: chatId!!,
+                content: output.action,
+                role: 'user'
+              });
             }
           }/></td>
       </tr>
       </tbody>
     </table>
 
-    {actionResult && <MarkdownRender content={actionResult}/>}
+    {/*{actionResult && <MarkdownRender content={actionResult}/>}*/}
 
     <MarkdownRender content={others.join('\n')}/>
   </>;
