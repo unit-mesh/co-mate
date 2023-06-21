@@ -27,7 +27,7 @@ export function ChatMessage({ message, chatId, ...props }: ChatMessageProps) {
         {message.role === 'user' ? <IconUser/> : <IconOpenAI/>}
       </div>
       <div className="ml-4 flex-1 space-y-2 overflow-hidden px-1">
-        <MessageRender message={message} chat-id={chatId}/>
+        <MessageRender message={message} chatId={chatId}/>
         <ChatMessageActions message={message}/>
       </div>
     </div>

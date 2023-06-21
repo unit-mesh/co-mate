@@ -69,7 +69,7 @@ function ActionButton({ isPending, tooling, onResult }: {
     }}>{isPending ? "Pending..." : "Run"}</Button>;
 }
 
-export function MessageRender({ message, chatId }: { message: Message, chatId: String }) {
+export function MessageRender({ message, chatId }: { message: Message, chatId?: String }) {
   console.log("chatId", chatId);
   const [isPending, setIsPending] = React.useState(false)
   const [actionResult, setActionResult] = React.useState("")
