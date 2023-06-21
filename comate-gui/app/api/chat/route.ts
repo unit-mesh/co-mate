@@ -5,7 +5,7 @@ import { searchTooling } from "@/app/api/common/search-tooling";
 // import { auth } from '@/auth'
 // import { nanoid } from '@/lib/utils'
 
-// export const runtime = 'edge'
+export const runtime = 'edge'
 
 export async function requestToOpenAi(previewToken: string, messages: Message[], isStream: boolean = true) {
   let basePath = process.env.OPENAI_PROXY_URL
@@ -43,7 +43,6 @@ export async function POST(req: Request) {
   const { messages, previewToken } = json
 
   if (messages.length == 1) {
-    // post to /api/prompt
     let output = await searchTooling(messages[0].content);
     messages[0].content = output.prompt;
   }

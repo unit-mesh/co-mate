@@ -36,7 +36,10 @@ fun Route.routeForAction() {
     post("/api/action/tooling") {
         val toolingThought = call.receive<ToolingThought>()
 
-        val url = Regex("https?://github.com/([^/]+)/([^/]+)").find(toolingThought.actionInput)!!.groupValues[0]
+        var url = Regex("https?://github.com/([^/]+)/([^/]+)").find(toolingThought.actionInput)!!.groupValues[0]
+        if (url.endsWith(".") || url.endsWith("?") || url.endsWith("\"")) {
+            url = url.dropLast(1)
+        }
 
         val action = ToolingAction.valueOf(toolingThought.action.uppercase())
         // parse url from toolingThought.actionInput
