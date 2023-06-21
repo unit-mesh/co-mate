@@ -26,7 +26,7 @@ class InitializeSystemFunction(override val context: ComateContext) : DyFunction
         val git = GitCommandManager(workingDirectory.toString())
 
         doCheckout(git, settings)
-        context.workdir = Path(settings.repositoryPath)
+        context.workdir = Path(workingDirectory.absolutePath.toString())
         return FunctionResult.Success(true)
     }
 

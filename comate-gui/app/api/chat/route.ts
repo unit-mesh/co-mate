@@ -7,7 +7,7 @@ import { searchTooling } from "@/app/api/common/search-tooling";
 
 // export const runtime = 'edge'
 
-export async function requestToOpenAi(previewToken: string, messages: Message[]) {
+export async function requestToOpenAi(previewToken: string, messages: Message[], isStream: boolean = true) {
   let basePath = process.env.PROXY_URL
   if (basePath == null) {
     basePath = 'https://api.openai.com'
@@ -24,38 +24,16 @@ export async function requestToOpenAi(previewToken: string, messages: Message[])
     model: 'gpt-3.5-turbo',
     messages,
     temperature: 0.7,
-    stream: true
+    stream: isStream
   })
 
+  console.log("isStream", isStream)
+  if (!isStream) {
+    return res
+  }
+
   const stream = OpenAIStream(res, {
-    // async onCompletion(completion) {
-    //   const title = json.messages[0].content.substring(0, 100)
-    //   const userId = session?.user.id
-    //   if (userId) {
-    //     const id = json.id ?? nanoid()
-    //     const createdAt = Date.now()
-    //     const path = `/chat/${id}`
-    //     const payload = {
-    //       id,
-    //       title,
-    //       userId,
-    //       createdAt,
-    //       path,
-    //       messages: [
-    //         ...messages,
-    //         {
-    //           content: completion,
-    //           role: 'assistant'
-    //         }
-    //       ]
-    //     }
-    //     await kv.hmset(`chat:${id}`, payload)
-    //     await kv.zadd(`user:chat:${userId}`, {
-    //       score: createdAt,
-    //       member: `chat:${id}`
-    //     })
-    //   }
-    // }
+
   })
 
   return new StreamingTextResponse(stream)

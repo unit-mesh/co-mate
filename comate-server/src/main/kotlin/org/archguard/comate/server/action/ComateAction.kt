@@ -5,8 +5,6 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import org.archguard.comate.command.fakeComateContext
 import org.archguard.comate.dynamic.functions.FunctionResult
 import org.archguard.comate.dynamic.functions.InitializeSystemFunction
@@ -19,8 +17,7 @@ enum class ToolingAction(val action: String) {
         override fun execute(input: String): FunctionResult.Success<String> {
             context.projectRepo = input
             InitializeSystemFunction(context).execute()
-            val output = IntroduceSystemFunction(context).execute()
-            return output
+            return IntroduceSystemFunction(context).execute()
         }
     }
     ;

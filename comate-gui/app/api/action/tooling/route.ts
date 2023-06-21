@@ -23,18 +23,15 @@ export async function POST(req: Request) {
     });
 
     let newAction = await response.json();
-    const messages: Message[] = [];
+    const messages: any[] = [];
     messages.push({
-      id: "1",
       content: newAction.action,
       role: 'user'
     })
 
-    return requestToOpenAi(previewToken, messages)
+    console.log("tooling, newAction", newAction);
+    return requestToOpenAi(previewToken, messages, false)
   } catch (e) {
     return NextResponse.json({ error: e }, { status: 500 })
   }
-
-
-  return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
 }

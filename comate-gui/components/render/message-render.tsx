@@ -37,7 +37,11 @@ function messageToThought(firstLine: string, splitContent: string[]) {
   return tooling;
 }
 
-function ActionButton({ isPending, tooling }: { isPending: boolean, tooling: ToolingThought }) {
+function ActionButton({ isPending, tooling, onResult }: {
+  isPending: boolean,
+  tooling: ToolingThought,
+  onResult: (result: string) => void
+}) {
   return <Button
     variant="outline"
     disabled={isPending}
@@ -46,13 +50,15 @@ function ActionButton({ isPending, tooling }: { isPending: boolean, tooling: Too
         method: "POST",
         body: JSON.stringify(tooling),
       }).then((response) => {
-        console.log(response)
+        console.log(response);
+        onResult(response)
       });
     }}>{isPending ? "Pending..." : "Run"}</Button>;
 }
 
 export function MessageRender({ message }: { message: Message }) {
   const [isPending, setIsPending] = React.useState(false)
+  const [actionResult, setActionResult] = React.useState("")
 
   let content = message.content;
 
@@ -82,10 +88,15 @@ export function MessageRender({ message }: { message: Message }) {
       <tr>
         <td>{tooling.action}</td>
         <td>{tooling.actionInput}</td>
-        <td><ActionButton isPending={isPending} tooling={tooling}/></td>
+        <td>
+          <ActionButton isPending={isPending} tooling={tooling} onResult={
+            (output: string) => setActionResult(output)
+          }/></td>
       </tr>
       </tbody>
     </table>
+
+    {actionResult && <MarkdownRender content={actionResult}/>}
 
     <MarkdownRender content={others.join('\n')}/>
   </>;
