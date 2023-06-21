@@ -22,6 +22,8 @@ dependencies {
     implementation(projects.llmCore)
     implementation(projects.comateCore)
 
+    implementation(libs.dotenv)
+
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
     implementation("io.ktor:ktor-server-status-pages:$ktor_version")

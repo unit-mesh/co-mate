@@ -20,7 +20,7 @@ import kotlin.io.path.Path
 data class ComateContext(
     var workdir: Path,
     val language: String,
-    val connector: OpenAIConnector?,
+    var connector: OpenAIConnector?,
     var projectRepo: String = "",
     val extArgs: Map<String, String> = emptyMap(),
     val strategy: Strategy = BasicPromptStrategy(),
