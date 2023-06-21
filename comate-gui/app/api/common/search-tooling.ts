@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 type BaseTool = {
   name: string,
   description: string,

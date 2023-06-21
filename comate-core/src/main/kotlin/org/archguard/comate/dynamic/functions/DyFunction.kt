@@ -1,6 +1,7 @@
 package org.archguard.comate.dynamic.functions
 
 import com.fasterxml.jackson.annotation.JsonValue
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.archguard.architecture.style.NamingStyle
 import org.archguard.comate.command.ComateContext
@@ -11,9 +12,11 @@ annotation class ComateFunction
 
 @Serializable
 sealed class FunctionResult<out T : Any> {
+    @SerialName("success")
     @Serializable
     class Success<out T : Any>(val value: T) : FunctionResult<T>()
 
+    @SerialName("failure")
     @Serializable
     class Failure(val message: String) : FunctionResult<String>()
 }

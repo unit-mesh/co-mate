@@ -5,7 +5,10 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.archguard.comate.command.fakeComateContext
+import org.archguard.comate.dynamic.functions.FunctionResult
 import org.archguard.comate.dynamic.functions.InitializeSystemFunction
 import org.archguard.comate.dynamic.functions.IntroduceSystemFunction
 
@@ -13,16 +16,16 @@ val context = fakeComateContext()
 
 enum class ToolingAction(val action: String) {
     INTRODUCE_SYSTEM(action = "introduce_system") {
-        override fun execute(input: String): String {
+        override fun execute(input: String): FunctionResult.Success<String> {
             context.projectRepo = input
             InitializeSystemFunction(context).execute()
-            IntroduceSystemFunction(context).execute()
-            return ""
+            val output = IntroduceSystemFunction(context).execute()
+            return output
         }
     }
     ;
 
-    abstract fun execute(input: String): String
+    abstract fun execute(input: String): FunctionResult.Success<Any>
 }
 
 @Serializable
@@ -40,8 +43,8 @@ fun Route.routeForAction() {
 
         val action = ToolingAction.valueOf(toolingThought.action.uppercase())
         // parse url from toolingThought.actionInput
-        action.execute(url)
+        val output = action.execute(url)
 
-        call.respond(ActionResult("ok", ToolingAction.INTRODUCE_SYSTEM.toString()))
+        call.respond(ActionResult("ok", output.value.toString()))
     }
 }

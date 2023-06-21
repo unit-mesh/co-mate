@@ -5,6 +5,8 @@ import org.archguard.comate.code.ServicesMap
 import org.archguard.comate.code.generatePackageDependencies
 import org.archguard.comate.connector.OpenAIConnector
 import org.archguard.comate.document.ReadmeParser
+import org.archguard.comate.strategy.BasicPromptStrategy
+import org.archguard.comate.strategy.Strategy
 import org.archguard.comate.wrapper.ComateScaContext
 import org.archguard.comate.wrapper.ComateSourceCodeContext
 import org.archguard.scanner.analyser.*
@@ -21,6 +23,7 @@ data class ComateContext(
     val connector: OpenAIConnector?,
     var projectRepo: String = "",
     val extArgs: Map<String, String> = emptyMap(),
+    val strategy: Strategy = BasicPromptStrategy(),
     private val ds: List<CodeDataStruct> = emptyList(),
     private val projectDependencies: List<CompositionDependency> = emptyList(),
     private val apis: List<RestApiElement> = emptyList(),
