@@ -5,6 +5,7 @@ import org.archguard.comate.command.ComateContext
 import org.archguard.comate.governance.ApiRuleVerifier
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
+import org.archguard.spec.element.RestApiElement
 import org.archguard.spec.lang.rest_api
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -34,8 +35,15 @@ class ApiGovernancePrompter(
 
         logger.info("finished analyse code: ${context.workdir}")
 
+        // todo: we don't have enough time to analyse all the apis
+        val oneApis: List<RestApiElement> = if (apis.size > 1) {
+            apis.subList(0, 1)
+        } else {
+            apis
+        }
+
         // todo: use a better way to get the apis
-        val results = apis.map { api ->
+        val results = oneApis.map { api ->
             val governance = rest_api {
                 uri_construction {
                     pattern("\\/api\\/[a-zA-Z0-9]+\\/v[0-9]+\\/[a-zA-Z0-9\\/\\-]+")
