@@ -11,6 +11,11 @@ export const nanoid = customAlphabet(
   7
 ) // 7-character random string
 
+const decoder = new TextDecoder()
+export function decodeAIStreamChunk(chunk: Uint8Array): string {
+  return decoder.decode(chunk)
+}
+
 export async function fetcher<JSON = any>(
   input: RequestInfo,
   init?: RequestInit

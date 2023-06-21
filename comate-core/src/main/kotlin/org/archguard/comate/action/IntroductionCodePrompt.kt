@@ -21,8 +21,8 @@ class IntroductionCodePrompt(
     override fun getSample(): String {
         return """
 ```
-{xxx} 项目是一个 {channel type} 应用程序，使用了 Jetpack Compose、{xxx} 和一系列相关的库来构建 {xxx} 等功能。
-该应用还使用了一些第三方库来构建用户界面 {xxx}，以及进行 {xxx} 等任务。该应用需要考虑 {xxx} 等非功能需求。
+{xxx} 项目是一个 {channel type} 应用程序，使用了 {xxx} 和一系列相关的库来构建 {xxx} 等功能（介绍核心的框架）。
+该应用还使用了一些第三方库来构建 {xxx} (诸如于用户界面)，以及进行 {xxx} 等任务（诸如于任务调度等功能）。该应用需要考虑 {xxx} 等非功能需求。
 ```""".trimIndent()
     }
 

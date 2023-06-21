@@ -1,8 +1,8 @@
-import { Message } from "ai";
+import { Message, OpenAIStream, streamToResponse } from "ai";
 import { MarkdownRender } from "@/components/render/markdown-render";
 import { Button } from "@/components/ui/button";
 import * as React from "react";
-import { fetcher } from "@/lib/utils";
+import { decodeAIStreamChunk, fetcher } from "@/lib/utils";
 
 export interface ToolingThought {
   thought: string
@@ -46,12 +46,26 @@ function ActionButton({ isPending, tooling, onResult }: {
     variant="outline"
     disabled={isPending}
     onClick={async () => {
-      await fetcher("/api/action/tooling", {
+      isPending = true
+
+      await fetch("/api/action/tooling", {
         method: "POST",
         body: JSON.stringify(tooling),
-      }).then((response) => {
-        console.log(response);
-        onResult(response)
+      }).then(async (response: any) => {
+        console.log(response.body);
+        let result = ""
+        const reader = response.body.getReader()
+        while (true) {
+          const { done, value } = await reader.read()
+          if (done) {
+            break
+          }
+
+          result += decodeAIStreamChunk(value)
+          onResult(result)
+        }
+
+        isPending = false
       });
     }}>{isPending ? "Pending..." : "Run"}</Button>;
 }
@@ -76,7 +90,7 @@ export function MessageRender({ message }: { message: Message }) {
   return <>
     <MarkdownRender content={tooling.thought}/>
 
-    <table>
+    <table className="bg-white">
       <thead>
       <tr>
         <th>Action</th>
@@ -90,7 +104,10 @@ export function MessageRender({ message }: { message: Message }) {
         <td>{tooling.actionInput}</td>
         <td>
           <ActionButton isPending={isPending} tooling={tooling} onResult={
-            (output: string) => setActionResult(output)
+            (output: string) => {
+              console.log(output);
+              setActionResult(output)
+            }
           }/></td>
       </tr>
       </tbody>

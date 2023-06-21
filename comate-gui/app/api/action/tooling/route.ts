@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     })
 
     console.log("tooling, newAction", newAction);
-    return requestToOpenAi(previewToken, messages, false)
+    return requestToOpenAi(previewToken, messages)
   } catch (e) {
     return NextResponse.json({ error: e }, { status: 500 })
   }
