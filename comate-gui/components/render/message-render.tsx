@@ -1,8 +1,7 @@
-import { Message, OpenAIStream, streamToResponse } from "ai";
+import { Message } from "ai";
 import { MarkdownRender } from "@/components/render/markdown-render";
-import { Button } from "@/components/ui/button";
 import * as React from "react";
-import { decodeAIStreamChunk, fetcher } from "@/lib/utils";
+import { ActionButton } from "@/components/render/action-button";
 
 export interface ToolingThought {
   thought: string
@@ -37,44 +36,10 @@ function messageToThought(firstLine: string, splitContent: string[]) {
   return tooling;
 }
 
-function ActionButton({ isPending, tooling, onResult }: {
-  isPending: boolean,
-  tooling: ToolingThought,
-  onResult: (result: string) => void
-}) {
-  return <Button
-    variant="outline"
-    disabled={isPending}
-    onClick={async () => {
-      isPending = true
-
-      await fetch("/api/action/tooling", {
-        method: "POST",
-        body: JSON.stringify(tooling),
-      }).then(async response => {
-        onResult(await response.json())
-        // let result = ""
-        // const reader = response.body.getReader()
-        // while (true) {
-        //   const { done, value } = await reader.read()
-        //   if (done) {
-        //     break
-        //   }
-        //
-        //   result += decodeAIStreamChunk(value)
-        //   onResult(result)
-        // }
-
-        isPending = false
-      });
-    }}>{isPending ? "Pending..." : "Run"}</Button>;
-}
-
 type MessageRenderProps = { message: Message, chatId?: string, appendToChat?: (message: Message) => void };
 
 export function MessageRender({ message, appendToChat, chatId }: MessageRenderProps) {
   const [isPending, setIsPending] = React.useState(false)
-  // const [actionResult, setActionResult] = React.useState("")
 
   let content = message.content;
 
@@ -107,8 +72,6 @@ export function MessageRender({ message, appendToChat, chatId }: MessageRenderPr
         <td>
           <ActionButton isPending={isPending} tooling={tooling} onResult={
             (output: any) => {
-              console.log(output);
-              // setActionResult(output)
               appendToChat?.({
                 id: chatId!!,
                 content: output.action,
@@ -119,8 +82,6 @@ export function MessageRender({ message, appendToChat, chatId }: MessageRenderPr
       </tr>
       </tbody>
     </table>
-
-    {/*{actionResult && <MarkdownRender content={actionResult}/>}*/}
 
     <MarkdownRender content={others.join('\n')}/>
   </>;

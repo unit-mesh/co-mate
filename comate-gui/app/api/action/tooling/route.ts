@@ -17,16 +17,8 @@ export async function POST(req: Request) {
       body: JSON.stringify(json),
     });
 
-    let newAction = await response.json();
-    // const messages: any[] = [];
-    // messages.push({
-    //   content: newAction.action,
-    //   role: 'user'
-    // })
-    // todo: add to conversation ?
-    // console.log("tooling, newAction", newAction);
-    // requestToOpenAi(previewToken, messages)
-    return NextResponse.json(newAction, { status: 200 })
+    let responseJson = await response.json();
+    return NextResponse.json(responseJson, { status: 200 })
   } catch (e) {
     return NextResponse.json({ error: e }, { status: 500 })
   }
