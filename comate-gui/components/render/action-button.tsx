@@ -7,20 +7,20 @@ export function ActionButton({ tooling, onResult }: {
   tooling: ToolingThought,
   onResult: (result: string) => void
 }) {
-  const [isAnalysising, setIsAnalysising] = React.useState(false)
+  const [isAnalysing, setIsAnalysing] = React.useState(false)
 
   return <Button
     variant="outline"
-    disabled={isAnalysising}
+    disabled={isAnalysing}
     onClick={async () => {
-      setIsAnalysising(true)
+      setIsAnalysing(true)
 
       await fetch("/api/action/tooling", {
         method: "POST",
         body: JSON.stringify(tooling),
       }).then(async response => {
         onResult(await response.json())
-        setIsAnalysising(false)
+        setIsAnalysing(false)
       });
-    }}>{isAnalysising ? "Analysis..." : "Run"}</Button>;
+    }}>{isAnalysing ? "Analysis..." : "Run"}</Button>;
 }
