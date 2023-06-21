@@ -9,9 +9,11 @@ export interface ToolingThought {
   actionInput: string
 }
 
+// HasMatchFunction: true
 // Thought: I need to introduce the system to the team and ensure that it aligns with our overall architecture and governance policies.
 // Action: introduce_system
 // Action Input: https://github.com/archguard/ddd-monolithic-code-sample
+const hasMatchFunctionRegex = /\s*HasMatchFunction:\s*(.*(?:\n(?!\s*\/\/).*)*)/i;
 const thoughtRegex = /\s*Thought:\s*(.*(?:\n(?!\s*\/\/).*)*)/i;
 const actionRegex = /\s*Action:\s*(.*(?:\n(?!\s*\/\/).*)*)/i;
 const actionInputRegex = /\s*Action\s*Input:\s*(.*(?:\n(?!\s*\/\/).*)*)/i;
@@ -44,10 +46,12 @@ export function MessageRender({ message, appendToChat, chatId }: MessageRenderPr
   let splitContent = content.split('\n').filter((line) => line.trim() !== "");
   let firstLine = splitContent[0];
 
-  let isOurThoughtTree = splitContent.length < 1 || !thoughtRegex.test(firstLine);
-  if (isOurThoughtTree) {
+  let isNoMatch = splitContent.length < 1 || !hasMatchFunctionRegex.test(firstLine);
+  let result = hasMatchFunctionRegex.exec(firstLine)?.[1] ?? "";
+  if (isNoMatch || result !== "true") {
     return <MarkdownRender content={content}/>;
   }
+  splitContent = splitContent.slice(1);
 
   let tooling = messageToThought(firstLine, splitContent);
   let others = splitContent.slice(3);

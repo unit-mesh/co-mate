@@ -23,6 +23,7 @@ class PromptingWrapper {
     Use the following format:
 
     Question: the input question you must answer
+    HasMatchFunction: true/false (if has match tool)
     Thought: you should always think about what to do
     Action: the action to take, should be one of [${toolNames}]
     Action Input: the input to the action (parse from the user input, don't add other additional information)
