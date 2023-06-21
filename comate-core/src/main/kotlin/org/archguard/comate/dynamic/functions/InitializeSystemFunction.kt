@@ -16,7 +16,7 @@ class InitializeSystemFunction(override val context: ComateContext) : DyFunction
         return "Initialize system will clone the repository and setup it."
     }
 
-    override fun execute(): Boolean {
+    override fun execute(): FunctionResult<Boolean> {
         val settings = GitSourceSettings(context.projectRepo)
         // mkdir temp
         mkdir("temp")
@@ -27,7 +27,7 @@ class InitializeSystemFunction(override val context: ComateContext) : DyFunction
 
         doCheckout(git, settings)
         context.workdir = Path(settings.repositoryPath)
-        return true
+        return FunctionResult.Success(true)
     }
 
     override fun parameters(): HashMap<String, String> {

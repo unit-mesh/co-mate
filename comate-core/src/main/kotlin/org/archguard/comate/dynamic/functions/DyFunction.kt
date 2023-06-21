@@ -1,11 +1,22 @@
 package org.archguard.comate.dynamic.functions
 
+import com.fasterxml.jackson.annotation.JsonValue
+import kotlinx.serialization.Serializable
 import org.archguard.architecture.style.NamingStyle
 import org.archguard.comate.command.ComateContext
 
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.CLASS)
 annotation class ComateFunction
+
+@Serializable
+sealed class FunctionResult<out T : Any> {
+    @Serializable
+    class Success<out T : Any>(val value: T) : FunctionResult<T>()
+
+    @Serializable
+    class Failure(val message: String) : FunctionResult<String>()
+}
 
 /**
  * A dynamic function is a function that can be executed by the dynamic context
@@ -23,7 +34,7 @@ interface DyFunction {
     /**
      * return true if the function is executed successfully
      */
-    fun execute(): Boolean
+    fun execute(): FunctionResult<Any>
 
     /**
      * function definition for LLM to select the best function

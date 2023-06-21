@@ -8,8 +8,8 @@ class ApiGovernanceFunction(override val context: ComateContext) : DyFunction {
         return "REST API Governance function, based on API Specification."
     }
 
-    override fun execute(): Boolean {
-        return true
+    override fun execute(): FunctionResult.Success<Boolean> {
+        return FunctionResult.Success(true)
     }
 
     override fun parameters(): HashMap<String, String> = hashMapOf(

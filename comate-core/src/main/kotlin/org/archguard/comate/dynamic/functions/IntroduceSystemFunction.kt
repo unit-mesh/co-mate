@@ -8,8 +8,8 @@ class IntroduceSystemFunction(override val context: ComateContext) : DyFunction 
         return "Introduce system based on README.md, project dependencies."
     }
 
-    override fun execute(): Boolean {
-        return true
+    override fun execute(): FunctionResult.Success<Boolean> {
+        return FunctionResult.Success(true)
     }
 
     override fun parameters(): HashMap<String, String> = hashMapOf(
