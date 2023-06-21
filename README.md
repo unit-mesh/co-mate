@@ -141,6 +141,14 @@ Token Based Authentication (Recommended) Ideally, microservices should be statel
 }
 ```
 
+Similar Project:
+
+- [AutoDoc](https://github.com/context-labs/autodoc). Autodoc is an experimental toolkit for auto-generating codebase documentation for git repositories using Large
+  Language Models, like GPT-4 or Alpaca. Autodoc can be installed in your repo in about 5 minutes. It indexes your
+  codebase through a depth-first traversal of all repository contents and calls an LLM to write documentation for each
+  file and folder. These documents can be combined to describe the different components of your system and how they work
+  together.
+
 License
 ---
 
