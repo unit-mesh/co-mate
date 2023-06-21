@@ -20,4 +20,6 @@ export async function POST(req: Request) {
   } catch (e) {
     console.log(e)
   }
+
+  return new Response('OK', { status: 200 })
 }
