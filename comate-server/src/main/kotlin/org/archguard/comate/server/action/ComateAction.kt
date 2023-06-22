@@ -9,10 +9,7 @@ import kotlinx.serialization.Serializable
 import org.archguard.comate.command.fakeComateContext
 import org.archguard.comate.connector.OPENAI_MODEL
 import org.archguard.comate.connector.OpenAIConnector
-import org.archguard.comate.dynamic.functions.FunctionResult
-import org.archguard.comate.dynamic.functions.InitializeSystemFunction
-import org.archguard.comate.dynamic.functions.IntroduceSystemFunction
-import org.archguard.comate.dynamic.functions.RestApiGovernanceFunction
+import org.archguard.comate.dynamic.functions.*
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.io.path.pathString
@@ -30,6 +27,11 @@ enum class ToolingAction(val action: String) {
     REST_API_GOVERNANCE(action = "rest_api_governance") {
         override fun execute(input: String): FunctionResult.Success<String> {
             return RestApiGovernanceFunction(comateContext).execute()
+        }
+    },
+    FOUNDATION_SPEC_GOVERNANCE(action = "foundation_spec_governance") {
+        override fun execute(input: String): FunctionResult.Success<String> {
+            return FoundationSpecGovernanceFunction(comateContext).execute()
         }
     },
     ;

@@ -18,6 +18,13 @@ class FoundationGovernancePrompter(
     override fun getRequirements(): String = """
 1. 使用中文描述。
 2. 使用业务场景的语言描述，不要使用技术术语。
+3. 如果 result 是 true，请不要返回任何信息。
+4. 如果 result 是 false，请返回不通过的原因，并根据 rule 提供符合规范的 API。
+5. 你只返回如下的结果类似于：
+
+###
+- `{xxx}` 不符合 { rule name } 规范，Rule: { rule }，建议修改为 {new api}。
+###
 
     """.trimIndent()
 
@@ -26,7 +33,7 @@ class FoundationGovernancePrompter(
 
         val governance = foundation {
             project_name {
-                pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\${'$'}")
+                pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
                 example("system1-servicecenter1-microservice1")
             }
 
