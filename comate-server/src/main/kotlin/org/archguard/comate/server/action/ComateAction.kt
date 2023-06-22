@@ -28,7 +28,7 @@ enum class ToolingAction(val action: String) {
         }
     },
     REST_API_GOVERNANCE(action = "rest_api_governance") {
-        override fun execute(input: String): FunctionResult.Success<Any> {
+        override fun execute(input: String): FunctionResult.Success<String> {
             return RestApiGovernanceFunction(comateContext).execute()
         }
     },
