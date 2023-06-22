@@ -35,9 +35,9 @@ OPENAI_API_PROXY=xxxx (optional, if you had a OpenAI proxy server)
 
 ## Modules
 
-- `comate-server`: server side [todo]
+- `comate-server`: server side which provide REST API
+- `comate-gui`: web GUI
 - `comate-cli`: command line interface  [todo]
-- `comate-gui` [deprecated]: graphical user interface  [todo]
 
 Core modules:
 
@@ -52,14 +52,14 @@ Core modules:
 - Architecture Define
     - `architecture`: architecture model
 
+### Tech Stack
+
+- GUI: Next.js + React + AI.js
+- Server: Kotlin + Ktor
+- DSL: Kotlin Type-Safe DSL
+- Code Engine: ArchGuard & ArchGuard CodeDB
+
 ## Specification Language/DSL
-
-- Domain (TODO). spec for Domain Driven Design.
-- Foundation (WIP). basic spec, like Project naming, Package and Class and Function naming.
-- RestApi. spec for RESTful API.
-- ....
-
-### Domain
 
 ```kotlin
 domain {
