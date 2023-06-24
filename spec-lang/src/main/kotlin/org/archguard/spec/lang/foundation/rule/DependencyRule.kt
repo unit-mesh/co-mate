@@ -16,17 +16,16 @@ class DependencyRule : Rule<FoundationElement> {
     override fun exec(input: FoundationElement): List<RuleResult> {
         val results = mutableListOf<RuleResult>()
 
-        val layerRegexMap: Map<String, Regex> = input.layeredDefines.map {
+        val layerRegexMap: Map<String, Regex> = input.layeredDefines.associate {
             it.name to Regex(it.pattern!!)
-        }.toMap()
+        }
 
         this.rules.forEach { (from, targetPkg) ->
             val currentPkg = layerRegexMap[from] ?: return@forEach
             val targetList = targetPkg.map { to -> layerRegexMap[to] }
 
             input.ds.forEach { ds ->
-                val pkg = ds.Package
-                if (currentPkg.matches(pkg)) {
+                if (currentPkg.matches(ds.Package)) {
                     if (ds.Imports.isEmpty()) {
                         return@forEach
                     }
