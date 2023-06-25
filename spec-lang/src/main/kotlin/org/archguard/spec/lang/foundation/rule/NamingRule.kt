@@ -5,6 +5,7 @@ import org.archguard.spec.base.RuleResult
 import org.archguard.spec.lang.foundation.expression.NamingExpression
 import org.archguard.spec.lang.matcher.CompareType
 import org.archguard.spec.lang.matcher.DelayCompare
+import org.jetbrains.annotations.TestOnly
 
 
 class NamingRule : Rule<String> {
@@ -12,7 +13,7 @@ class NamingRule : Rule<String> {
     val name: Any = "<placeholder>"
     var string: String = ""
 
-    private var delayCompare: DelayCompare? = null
+    var delayCompare: DelayCompare? = null
 
     fun endWiths(vararg suffixes: String): DelayCompare {
         val compare = DelayCompare(string, CompareType.END_WITHS, suffixes.toList())
@@ -41,4 +42,11 @@ class NamingRule : Rule<String> {
         val compare = delayCompare!!.compare()
         return listOf(RuleResult(this.actionName, "Naming exec: $input, compareType: $delayCompare", compare, input))
     }
+}
+
+@TestOnly
+fun naming(block: NamingRule.() -> Unit): NamingRule {
+    val namingRule = NamingRule()
+    namingRule.block()
+    return namingRule
 }
