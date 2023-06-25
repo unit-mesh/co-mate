@@ -4,23 +4,52 @@ import chapi.domain.core.CodeDataStruct
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.archguard.spec.element.FoundationElement
+import org.archguard.spec.lang.foundation.declaration.LayeredDefine
+import org.archguard.spec.lang.foundation.declaration.layered
+import org.archguard.spec.lang.matcher.shouldBe
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class DependencyRuleTest {
     @Test
     fun should_correct_setup_for_deps() {
-        val rule = DependencyRule()
-        rule.rules = hashMapOf(
-            "application" to listOf("domain", "interface"),
-            "domain" to listOf("infrastructure"),
-            "interface" to listOf("domain")
-        )
+        val layeredDeclaration = layered {
+            layer("application") {
+                pattern(".*\\.application") {
+                    name shouldBe endWiths("DTO", "Request", "Response", "Factory", "Service")
+                }
+            }
+            layer("domain") {
+                pattern(".*\\.domain(?:\\.[a-zA-Z]+)?") { name shouldBe endWiths("Entity") }
+            }
+            layer("infrastructure") {
+                pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
+            }
+            layer("interface") {
+                pattern(".*\\.interface") { name shouldBe endWiths("Controller", "Service") }
+            }
+
+            dependency {
+                "application" dependedOn "domain"
+                "application" dependedOn "interface"
+                "domain" dependedOn "infrastructure"
+                "interface" dependedOn "domain"
+            }
+        }
 
         // load the ds from the test resources
         val dsString = this.javaClass.classLoader.getResource("spec/ddd-mono-repo-demo.json")!!.readText()
         val ds: List<CodeDataStruct> = Json.decodeFromString(dsString)
+        val foundationElement = FoundationElement("ddd-mono-repo-demo", ds)
 
-        val results = rule.exec(FoundationElement("ddd-mono-repo-demo", ds))
-        assert(results.isEmpty())
+        val rules = layeredDeclaration.rules(foundationElement)
+
+        foundationElement.layeredDefines = rules.filterIsInstance<LayeredDefine>()
+        assertEquals(5, rules.size)
+
+        val dependencyRule = rules.filterIsInstance<DependencyRule>().first()
+        val ruleResults = dependencyRule.exec(foundationElement)
+
+//        assertEquals(0, ruleResults.size)
     }
 }

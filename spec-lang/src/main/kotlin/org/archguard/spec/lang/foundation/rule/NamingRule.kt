@@ -6,6 +6,7 @@ import org.archguard.spec.lang.foundation.expression.NamingExpression
 import org.archguard.spec.lang.matcher.CompareType
 import org.archguard.spec.lang.matcher.DelayCompare
 
+
 class NamingRule : Rule<String> {
     override val actionName: String = "Naming"
     val name: Any = "<placeholder>"

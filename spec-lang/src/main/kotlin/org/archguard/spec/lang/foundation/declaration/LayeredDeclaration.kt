@@ -4,6 +4,7 @@ import org.archguard.spec.base.Rule
 import org.archguard.spec.lang.base.BaseDeclaration
 import org.archguard.spec.lang.foundation.rule.DependencyRule
 import org.archguard.spec.element.FoundationElement
+import org.jetbrains.annotations.TestOnly
 
 class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     private val dependencyRules = mutableListOf<DependencyRule>()
@@ -26,4 +27,11 @@ class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     override fun rules(element: FoundationElement): List<Rule<FoundationElement>> {
         return layerRules + dependencyRules
     }
+}
+
+@TestOnly
+fun layered(function: LayeredDeclaration.() -> Unit): LayeredDeclaration {
+    val declaration = LayeredDeclaration()
+    declaration.function()
+    return declaration
 }

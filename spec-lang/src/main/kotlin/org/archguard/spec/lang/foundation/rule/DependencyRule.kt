@@ -28,10 +28,14 @@ class DependencyRule : Rule<FoundationElement> {
             val currentPkg = layerRegexMap[from] ?: return@forEach
             val targetList = targetPkg.map { to -> layerRegexMap[to] }
 
-            input.ds.forEach { ds ->
+            if (targetList.any { it == null }) {
+                return@forEach
+            }
+
+            input.ds.forEachIndexed { _, ds ->
                 if (currentPkg.matches(ds.Package)) {
                     if (ds.Imports.isEmpty()) {
-                        return@forEach
+                        return@forEachIndexed
                     }
 
                     val hasMatch = targetList.any { target ->
