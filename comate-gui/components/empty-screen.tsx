@@ -4,18 +4,23 @@ import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/external-link'
 import { IconArrowRight } from '@/components/ui/icons'
 
+let demoUrl = `https://github.com/archguard/ddd-monolithic-code-sample`;
 const exampleMessages = [
   {
     heading: 'First, import a system as context',
-    message: `Introduce the system for following repository: https://github.com/archguard/ddd-monolithic-code-sample`
+    message: `Introduce the system for following repository: ${demoUrl}`
   },
   {
     heading: 'Summarize the architecture',
-    message: 'Summarize the architecture for this system.'
+    message: `Summarize the architecture for this system: ${demoUrl}`
   },
   {
     heading: 'Check REST API Specification',
-    message: `Check REST API specification for this system.`
+    message: `Check REST API specification for this system: ${demoUrl}`
+  },
+  {
+    heading: `Is this system follow basic specification?`,
+    message: `Is this system follow basic specification? ${demoUrl}`
   }
 ]
 
