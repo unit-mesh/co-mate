@@ -8,13 +8,9 @@ class DependencyRule : Rule<FoundationElement> {
     override val actionName: String get() = "DependencyRule"
     var rules: HashMap<String, List<String>> = hashMapOf()
 
-    //
-    var allTargetList: List<String> = listOf()
-
     infix fun String.dependedOn(to: String) {
         val list = rules.getOrDefault(this, listOf())
         rules[this] = list + to
-        allTargetList = allTargetList + to
     }
 
     override fun exec(input: FoundationElement): List<RuleResult> {
@@ -24,6 +20,7 @@ class DependencyRule : Rule<FoundationElement> {
 
         val results = mutableListOf<RuleResult>()
 
+        val allTargetList: List<String> = input.layeredDefines.map { it.name }
         val layerRegexMap: Map<String, Regex> = input.layeredDefines.associate {
             it.name to Regex(it.pattern!!)
         }

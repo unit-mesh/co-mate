@@ -55,4 +55,42 @@ class DependencyRuleTest {
 
         assertEquals(0, ruleResults.size)
     }
+
+    @Test
+    fun should_find_error_layered_dep() {
+        val layeredDeclaration = layered {
+            layer("interface") {
+                pattern(".*\\.apis") { name shouldBe endWiths("Controller") }
+            }
+            layer("application") {
+                pattern(".*\\.application") {
+                    name shouldBe endWiths("DTO", "Request", "Response", "Factory", "Service")
+                }
+            }
+            layer("domain") {
+                pattern(".*\\.domain(?:\\.[a-zA-Z]+)?") { name shouldNotBe endWiths("Request", "Response") }
+            }
+            layer("infrastructure") {
+                pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
+            }
+
+            dependency {
+                "application" dependedOn "interface"
+            }
+        }
+
+        val dsString = this.javaClass.classLoader.getResource("spec/ddd-mono-repo-demo.json")!!.readText()
+        val ds: List<CodeDataStruct> = Json.decodeFromString(dsString)
+        val foundationElement = FoundationElement("ddd-mono-repo-demo", ds)
+
+        val rules = layeredDeclaration.rules(foundationElement)
+
+        foundationElement.layeredDefines = rules.filterIsInstance<LayeredDefine>()
+        assertEquals(5, rules.size)
+
+        val dependencyRule = rules.filterIsInstance<DependencyRule>().first()
+        val ruleResults = dependencyRule.exec(foundationElement)
+
+        assertEquals(2, ruleResults.size)
+    }
 }
