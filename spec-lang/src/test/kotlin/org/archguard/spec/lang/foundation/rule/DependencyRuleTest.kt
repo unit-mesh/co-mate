@@ -15,19 +15,19 @@ class DependencyRuleTest {
     @Test
     fun should_correct_setup_for_deps() {
         val layeredDeclaration = layered {
+            layer("interface") {
+                pattern(".*\\.interface") { name shouldBe endWiths("Controller", "Service") }
+            }
             layer("application") {
                 pattern(".*\\.application") {
                     name shouldBe endWiths("DTO", "Request", "Response", "Factory", "Service")
                 }
             }
             layer("domain") {
-                pattern(".*\\.domain(?:\\.[a-zA-Z]+)?") { name shouldNotBe endWiths("Entity") }
+                pattern(".*\\.domain") { name shouldBe endWiths("Entity") }
             }
             layer("infrastructure") {
                 pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
-            }
-            layer("interface") {
-                pattern(".*\\.apis") { name shouldBe endWiths("Controller", "Service") }
             }
 
             dependency {
