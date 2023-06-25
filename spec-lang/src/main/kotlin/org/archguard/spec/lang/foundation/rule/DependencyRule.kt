@@ -8,9 +8,13 @@ class DependencyRule : Rule<FoundationElement> {
     override val actionName: String get() = "DependencyRule"
     var rules: HashMap<String, List<String>> = hashMapOf()
 
+    //
+    var allTargetList: List<String> = listOf()
+
     infix fun String.dependedOn(to: String) {
         val list = rules.getOrDefault(this, listOf())
         rules[this] = list + to
+        allTargetList = allTargetList + to
     }
 
     override fun exec(input: FoundationElement): List<RuleResult> {
@@ -24,11 +28,13 @@ class DependencyRule : Rule<FoundationElement> {
             it.name to Regex(it.pattern!!)
         }
 
-        this.rules.forEach { (from, targetPkg) ->
+        this.rules.forEach { (from, target) ->
             val currentPkg = layerRegexMap[from] ?: return@forEach
-            val targetList = targetPkg.map { to -> layerRegexMap[to] }
 
-            if (targetList.any { it == null }) {
+            val underTargetList = allTargetList.filter { !target.contains(it) }
+                .map { layerRegexMap[it] }
+
+            if (underTargetList.any { it == null }) {
                 return@forEach
             }
 
@@ -38,14 +44,14 @@ class DependencyRule : Rule<FoundationElement> {
                         return@forEachIndexed
                     }
 
-                    val hasMatch = targetList.any { target ->
+                    val hasErrorDep = underTargetList.any { target ->
                         ds.Imports.any { imp ->
                             target!!.matches(imp.Source.substringBeforeLast("."))
                         }
                     }
 
-                    if (!hasMatch) {
-                        val rule = "Package $from should not depend on ${targetPkg.joinToString(", ")}"
+                    if (hasErrorDep) {
+                        val rule = "Package $from should not depend on ${target.joinToString(", ")}"
                         results.add(RuleResult(this.actionName, rule, false, ds.Package + "." + ds.NodeName))
                     }
                 }

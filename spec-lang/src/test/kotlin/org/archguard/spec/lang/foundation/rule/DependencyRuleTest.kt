@@ -16,7 +16,7 @@ class DependencyRuleTest {
     fun should_correct_setup_for_deps() {
         val layeredDeclaration = layered {
             layer("interface") {
-                pattern(".*\\.interface") { name shouldBe endWiths("Controller", "Service") }
+                pattern(".*\\.apis") { name shouldBe endWiths("Controller") }
             }
             layer("application") {
                 pattern(".*\\.application") {
@@ -24,7 +24,7 @@ class DependencyRuleTest {
                 }
             }
             layer("domain") {
-                pattern(".*\\.domain") { name shouldBe endWiths("Entity") }
+                pattern(".*\\.domain(?:\\.[a-zA-Z]+)?") { name shouldNotBe endWiths("Request", "Response") }
             }
             layer("infrastructure") {
                 pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
@@ -53,7 +53,6 @@ class DependencyRuleTest {
         val dependencyRule = rules.filterIsInstance<DependencyRule>().first()
         val ruleResults = dependencyRule.exec(foundationElement)
 
-        println(ruleResults)
-//        assertEquals(0, ruleResults.size)
+        assertEquals(0, ruleResults.size)
     }
 }
