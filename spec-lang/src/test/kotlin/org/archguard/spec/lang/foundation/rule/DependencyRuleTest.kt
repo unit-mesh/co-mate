@@ -7,6 +7,7 @@ import org.archguard.spec.element.FoundationElement
 import org.archguard.spec.lang.foundation.declaration.LayeredDefine
 import org.archguard.spec.lang.foundation.declaration.layered
 import org.archguard.spec.lang.matcher.shouldBe
+import org.archguard.spec.lang.matcher.shouldNotBe
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -20,20 +21,22 @@ class DependencyRuleTest {
                 }
             }
             layer("domain") {
-                pattern(".*\\.domain(?:\\.[a-zA-Z]+)?") { name shouldBe endWiths("Entity") }
+                pattern(".*\\.domain(?:\\.[a-zA-Z]+)?") { name shouldNotBe endWiths("Entity") }
             }
             layer("infrastructure") {
                 pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
             }
             layer("interface") {
-                pattern(".*\\.interface") { name shouldBe endWiths("Controller", "Service") }
+                pattern(".*\\.apis") { name shouldBe endWiths("Controller", "Service") }
             }
 
             dependency {
-                "application" dependedOn "domain"
-                "application" dependedOn "interface"
-                "domain" dependedOn "infrastructure"
                 "interface" dependedOn "domain"
+                "interface" dependedOn "application"
+                "interface" dependedOn "infrastructure"
+                "application" dependedOn "domain"
+                "application" dependedOn "infrastructure"
+                "domain" dependedOn "infrastructure"
             }
         }
 
@@ -50,6 +53,7 @@ class DependencyRuleTest {
         val dependencyRule = rules.filterIsInstance<DependencyRule>().first()
         val ruleResults = dependencyRule.exec(foundationElement)
 
+        println(ruleResults)
 //        assertEquals(0, ruleResults.size)
     }
 }

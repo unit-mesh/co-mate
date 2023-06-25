@@ -99,10 +99,12 @@ foundation {
         }
 
         dependency {
-            "application" dependedOn "domain"
-            "application" dependedOn "interface"
-            "domain" dependedOn "infrastructure"
             "interface" dependedOn "domain"
+            "interface" dependedOn "application"
+            "interface" dependedOn "infrastructure"
+            "application" dependedOn "domain"
+            "application" dependedOn "infrastructure"
+            "domain" dependedOn "infrastructure"
         }
     }
 
