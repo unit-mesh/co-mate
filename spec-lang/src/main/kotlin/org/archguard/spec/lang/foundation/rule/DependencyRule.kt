@@ -6,7 +6,7 @@ import org.archguard.spec.element.FoundationElement
 
 class DependencyRule : Rule<FoundationElement> {
     override val actionName: String get() = "DependencyRule"
-    private val rules: HashMap<String, List<String>> = hashMapOf()
+    var rules: HashMap<String, List<String>> = hashMapOf()
 
     infix fun String.dependedOn(to: String) {
         val list = rules.getOrDefault(this, listOf())
@@ -14,6 +14,10 @@ class DependencyRule : Rule<FoundationElement> {
     }
 
     override fun exec(input: FoundationElement): List<RuleResult> {
+        if (input.layeredDefines.isEmpty() || input.ds.isEmpty() || this.rules.isEmpty()) {
+            return listOf()
+        }
+
         val results = mutableListOf<RuleResult>()
 
         val layerRegexMap: Map<String, Regex> = input.layeredDefines.associate {
@@ -37,8 +41,8 @@ class DependencyRule : Rule<FoundationElement> {
                     }
 
                     if (!hasMatch) {
-                        val rule = "Package ${ds.Package} should not depend on ${targetPkg.joinToString(", ")}"
-                        results.add(RuleResult(this.actionName, rule, false))
+                        val rule = "Package $from should not depend on ${targetPkg.joinToString(", ")}"
+                        results.add(RuleResult(this.actionName, rule, false, ds.Package + "." + ds.NodeName))
                     }
                 }
             }

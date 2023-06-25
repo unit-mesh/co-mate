@@ -2,9 +2,9 @@ package org.archguard.spec.lang.foundation.declaration
 
 import org.archguard.spec.base.Rule
 import org.archguard.spec.base.RuleResult
+import org.archguard.spec.element.FoundationElement
 import org.archguard.spec.lang.foundation.expression.NamingExpression
 import org.archguard.spec.lang.foundation.rule.NamingRule
-import org.archguard.spec.element.FoundationElement
 
 class LayeredDefine(val name: String) : Rule<FoundationElement> {
     var pattern: String? = null

@@ -1,0 +1,4404 @@
+[
+  {
+    "NodeName": "ProductServiceApplication",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/ProductServiceApplication.java",
+    "Functions": [
+      {
+        "Name": "main",
+        "ReturnType": "void",
+        "Parameters": [
+          {
+            "TypeValue": "args",
+            "TypeType": "String[]"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "org.springframework.boot",
+            "Type": "CHAIN",
+            "NodeName": "SpringApplication",
+            "FunctionName": "run",
+            "Parameters": [
+              {
+                "TypeValue": "ProductServiceApplication.class",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "args",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 21,
+              "StartLinePosition": 26,
+              "StopLine": 21,
+              "StopLinePosition": 67
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 20,
+          "StartLinePosition": 18,
+          "StopLine": 22,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "args",
+            "TypeType": "String[]"
+          }
+        ],
+        "BodyHash": -333857229
+      },
+      {
+        "Name": "createRestApi",
+        "ReturnType": "Docket",
+        "FunctionCalls": [
+          {
+            "Package": "springfox.documentation.spring.web.plugins",
+            "Type": "CHAIN",
+            "NodeName": "Docket",
+            "FunctionName": "select",
+            "Position": {
+              "StartLine": 27,
+              "StartLinePosition": 17,
+              "StopLine": 27,
+              "StopLinePosition": 24
+            }
+          },
+          {
+            "Package": "com.dmall.productservice",
+            "NodeName": "newDocket",
+            "FunctionName": "apis",
+            "Parameters": [
+              {
+                "TypeValue": "RequestHandlerSelectors.basePackage(\"com.dmall.productservice.apis\")",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 28,
+              "StartLinePosition": 17,
+              "StopLine": 28,
+              "StopLinePosition": 90
+            }
+          },
+          {
+            "Package": "springfox.documentation.builders",
+            "Type": "CHAIN",
+            "NodeName": "RequestHandlerSelectors",
+            "FunctionName": "basePackage",
+            "Parameters": [
+              {
+                "TypeValue": "\"com.dmall.productservice.apis\"",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 28,
+              "StartLinePosition": 46,
+              "StopLine": 28,
+              "StopLinePosition": 89
+            }
+          },
+          {
+            "Package": "com.dmall.productservice",
+            "NodeName": "newDocket",
+            "FunctionName": "paths",
+            "Parameters": [
+              {
+                "TypeValue": "PathSelectors.any()",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 29,
+              "StartLinePosition": 17,
+              "StopLine": 29,
+              "StopLinePosition": 42
+            }
+          },
+          {
+            "Package": "springfox.documentation.builders",
+            "Type": "CHAIN",
+            "NodeName": "PathSelectors",
+            "FunctionName": "any",
+            "Position": {
+              "StartLine": 29,
+              "StartLinePosition": 37,
+              "StopLine": 29,
+              "StopLinePosition": 41
+            }
+          },
+          {
+            "Package": "com.dmall.productservice",
+            "NodeName": "newDocket",
+            "FunctionName": "build",
+            "Position": {
+              "StartLine": 30,
+              "StartLinePosition": 17,
+              "StopLine": 30,
+              "StopLinePosition": 23
+            }
+          }
+        ],
+        "Annotations": [
+          {
+            "Name": "Bean"
+          }
+        ],
+        "Position": {
+          "StartLine": 25,
+          "StartLinePosition": 11,
+          "StopLine": 32,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "args",
+            "TypeType": "String[]"
+          },
+          {
+            "TypeValue": "newDocket(DocumentationType.SWAGGER_2)",
+            "TypeType": "Docket"
+          }
+        ],
+        "BodyHash": 134979677
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "SpringBootApplication"
+      },
+      {
+        "Name": "EnableSwagger2"
+      },
+      {
+        "Name": "EnableFeignClients"
+      },
+      {
+        "Name": "Configuration"
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "org.springframework.boot.SpringApplication"
+      },
+      {
+        "Source": "org.springframework.boot.autoconfigure.SpringBootApplication"
+      },
+      {
+        "Source": "org.springframework.cloud.openfeign.EnableFeignClients"
+      },
+      {
+        "Source": "org.springframework.context.annotation.Bean"
+      },
+      {
+        "Source": "org.springframework.context.annotation.Configuration"
+      },
+      {
+        "Source": "springfox.documentation.builders.PathSelectors"
+      },
+      {
+        "Source": "springfox.documentation.builders.RequestHandlerSelectors"
+      },
+      {
+        "Source": "springfox.documentation.spi.DocumentationType"
+      },
+      {
+        "Source": "springfox.documentation.spring.web.plugins.Docket"
+      },
+      {
+        "Source": "springfox.documentation.swagger2.annotations.EnableSwagger2"
+      }
+    ],
+    "Position": {
+      "StartLine": 18,
+      "StartLinePosition": 7,
+      "StopLine": 33
+    }
+  },
+  {
+    "NodeName": "FundProductController",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.apis",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/apis/FundProductController.java",
+    "Fields": [
+      {
+        "TypeType": "ProductService",
+        "TypeKey": "productService"
+      }
+    ],
+    "Functions": [
+      {
+        "Name": "FundProductController",
+        "Parameters": [
+          {
+            "TypeValue": "productService",
+            "TypeType": "ProductService"
+          }
+        ],
+        "Position": {
+          "StartLine": 14,
+          "StartLinePosition": 11,
+          "StopLine": 16,
+          "StopLinePosition": 4
+        },
+        "IsConstructor": true
+      },
+      {
+        "Name": "onSale",
+        "ReturnType": "ProductResponse",
+        "Parameters": [
+          {
+            "TypeValue": "fundProductRequest",
+            "TypeType": "FundProductRequest"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.apis.dto",
+            "Type": "SUPER",
+            "NodeName": "this.productService",
+            "FunctionName": "isProductExist",
+            "Parameters": [
+              {
+                "TypeValue": "fundProductRequest.getName()",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 25,
+              "StartLinePosition": 32,
+              "StopLine": 25,
+              "StopLinePosition": 75
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.dto",
+            "Type": "CHAIN",
+            "NodeName": "FundProductRequest",
+            "FunctionName": "getName",
+            "Position": {
+              "StartLine": 25,
+              "StartLinePosition": 66,
+              "StopLine": 25,
+              "StopLinePosition": 74
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.dto",
+            "Type": "CHAIN",
+            "NodeName": "FundProductRequest",
+            "FunctionName": "getName",
+            "Position": {
+              "StartLine": 29,
+              "StartLinePosition": 31,
+              "StopLine": 29,
+              "StopLinePosition": 39
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.dto",
+            "Type": "CHAIN",
+            "NodeName": "FundProductRequest",
+            "FunctionName": "getTerm",
+            "Position": {
+              "StartLine": 29,
+              "StartLinePosition": 71,
+              "StopLine": 29,
+              "StopLinePosition": 79
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.dto",
+            "Type": "CHAIN",
+            "NodeName": "FundProductRequest",
+            "FunctionName": "getYield",
+            "Position": {
+              "StartLine": 29,
+              "StartLinePosition": 111,
+              "StopLine": 29,
+              "StopLinePosition": 120
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis",
+            "NodeName": "Integer",
+            "FunctionName": "parseInt",
+            "Parameters": [
+              {
+                "TypeValue": "fundProductRequest.getTerm()",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 33,
+              "StartLinePosition": 20,
+              "StopLine": 33,
+              "StopLinePosition": 57
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.dto",
+            "Type": "CHAIN",
+            "NodeName": "FundProductRequest",
+            "FunctionName": "getTerm",
+            "Position": {
+              "StartLine": 33,
+              "StartLinePosition": 48,
+              "StopLine": 33,
+              "StopLinePosition": 56
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis",
+            "NodeName": "Integer",
+            "FunctionName": "parseInt",
+            "Parameters": [
+              {
+                "TypeValue": "fundProductRequest.getYield()",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 37,
+              "StartLinePosition": 20,
+              "StopLine": 37,
+              "StopLinePosition": 58
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.dto",
+            "Type": "CHAIN",
+            "NodeName": "FundProductRequest",
+            "FunctionName": "getYield",
+            "Position": {
+              "StartLine": 37,
+              "StartLinePosition": 48,
+              "StopLine": 37,
+              "StopLinePosition": 57
+            }
+          }
+        ],
+        "Annotations": [
+          {
+            "Name": "RequestMapping",
+            "KeyValues": [
+              {
+                "Key": "\"/on-sale\"",
+                "Value": "\"/on-sale\""
+              }
+            ]
+          }
+        ],
+        "Position": {
+          "StartLine": 24,
+          "StartLinePosition": 11,
+          "StopLine": 42,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "productService",
+            "TypeType": "ProductService"
+          },
+          {
+            "TypeValue": "fundProductRequest",
+            "TypeType": "FundProductRequest"
+          },
+          {
+            "TypeValue": "throw",
+            "TypeType": "RuntimeException"
+          }
+        ],
+        "BodyHash": 410636117
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "RequestMapping",
+        "KeyValues": [
+          {
+            "Key": "\"/fund-products\"",
+            "Value": "\"/fund-products\""
+          }
+        ]
+      }
+    ],
+    "FunctionCalls": [
+      {
+        "Package": "com.dmall.productservice.application",
+        "Type": "FIELD",
+        "NodeName": "ProductService",
+        "Position": {
+          "StartLine": 12,
+          "StartLinePosition": 18,
+          "StopLine": 12,
+          "StopLinePosition": 47
+        }
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "com.dmall.productservice.apis.dto.FundProductRequest"
+      },
+      {
+        "Source": "com.dmall.productservice.apis.dto.ProductResponse"
+      },
+      {
+        "Source": "com.dmall.productservice.application.ProductService"
+      },
+      {
+        "Source": "org.springframework.web.bind.annotation.RequestBody"
+      },
+      {
+        "Source": "org.springframework.web.bind.annotation.RequestMapping"
+      }
+    ],
+    "Position": {
+      "StartLine": 10,
+      "StartLinePosition": 7,
+      "StopLine": 43
+    }
+  },
+  {
+    "NodeName": "ProductController",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.apis",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/apis/ProductController.java",
+    "Fields": [
+      {
+        "TypeType": "ProductService",
+        "TypeKey": "productService"
+      },
+      {
+        "TypeType": "ProductAssembler",
+        "TypeKey": "productAssembler"
+      }
+    ],
+    "Functions": [
+      {
+        "Name": "ProductController",
+        "Parameters": [
+          {
+            "TypeValue": "productService",
+            "TypeType": "ProductService"
+          },
+          {
+            "TypeValue": "productAssembler",
+            "TypeType": "ProductAssembler"
+          }
+        ],
+        "Position": {
+          "StartLine": 25,
+          "StartLinePosition": 11,
+          "StopLine": 28,
+          "StopLinePosition": 4
+        },
+        "IsConstructor": true
+      },
+      {
+        "Name": "getAllProducts",
+        "ReturnType": "List<ProductResponse>",
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.application",
+            "Type": "CHAIN",
+            "NodeName": "ProductService",
+            "FunctionName": "getProducts",
+            "Position": {
+              "StartLine": 33,
+              "StartLinePosition": 54,
+              "StopLine": 33,
+              "StopLinePosition": 66
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.assembler",
+            "Type": "CHAIN",
+            "NodeName": "ProductAssembler",
+            "FunctionName": "toProductResponseList",
+            "Parameters": [
+              {
+                "TypeValue": "products",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 34,
+              "StartLinePosition": 32,
+              "StopLine": 34,
+              "StopLinePosition": 62
+            }
+          }
+        ],
+        "Annotations": [
+          {
+            "Name": "Autowired"
+          },
+          {
+            "Name": "GetMapping",
+            "KeyValues": [
+              {
+                "Key": "produces",
+                "Value": "\"application/json\""
+              }
+            ]
+          },
+          {
+            "Name": "ApiOperation",
+            "KeyValues": [
+              {
+                "Key": "\"Get all products\"",
+                "Value": "\"Get all products\""
+              }
+            ]
+          }
+        ],
+        "Position": {
+          "StartLine": 32,
+          "StartLinePosition": 11,
+          "StopLine": 35,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "productService",
+            "TypeType": "ProductService"
+          },
+          {
+            "TypeValue": "productAssembler",
+            "TypeType": "ProductAssembler"
+          },
+          {
+            "TypeValue": "List",
+            "TypeType": ""
+          }
+        ],
+        "BodyHash": 36573574
+      },
+      {
+        "Name": "getProductById",
+        "ReturnType": "ProductResponse",
+        "Parameters": [
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.application",
+            "Type": "CHAIN",
+            "NodeName": "ProductService",
+            "FunctionName": "getProductsById",
+            "Parameters": [
+              {
+                "TypeValue": "productId",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 44,
+              "StartLinePosition": 47,
+              "StopLine": 44,
+              "StopLinePosition": 72
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.assembler",
+            "Type": "CHAIN",
+            "NodeName": "ProductAssembler",
+            "FunctionName": "toProductResponse",
+            "Parameters": [
+              {
+                "TypeValue": "product",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 45,
+              "StartLinePosition": 32,
+              "StopLine": 45,
+              "StopLinePosition": 57
+            }
+          }
+        ],
+        "Annotations": [
+          {
+            "Name": "ApiOperation",
+            "KeyValues": [
+              {
+                "Key": "\"Get product by id\"",
+                "Value": "\"Get product by id\""
+              }
+            ]
+          },
+          {
+            "Name": "ApiImplicitParams",
+            "KeyValues": [
+              {
+                "Key": "{@ApiImplicitParam(name=\"productId\",required=true,defaultValue=\"1\")}",
+                "Value": "{@ApiImplicitParam(name=\"productId\",required=true,defaultValue=\"1\")}"
+              }
+            ]
+          },
+          {
+            "Name": "ApiImplicitParam",
+            "KeyValues": [
+              {
+                "Key": "name",
+                "Value": "\"productId\""
+              },
+              {
+                "Key": "required",
+                "Value": "true"
+              },
+              {
+                "Key": "defaultValue",
+                "Value": "\"1\""
+              }
+            ]
+          },
+          {
+            "Name": "RequestMapping",
+            "KeyValues": [
+              {
+                "Key": "value",
+                "Value": "\"/{productId}\""
+              },
+              {
+                "Key": "method",
+                "Value": "RequestMethod.GET"
+              },
+              {
+                "Key": "produces",
+                "Value": "\"application/json\""
+              }
+            ]
+          }
+        ],
+        "Position": {
+          "StartLine": 42,
+          "StartLinePosition": 11,
+          "StopLine": 46,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "productService",
+            "TypeType": "ProductService"
+          },
+          {
+            "TypeValue": "productAssembler",
+            "TypeType": "ProductAssembler"
+          },
+          {
+            "TypeValue": "List",
+            "TypeType": ""
+          },
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "Product",
+            "TypeType": ""
+          }
+        ],
+        "BodyHash": 1985112002
+      },
+      {
+        "Name": "createProduct",
+        "ReturnType": "ProductResponse",
+        "Parameters": [
+          {
+            "TypeValue": "productCreationRequest",
+            "TypeType": "ProductCreationRequest"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.apis.assembler",
+            "Type": "CHAIN",
+            "NodeName": "ProductAssembler",
+            "FunctionName": "toDomainObject",
+            "Parameters": [
+              {
+                "TypeValue": "productCreationRequest",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 52,
+              "StartLinePosition": 43,
+              "StopLine": 52,
+              "StopLinePosition": 80
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.assembler",
+            "Type": "CHAIN",
+            "NodeName": "ProductAssembler",
+            "FunctionName": "toProductResponse",
+            "Parameters": [
+              {
+                "TypeValue": "productService.save(product)",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 53,
+              "StartLinePosition": 32,
+              "StopLine": 53,
+              "StopLinePosition": 78
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.application",
+            "Type": "CHAIN",
+            "NodeName": "ProductService",
+            "FunctionName": "save",
+            "Parameters": [
+              {
+                "TypeValue": "product",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 53,
+              "StartLinePosition": 65,
+              "StopLine": 53,
+              "StopLinePosition": 77
+            }
+          }
+        ],
+        "Annotations": [
+          {
+            "Name": "ApiOperation",
+            "KeyValues": [
+              {
+                "Key": "\"Create new product\"",
+                "Value": "\"Create new product\""
+              }
+            ]
+          },
+          {
+            "Name": "PostMapping",
+            "KeyValues": [
+              {
+                "Key": "produces",
+                "Value": "\"application/json\""
+              },
+              {
+                "Key": "consumes",
+                "Value": "\"application/json\""
+              }
+            ]
+          }
+        ],
+        "Position": {
+          "StartLine": 51,
+          "StartLinePosition": 11,
+          "StopLine": 54,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "productService",
+            "TypeType": "ProductService"
+          },
+          {
+            "TypeValue": "productAssembler",
+            "TypeType": "ProductAssembler"
+          },
+          {
+            "TypeValue": "List",
+            "TypeType": ""
+          },
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "Product",
+            "TypeType": ""
+          },
+          {
+            "TypeValue": "productCreationRequest",
+            "TypeType": "ProductCreationRequest"
+          },
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          }
+        ],
+        "BodyHash": -1924377136
+      },
+      {
+        "Name": "updateProduct",
+        "ReturnType": "void",
+        "Parameters": [
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "productUpdateRequest",
+            "TypeType": "ProductCreationRequest"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.apis.assembler",
+            "Type": "CHAIN",
+            "NodeName": "ProductAssembler",
+            "FunctionName": "toDomainObject",
+            "Parameters": [
+              {
+                "TypeValue": "productUpdateRequest",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 60,
+              "StartLinePosition": 46,
+              "StopLine": 60,
+              "StopLinePosition": 81
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.application",
+            "Type": "CHAIN",
+            "NodeName": "ProductService",
+            "FunctionName": "getProductsById",
+            "Parameters": [
+              {
+                "TypeValue": "productId",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 61,
+              "StartLinePosition": 44,
+              "StopLine": 61,
+              "StopLinePosition": 69
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "getName",
+            "Position": {
+              "StartLine": 62,
+              "StartLinePosition": 22,
+              "StopLine": 62,
+              "StopLinePosition": 30
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "setName",
+            "Parameters": [
+              {
+                "TypeValue": "newProduct.getName()",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 63,
+              "StartLinePosition": 23,
+              "StopLine": 63,
+              "StopLinePosition": 51
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "getName",
+            "Position": {
+              "StartLine": 63,
+              "StartLinePosition": 42,
+              "StopLine": 63,
+              "StopLinePosition": 50
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "getDescription",
+            "Position": {
+              "StartLine": 65,
+              "StartLinePosition": 22,
+              "StopLine": 65,
+              "StopLinePosition": 37
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "setDescription",
+            "Parameters": [
+              {
+                "TypeValue": "newProduct.getDescription()",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 66,
+              "StartLinePosition": 23,
+              "StopLine": 66,
+              "StopLinePosition": 65
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "getDescription",
+            "Position": {
+              "StartLine": 66,
+              "StartLinePosition": 49,
+              "StopLine": 66,
+              "StopLinePosition": 64
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "getPrice",
+            "Position": {
+              "StartLine": 69,
+              "StartLinePosition": 23,
+              "StopLine": 69,
+              "StopLinePosition": 32
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "setPrice",
+            "Parameters": [
+              {
+                "TypeValue": "newProduct.getPrice()",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 70,
+              "StartLinePosition": 23,
+              "StopLine": 70,
+              "StopLinePosition": 53
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "getPrice",
+            "Position": {
+              "StartLine": 70,
+              "StartLinePosition": 43,
+              "StopLine": 70,
+              "StopLinePosition": 52
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "getProductPdfUrl",
+            "Position": {
+              "StartLine": 72,
+              "StartLinePosition": 23,
+              "StopLine": 72,
+              "StopLinePosition": 40
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "isProductPdfUrlValid",
+            "Position": {
+              "StartLine": 74,
+              "StartLinePosition": 27,
+              "StopLine": 74,
+              "StopLinePosition": 48
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "setProductPdfUrl",
+            "Parameters": [
+              {
+                "TypeValue": "newProduct.getProductPdfUrl()",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 75,
+              "StartLinePosition": 27,
+              "StopLine": 75,
+              "StopLinePosition": 73
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "getProductPdfUrl",
+            "Position": {
+              "StartLine": 75,
+              "StartLinePosition": 55,
+              "StopLine": 75,
+              "StopLinePosition": 72
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.application",
+            "Type": "CHAIN",
+            "NodeName": "ProductService",
+            "FunctionName": "save",
+            "Parameters": [
+              {
+                "TypeValue": "oldProduct",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 78,
+              "StartLinePosition": 23,
+              "StopLine": 78,
+              "StopLinePosition": 38
+            }
+          }
+        ],
+        "Annotations": [
+          {
+            "Name": "ApiOperation",
+            "KeyValues": [
+              {
+                "Key": "\"update product info\"",
+                "Value": "\"update product info\""
+              }
+            ]
+          },
+          {
+            "Name": "RequestMapping",
+            "KeyValues": [
+              {
+                "Key": "value",
+                "Value": "\"/{productId}\""
+              },
+              {
+                "Key": "method",
+                "Value": "RequestMethod.PUT"
+              }
+            ]
+          }
+        ],
+        "Position": {
+          "StartLine": 58,
+          "StartLinePosition": 11,
+          "StopLine": 79,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "productService",
+            "TypeType": "ProductService"
+          },
+          {
+            "TypeValue": "productAssembler",
+            "TypeType": "ProductAssembler"
+          },
+          {
+            "TypeValue": "List",
+            "TypeType": ""
+          },
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "Product",
+            "TypeType": ""
+          },
+          {
+            "TypeValue": "productCreationRequest",
+            "TypeType": "ProductCreationRequest"
+          },
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          },
+          {
+            "TypeValue": "productUpdateRequest",
+            "TypeType": "ProductCreationRequest"
+          },
+          {
+            "TypeValue": "newProduct",
+            "TypeType": "Product"
+          },
+          {
+            "TypeValue": "oldProduct",
+            "TypeType": "Product"
+          }
+        ],
+        "BodyHash": -1015994214
+      },
+      {
+        "Name": "deleteProduct",
+        "ReturnType": "void",
+        "Parameters": [
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.application",
+            "Type": "CHAIN",
+            "NodeName": "ProductService",
+            "FunctionName": "getProductsById",
+            "Parameters": [
+              {
+                "TypeValue": "productId",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 85,
+              "StartLinePosition": 41,
+              "StopLine": 85,
+              "StopLinePosition": 66
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "setDeleted",
+            "Parameters": [
+              {
+                "TypeValue": "true",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 86,
+              "StartLinePosition": 16,
+              "StopLine": 86,
+              "StopLinePosition": 31
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.application",
+            "Type": "CHAIN",
+            "NodeName": "ProductService",
+            "FunctionName": "save",
+            "Parameters": [
+              {
+                "TypeValue": "product",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 87,
+              "StartLinePosition": 23,
+              "StopLine": 87,
+              "StopLinePosition": 35
+            }
+          }
+        ],
+        "Annotations": [
+          {
+            "Name": "ApiOperation",
+            "KeyValues": [
+              {
+                "Key": "\"delete product\"",
+                "Value": "\"delete product\""
+              }
+            ]
+          },
+          {
+            "Name": "RequestMapping",
+            "KeyValues": [
+              {
+                "Key": "value",
+                "Value": "\"/{productId}\""
+              },
+              {
+                "Key": "method",
+                "Value": "RequestMethod.DELETE"
+              }
+            ]
+          }
+        ],
+        "Position": {
+          "StartLine": 84,
+          "StartLinePosition": 11,
+          "StopLine": 88,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "productService",
+            "TypeType": "ProductService"
+          },
+          {
+            "TypeValue": "productAssembler",
+            "TypeType": "ProductAssembler"
+          },
+          {
+            "TypeValue": "List",
+            "TypeType": ""
+          },
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "Product",
+            "TypeType": ""
+          },
+          {
+            "TypeValue": "productCreationRequest",
+            "TypeType": "ProductCreationRequest"
+          },
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          },
+          {
+            "TypeValue": "productUpdateRequest",
+            "TypeType": "ProductCreationRequest"
+          },
+          {
+            "TypeValue": "newProduct",
+            "TypeType": "Product"
+          },
+          {
+            "TypeValue": "oldProduct",
+            "TypeType": "Product"
+          }
+        ],
+        "BodyHash": -1507962729
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "RestController"
+      },
+      {
+        "Name": "RequestMapping",
+        "KeyValues": [
+          {
+            "Key": "\"/products\"",
+            "Value": "\"/products\""
+          }
+        ]
+      }
+    ],
+    "FunctionCalls": [
+      {
+        "Package": "com.dmall.productservice.application",
+        "Type": "FIELD",
+        "NodeName": "ProductService",
+        "Position": {
+          "StartLine": 20,
+          "StartLinePosition": 12,
+          "StopLine": 20,
+          "StopLinePosition": 41
+        }
+      },
+      {
+        "Package": "com.dmall.productservice.apis.assembler",
+        "Type": "FIELD",
+        "NodeName": "ProductAssembler",
+        "Position": {
+          "StartLine": 22,
+          "StartLinePosition": 12,
+          "StopLine": 22,
+          "StopLinePosition": 45
+        }
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "com.dmall.productservice.apis.assembler.ProductAssembler"
+      },
+      {
+        "Source": "com.dmall.productservice.apis.dto.ProductCreationRequest"
+      },
+      {
+        "Source": "com.dmall.productservice.apis.dto.ProductResponse"
+      },
+      {
+        "Source": "com.dmall.productservice.application.ProductService"
+      },
+      {
+        "Source": "com.dmall.productservice.domain.product.Product"
+      },
+      {
+        "Source": "io.swagger.annotations.ApiImplicitParam"
+      },
+      {
+        "Source": "io.swagger.annotations.ApiImplicitParams"
+      },
+      {
+        "Source": "io.swagger.annotations.ApiOperation"
+      },
+      {
+        "Source": "org.springframework.beans.factory.annotation.Autowired"
+      },
+      {
+        "Source": "org.springframework.web.bind.annotation"
+      },
+      {
+        "Source": "java.util.List"
+      }
+    ],
+    "Position": {
+      "StartLine": 18,
+      "StartLinePosition": 7,
+      "StopLine": 89
+    }
+  },
+  {
+    "NodeName": "SwaggerController",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.apis",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/apis/SwaggerController.java",
+    "Functions": [
+      {
+        "Name": "home",
+        "ReturnType": "String",
+        "Annotations": [
+          {
+            "Name": "RequestMapping",
+            "KeyValues": [
+              {
+                "Key": "\"/products/swagger\"",
+                "Value": "\"/products/swagger\""
+              }
+            ]
+          }
+        ],
+        "Position": {
+          "StartLine": 9,
+          "StartLinePosition": 11,
+          "StopLine": 11,
+          "StopLinePosition": 4
+        },
+        "BodyHash": -926878742
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "Controller"
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "org.springframework.stereotype.Controller"
+      },
+      {
+        "Source": "org.springframework.web.bind.annotation.RequestMapping"
+      }
+    ],
+    "Position": {
+      "StartLine": 7,
+      "StopLine": 12
+    }
+  },
+  {
+    "NodeName": "ProductAssembler",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.apis.assembler",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/apis/assembler/ProductAssembler.java",
+    "Fields": [
+      {
+        "TypeType": "ModelMapper",
+        "TypeValue": "newModelMapper()",
+        "TypeKey": "mapper"
+      },
+      {
+        "TypeType": "ProductFactory",
+        "TypeKey": "productFactory",
+        "Annotations": [
+          {
+            "Name": "Autowired"
+          }
+        ]
+      }
+    ],
+    "Functions": [
+      {
+        "Name": "toDomainObject",
+        "ReturnType": "Product",
+        "Parameters": [
+          {
+            "TypeValue": "creationRequest",
+            "TypeType": "ProductCreationRequest"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.application",
+            "Type": "CHAIN",
+            "NodeName": "ProductFactory",
+            "FunctionName": "create",
+            "Parameters": [
+              {
+                "TypeValue": "creationRequest.getName()",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "creationRequest.getDescription()",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "creationRequest.getPrice()",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "isOnSale",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 24,
+              "StartLinePosition": 30,
+              "StopLine": 25,
+              "StopLinePosition": 86
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.dto",
+            "Type": "CHAIN",
+            "NodeName": "ProductCreationRequest",
+            "FunctionName": "getName",
+            "Position": {
+              "StartLine": 24,
+              "StartLinePosition": 53,
+              "StopLine": 24,
+              "StopLinePosition": 61
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.dto",
+            "Type": "CHAIN",
+            "NodeName": "ProductCreationRequest",
+            "FunctionName": "getDescription",
+            "Position": {
+              "StartLine": 25,
+              "StartLinePosition": 32,
+              "StopLine": 25,
+              "StopLinePosition": 47
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.dto",
+            "Type": "CHAIN",
+            "NodeName": "ProductCreationRequest",
+            "FunctionName": "getPrice",
+            "Position": {
+              "StartLine": 25,
+              "StartLinePosition": 66,
+              "StopLine": 25,
+              "StopLinePosition": 75
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 23,
+          "StartLinePosition": 11,
+          "StopLine": 26,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "newModelMapper()",
+            "TypeType": "ModelMapper"
+          },
+          {
+            "TypeValue": "creationRequest",
+            "TypeType": "ProductCreationRequest"
+          }
+        ],
+        "BodyHash": -764871492
+      },
+      {
+        "Name": "toDto",
+        "ReturnType": "ProductCreationRequest",
+        "Parameters": [
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "org.modelmapper",
+            "Type": "CHAIN",
+            "NodeName": "ModelMapper",
+            "FunctionName": "map",
+            "Parameters": [
+              {
+                "TypeValue": "product",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "ProductCreationRequest.class",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 29,
+              "StartLinePosition": 22,
+              "StopLine": 29,
+              "StopLinePosition": 63
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 28,
+          "StartLinePosition": 11,
+          "StopLine": 30,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "newModelMapper()",
+            "TypeType": "ModelMapper"
+          },
+          {
+            "TypeValue": "creationRequest",
+            "TypeType": "ProductCreationRequest"
+          },
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          }
+        ],
+        "BodyHash": -2144980363
+      },
+      {
+        "Name": "toProductResponse",
+        "ReturnType": "ProductResponse",
+        "Parameters": [
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "org.modelmapper",
+            "Type": "CHAIN",
+            "NodeName": "ModelMapper",
+            "FunctionName": "map",
+            "Parameters": [
+              {
+                "TypeValue": "product",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "ProductResponse.class",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 34,
+              "StartLinePosition": 26,
+              "StopLine": 34,
+              "StopLinePosition": 60
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 32,
+          "StartLinePosition": 11,
+          "StopLine": 38,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "newModelMapper()",
+            "TypeType": "ModelMapper"
+          },
+          {
+            "TypeValue": "creationRequest",
+            "TypeType": "ProductCreationRequest"
+          },
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          }
+        ],
+        "BodyHash": 1002201957
+      },
+      {
+        "Name": "toProductResponseList",
+        "ReturnType": "List<ProductResponse>",
+        "Parameters": [
+          {
+            "TypeValue": "products",
+            "TypeType": "List<Product>"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.apis.assembler",
+            "NodeName": "List<Product>",
+            "FunctionName": "stream",
+            "Position": {
+              "StartLine": 41,
+              "StartLinePosition": 24,
+              "StopLine": 41,
+              "StopLinePosition": 31
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.assembler",
+            "NodeName": "List<Product>",
+            "FunctionName": "map",
+            "Parameters": [
+              {
+                "TypeValue": "c->mapper.map(c,ProductResponse.class)",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 42,
+              "StartLinePosition": 17,
+              "StopLine": 42,
+              "StopLinePosition": 62
+            }
+          },
+          {
+            "Package": "org.modelmapper",
+            "Type": "CHAIN",
+            "NodeName": "ModelMapper",
+            "FunctionName": "map",
+            "Parameters": [
+              {
+                "TypeValue": "c",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "ProductResponse.class",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 42,
+              "StartLinePosition": 33,
+              "StopLine": 42,
+              "StopLinePosition": 61
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.apis.assembler",
+            "NodeName": "List<Product>",
+            "FunctionName": "collect",
+            "Parameters": [
+              {
+                "TypeValue": "Collectors.toList()",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 43,
+              "StartLinePosition": 17,
+              "StopLine": 43,
+              "StopLinePosition": 44
+            }
+          },
+          {
+            "Package": "java.util.stream",
+            "Type": "CHAIN",
+            "NodeName": "Collectors",
+            "FunctionName": "toList",
+            "Position": {
+              "StartLine": 43,
+              "StartLinePosition": 36,
+              "StopLine": 43,
+              "StopLinePosition": 43
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 40,
+          "StartLinePosition": 11,
+          "StopLine": 44,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "newModelMapper()",
+            "TypeType": "ModelMapper"
+          },
+          {
+            "TypeValue": "creationRequest",
+            "TypeType": "ProductCreationRequest"
+          },
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          },
+          {
+            "TypeValue": "products",
+            "TypeType": "List<Product>"
+          }
+        ],
+        "BodyHash": 1212518019
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "Component"
+      }
+    ],
+    "FunctionCalls": [
+      {
+        "Package": "org.modelmapper",
+        "Type": "FIELD",
+        "NodeName": "ModelMapper",
+        "Position": {
+          "StartLine": 17,
+          "StartLinePosition": 27,
+          "StopLine": 17,
+          "StopLinePosition": 65
+        }
+      },
+      {
+        "Package": "com.dmall.productservice.application",
+        "Type": "FIELD",
+        "NodeName": "ProductFactory",
+        "Position": {
+          "StartLine": 20,
+          "StartLinePosition": 12,
+          "StopLine": 20,
+          "StopLinePosition": 41
+        }
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "com.dmall.productservice.apis.dto.ProductCreationRequest"
+      },
+      {
+        "Source": "com.dmall.productservice.apis.dto.ProductResponse"
+      },
+      {
+        "Source": "com.dmall.productservice.application.ProductFactory"
+      },
+      {
+        "Source": "com.dmall.productservice.domain.product.Product"
+      },
+      {
+        "Source": "org.modelmapper.ModelMapper"
+      },
+      {
+        "Source": "org.springframework.beans.factory.annotation.Autowired"
+      },
+      {
+        "Source": "org.springframework.stereotype.Component"
+      },
+      {
+        "Source": "java.util.List"
+      },
+      {
+        "Source": "java.util.stream.Collectors"
+      }
+    ],
+    "Position": {
+      "StartLine": 15,
+      "StartLinePosition": 7,
+      "StopLine": 45
+    }
+  },
+  {
+    "NodeName": "FundProductRequest",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.apis.dto",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/apis/dto/FundProductRequest.java",
+    "Fields": [
+      {
+        "TypeType": "String",
+        "TypeKey": "name"
+      },
+      {
+        "TypeType": "String",
+        "TypeKey": "term"
+      },
+      {
+        "TypeType": "String",
+        "TypeKey": "yield"
+      }
+    ],
+    "Functions": [
+      {
+        "Name": "FundProductRequest",
+        "Parameters": [
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "term",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "yield",
+            "TypeType": "String"
+          }
+        ],
+        "Position": {
+          "StartLine": 10,
+          "StartLinePosition": 11,
+          "StopLine": 14,
+          "StopLinePosition": 4
+        },
+        "IsConstructor": true
+      },
+      {
+        "Name": "getName",
+        "ReturnType": "String",
+        "Position": {
+          "StartLine": 16,
+          "StartLinePosition": 11,
+          "StopLine": 18,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "term",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "yield",
+            "TypeType": "String"
+          }
+        ],
+        "BodyHash": -146094952
+      },
+      {
+        "Name": "getTerm",
+        "ReturnType": "String",
+        "Position": {
+          "StartLine": 20,
+          "StartLinePosition": 11,
+          "StopLine": 22,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "term",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "yield",
+            "TypeType": "String"
+          }
+        ],
+        "BodyHash": 29530681
+      },
+      {
+        "Name": "getYield",
+        "ReturnType": "String",
+        "Position": {
+          "StartLine": 24,
+          "StartLinePosition": 11,
+          "StopLine": 26,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "term",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "yield",
+            "TypeType": "String"
+          }
+        ],
+        "BodyHash": 1160520740
+      }
+    ],
+    "Position": {
+      "StartLine": 5,
+      "StartLinePosition": 7,
+      "StopLine": 27
+    }
+  },
+  {
+    "NodeName": "ProductCreationRequest",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.apis.dto",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/apis/dto/ProductCreationRequest.java",
+    "Fields": [
+      {
+        "TypeType": "String",
+        "TypeKey": "name",
+        "Annotations": [
+          {
+            "Name": "ApiModelProperty",
+            "KeyValues": [
+              {
+                "Key": "example",
+                "Value": "\"Computer\""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TypeType": "String",
+        "TypeKey": "description",
+        "Annotations": [
+          {
+            "Name": "ApiModelProperty",
+            "KeyValues": [
+              {
+                "Key": "example",
+                "Value": "\"32G Memory and 1T HardDisk\""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TypeType": "BigDecimal",
+        "TypeKey": "price",
+        "Annotations": [
+          {
+            "Name": "ApiModelProperty",
+            "KeyValues": [
+              {
+                "Key": "example",
+                "Value": "\"1000.00\""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "Getter"
+      },
+      {
+        "Name": "Setter"
+      },
+      {
+        "Name": "ApiModel"
+      }
+    ],
+    "FunctionCalls": [
+      {
+        "Package": "java.math",
+        "Type": "FIELD",
+        "NodeName": "BigDecimal",
+        "Position": {
+          "StartLine": 23,
+          "StartLinePosition": 12,
+          "StopLine": 23,
+          "StopLinePosition": 28
+        }
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "lombok.Getter"
+      },
+      {
+        "Source": "lombok.Setter"
+      },
+      {
+        "Source": "java.math.BigDecimal"
+      },
+      {
+        "Source": "io.swagger.annotations.ApiModel"
+      },
+      {
+        "Source": "io.swagger.annotations.ApiModelProperty"
+      }
+    ],
+    "Position": {
+      "StartLine": 14,
+      "StartLinePosition": 7,
+      "StopLine": 24
+    }
+  },
+  {
+    "NodeName": "ProductResponse",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.apis.dto",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/apis/dto/ProductResponse.java",
+    "Fields": [
+      {
+        "TypeType": "Long",
+        "TypeKey": "id",
+        "Annotations": [
+          {
+            "Name": "ApiModelProperty",
+            "KeyValues": [
+              {
+                "Key": "example",
+                "Value": "\"1\""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TypeType": "String",
+        "TypeKey": "name",
+        "Annotations": [
+          {
+            "Name": "ApiModelProperty",
+            "KeyValues": [
+              {
+                "Key": "example",
+                "Value": "\"Computer\""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TypeType": "String",
+        "TypeKey": "description",
+        "Annotations": [
+          {
+            "Name": "ApiModelProperty",
+            "KeyValues": [
+              {
+                "Key": "example",
+                "Value": "\"32G Memory and 1T HardDisk\""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TypeType": "BigDecimal",
+        "TypeKey": "price",
+        "Annotations": [
+          {
+            "Name": "ApiModelProperty",
+            "KeyValues": [
+              {
+                "Key": "example",
+                "Value": "\"1000.00\""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "AllArgsConstructor"
+      },
+      {
+        "Name": "EqualsAndHashCode"
+      },
+      {
+        "Name": "NoArgsConstructor"
+      },
+      {
+        "Name": "Builder"
+      },
+      {
+        "Name": "Getter"
+      },
+      {
+        "Name": "Setter"
+      }
+    ],
+    "FunctionCalls": [
+      {
+        "Package": "java.math",
+        "Type": "FIELD",
+        "NodeName": "BigDecimal",
+        "Position": {
+          "StartLine": 23,
+          "StartLinePosition": 12,
+          "StopLine": 23,
+          "StopLinePosition": 28
+        }
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "lombok"
+      },
+      {
+        "Source": "java.math.BigDecimal"
+      },
+      {
+        "Source": "io.swagger.annotations.ApiModelProperty"
+      }
+    ],
+    "Position": {
+      "StartLine": 15,
+      "StartLinePosition": 7,
+      "StopLine": 24
+    }
+  },
+  {
+    "NodeName": "ProductFactory",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.application",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/application/ProductFactory.java",
+    "Fields": [
+      {
+        "TypeType": "ModelMapper",
+        "TypeValue": "newModelMapper()",
+        "TypeKey": "mapper"
+      }
+    ],
+    "Functions": [
+      {
+        "Name": "create",
+        "ReturnType": "Product",
+        "Parameters": [
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "description",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "price",
+            "TypeType": "BigDecimal"
+          },
+          {
+            "TypeValue": "isOnSale",
+            "TypeType": "Boolean"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "builder",
+            "Position": {
+              "StartLine": 16,
+              "StartLinePosition": 23,
+              "StopLine": 16,
+              "StopLinePosition": 31
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "name",
+            "Parameters": [
+              {
+                "TypeValue": "name",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 17,
+              "StartLinePosition": 17,
+              "StopLine": 17,
+              "StopLinePosition": 26
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "description",
+            "Parameters": [
+              {
+                "TypeValue": "description",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 18,
+              "StartLinePosition": 17,
+              "StopLine": 18,
+              "StopLinePosition": 40
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "price",
+            "Parameters": [
+              {
+                "TypeValue": "ProductPrice.of(\"RMB\",price)",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 19,
+              "StartLinePosition": 17,
+              "StopLine": 19,
+              "StopLinePosition": 52
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "ProductPrice",
+            "FunctionName": "of",
+            "Parameters": [
+              {
+                "TypeValue": "\"RMB\"",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "price",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 19,
+              "StartLinePosition": 36,
+              "StopLine": 19,
+              "StopLinePosition": 51
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "isOnSale",
+            "Parameters": [
+              {
+                "TypeValue": "isOnSale",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 20,
+              "StartLinePosition": 17,
+              "StopLine": 20,
+              "StopLinePosition": 34
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "build",
+            "Position": {
+              "StartLine": 21,
+              "StartLinePosition": 17,
+              "StopLine": 21,
+              "StopLinePosition": 23
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 15,
+          "StartLinePosition": 11,
+          "StopLine": 22,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "newModelMapper()",
+            "TypeType": "ModelMapper"
+          },
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "description",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "price",
+            "TypeType": "BigDecimal"
+          },
+          {
+            "TypeValue": "isOnSale",
+            "TypeType": "Boolean"
+          }
+        ],
+        "BodyHash": 753146808
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "Component"
+      }
+    ],
+    "FunctionCalls": [
+      {
+        "Package": "org.modelmapper",
+        "Type": "FIELD",
+        "NodeName": "ModelMapper",
+        "Position": {
+          "StartLine": 13,
+          "StartLinePosition": 27,
+          "StopLine": 13,
+          "StopLinePosition": 65
+        }
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "com.dmall.productservice.domain.product.Product"
+      },
+      {
+        "Source": "com.dmall.productservice.domain.product.ProductPrice"
+      },
+      {
+        "Source": "org.modelmapper.ModelMapper"
+      },
+      {
+        "Source": "org.springframework.stereotype.Component"
+      },
+      {
+        "Source": "java.math.BigDecimal"
+      }
+    ],
+    "Position": {
+      "StartLine": 11,
+      "StartLinePosition": 7,
+      "StopLine": 23
+    }
+  },
+  {
+    "NodeName": "ProductService",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.application",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/application/ProductService.java",
+    "Fields": [
+      {
+        "TypeType": "ProductRepository",
+        "TypeKey": "repository",
+        "Annotations": [
+          {
+            "Name": "Autowired"
+          }
+        ]
+      }
+    ],
+    "Functions": [
+      {
+        "Name": "getProducts",
+        "ReturnType": "List<Product>",
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.infrastructure.repositories",
+            "Type": "CHAIN",
+            "NodeName": "ProductRepository",
+            "FunctionName": "findAll",
+            "Position": {
+              "StartLine": 18,
+              "StartLinePosition": 26,
+              "StopLine": 18,
+              "StopLinePosition": 34
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 17,
+          "StartLinePosition": 11,
+          "StopLine": 19,
+          "StopLinePosition": 4
+        },
+        "BodyHash": -1358628846
+      },
+      {
+        "Name": "getProductsById",
+        "ReturnType": "Product",
+        "Parameters": [
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.infrastructure.repositories",
+            "Type": "CHAIN",
+            "NodeName": "ProductRepository",
+            "FunctionName": "findById",
+            "Parameters": [
+              {
+                "TypeValue": "productId",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 22,
+              "StartLinePosition": 26,
+              "StopLine": 22,
+              "StopLinePosition": 44
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 21,
+          "StartLinePosition": 11,
+          "StopLine": 23,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          }
+        ],
+        "BodyHash": -26430075
+      },
+      {
+        "Name": "save",
+        "ReturnType": "Product",
+        "Parameters": [
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.infrastructure.repositories",
+            "Type": "CHAIN",
+            "NodeName": "ProductRepository",
+            "FunctionName": "findById",
+            "Parameters": [
+              {
+                "TypeValue": "repository.save(product)",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 26,
+              "StartLinePosition": 26,
+              "StopLine": 26,
+              "StopLinePosition": 59
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.infrastructure.repositories",
+            "Type": "CHAIN",
+            "NodeName": "ProductRepository",
+            "FunctionName": "save",
+            "Parameters": [
+              {
+                "TypeValue": "product",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 26,
+              "StartLinePosition": 46,
+              "StopLine": 26,
+              "StopLinePosition": 58
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 25,
+          "StartLinePosition": 11,
+          "StopLine": 27,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          }
+        ],
+        "BodyHash": -1211894266
+      },
+      {
+        "Name": "isProductExist",
+        "ReturnType": "boolean",
+        "Parameters": [
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.infrastructure.repositories",
+            "Type": "CHAIN",
+            "NodeName": "ProductRepository",
+            "FunctionName": "findAll",
+            "Position": {
+              "StartLine": 30,
+              "StartLinePosition": 26,
+              "StopLine": 30,
+              "StopLinePosition": 34
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.application",
+            "NodeName": "ProductRepository",
+            "FunctionName": "stream",
+            "Position": {
+              "StartLine": 30,
+              "StartLinePosition": 36,
+              "StopLine": 30,
+              "StopLinePosition": 43
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.application",
+            "NodeName": "ProductRepository",
+            "FunctionName": "anyMatch",
+            "Parameters": [
+              {
+                "TypeValue": "product->product.getName().equals(name)",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 30,
+              "StartLinePosition": 45,
+              "StopLine": 30,
+              "StopLinePosition": 95
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "getName",
+            "Position": {
+              "StartLine": 30,
+              "StartLinePosition": 73,
+              "StopLine": 30,
+              "StopLinePosition": 81
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.application",
+            "NodeName": "Product",
+            "FunctionName": "equals",
+            "Parameters": [
+              {
+                "TypeValue": "name",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 30,
+              "StartLinePosition": 83,
+              "StopLine": 30,
+              "StopLinePosition": 94
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 29,
+          "StartLinePosition": 11,
+          "StopLine": 31,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          },
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          }
+        ],
+        "BodyHash": -485526293
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "Component"
+      }
+    ],
+    "FunctionCalls": [
+      {
+        "Package": "com.dmall.productservice.infrastructure.repositories",
+        "Type": "FIELD",
+        "NodeName": "ProductRepository",
+        "Position": {
+          "StartLine": 15,
+          "StartLinePosition": 12,
+          "StopLine": 15,
+          "StopLinePosition": 40
+        }
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "com.dmall.productservice.domain.product.Product"
+      },
+      {
+        "Source": "com.dmall.productservice.infrastructure.repositories.ProductRepository"
+      },
+      {
+        "Source": "org.springframework.beans.factory.annotation.Autowired"
+      },
+      {
+        "Source": "org.springframework.stereotype.Component"
+      },
+      {
+        "Source": "java.util.List"
+      }
+    ],
+    "Position": {
+      "StartLine": 12,
+      "StartLinePosition": 7,
+      "StopLine": 32
+    }
+  },
+  {
+    "NodeName": "Product",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.domain.product",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/domain/product/Product.java",
+    "Fields": [
+      {
+        "TypeType": "Long",
+        "TypeKey": "id"
+      },
+      {
+        "TypeType": "String",
+        "TypeKey": "name"
+      },
+      {
+        "TypeType": "String",
+        "TypeKey": "description"
+      },
+      {
+        "TypeType": "ProductPrice",
+        "TypeKey": "price"
+      },
+      {
+        "TypeType": "String",
+        "TypeKey": "productPdfUrl"
+      },
+      {
+        "TypeType": "Boolean",
+        "TypeKey": "isOnSale"
+      }
+    ],
+    "Functions": [
+      {
+        "Name": "Product",
+        "Parameters": [
+          {
+            "TypeValue": "id",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "description",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "price",
+            "TypeType": "ProductPrice"
+          }
+        ],
+        "Position": {
+          "StartLine": 26,
+          "StartLinePosition": 11,
+          "StopLine": 31,
+          "StopLinePosition": 4
+        },
+        "IsConstructor": true
+      },
+      {
+        "Name": "Product",
+        "Parameters": [
+          {
+            "TypeValue": "id",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "description",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "price",
+            "TypeType": "ProductPrice"
+          },
+          {
+            "TypeValue": "productPdfUrl",
+            "TypeType": "String"
+          }
+        ],
+        "Position": {
+          "StartLine": 33,
+          "StartLinePosition": 11,
+          "StopLine": 39,
+          "StopLinePosition": 4
+        },
+        "IsConstructor": true
+      },
+      {
+        "Name": "setDeleted",
+        "ReturnType": "void",
+        "Parameters": [
+          {
+            "TypeValue": "deleted",
+            "TypeType": "boolean"
+          }
+        ],
+        "Position": {
+          "StartLine": 41,
+          "StartLinePosition": 11,
+          "StopLine": 43,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "id",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "description",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "price",
+            "TypeType": "ProductPrice"
+          },
+          {
+            "TypeValue": "productPdfUrl",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "deleted",
+            "TypeType": "boolean"
+          }
+        ],
+        "BodyHash": 139883538
+      },
+      {
+        "Name": "isProductPdfUrlValid",
+        "ReturnType": "boolean",
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "NodeName": "String",
+            "FunctionName": "matches",
+            "Parameters": [
+              {
+                "TypeValue": "\"^(https?://)?([\\\\da-z.-]+)\\\\.([a-z.]{2,6})[/\\\\w .-]*/?$\"",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 49,
+              "StartLinePosition": 29,
+              "StopLine": 49,
+              "StopLinePosition": 94
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 45,
+          "StartLinePosition": 11,
+          "StopLine": 50,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "id",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "description",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "price",
+            "TypeType": "ProductPrice"
+          },
+          {
+            "TypeValue": "productPdfUrl",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "deleted",
+            "TypeType": "boolean"
+          }
+        ],
+        "BodyHash": 1661443134
+      },
+      {
+        "Name": "getFundName",
+        "ReturnType": "String",
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "NodeName": "String",
+            "FunctionName": "replaceAll",
+            "Parameters": [
+              {
+                "TypeValue": "regex",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "\"$1\"",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 57,
+              "StartLinePosition": 29,
+              "StopLine": 57,
+              "StopLinePosition": 51
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 52,
+          "StartLinePosition": 11,
+          "StopLine": 58,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "id",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "name",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "description",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "price",
+            "TypeType": "ProductPrice"
+          },
+          {
+            "TypeValue": "productPdfUrl",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "deleted",
+            "TypeType": "boolean"
+          },
+          {
+            "TypeValue": "regex",
+            "TypeType": "String"
+          }
+        ],
+        "BodyHash": 1556322262
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "AllArgsConstructor"
+      },
+      {
+        "Name": "EqualsAndHashCode"
+      },
+      {
+        "Name": "NoArgsConstructor"
+      },
+      {
+        "Name": "Builder"
+      },
+      {
+        "Name": "Getter"
+      },
+      {
+        "Name": "Setter"
+      }
+    ],
+    "FunctionCalls": [
+      {
+        "Package": "com.dmall.productservice.domain.product",
+        "Type": "FIELD",
+        "NodeName": "ProductPrice",
+        "Position": {
+          "StartLine": 20,
+          "StartLinePosition": 12,
+          "StopLine": 20,
+          "StopLinePosition": 30
+        }
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "lombok"
+      }
+    ],
+    "Position": {
+      "StartLine": 12,
+      "StartLinePosition": 7,
+      "StopLine": 59
+    }
+  },
+  {
+    "NodeName": "ProductAttribute",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.domain.product",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/domain/product/ProductAttribute.java",
+    "Fields": [
+      {
+        "TypeType": "String",
+        "TypeKey": "id"
+      },
+      {
+        "TypeType": "String",
+        "TypeKey": "color"
+      },
+      {
+        "TypeType": "String",
+        "TypeKey": "size"
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "AllArgsConstructor"
+      },
+      {
+        "Name": "EqualsAndHashCode"
+      },
+      {
+        "Name": "Builder"
+      },
+      {
+        "Name": "Getter"
+      },
+      {
+        "Name": "Setter"
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "lombok.AllArgsConstructor"
+      },
+      {
+        "Source": "lombok.Builder"
+      },
+      {
+        "Source": "lombok.EqualsAndHashCode"
+      },
+      {
+        "Source": "lombok.Getter"
+      },
+      {
+        "Source": "lombok.Setter"
+      },
+      {
+        "Source": "java.math.BigDecimal"
+      }
+    ],
+    "Position": {
+      "StartLine": 18,
+      "StartLinePosition": 7,
+      "StopLine": 23
+    }
+  },
+  {
+    "NodeName": "ProductPrice",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.domain.product",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/domain/product/ProductPrice.java",
+    "Fields": [
+      {
+        "TypeType": "String",
+        "TypeKey": "currency"
+      },
+      {
+        "TypeType": "BigDecimal",
+        "TypeKey": "value"
+      }
+    ],
+    "Functions": [
+      {
+        "Name": "of",
+        "ReturnType": "ProductPrice",
+        "Parameters": [
+          {
+            "TypeValue": "currency",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "value",
+            "TypeType": "BigDecimal"
+          }
+        ],
+        "Position": {
+          "StartLine": 25,
+          "StartLinePosition": 18,
+          "StopLine": 27,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "currency",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "value",
+            "TypeType": "BigDecimal"
+          },
+          {
+            "TypeValue": "return",
+            "TypeType": "ProductPrice"
+          }
+        ],
+        "BodyHash": 555518812
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "AllArgsConstructor"
+      },
+      {
+        "Name": "EqualsAndHashCode"
+      },
+      {
+        "Name": "Builder"
+      },
+      {
+        "Name": "Getter"
+      },
+      {
+        "Name": "Setter"
+      }
+    ],
+    "FunctionCalls": [
+      {
+        "Package": "java.math",
+        "Type": "FIELD",
+        "NodeName": "BigDecimal",
+        "Position": {
+          "StartLine": 23,
+          "StartLinePosition": 12,
+          "StopLine": 23,
+          "StopLinePosition": 28
+        }
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "lombok.AllArgsConstructor"
+      },
+      {
+        "Source": "lombok.Builder"
+      },
+      {
+        "Source": "lombok.EqualsAndHashCode"
+      },
+      {
+        "Source": "lombok.Getter"
+      },
+      {
+        "Source": "lombok.NoArgsConstructor"
+      },
+      {
+        "Source": "lombok.Setter"
+      },
+      {
+        "Source": "java.math.BigDecimal"
+      }
+    ],
+    "Position": {
+      "StartLine": 19,
+      "StartLinePosition": 7,
+      "StopLine": 28
+    }
+  },
+  {
+    "NodeName": "PlaceHolder",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.infrastructure.gateways",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/infrastructure/gateways/PlaceHolder.java",
+    "Position": {
+      "StartLine": 3,
+      "StartLinePosition": 7,
+      "StopLine": 4
+    }
+  },
+  {
+    "NodeName": "ProductRepository",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.infrastructure.repositories",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/infrastructure/repositories/ProductRepository.java",
+    "Fields": [
+      {
+        "TypeType": "ModelMapper",
+        "TypeValue": "newModelMapper()",
+        "TypeKey": "mapper"
+      },
+      {
+        "TypeType": "ProductJpaPersistence",
+        "TypeKey": "repository",
+        "Annotations": [
+          {
+            "Name": "Autowired"
+          }
+        ]
+      }
+    ],
+    "Functions": [
+      {
+        "Name": "save",
+        "ReturnType": "Long",
+        "Parameters": [
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.infrastructure.repositories.persistence",
+            "Type": "CHAIN",
+            "NodeName": "ProductJpaPersistence",
+            "FunctionName": "save",
+            "Parameters": [
+              {
+                "TypeValue": "mapper.map(product,ProductDataEntity.class)",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 24,
+              "StartLinePosition": 27,
+              "StopLine": 24,
+              "StopLinePosition": 76
+            }
+          },
+          {
+            "Package": "org.modelmapper",
+            "Type": "CHAIN",
+            "NodeName": "ModelMapper",
+            "FunctionName": "map",
+            "Parameters": [
+              {
+                "TypeValue": "product",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "ProductDataEntity.class",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 24,
+              "StartLinePosition": 39,
+              "StopLine": 24,
+              "StopLinePosition": 75
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.infrastructure.repositories.dataentity",
+            "Type": "CHAIN",
+            "NodeName": "ProductDataEntity",
+            "FunctionName": "getId",
+            "Position": {
+              "StartLine": 25,
+              "StartLinePosition": 34,
+              "StopLine": 25,
+              "StopLinePosition": 40
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 22,
+          "StartLinePosition": 11,
+          "StopLine": 26,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "newModelMapper()",
+            "TypeType": "ModelMapper"
+          },
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          },
+          {
+            "TypeValue": "productDataEntity",
+            "TypeType": "ProductDataEntity"
+          }
+        ],
+        "BodyHash": -217207568
+      },
+      {
+        "Name": "findById",
+        "ReturnType": "Product",
+        "Parameters": [
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          }
+        ],
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.infrastructure.repositories.persistence",
+            "Type": "CHAIN",
+            "NodeName": "ProductJpaPersistence",
+            "FunctionName": "findById",
+            "Parameters": [
+              {
+                "TypeValue": "productId",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 30,
+              "StartLinePosition": 57,
+              "StopLine": 30,
+              "StopLinePosition": 75
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "CHAIN",
+            "NodeName": "Product",
+            "FunctionName": "map",
+            "Parameters": [
+              {
+                "TypeValue": "productDataEntity->mapper.map(productDataEntity,Product.class)",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 31,
+              "StartLinePosition": 23,
+              "StopLine": 31,
+              "StopLinePosition": 92
+            }
+          },
+          {
+            "Package": "org.modelmapper",
+            "Type": "CHAIN",
+            "NodeName": "ModelMapper",
+            "FunctionName": "map",
+            "Parameters": [
+              {
+                "TypeValue": "productDataEntity",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "Product.class",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 31,
+              "StartLinePosition": 55,
+              "StopLine": 31,
+              "StopLinePosition": 91
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.infrastructure.repositories",
+            "NodeName": "Product",
+            "FunctionName": "orElse",
+            "Parameters": [
+              {
+                "TypeValue": "null",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 31,
+              "StartLinePosition": 94,
+              "StopLine": 31,
+              "StopLinePosition": 105
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 29,
+          "StartLinePosition": 11,
+          "StopLine": 32,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "newModelMapper()",
+            "TypeType": "ModelMapper"
+          },
+          {
+            "TypeValue": "product",
+            "TypeType": "Optional<ProductDataEntity>"
+          },
+          {
+            "TypeValue": "productDataEntity",
+            "TypeType": "ProductDataEntity"
+          },
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          }
+        ],
+        "BodyHash": -350519402
+      },
+      {
+        "Name": "findAll",
+        "ReturnType": "List<Product>",
+        "FunctionCalls": [
+          {
+            "Package": "com.google.common.collect",
+            "Type": "CHAIN",
+            "NodeName": "Lists",
+            "FunctionName": "newArrayList",
+            "Position": {
+              "StartLine": 35,
+              "StartLinePosition": 37,
+              "StopLine": 35,
+              "StopLinePosition": 50
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.infrastructure.repositories.persistence",
+            "Type": "CHAIN",
+            "NodeName": "ProductJpaPersistence",
+            "FunctionName": "findAll",
+            "Position": {
+              "StartLine": 37,
+              "StartLinePosition": 58,
+              "StopLine": 37,
+              "StopLinePosition": 66
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.infrastructure.repositories",
+            "NodeName": "Iterable<ProductDataEntity>",
+            "FunctionName": "forEach",
+            "Parameters": [
+              {
+                "TypeValue": "(productDataEntity)->result.add(mapper.map(productDataEntity,Product.class))",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 39,
+              "StartLinePosition": 17,
+              "StopLine": 39,
+              "StopLinePosition": 104
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.infrastructure.repositories",
+            "NodeName": "List<Product>",
+            "FunctionName": "add",
+            "Parameters": [
+              {
+                "TypeValue": "mapper.map(productDataEntity,Product.class)",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 39,
+              "StartLinePosition": 55,
+              "StopLine": 39,
+              "StopLinePosition": 103
+            }
+          },
+          {
+            "Package": "org.modelmapper",
+            "Type": "CHAIN",
+            "NodeName": "ModelMapper",
+            "FunctionName": "map",
+            "Parameters": [
+              {
+                "TypeValue": "productDataEntity",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "Product.class",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 39,
+              "StartLinePosition": 66,
+              "StopLine": 39,
+              "StopLinePosition": 102
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 34,
+          "StartLinePosition": 11,
+          "StopLine": 42,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "newModelMapper()",
+            "TypeType": "ModelMapper"
+          },
+          {
+            "TypeValue": "product",
+            "TypeType": "Optional<ProductDataEntity>"
+          },
+          {
+            "TypeValue": "productDataEntity",
+            "TypeType": "ProductDataEntity"
+          },
+          {
+            "TypeValue": "productId",
+            "TypeType": "Long"
+          },
+          {
+            "TypeValue": "result",
+            "TypeType": "List<Product>"
+          },
+          {
+            "TypeValue": "iterable",
+            "TypeType": "Iterable<ProductDataEntity>"
+          }
+        ],
+        "BodyHash": 1852033922
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "Component"
+      }
+    ],
+    "FunctionCalls": [
+      {
+        "Package": "org.modelmapper",
+        "Type": "FIELD",
+        "NodeName": "ModelMapper",
+        "Position": {
+          "StartLine": 17,
+          "StartLinePosition": 27,
+          "StopLine": 17,
+          "StopLinePosition": 65
+        }
+      },
+      {
+        "Package": "com.dmall.productservice.infrastructure.repositories.persistence",
+        "Type": "FIELD",
+        "NodeName": "ProductJpaPersistence",
+        "Position": {
+          "StartLine": 20,
+          "StartLinePosition": 12,
+          "StopLine": 20,
+          "StopLinePosition": 44
+        }
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "com.dmall.productservice.domain.product.Product"
+      },
+      {
+        "Source": "com.dmall.productservice.infrastructure.repositories.dataentity.ProductDataEntity"
+      },
+      {
+        "Source": "com.dmall.productservice.infrastructure.repositories.persistence.ProductJpaPersistence"
+      },
+      {
+        "Source": "com.google.common.collect.Lists"
+      },
+      {
+        "Source": "org.modelmapper.ModelMapper"
+      },
+      {
+        "Source": "org.springframework.beans.factory.annotation.Autowired"
+      },
+      {
+        "Source": "org.springframework.stereotype.Component"
+      },
+      {
+        "Source": "java.util.List"
+      },
+      {
+        "Source": "java.util.Optional"
+      }
+    ],
+    "Position": {
+      "StartLine": 15,
+      "StartLinePosition": 7,
+      "StopLine": 43
+    }
+  },
+  {
+    "NodeName": "ProductDataEntity",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.infrastructure.repositories.dataentity",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/infrastructure/repositories/dataentity/ProductDataEntity.java",
+    "Fields": [
+      {
+        "TypeType": "Long",
+        "TypeKey": "id",
+        "Annotations": [
+          {
+            "Name": "Id"
+          },
+          {
+            "Name": "GeneratedValue",
+            "KeyValues": [
+              {
+                "Key": "strategy",
+                "Value": "GenerationType.IDENTITY"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TypeType": "String",
+        "TypeKey": "name",
+        "Annotations": [
+          {
+            "Name": "Column",
+            "KeyValues": [
+              {
+                "Key": "nullable",
+                "Value": "false"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TypeType": "String",
+        "TypeKey": "description",
+        "Annotations": [
+          {
+            "Name": "Column",
+            "KeyValues": [
+              {
+                "Key": "nullable",
+                "Value": "false"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TypeType": "BigDecimal",
+        "TypeKey": "price",
+        "Annotations": [
+          {
+            "Name": "Column",
+            "KeyValues": [
+              {
+                "Key": "nullable",
+                "Value": "false"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TypeType": "Boolean",
+        "TypeKey": "isOnSale",
+        "Annotations": [
+          {
+            "Name": "Column",
+            "KeyValues": [
+              {
+                "Key": "nullable",
+                "Value": "false"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Functions": [
+      {
+        "Name": "ProductDataEntity",
+        "Position": {
+          "StartLine": 33,
+          "StartLinePosition": 11,
+          "StopLine": 33,
+          "StopLinePosition": 33
+        },
+        "IsConstructor": true
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "Getter"
+      },
+      {
+        "Name": "Setter"
+      },
+      {
+        "Name": "Entity"
+      },
+      {
+        "Name": "Table",
+        "KeyValues": [
+          {
+            "Key": "name",
+            "Value": "\"product\""
+          }
+        ]
+      }
+    ],
+    "FunctionCalls": [
+      {
+        "Package": "java.math",
+        "Type": "FIELD",
+        "NodeName": "BigDecimal",
+        "Position": {
+          "StartLine": 28,
+          "StartLinePosition": 12,
+          "StopLine": 28,
+          "StopLinePosition": 28
+        }
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "lombok.Getter"
+      },
+      {
+        "Source": "lombok.NoArgsConstructor"
+      },
+      {
+        "Source": "lombok.Setter"
+      },
+      {
+        "Source": "javax.persistence"
+      },
+      {
+        "Source": "java.math.BigDecimal"
+      }
+    ],
+    "Position": {
+      "StartLine": 16,
+      "StartLinePosition": 7,
+      "StopLine": 34
+    }
+  },
+  {
+    "NodeName": "ProductJpaPersistence",
+    "Module": "root",
+    "Type": "INTERFACE",
+    "Package": "com.dmall.productservice.infrastructure.repositories.persistence",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/main/java/com/dmall/productservice/infrastructure/repositories/persistence/ProductJpaPersistence.java",
+    "Extend": "CrudRepository<ProductDataEntity,Long>",
+    "Annotations": [
+      {
+        "Name": "Repository"
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "com.dmall.productservice.infrastructure.repositories.dataentity.ProductDataEntity"
+      },
+      {
+        "Source": "org.springframework.data.repository.CrudRepository"
+      },
+      {
+        "Source": "org.springframework.stereotype.Repository"
+      }
+    ]
+  },
+  {
+    "NodeName": "ProductContractTest",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.contractTest",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/test/java/com/dmall/productservice/contractTest/ProductContractTest.java",
+    "Fields": [
+      {
+        "TypeType": "ProductService",
+        "TypeKey": "productService",
+        "Annotations": [
+          {
+            "Name": "Mock"
+          }
+        ]
+      },
+      {
+        "TypeType": "ProductAssembler",
+        "TypeKey": "productAssembler",
+        "Annotations": [
+          {
+            "Name": "Spy"
+          }
+        ]
+      },
+      {
+        "TypeType": "ProductController",
+        "TypeKey": "productController",
+        "Annotations": [
+          {
+            "Name": "InjectMocks"
+          }
+        ]
+      },
+      {
+        "TypeType": "MockMvcTarget",
+        "TypeValue": "newMockMvcTarget()",
+        "TypeKey": "target",
+        "Annotations": [
+          {
+            "Name": "TestTarget"
+          }
+        ]
+      }
+    ],
+    "Functions": [
+      {
+        "Name": "setUp",
+        "ReturnType": "void",
+        "FunctionCalls": [
+          {
+            "Package": "org.mockito",
+            "Type": "CHAIN",
+            "NodeName": "MockitoAnnotations",
+            "FunctionName": "initMocks",
+            "Parameters": [
+              {
+                "TypeValue": "this",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 43,
+              "StartLinePosition": 27,
+              "StopLine": 43,
+              "StopLinePosition": 41
+            }
+          },
+          {
+            "Package": "au.com.dius.pact.provider.spring.target",
+            "Type": "CHAIN",
+            "NodeName": "MockMvcTarget",
+            "FunctionName": "setControllers",
+            "Parameters": [
+              {
+                "TypeValue": "productController",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 44,
+              "StartLinePosition": 15,
+              "StopLine": 44,
+              "StopLinePosition": 47
+            }
+          },
+          {
+            "Package": "au.com.dius.pact.provider.spring.target",
+            "Type": "CHAIN",
+            "NodeName": "MockMvcTarget",
+            "FunctionName": "setPrintRequestResponse",
+            "Parameters": [
+              {
+                "TypeValue": "true",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 45,
+              "StartLinePosition": 15,
+              "StopLine": 45,
+              "StopLinePosition": 43
+            }
+          }
+        ],
+        "Annotations": [
+          {
+            "Name": "Before"
+          }
+        ],
+        "Position": {
+          "StartLine": 42,
+          "StartLinePosition": 11,
+          "StopLine": 46,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "newMockMvcTarget()",
+            "TypeType": "MockMvcTarget"
+          }
+        ],
+        "BodyHash": -2032853540
+      },
+      {
+        "Name": "shouldGetAllProducts",
+        "ReturnType": "ProductController",
+        "FunctionCalls": [
+          {
+            "Package": "org.mockito",
+            "Type": "CHAIN",
+            "NodeName": "Mockito",
+            "FunctionName": "when",
+            "Parameters": [
+              {
+                "TypeValue": "productService.getProducts()",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 51,
+              "StartLinePosition": 16,
+              "StopLine": 51,
+              "StopLinePosition": 49
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.application",
+            "Type": "CHAIN",
+            "NodeName": "ProductService",
+            "FunctionName": "getProducts",
+            "Position": {
+              "StartLine": 51,
+              "StartLinePosition": 36,
+              "StopLine": 51,
+              "StopLinePosition": 48
+            }
+          },
+          {
+            "Package": "org.mockito",
+            "Type": "CHAIN",
+            "NodeName": "Mockito",
+            "FunctionName": "thenReturn",
+            "Parameters": [
+              {
+                "TypeValue": "Arrays.asList(newProduct(){{setId(1L);setName(\"Book\");setPrice(null);setIsOnSale(true);setDescription(\"Some Books\");}})",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 51,
+              "StartLinePosition": 51,
+              "StopLine": 59,
+              "StopLinePosition": 9
+            }
+          },
+          {
+            "Package": "java.util",
+            "Type": "CHAIN",
+            "NodeName": "Arrays",
+            "FunctionName": "asList",
+            "Parameters": [
+              {
+                "TypeValue": "newProduct(){{setId(1L);setName(\"Book\");setPrice(null);setIsOnSale(true);setDescription(\"Some Books\");}}",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 51,
+              "StartLinePosition": 69,
+              "StopLine": 59,
+              "StopLinePosition": 8
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.contractTest",
+            "NodeName": "ProductContractTest",
+            "FunctionName": "setId",
+            "Parameters": [
+              {
+                "TypeValue": "1L",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 53,
+              "StartLinePosition": 20,
+              "StopLine": 53,
+              "StopLinePosition": 28
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.contractTest",
+            "NodeName": "ProductContractTest",
+            "FunctionName": "setName",
+            "Parameters": [
+              {
+                "TypeValue": "\"Book\"",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 54,
+              "StartLinePosition": 20,
+              "StopLine": 54,
+              "StopLinePosition": 34
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.contractTest",
+            "NodeName": "ProductContractTest",
+            "FunctionName": "setPrice",
+            "Parameters": [
+              {
+                "TypeValue": "null",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 55,
+              "StartLinePosition": 20,
+              "StopLine": 55,
+              "StopLinePosition": 33
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.contractTest",
+            "NodeName": "ProductContractTest",
+            "FunctionName": "setIsOnSale",
+            "Parameters": [
+              {
+                "TypeValue": "true",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 56,
+              "StartLinePosition": 20,
+              "StopLine": 56,
+              "StopLinePosition": 36
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.contractTest",
+            "NodeName": "ProductContractTest",
+            "FunctionName": "setDescription",
+            "Parameters": [
+              {
+                "TypeValue": "\"Some Books\"",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 57,
+              "StartLinePosition": 20,
+              "StopLine": 57,
+              "StopLinePosition": 47
+            }
+          }
+        ],
+        "Annotations": [
+          {
+            "Name": "Test"
+          },
+          {
+            "Name": "State",
+            "KeyValues": [
+              {
+                "Key": "\"Get all products\"",
+                "Value": "\"Get all products\""
+              }
+            ]
+          }
+        ],
+        "InnerStructures": [
+          {
+            "NodeName": "Product",
+            "Type": "CREATOR_CLASS",
+            "Package": "com.dmall.productservice.contractTest",
+            "Fields": [
+              {
+                "TypeType": "ProductService",
+                "TypeKey": "productService",
+                "Annotations": [
+                  {
+                    "Name": "Mock"
+                  }
+                ]
+              },
+              {
+                "TypeType": "ProductAssembler",
+                "TypeKey": "productAssembler",
+                "Annotations": [
+                  {
+                    "Name": "Spy"
+                  }
+                ]
+              },
+              {
+                "TypeType": "ProductController",
+                "TypeKey": "productController",
+                "Annotations": [
+                  {
+                    "Name": "InjectMocks"
+                  }
+                ]
+              },
+              {
+                "TypeType": "MockMvcTarget",
+                "TypeValue": "newMockMvcTarget()",
+                "TypeKey": "target",
+                "Annotations": [
+                  {
+                    "Name": "TestTarget"
+                  }
+                ]
+              }
+            ],
+            "Position": {
+              "StartLine": 52,
+              "StartLinePosition": 20,
+              "StopLine": 58,
+              "StopLinePosition": 17
+            }
+          }
+        ],
+        "Position": {
+          "StartLine": 50,
+          "StartLinePosition": 11,
+          "StopLine": 61,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "newMockMvcTarget()",
+            "TypeType": "MockMvcTarget"
+          },
+          {
+            "TypeValue": "newProduct(){{setId(1L);setName(\"Book\");setPrice(null);setIsOnSale(true);setDescription(\"Some Books\");}}",
+            "TypeType": "Product"
+          }
+        ],
+        "BodyHash": 1630988648
+      }
+    ],
+    "Annotations": [
+      {
+        "Name": "RunWith",
+        "KeyValues": [
+          {
+            "Key": "RestPactRunner.class",
+            "Value": "RestPactRunner.class"
+          }
+        ]
+      },
+      {
+        "Name": "PactFolder",
+        "KeyValues": [
+          {
+            "Key": "\"contracts\"",
+            "Value": "\"contracts\""
+          }
+        ]
+      },
+      {
+        "Name": "Provider",
+        "KeyValues": [
+          {
+            "Key": "\"product-service\"",
+            "Value": "\"product-service\""
+          }
+        ]
+      }
+    ],
+    "FunctionCalls": [
+      {
+        "Package": "com.dmall.productservice.application",
+        "Type": "FIELD",
+        "NodeName": "ProductService",
+        "Position": {
+          "StartLine": 30,
+          "StartLinePosition": 12,
+          "StopLine": 30,
+          "StopLinePosition": 41
+        }
+      },
+      {
+        "Package": "com.dmall.productservice.apis.assembler",
+        "Type": "FIELD",
+        "NodeName": "ProductAssembler",
+        "Position": {
+          "StartLine": 33,
+          "StartLinePosition": 12,
+          "StopLine": 33,
+          "StopLinePosition": 45
+        }
+      },
+      {
+        "Package": "com.dmall.productservice.apis",
+        "Type": "FIELD",
+        "NodeName": "ProductController",
+        "Position": {
+          "StartLine": 36,
+          "StartLinePosition": 12,
+          "StopLine": 36,
+          "StopLinePosition": 47
+        }
+      },
+      {
+        "Package": "au.com.dius.pact.provider.spring.target",
+        "Type": "FIELD",
+        "NodeName": "MockMvcTarget",
+        "Position": {
+          "StartLine": 39,
+          "StartLinePosition": 17,
+          "StopLine": 39,
+          "StopLinePosition": 59
+        }
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "au.com.dius.pact.provider.junit.Provider"
+      },
+      {
+        "Source": "au.com.dius.pact.provider.junit.RestPactRunner"
+      },
+      {
+        "Source": "au.com.dius.pact.provider.junit.State"
+      },
+      {
+        "Source": "au.com.dius.pact.provider.junit.loader.PactFolder"
+      },
+      {
+        "Source": "au.com.dius.pact.provider.junit.target.TestTarget"
+      },
+      {
+        "Source": "au.com.dius.pact.provider.spring.target.MockMvcTarget"
+      },
+      {
+        "Source": "com.dmall.productservice.apis.ProductController"
+      },
+      {
+        "Source": "com.dmall.productservice.apis.assembler.ProductAssembler"
+      },
+      {
+        "Source": "com.dmall.productservice.application.ProductService"
+      },
+      {
+        "Source": "com.dmall.productservice.domain.product.Product"
+      },
+      {
+        "Source": "org.junit.Before"
+      },
+      {
+        "Source": "org.junit.Test"
+      },
+      {
+        "Source": "org.junit.runner.RunWith"
+      },
+      {
+        "Source": "org.mockito.InjectMocks"
+      },
+      {
+        "Source": "org.mockito.Mock"
+      },
+      {
+        "Source": "org.mockito.Mockito"
+      },
+      {
+        "Source": "org.mockito.MockitoAnnotations"
+      },
+      {
+        "Source": "org.mockito.Spy"
+      },
+      {
+        "Source": "java.util.Arrays"
+      }
+    ],
+    "Position": {
+      "StartLine": 27,
+      "StartLinePosition": 7,
+      "StopLine": 62
+    }
+  },
+  {
+    "NodeName": "ProductTest",
+    "Module": "root",
+    "Type": "CLASS",
+    "Package": "com.dmall.productservice.domain.product",
+    "FilePath": "temp/ddd-monolithic-code-sample/src/test/java/com/dmall/productservice/domain/product/ProductTest.java",
+    "Functions": [
+      {
+        "Name": "should_get_fund_name_by_product_pdf_url",
+        "ReturnType": "void",
+        "FunctionCalls": [
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "SAME_PACKAGE",
+            "NodeName": "ProductPrice",
+            "FunctionName": "of",
+            "Parameters": [
+              {
+                "TypeValue": "\"USD\"",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "newBigDecimal(\"10.00\")",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 14,
+              "StartLinePosition": 81,
+              "StopLine": 14,
+              "StopLinePosition": 114
+            }
+          },
+          {
+            "Package": "junit.framework",
+            "NodeName": "TestCase",
+            "FunctionName": "assertEquals",
+            "Parameters": [
+              {
+                "TypeValue": "\"长盛货币B\"",
+                "TypeType": ""
+              },
+              {
+                "TypeValue": "product.getFundName()",
+                "TypeType": ""
+              }
+            ],
+            "Position": {
+              "StartLine": 15,
+              "StartLinePosition": 8,
+              "StopLine": 15,
+              "StopLinePosition": 51
+            }
+          },
+          {
+            "Package": "com.dmall.productservice.domain.product",
+            "Type": "SAME_PACKAGE",
+            "NodeName": "Product",
+            "FunctionName": "getFundName",
+            "Position": {
+              "StartLine": 15,
+              "StartLinePosition": 38,
+              "StopLine": 15,
+              "StopLinePosition": 50
+            }
+          }
+        ],
+        "Annotations": [
+          {
+            "Name": "Test"
+          }
+        ],
+        "Position": {
+          "StartLine": 12,
+          "StartLinePosition": 11,
+          "StopLine": 16,
+          "StopLinePosition": 4
+        },
+        "LocalVariables": [
+          {
+            "TypeValue": "url",
+            "TypeType": "String"
+          },
+          {
+            "TypeValue": "product",
+            "TypeType": "Product"
+          },
+          {
+            "TypeValue": "newProduct(null,\"name\",\"description\",ProductPrice.of(\"USD\",newBigDecimal(\"10.00\")),url,false)",
+            "TypeType": "Product"
+          },
+          {
+            "TypeValue": "\"USD\"",
+            "TypeType": "BigDecimal"
+          }
+        ],
+        "BodyHash": -1172294063
+      }
+    ],
+    "Imports": [
+      {
+        "Source": "org.junit.Test"
+      },
+      {
+        "Source": "java.math.BigDecimal"
+      },
+      {
+        "Source": "junit.framework.TestCase",
+        "UsageName": [
+          "assertEquals"
+        ]
+      }
+    ],
+    "Position": {
+      "StartLine": 9,
+      "StartLinePosition": 7,
+      "StopLine": 17
+    }
+  }
+]
