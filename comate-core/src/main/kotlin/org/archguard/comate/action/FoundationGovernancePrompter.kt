@@ -38,7 +38,9 @@ class FoundationGovernancePrompter(
 
             layered {
                 layer("application") {
-                    pattern(".*\\.application") { name shouldBe endWiths("DTO", "Request", "Response") }
+                    pattern(".*\\.application") {
+                        name shouldBe endWiths("DTO", "Request", "Response", "Factory", "Service")
+                    }
                 }
                 layer("domain") {
                     pattern(".*\\.domain") { name shouldBe endWiths("Entity") }
