@@ -37,7 +37,7 @@ class LayeredDefine(val name: String) : Rule<FoundationElement> {
                 namingRule!!.exec(it.NodeName)
             }
             .flatten().forEach {
-                results.add(RuleResult("Layered for ${this.name}", this.actionName, it.success, it.originValue))
+                results.add(RuleResult("Layered for ${this.name}", this.actionName, it.success, it.value))
             }
 
         return results

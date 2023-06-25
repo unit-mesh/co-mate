@@ -58,7 +58,7 @@ class FoundationSpecTest {
         governance.setVerifier(FakeRuleVerifier())
         val results: List<RuleResult> = governance.exec(foundation)
 
-        val projectNameResult = results.filter { it.ruleName == "ProjectName" }
+        val projectNameResult = results.filter { it.name == "ProjectName" }
         assertEquals(projectNameResult[0].success, false)
     }
 
@@ -68,11 +68,11 @@ class FoundationSpecTest {
         val foundation = FoundationElement("system1-servicecenter1-microservice1", listOf(ds))
 
         val results: List<RuleResult> = governance.exec(foundation)
-        val projectNameResult = results.filter { it.ruleName == "ProjectName" }
+        val projectNameResult = results.filter { it.name == "ProjectName" }
 
         assertEquals(projectNameResult[0].success, true)
 
-        val namingResult = results.filter { it.ruleName == "Naming for Class" && !it.success }
+        val namingResult = results.filter { it.name == "Naming for Class" && !it.success }
         assertEquals(namingResult.size, 1)
     }
 
@@ -83,10 +83,10 @@ class FoundationSpecTest {
 
         val results: List<RuleResult> = governance.exec(foundation)
 
-        val projectNameResult = results.filter { it.ruleName == "ProjectName" }
+        val projectNameResult = results.filter { it.name == "ProjectName" }
         assertEquals(projectNameResult[0].success, true)
 
-        val namingResult = results.filter { it.ruleName == "Naming" }
+        val namingResult = results.filter { it.name == "Naming" }
         assertEquals(namingResult[0].success, true)
     }
 
@@ -99,7 +99,7 @@ class FoundationSpecTest {
 
         val errorResult = result.filter { !it.success }
         assertEquals(errorResult.size, 1)
-        assertEquals(errorResult[0].ruleName, "Naming for Function")
+        assertEquals(errorResult[0].name, "Naming for Function")
     }
 
     @Test
@@ -111,7 +111,7 @@ class FoundationSpecTest {
 
         val errorResult = result.filter { !it.success }
         assertEquals(errorResult.size, 1)
-        assertEquals(errorResult[0].ruleName, "Layered for application")
+        assertEquals(errorResult[0].name, "Layered for application")
     }
 
     @Test
@@ -137,7 +137,7 @@ class FoundationSpecTest {
 
         val result: List<RuleResult> = governance.exec(foundation)
 
-        val errorResult = result.filter { it.ruleName == "DependencyRule" && !it.success }
+        val errorResult = result.filter { it.name == "DependencyRule" && !it.success }
         assertEquals(errorResult.size, 1)
     }
 
@@ -150,7 +150,7 @@ class FoundationSpecTest {
 
         val result: List<RuleResult> = governance.exec(foundation)
 
-        val errorResult = result.filter { it.ruleName == "DependencyRule" && !it.success }
+        val errorResult = result.filter { it.name == "DependencyRule" && !it.success }
         assertEquals(errorResult.size, 0)
     }
 }
