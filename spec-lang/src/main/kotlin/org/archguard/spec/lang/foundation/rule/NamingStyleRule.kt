@@ -58,16 +58,16 @@ class NamingStyleRule(val target: NamingTarget) : Rule<FoundationElement> {
 
             when (target) {
                 NamingTarget.Package -> {
-                    listOf(RuleResult(actionName, rule, namingStyle.isValid(it.Package)))
+                    listOf(RuleResult(actionName, rule, namingStyle.isValid(it.Package), it.Package))
                 }
 
                 NamingTarget.Class -> {
-                    listOf(RuleResult(actionName, rule, namingStyle.isValid(it.NodeName)))
+                    listOf(RuleResult(actionName, rule, namingStyle.isValid(it.NodeName), it.NodeName))
                 }
 
                 NamingTarget.Function -> {
                     it.Functions.map {
-                        RuleResult(actionName, rule, namingStyle.isValid(it.Name))
+                        RuleResult(actionName, rule, namingStyle.isValid(it.Name), it.Name)
                     }
                 }
             }

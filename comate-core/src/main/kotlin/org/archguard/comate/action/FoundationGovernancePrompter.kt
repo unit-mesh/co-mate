@@ -25,8 +25,7 @@ class FoundationGovernancePrompter(
 ###
 - `{xxx}` 不符合 { rule name } 规范，Rule: { rule }，建议修改为 {new api}。
 ###
-
-    """.trimIndent()
+""".trimIndent()
 
     override fun getExtendData(): String {
         val codeDataStructs = context.fetchDs()

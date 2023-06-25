@@ -30,7 +30,7 @@ data class ComateContext(
 ) {
     private val codeContext = ComateSourceCodeContext.create(this)
 
-    val projectName = workdir.fileName.toString()
+    val projectName get() = projectRepo.split("/").last()
 
     fun fetchDs(forceScan: Boolean = false): List<CodeDataStruct> {
         if (ds.isNotEmpty() && !forceScan) {

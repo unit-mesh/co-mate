@@ -31,10 +31,10 @@ class ProjectNameRule : PatternWithExampleRule<FoundationElement>, BaseDeclarati
 
         if (ruleRegex != null) {
             val matchResult = ruleRegex!!.find(input.projectName)
-            return listOf(RuleResult(this.actionName, ruleExplain, matchResult != null))
+            return listOf(RuleResult(this.actionName, ruleExplain, matchResult != null, input.projectName))
         }
 
-        return listOf(RuleResult(this.actionName, ruleExplain, false))
+        return listOf(RuleResult(this.actionName, ruleExplain, false, input.projectName))
     }
 
     override fun rules(element: FoundationElement): List<Rule<FoundationElement>> {

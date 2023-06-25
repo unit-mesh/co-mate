@@ -38,6 +38,6 @@ class NamingRule : Rule<String> {
     override fun exec(input: String): List<RuleResult> {
         this.delayCompare!!.left = input
         val compare = delayCompare!!.compare()
-        return listOf(RuleResult(this.actionName, "Naming exec: $input, compareType: $delayCompare", compare))
+        return listOf(RuleResult(this.actionName, "Naming exec: $input, compareType: $delayCompare", compare, input))
     }
 }
