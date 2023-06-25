@@ -19,8 +19,8 @@ const exampleMessages = [
     message: `Check REST API specification for this system: ${demoUrl}`
   },
   {
-    heading: `Is this system follow basic specification?`,
-    message: `Is this system follow basic specification? ${demoUrl}`
+    heading: `Is this system follow foundation specification?`,
+    message: `Is this system follow foundation specification? ${demoUrl}`
   }
 ]
 

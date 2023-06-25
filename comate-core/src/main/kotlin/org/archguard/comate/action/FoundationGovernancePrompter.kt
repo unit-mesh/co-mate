@@ -74,10 +74,12 @@ class FoundationGovernancePrompter(
         governance.setVerifier(ApiRuleVerifier(context.connector!!))
         val ruleResults = governance.exec(FoundationElement(context.projectName, codeDataStructs))
 
+        val failedResults = ruleResults.filter { !it.success }
+
         val introduction = context.fetchReadmeIntroduction()
         return """$introduction
 
-rule governance results: $ruleResults
+failed spec results: $failedResults
 
 """.trimIndent()
     }
