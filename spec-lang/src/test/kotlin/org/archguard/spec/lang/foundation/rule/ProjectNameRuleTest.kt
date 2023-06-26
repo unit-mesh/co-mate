@@ -24,7 +24,7 @@ class ProjectNameRuleTest {
             example("system1-servicecenter1-microservice1")
         }
 
-        val exec = projectNameRule.exec(FoundationElement("ms-sc-auth1", listOf()))
+        val exec = projectNameRule.exec(FoundationElement("ms-sc", listOf()))
         assertEquals(1, exec.size)
         assertEquals(false, exec[0].success)
     }
