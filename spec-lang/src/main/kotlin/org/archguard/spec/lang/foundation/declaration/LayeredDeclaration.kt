@@ -27,15 +27,16 @@ class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     override fun rules(element: FoundationElement): List<Rule<FoundationElement>> {
         return layerRules + dependencyRules
     }
-//
-//    override fun toString(): String {
-//        var result = "";
-//        result += layerRules.forEach {
-//            """pattern("${it.pattern}") { name shouldBe endWiths("${it.name}") }"""
-//        }
-//
-//        return result
-//    }
+
+    override fun toString(): String {
+        var result = ""
+
+        result += layerRules.joinToString(separator = "\n")
+        result += "\n"
+        result += "dependency {\n    " + dependencyRules.joinToString(separator = "\n    ") + "\n}"
+
+        return result
+    }
 }
 
 @TestOnly
