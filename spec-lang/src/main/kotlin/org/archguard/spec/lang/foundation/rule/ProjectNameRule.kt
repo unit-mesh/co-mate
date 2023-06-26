@@ -41,6 +41,13 @@ class ProjectNameRule : PatternWithExampleRule<FoundationElement>, BaseDeclarati
     override fun rules(element: FoundationElement): List<Rule<FoundationElement>> {
         return listOf(this)
     }
+
+    override fun toString(): String {
+        return """
+        pattern("${this.originRegex}")
+        example("${this.sample}")
+        """.trimIndent()
+    }
 }
 
 @TestOnly

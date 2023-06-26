@@ -28,4 +28,20 @@ class ProjectNameRuleTest {
         assertEquals(1, exec.size)
         assertEquals(false, exec[0].success)
     }
+
+    @Test
+    fun should_correct_generate_string() {
+        val projectNameRule = project_name_t {
+            pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
+            example("system1-servicecenter1-microservice1")
+        }
+
+        assertEquals(
+            projectNameRule.toString(),
+            """
+            pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?${'$'}")
+            example("system1-servicecenter1-microservice1")
+            """.trimIndent()
+        )
+    }
 }
