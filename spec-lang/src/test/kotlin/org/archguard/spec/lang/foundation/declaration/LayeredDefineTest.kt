@@ -13,7 +13,7 @@ class LayeredDefineTest {
 
         assertEquals(
             declaration.toString(), """
-        layered("interface") {
+        layer("interface") {
             pattern(".*\.apis") { name shouldBe endsWith("Controller") }
         }
         """.trimIndent()

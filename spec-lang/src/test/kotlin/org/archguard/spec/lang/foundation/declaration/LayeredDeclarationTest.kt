@@ -118,16 +118,16 @@ class LayeredDeclarationTest {
 
         assertEquals(declaration.toString(), """
         layered {
-            layered("interface") {
+            layer("interface") {
                 pattern(".*\.apis") { name shouldBe endsWith("Controller") }
             }
-            layered("application") {
+            layer("application") {
                 pattern(".*\.application") { name shouldBe endsWith("DTO", "Request", "Response", "Factory", "Service") }
             }
-            layered("domain") {
+            layer("domain") {
                 pattern(".*\.domain(?:\.[a-zA-Z]+)?") { name shouldNotBe endsWith("Request", "Response") }
             }
-            layered("infrastructure") {
+            layer("infrastructure") {
                 pattern(".*\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
             }
 

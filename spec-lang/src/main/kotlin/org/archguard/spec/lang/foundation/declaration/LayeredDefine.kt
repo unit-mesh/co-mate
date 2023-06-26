@@ -46,7 +46,7 @@ class LayeredDefine(val name: String) : Rule<FoundationElement> {
 
     override fun toString(): String {
         return """
-        layered("${this.name}") {
+        layer("${this.name}") {
             pattern("${this.pattern}") { ${this.namingRule} }
         }""".trimIndent()
     }
