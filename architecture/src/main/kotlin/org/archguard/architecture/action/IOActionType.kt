@@ -32,7 +32,18 @@ enum class IOActionType(val actionName: String) {
             TODO()
         }
     },
+    UNKNOWN("unknown") {
+        override fun createAction(args: List<String>): IOAction {
+            TODO()
+        }
+    }
     ;
 
     abstract fun createAction(args: List<String>): IOAction
+
+    companion object {
+        fun from(source: String): IOActionType {
+            return values().find { it.actionName == source.lowercase() } ?: UNKNOWN
+        }
+    }
 }

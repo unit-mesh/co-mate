@@ -2,7 +2,7 @@ package org.archguard.architecture
 
 import org.junit.jupiter.api.Test
 
-class LayeredStyleTest {
+class AgentDslTest {
     @Test
     fun demo() {
         exec {
