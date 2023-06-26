@@ -30,9 +30,9 @@ class KotlinInterpreter {
 
         return Message(
             id,
-            resultValue.toString(),
-            className,
-            result.rawValue.toString()
+            className = className,
+            resultValue = resultValue.toString(),
+            displayValue = result.rawValue.toString()
         )
     }
 }
