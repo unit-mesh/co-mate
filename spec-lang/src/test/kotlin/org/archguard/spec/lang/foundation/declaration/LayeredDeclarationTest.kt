@@ -112,7 +112,9 @@ class LayeredDeclarationTest {
             }
 
             dependency {
-                "application" dependedOn "interface"
+                "interface" dependedOn "domain"
+                "interface" dependedOn "application"
+                "interface" dependedOn "infrastructure"
             }
         }
 
@@ -130,9 +132,10 @@ class LayeredDeclarationTest {
             layer("infrastructure") {
                 pattern(".*\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
             }
-
             dependency {
-                "application" dependedOn "interface"
+                "interface" dependedOn "domain"
+                "interface" dependedOn "application"
+                "interface" dependedOn "infrastructure"
             }
         }
         """.trimIndent())

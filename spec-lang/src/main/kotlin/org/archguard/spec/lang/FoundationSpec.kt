@@ -105,7 +105,7 @@ class FoundationSpec : Spec<FoundationElement> {
 
     override fun toString(): String {
         return """foundation {
-${declarations.joinToString("\n    ")}
+${declarations.joinToString(separator = "\n").lines().joinToString(separator = "\n") { "    $it" }}
 }"""
     }
 }

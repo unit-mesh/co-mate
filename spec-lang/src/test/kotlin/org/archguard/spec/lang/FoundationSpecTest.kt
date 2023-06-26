@@ -156,29 +156,26 @@ class FoundationSpecTest {
     }
 
     @Test
-    @Disabled
     fun should_keep_same_with_to_string() {
         val actual = """
     foundation {
         project_name {
-            pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\${'$'}")
+            pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?${'$'}")
             example("system1-servicecenter1-microservice1")
         }
-
         layered {
             layer("application") {
-                pattern(".*\\.application") { name shouldBe endsWith("DTO", "Request", "Response") }
+                pattern(".*\.application") { name shouldBe endsWith("DTO", "Request", "Response") }
             }
             layer("domain") {
-                pattern(".*\\.domain") { name shouldBe endsWith("Entity") }
+                pattern(".*\.domain") { name shouldBe endsWith("Entity") }
             }
             layer("infrastructure") {
-                pattern(".*\\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
+                pattern(".*\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
             }
             layer("interface") {
-                pattern(".*\\.interface") { name shouldBe endsWith("Controller", "Service") }
+                pattern(".*\.interface") { name shouldBe endsWith("Controller", "Service") }
             }
-
             dependency {
                 "application" dependedOn "domain"
                 "application" dependedOn "interface"
@@ -186,7 +183,6 @@ class FoundationSpecTest {
                 "interface" dependedOn "domain"
             }
         }
-
         naming {
             class_level {
                 style("CamelCase")
