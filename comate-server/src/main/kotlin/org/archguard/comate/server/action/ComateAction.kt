@@ -9,35 +9,11 @@ import kotlinx.serialization.Serializable
 import org.archguard.comate.command.fakeComateContext
 import org.archguard.comate.connector.OPENAI_MODEL
 import org.archguard.comate.connector.OpenAIConnector
-import org.archguard.comate.dynamic.functions.*
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.io.path.pathString
 
 val comateContext = fakeComateContext()
-
-enum class ToolingAction(val action: String) {
-    INTRODUCE_SYSTEM(action = "introduce_system") {
-        override fun execute(input: String): FunctionResult.Success<String> {
-            comateContext.projectRepo = input
-            InitializeSystemFunction(comateContext).execute()
-            return IntroduceSystemFunction(comateContext).execute()
-        }
-    },
-    REST_API_GOVERNANCE(action = "rest_api_governance") {
-        override fun execute(input: String): FunctionResult.Success<String> {
-            return RestApiGovernanceFunction(comateContext).execute()
-        }
-    },
-    FOUNDATION_SPEC_GOVERNANCE(action = "foundation_spec_governance") {
-        override fun execute(input: String): FunctionResult.Success<String> {
-            return FoundationSpecGovernanceFunction(comateContext).execute()
-        }
-    },
-    ;
-
-    abstract fun execute(input: String): FunctionResult.Success<Any>
-}
 
 @Serializable
 data class ToolingThought(val thought: String, val action: String, val actionInput: String)
@@ -51,12 +27,9 @@ fun Route.routeForAction() {
         val toolingThought = call.receive<ToolingThought>()
 
         if (comateContext.projectRepo == "") {
-            var url: String
+            val url: String
             try {
-                url = Regex("https?://github.com/([^/]+)/([^/]+)").find(toolingThought.actionInput)!!.groupValues[0]
-                if (url.endsWith(".") || url.endsWith("?") || url.endsWith("\"")) {
-                    url = url.dropLast(1)
-                }
+                url = parseUrlFromRequest(toolingThought.actionInput)
             } catch (e: Exception) {
                 call.respond(ActionResult("error", "invalid url"))
                 return@post
@@ -76,6 +49,20 @@ fun Route.routeForAction() {
 
         call.respond(ActionResult("ok", output.value.toString()))
     }
+}
+
+val regex = Regex("(?:https?|http)://(?:\\w+\\.)+\\w{2,}(?:\$|/[\\w-]+){2,}")
+
+fun parseUrlFromRequest(input: String): String {
+    val matchResult = regex.find(input) ?: throw Exception("invalid url")
+
+    var url = matchResult.value
+
+    if (url.endsWith(".") || url.endsWith("?") || url.endsWith("\"")) {
+        url = url.dropLast(1)
+    }
+
+    return url
 }
 
 fun createConnector(): OpenAIConnector {
