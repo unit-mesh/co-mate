@@ -30,4 +30,48 @@ class NamingRuleTest {
         assertEquals(1, exec.size)
         assertEquals(false, exec[0].success)
     }
+
+    @Test
+    fun should_return_true_when_match_starts_with() {
+        val namingRule = naming {
+            name shouldBe startsWith("t")
+        }
+
+        val exec = namingRule.exec("test")
+        assertEquals(1, exec.size)
+        assertEquals(true, exec[0].success)
+    }
+
+    @Test
+    fun should_return_false_when_not_match_starts_with() {
+        val namingRule = naming {
+            name shouldBe startsWith("t1")
+        }
+
+        val exec = namingRule.exec("test")
+        assertEquals(1, exec.size)
+        assertEquals(false, exec[0].success)
+    }
+
+    @Test
+    fun should_return_true_when_match_contains() {
+        val namingRule = naming {
+            name shouldBe contains("es")
+        }
+
+        val exec = namingRule.exec("test")
+        assertEquals(1, exec.size)
+        assertEquals(true, exec[0].success)
+    }
+
+    @Test
+    fun should_return_false_when_not_match_contains() {
+        val namingRule = naming {
+            name shouldBe contains("es1")
+        }
+
+        val exec = namingRule.exec("test")
+        assertEquals(1, exec.size)
+        assertEquals(false, exec[0].success)
+    }
 }
