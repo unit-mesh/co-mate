@@ -51,4 +51,21 @@ class NamingStyleRuleTest {
         assertEquals(false, results[0].success)
         assertEquals("Naming for Function", results[0].name)
     }
+
+    @Test
+    fun should_return_correct_to_string_item() {
+        val namingStyleRule = naming_style_t({
+            style("CamelCase")
+            pattern(".*") { name shouldNotBe contains("${'$'}") }
+        }, NamingTarget.Class)
+
+        assertEquals(
+            namingStyleRule.toString(), """
+            class_level {
+                style("CamelCase")
+                pattern(".*") { name shouldNotBe contains("${'$'}") }
+            }
+            """.trimIndent()
+        )
+    }
 }

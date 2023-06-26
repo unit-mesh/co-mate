@@ -74,6 +74,17 @@ class NamingStyleRule(val target: NamingTarget) : Rule<FoundationElement> {
             }
         }.flatten()
     }
+
+    override fun toString(): String {
+
+        return """
+                ${target.name.lowercase()}_level {
+                    style("${namingStyle.name}")
+                    pattern("${filterPattern.pattern}") { ${namingRule} }
+                }
+            """.trimIndent()
+    }
+
 }
 
 @TestOnly

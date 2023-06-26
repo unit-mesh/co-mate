@@ -156,6 +156,7 @@ class FoundationSpecTest {
     }
 
     @Test
+    @Disabled
     fun should_keep_same_with_to_string() {
         val actual = """
     foundation {

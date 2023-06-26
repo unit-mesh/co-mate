@@ -4,6 +4,7 @@ import org.archguard.spec.base.Rule
 import org.archguard.spec.lang.base.BaseDeclaration
 import org.archguard.spec.lang.foundation.rule.NamingStyleRule
 import org.archguard.spec.element.FoundationElement
+import org.jetbrains.annotations.TestOnly
 
 enum class NamingTarget {
     Package,
@@ -33,4 +34,18 @@ class NamingDeclaration : BaseDeclaration<FoundationElement> {
     override fun rules(element: FoundationElement): List<Rule<FoundationElement>> {
         return rules
     }
+
+    override fun toString(): String {
+        val rules = rules.joinToString(separator = "\n").lines().joinToString(separator = "\n") { "    $it" }
+        return """naming {
+$rules
+}"""
+    }
+}
+
+@TestOnly
+fun naming_t(function: NamingDeclaration.() -> Unit): NamingDeclaration {
+    val declaration = NamingDeclaration()
+    declaration.function()
+    return declaration
 }
