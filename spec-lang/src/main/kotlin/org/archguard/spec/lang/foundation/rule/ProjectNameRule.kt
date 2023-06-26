@@ -41,3 +41,9 @@ class ProjectNameRule : PatternWithExampleRule<FoundationElement>, BaseDeclarati
         return listOf(this)
     }
 }
+
+fun project_name(init: ProjectNameRule.() -> Unit): ProjectNameRule {
+    val rule = ProjectNameRule()
+    rule.init()
+    return rule
+}
