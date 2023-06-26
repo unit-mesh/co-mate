@@ -38,6 +38,7 @@ dependencies {
 
     implementation("ch.qos.logback:logback-classic:1.4.5")
 
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version") // for testing
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
     testImplementation(libs.bundles.test)
 }
