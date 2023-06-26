@@ -11,7 +11,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlin.reflect.KClass
 
-@Serializable(ArchdocMessageTypeSerializer::class)
+@Serializable(MessageTypeSerializer::class)
 enum class MessageType(val contentClass: KClass<out MessageContent>) {
     NONE(NoneContent::class),
     ERROR(ErrorContent::class),
@@ -51,7 +51,7 @@ enum class DocStatus {
     ABORT;
 }
 
-object ArchdocMessageTypeSerializer : KSerializer<MessageType> {
+object MessageTypeSerializer : KSerializer<MessageType> {
     private val cache: MutableMap<String, MessageType> = hashMapOf()
 
     private fun getMessageType(type: String): MessageType {
