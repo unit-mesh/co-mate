@@ -24,6 +24,12 @@ dependencies {
     implementation(libs.archguard.feat.apicalls)
     implementation(libs.chapi.domain)
 
+
+    // format results to CSV format
+    implementation("app.softwork:kotlinx-serialization-csv:0.0.13")
+    implementation("app.softwork:kotlinx-serialization-flf:0.0.13")
+
+
     compileOnly("org.archguard.codedb:action-toolkit:0.1.2")
     implementation("org.archguard.codedb:checkout:0.1.2")
 

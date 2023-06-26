@@ -5,6 +5,7 @@ import org.archguard.spec.lang.base.BaseDeclaration
 import org.archguard.spec.lang.base.PatternWithExampleRule
 import org.archguard.spec.base.RuleResult
 import org.archguard.spec.element.FoundationElement
+import org.jetbrains.annotations.TestOnly
 
 class ProjectNameRule : PatternWithExampleRule<FoundationElement>, BaseDeclaration<FoundationElement> {
     override val actionName = "ProjectName"
@@ -42,6 +43,7 @@ class ProjectNameRule : PatternWithExampleRule<FoundationElement>, BaseDeclarati
     }
 }
 
+@TestOnly
 fun project_name(init: ProjectNameRule.() -> Unit): ProjectNameRule {
     val rule = ProjectNameRule()
     rule.init()

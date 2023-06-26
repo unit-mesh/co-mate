@@ -5,6 +5,7 @@ import org.archguard.spec.base.RuleResult
 import org.archguard.spec.element.FoundationElement
 import org.archguard.spec.lang.foundation.expression.NamingExpression
 import org.archguard.spec.lang.foundation.rule.NamingRule
+import org.jetbrains.annotations.TestOnly
 
 class LayeredDefine(val name: String) : Rule<FoundationElement> {
     var pattern: String? = null
