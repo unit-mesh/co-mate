@@ -1,6 +1,5 @@
 package org.archguard.comate.dynamic.functions
 
-import org.archguard.comate.action.ApiGovernancePrompter
 import org.archguard.comate.action.FoundationGovernancePrompter
 import org.archguard.comate.command.ComateContext
 

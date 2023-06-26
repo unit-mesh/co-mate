@@ -56,6 +56,7 @@ allprojects {
 
 dependencies {
     jacocoAggregation(project(":architecture"))
+
     jacocoAggregation(project(":comate-core"))
 
     jacocoAggregation(project(":llm-core"))
