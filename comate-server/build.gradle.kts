@@ -36,6 +36,9 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
     implementation("io.ktor:ktor-server-websockets:$ktor_version")
 
+    implementation("io.ktor:ktor-server-cors:$ktor_version")
+    implementation("io.ktor:ktor-server-compression:$ktor_version")
+
     implementation("ch.qos.logback:logback-classic:1.4.5")
 
     implementation("io.ktor:ktor-client-content-negotiation:$ktor_version") // for testing
