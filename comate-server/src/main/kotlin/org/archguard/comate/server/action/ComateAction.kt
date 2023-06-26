@@ -1,6 +1,7 @@
 package org.archguard.comate.server.action
 
 import io.github.cdimascio.dotenv.Dotenv
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -43,8 +44,12 @@ fun Route.routeForAction() {
             comateContext.connector = createConnector()
         }
 
-        val action = ToolingAction.valueOf(toolingThought.action.uppercase())
-        // parse url from toolingThought.actionInput
+        val action = ToolingAction.from(toolingThought.action.lowercase())
+        if (action == null) {
+            call.response.status(HttpStatusCode.BadRequest)
+            return@post
+        }
+
         val output = action.execute(comateContext.projectRepo)
 
         call.respond(ActionResult("ok", output.value.toString()))

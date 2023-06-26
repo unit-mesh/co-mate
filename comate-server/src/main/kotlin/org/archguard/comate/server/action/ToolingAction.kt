@@ -23,4 +23,10 @@ enum class ToolingAction(val action: String) {
     ;
 
     abstract fun execute(input: String): FunctionResult.Success<Any>
+
+    companion object {
+        fun from(action: String): ToolingAction? {
+            return values().find { it.action == action.lowercase() }
+        }
+    }
 }
