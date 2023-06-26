@@ -3,6 +3,7 @@ package org.archguard.spec.lang.foundation.rule
 import org.archguard.spec.base.Rule
 import org.archguard.spec.base.RuleResult
 import org.archguard.spec.element.FoundationElement
+import org.jetbrains.annotations.TestOnly
 
 class DependencyRule : Rule<FoundationElement> {
     override val actionName: String get() = "DependencyRule"
@@ -57,4 +58,19 @@ class DependencyRule : Rule<FoundationElement> {
 
         return results
     }
+
+    override fun toString(): String {
+        return rules.entries.joinToString("\n") { (from, target) ->
+            target.joinToString("\n") { to ->
+                "\"$from\" dependedOn \"$to\""
+            }
+        }
+    }
+}
+
+@TestOnly
+fun dependency_t(block: DependencyRule.() -> Unit): DependencyRule {
+    val dependencyRule = DependencyRule()
+    dependencyRule.block()
+    return dependencyRule
 }

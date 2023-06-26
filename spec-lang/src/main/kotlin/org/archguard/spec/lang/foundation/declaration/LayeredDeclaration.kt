@@ -27,7 +27,7 @@ class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     override fun rules(element: FoundationElement): List<Rule<FoundationElement>> {
         return layerRules + dependencyRules
     }
-
+//
 //    override fun toString(): String {
 //        var result = "";
 //        result += layerRules.forEach {
@@ -39,7 +39,7 @@ class LayeredDeclaration : BaseDeclaration<FoundationElement> {
 }
 
 @TestOnly
-fun layered(function: LayeredDeclaration.() -> Unit): LayeredDeclaration {
+fun layered_t(function: LayeredDeclaration.() -> Unit): LayeredDeclaration {
     val declaration = LayeredDeclaration()
     declaration.function()
     return declaration
