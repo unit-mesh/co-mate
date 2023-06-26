@@ -2,17 +2,14 @@ package org.archguard.comate.server.action
 
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
 import io.ktor.server.testing.*
-import org.archguard.comate.command.fakeComateContext
+import io.mockk.every
+import io.mockk.mockk
+import net.bytebuddy.implementation.MethodCall.call
 import org.archguard.comate.connector.OpenAIConnector
-import org.archguard.comate.server.prompt.PromptToolingReq
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class ComateActionKtTest {
@@ -51,5 +48,25 @@ class ComateActionKtTest {
         }
 
         assertEquals(HttpStatusCode.BadRequest, response.status)
+    }
+
+    @Test
+    fun should_handle_external_openai_calling()  = testApplication {
+        val connector = mockk<OpenAIConnector>()
+        every { connector.prompt(any()) } returns "true"
+
+        comateContext.connector = connector
+        val client = createClient {
+            install(ContentNegotiation) {
+                json()
+            }
+        }
+
+        val response = client.post("/api/action/tooling") {
+            contentType(ContentType.Application.Json)
+            setBody(ToolingThought("api governance", "rest_api_governance", expect))
+        }
+
+        assertEquals(HttpStatusCode.OK, response.status)
     }
 }
