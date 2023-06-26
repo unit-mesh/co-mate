@@ -69,41 +69,20 @@ data class ComateContext(
         return ServicesMap.scanApis(codeDataStructs, codeContext)
     }
 
-    fun fetchReadmeIntroduction(): String {
-        return ReadmeParser.introduction(workdir)
-    }
+    fun fetchReadmeIntroduction(): String = ReadmeParser.introduction(workdir)
 
     companion object {
         fun codeAnalyser(lang: String, context: SourceCodeContext): LanguageSourceCodeAnalyser? {
             return when (lang.lowercase()) {
-                "java" -> {
-                    JavaAnalyser(context)
-                }
-
-                "kotlin" -> {
-                    KotlinAnalyser(context)
-                }
-
-                "javascript", "typescript" -> {
-                    TypeScriptAnalyser(context)
-                }
-
-                "golang" -> {
-                    GoAnalyser(context)
-                }
-
-                "python" -> {
-                    PythonAnalyser(context)
-                }
-
-                else -> {
-                    null
-                }
+                "java" -> JavaAnalyser(context)
+                "kotlin" -> KotlinAnalyser(context)
+                "javascript", "typescript" -> TypeScriptAnalyser(context)
+                "golang" -> GoAnalyser(context)
+                "python" -> PythonAnalyser(context)
+                else -> null
             }
         }
     }
 }
 
-fun fakeComateContext(): ComateContext {
-    return ComateContext(Path(path = "."), "java", null)
-}
+fun fakeComateContext(): ComateContext = ComateContext(Path(path = "."), "java", null)
