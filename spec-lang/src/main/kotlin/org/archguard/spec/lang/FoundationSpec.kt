@@ -45,7 +45,30 @@ class FoundationSpec : Spec<FoundationElement> {
     }
 
     override fun default(): Spec<FoundationElement> {
-        return foundation {
+        return defaultSpec()
+    }
+
+    override fun exec(element: FoundationElement): List<RuleResult> {
+        val rules = declarations.map { declaration ->
+            declaration.rules(element)
+        }.flatten()
+
+        // update context
+        element.layeredDefines = rules.filterIsInstance<LayeredDefine>()
+
+        return rules.map { rule ->
+            rule.exec(element) as List<RuleResult>
+        }.flatten()
+    }
+
+    override fun toString(): String {
+        return """foundation {
+${declarations.joinToString(separator = "\n").lines().joinToString(separator = "\n") { "    $it" }}
+}"""
+    }
+
+    companion object {
+        fun defaultSpec() = foundation {
             project_name {
                 pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
                 example("system1-servicecenter1-microservice1")
@@ -88,25 +111,6 @@ class FoundationSpec : Spec<FoundationElement> {
                 }
             }
         }
-    }
-
-    override fun exec(element: FoundationElement): List<RuleResult> {
-        val rules = declarations.map { declaration ->
-            declaration.rules(element)
-        }.flatten()
-
-        // update context
-        element.layeredDefines = rules.filterIsInstance<LayeredDefine>()
-
-        return rules.map { rule ->
-            rule.exec(element) as List<RuleResult>
-        }.flatten()
-    }
-
-    override fun toString(): String {
-        return """foundation {
-${declarations.joinToString(separator = "\n").lines().joinToString(separator = "\n") { "    $it" }}
-}"""
     }
 }
 

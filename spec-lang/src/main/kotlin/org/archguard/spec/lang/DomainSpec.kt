@@ -18,21 +18,27 @@ class DomainSpec : Spec<Any> {
     }
 
     override fun default(): Spec<Any> {
-        return domain {
-            context_map("TicketBooking") {
-                context("Reservation") {}
-                context("Ticket") {}
-
-                mapping {
-                    context("Reservation") dependedOn context("Ticket")
-                    context("Reservation") dependedOn context("Movie")
-                }
-            }
-        }
+        return defaultSpec()
     }
 
     override fun exec(element: Any): List<RuleResult> {
         return listOf()
+    }
+
+    companion object {
+        fun defaultSpec(): DomainSpec {
+            return domain {
+                context_map("TicketBooking") {
+                    context("Reservation") {}
+                    context("Ticket") {}
+
+                    mapping {
+                        context("Reservation") dependedOn context("Ticket")
+                        context("Reservation") dependedOn context("Movie")
+                    }
+                }
+            }
+        }
     }
 }
 
