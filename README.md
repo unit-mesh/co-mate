@@ -3,6 +3,8 @@
 [![Java support](https://img.shields.io/badge/Java-11+-green?logo=java&logoColor=white)](https://openjdk.java.net/)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/archguard/co-mate)
 [![Coverage Status](https://coveralls.io/repos/github/archguard/co-mate/badge.svg?branch=master)](https://coveralls.io/github/archguard/co-mate?branch=master)
+[![languages](https://img.shields.io/badge/language-kotlin-blueviolet?logo=kotlin&logoColor=white)](https://kotlinlang.org/)
+[![GitHub license](https://img.shields.io/github/license/archguard/co-mate)](https://opensource.org/license/mpl-2-0/)
 
 > Co-mate is an AI-powered software architecture copilot, design and governance tools.
 
