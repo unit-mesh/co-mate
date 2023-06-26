@@ -72,9 +72,9 @@ enum class DynamicContext(val value: String) {
         fun build(values: List<String>, workspace: ComateContext): List<String> =
             values.mapNotNull(Companion::from).map {
                 when (it) {
-                    REST_API_SPECIFICATION -> RestApiSpec().default()
-                    FOUNDATION_SPECIFICATION -> FoundationSpec().default()
-                    DOMAIN_SPECIFICATION -> DomainSpec().default()
+                    REST_API_SPECIFICATION -> RestApiSpec().default().toString()
+                    FOUNDATION_SPECIFICATION -> FoundationSpec().default().toString()
+                    DOMAIN_SPECIFICATION -> DomainSpec().default().toString()
 
                     DOMAIN_MODEL -> DomainModelFactory.generate("mvc", workspace.fetchDs())
                     PACKAGE_INFO -> CodeDataStruct.packageInString(workspace.fetchDs())

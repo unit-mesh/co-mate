@@ -17,19 +17,18 @@ class DomainSpec : Spec<Any> {
 
     }
 
-    override fun default(): String {
-        return """domain {
-        context_map("TicketBooking") {
-            context("Reservation") {}
-            context("Ticket") {}
+    override fun default(): Spec<Any> {
+        return domain {
+            context_map("TicketBooking") {
+                context("Reservation") {}
+                context("Ticket") {}
 
-            mapping {
-                context("Reservation") dependedOn context("Ticket")
-                context("Reservation") dependedOn context("Movie")
+                mapping {
+                    context("Reservation") dependedOn context("Ticket")
+                    context("Reservation") dependedOn context("Movie")
+                }
             }
         }
-    }
-"""
     }
 
     override fun exec(element: Any): List<RuleResult> {

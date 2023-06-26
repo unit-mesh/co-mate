@@ -5,6 +5,7 @@ import org.archguard.comate.governance.ApiRuleVerifier
 import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.spec.element.FoundationElement
+import org.archguard.spec.lang.FoundationSpec
 import org.archguard.spec.lang.foundation
 import org.archguard.spec.lang.matcher.shouldBe
 import org.archguard.spec.lang.matcher.shouldNotBe
@@ -30,50 +31,7 @@ class FoundationGovernancePrompter(
     override fun getExtendData(): String {
         val codeDataStructs = context.fetchDs()
 
-        val governance = foundation {
-            project_name {
-                pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
-                example("system1-servicecenter1-microservice1")
-            }
-
-            layered {
-                layer("interface") {
-                    pattern(".*\\.interface") { name shouldBe endsWith("Controller", "Service") }
-                }
-                layer("application") {
-                    pattern(".*\\.application") {
-                        name shouldBe endsWith("DTO", "Request", "Response", "Factory", "Service")
-                    }
-                }
-                layer("domain") {
-                    pattern(".*\\.domain") { name shouldBe endsWith("Entity") }
-                }
-                layer("infrastructure") {
-                    pattern(".*\\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
-                }
-
-                dependency {
-                    "interface" dependedOn "domain"
-                    "interface" dependedOn "application"
-                    "interface" dependedOn "infrastructure"
-                    "application" dependedOn "domain"
-                    "application" dependedOn "infrastructure"
-                    "domain" dependedOn "infrastructure"
-                }
-            }
-
-            naming {
-                class_level {
-                    style("CamelCase")
-                    pattern(".*") { name shouldNotBe contains("${'$'}") }
-                }
-                function_level {
-                    style("CamelCase")
-                    pattern(".*") { name shouldNotBe contains("${'$'}") }
-                }
-            }
-        }
-
+        val governance = FoundationSpec().default()
         governance.setVerifier(ApiRuleVerifier(context.connector!!))
         val ruleResults = governance.exec(FoundationElement(context.projectName, codeDataStructs))
 
