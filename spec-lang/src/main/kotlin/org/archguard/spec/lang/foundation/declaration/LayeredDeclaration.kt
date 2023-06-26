@@ -29,13 +29,19 @@ class LayeredDeclaration : BaseDeclaration<FoundationElement> {
     }
 
     override fun toString(): String {
-        var result = ""
+        val layered = layerRules.joinToString(separator = "\n").lines().joinToString(separator = "\n") { "    $it" }
+        val deps =
+            dependencyRules.joinToString(separator = "\n    ").lines().joinToString(separator = "\n") { "    $it" }
 
-        result += layerRules.joinToString(separator = "\n")
-        result += "\n"
-        result += "dependency {\n    " + dependencyRules.joinToString(separator = "\n    ") + "\n}"
+        val insider = """$layered
 
-        return result
+    dependency {
+    $deps
+    }"""
+
+        return """layered {
+$insider
+}"""
     }
 }
 

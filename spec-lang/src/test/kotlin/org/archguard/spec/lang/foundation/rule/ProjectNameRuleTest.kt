@@ -39,8 +39,10 @@ class ProjectNameRuleTest {
         assertEquals(
             projectNameRule.toString(),
             """
-            pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?${'$'}")
-            example("system1-servicecenter1-microservice1")
+            project_name {
+                pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?${'$'}")
+                example("system1-servicecenter1-microservice1")
+            }
             """.trimIndent()
         )
     }

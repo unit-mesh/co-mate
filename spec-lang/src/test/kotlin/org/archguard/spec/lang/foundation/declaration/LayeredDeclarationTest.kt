@@ -116,20 +116,25 @@ class LayeredDeclarationTest {
             }
         }
 
-        assertEquals(declaration.toString(), """layered("interface") {
-    pattern(".*\.apis") { name shouldBe endsWith("Controller") }
-}
-layered("application") {
-    pattern(".*\.application") { name shouldBe endsWith("DTO", "Request", "Response", "Factory", "Service") }
-}
-layered("domain") {
-    pattern(".*\.domain(?:\.[a-zA-Z]+)?") { name shouldNotBe endsWith("Request", "Response") }
-}
-layered("infrastructure") {
-    pattern(".*\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
-}
-dependency {
-    "application" dependedOn "interface"
-}""")
+        assertEquals(declaration.toString(), """
+        layered {
+            layered("interface") {
+                pattern(".*\.apis") { name shouldBe endsWith("Controller") }
+            }
+            layered("application") {
+                pattern(".*\.application") { name shouldBe endsWith("DTO", "Request", "Response", "Factory", "Service") }
+            }
+            layered("domain") {
+                pattern(".*\.domain(?:\.[a-zA-Z]+)?") { name shouldNotBe endsWith("Request", "Response") }
+            }
+            layered("infrastructure") {
+                pattern(".*\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
+            }
+
+            dependency {
+                "application" dependedOn "interface"
+            }
+        }
+        """.trimIndent())
     }
 }

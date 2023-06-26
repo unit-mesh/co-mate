@@ -43,46 +43,51 @@ class FoundationSpec : Spec<FoundationElement> {
     }
 
     override fun default(): String {
-        return """foundation {
-        project_name {
-            pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\${'$'}")
-            example("system1-servicecenter1-microservice1")
-        }
-
-        layered {
-            layer("application") {
-                pattern(".*\\.application") { name shouldBe endWiths("DTO", "Request", "Response") }
-            }
-            layer("domain") {
-                pattern(".*\\.domain") { name shouldBe endWiths("Entity") }
-            }
-            layer("infrastructure") {
-                pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
-            }
-            layer("interface") {
-                pattern(".*\\.interface") { name shouldBe endWiths("Controller", "Service") }
+        return """
+        foundation {
+            project_name {
+                pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\${'$'}")
+                example("system1-servicecenter1-microservice1")
             }
 
-            dependency {
-                "application" dependedOn "domain"
-                "application" dependedOn "interface"
-                "domain" dependedOn "infrastructure"
-                "interface" dependedOn "domain"
-            }
-        }
+            layered {
+                layer("interface") {
+                    pattern(".*\\.interface") { name shouldBe endsWith("Controller", "Service") }
+                }
+                layer("application") {
+                    pattern(".*\\.application") {
+                        name shouldBe endsWith("DTO", "Request", "Response", "Factory", "Service")
+                    }
+                }
+                layer("domain") {
+                    pattern(".*\\.domain") { name shouldBe endsWith("Entity") }
+                }
+                layer("infrastructure") {
+                    pattern(".*\\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
+                }
 
-        naming {
-            class_level {
-                style("CamelCase")
-                pattern(".*") { name shouldNotBe contains("${'$'}") }
+                dependency {
+                    "interface" dependedOn "domain"
+                    "interface" dependedOn "application"
+                    "interface" dependedOn "infrastructure"
+                    "application" dependedOn "domain"
+                    "application" dependedOn "infrastructure"
+                    "domain" dependedOn "infrastructure"
+                }
             }
-            function_level {
-                style("CamelCase")
-                pattern(".*") { name shouldNotBe contains("${'$'}") }
+
+            naming {
+                class_level {
+                    style("CamelCase")
+                    pattern(".*") { name shouldNotBe contains("${'$'}") }
+                }
+                function_level {
+                    style("CamelCase")
+                    pattern(".*") { name shouldNotBe contains("${'$'}") }
+                }
             }
         }
-    }
-"""
+""".trimIndent()
     }
 
     override fun exec(element: FoundationElement): List<RuleResult> {
@@ -96,6 +101,12 @@ class FoundationSpec : Spec<FoundationElement> {
         return rules.map { rule ->
             rule.exec(element) as List<RuleResult>
         }.flatten()
+    }
+
+    override fun toString(): String {
+        return """foundation {
+    ${declarations.joinToString("\n    ")}
+}"""
     }
 }
 

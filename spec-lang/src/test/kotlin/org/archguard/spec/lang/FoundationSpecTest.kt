@@ -8,6 +8,7 @@ import org.archguard.spec.base.RuleResult
 import org.archguard.spec.lang.matcher.shouldBe
 import org.archguard.spec.lang.matcher.shouldNotBe
 import org.archguard.spec.element.FoundationElement
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -152,5 +153,53 @@ class FoundationSpecTest {
 
         val errorResult = result.filter { it.name == "DependencyRule" && !it.success }
         assertEquals(errorResult.size, 0)
+    }
+
+    @Test
+    @Disabled
+    fun should_keep_same_with_to_string() {
+        val actual = """
+    foundation {
+        project_name {
+            pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\${'$'}")
+            example("system1-servicecenter1-microservice1")
+        }
+
+        layered {
+            layer("application") {
+                pattern(".*\\.application") { name shouldBe endsWith("DTO", "Request", "Response") }
+            }
+            layer("domain") {
+                pattern(".*\\.domain") { name shouldBe endsWith("Entity") }
+            }
+            layer("infrastructure") {
+                pattern(".*\\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
+            }
+            layer("interface") {
+                pattern(".*\\.interface") { name shouldBe endsWith("Controller", "Service") }
+            }
+
+            dependency {
+                "application" dependedOn "domain"
+                "application" dependedOn "interface"
+                "domain" dependedOn "infrastructure"
+                "interface" dependedOn "domain"
+            }
+        }
+
+        naming {
+            class_level {
+                style("CamelCase")
+                pattern(".*") { name shouldNotBe contains("${'$'}") }
+            }
+            function_level {
+                style("CamelCase")
+                pattern(".*") { name shouldNotBe contains("${'$'}") }
+            }
+        }
+    }
+""".trimIndent()
+
+        assertEquals(governance.toString(), actual);
     }
 }

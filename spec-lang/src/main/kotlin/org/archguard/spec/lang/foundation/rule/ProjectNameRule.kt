@@ -44,8 +44,10 @@ class ProjectNameRule : PatternWithExampleRule<FoundationElement>, BaseDeclarati
 
     override fun toString(): String {
         return """
-        pattern("${this.originRegex}")
-        example("${this.sample}")
+        project_name {
+            pattern("${this.originRegex}")
+            example("${this.sample}")
+        }
         """.trimIndent()
     }
 }
