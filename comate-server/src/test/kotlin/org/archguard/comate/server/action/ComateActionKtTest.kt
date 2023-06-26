@@ -7,13 +7,12 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.testing.*
 import io.mockk.every
 import io.mockk.mockk
-import net.bytebuddy.implementation.MethodCall.call
 import org.archguard.comate.connector.OpenAIConnector
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class ComateActionKtTest {
-    val expect = "https://github.com/archguard/co-mate"
+    private val expect = "https://github.com/archguard/co-mate"
 
     @Test
     fun should_correct_parse_url() {
