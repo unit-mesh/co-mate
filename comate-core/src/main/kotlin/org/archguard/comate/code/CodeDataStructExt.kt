@@ -23,9 +23,7 @@ fun CodeDataStruct.Companion.generatePackageDependencies(codeDataStructs: List<C
         }
     }
 
-    // if value is empty, remove it
-    val cleanPackageInOut = packageInOut.filter { it.value.isNotEmpty() }
-    return cleanPackageInOut
+    return packageInOut.filter { it.value.isNotEmpty() }
 }
 
 fun CodeDataStruct.Companion.packageInString(codeDataStructs: List<CodeDataStruct>): String {

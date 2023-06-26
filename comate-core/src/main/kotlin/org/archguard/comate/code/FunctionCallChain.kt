@@ -24,7 +24,8 @@ data class NodeTree(val node: String, val children: List<Leaf>) {
     }
 
     override fun toString(): String {
-        return "$node -> ${children.joinToString(", ")}"
+//        return "$node -> ${children.joinToString(", ")}"
+        return children.joinToString(", ")
     }
 }
 
@@ -91,8 +92,4 @@ fun String.getClassName(): String {
 fun String.getMethodName(): String {
     val split = this.split(".")
     return split.subList(split.size - 1, split.size).joinToString(".")
-}
-
-fun escapeStr(caller: String): String {
-    return caller.replace("\"", "\\\"")
 }

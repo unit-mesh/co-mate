@@ -40,9 +40,7 @@ class FoundationSpec : Spec<FoundationElement> {
         return rule
     }
 
-    override fun setVerifier(ruleVerifier: LlmRuleVerifier) {
-
-    }
+    override fun setVerifier(ruleVerifier: LlmRuleVerifier) = Unit
 
     override fun default(): Spec<FoundationElement> {
         return defaultSpec()
