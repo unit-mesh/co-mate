@@ -5,6 +5,7 @@ import org.archguard.spec.base.RuleResult
 import org.archguard.spec.element.FoundationElement
 import org.archguard.spec.lang.foundation.expression.NamingExpression
 import org.archguard.spec.lang.foundation.rule.NamingRule
+import org.jetbrains.annotations.TestOnly
 
 class LayeredDefine(val name: String) : Rule<FoundationElement> {
     var pattern: String? = null
@@ -42,4 +43,18 @@ class LayeredDefine(val name: String) : Rule<FoundationElement> {
 
         return results
     }
+
+    override fun toString(): String {
+        return """
+        layered("${this.name}") {
+            pattern("${this.pattern}") { ${this.namingRule} }
+        }""".trimIndent()
+    }
+}
+
+@TestOnly
+fun layered_t(name: String, block: LayeredDefine.() -> Unit): LayeredDefine {
+    val layeredDefine = LayeredDefine(name)
+    layeredDefine.block()
+    return layeredDefine
 }

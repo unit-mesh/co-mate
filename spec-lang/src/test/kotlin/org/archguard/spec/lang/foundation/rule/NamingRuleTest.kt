@@ -9,7 +9,7 @@ class NamingRuleTest {
     @Test
     fun should_success_pass_by_rule() {
         val namingRule = naming {
-            name shouldBe endWiths("t")
+            name shouldBe endsWith("t")
         }
 
         assertEquals("", namingRule.string)
@@ -23,7 +23,7 @@ class NamingRuleTest {
     @Test
     fun should_failed_when_not_match() {
         val namingRule = naming {
-            name shouldBe endWiths("t")
+            name shouldBe endsWith("t")
         }
 
         val exec = namingRule.exec("test1")
@@ -81,6 +81,6 @@ class NamingRuleTest {
             name shouldBe contains("es1")
         }
 
-        assertEquals("naming { <placeholder> shouldBe contains(\"es1\") }", namingRule.toString())
+        assertEquals("name shouldBe contains(\"es1\")", namingRule.toString())
     }
 }

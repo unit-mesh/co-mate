@@ -38,18 +38,18 @@ class FoundationGovernancePrompter(
 
             layered {
                 layer("interface") {
-                    pattern(".*\\.interface") { name shouldBe endWiths("Controller", "Service") }
+                    pattern(".*\\.interface") { name shouldBe endsWith("Controller", "Service") }
                 }
                 layer("application") {
                     pattern(".*\\.application") {
-                        name shouldBe endWiths("DTO", "Request", "Response", "Factory", "Service")
+                        name shouldBe endsWith("DTO", "Request", "Response", "Factory", "Service")
                     }
                 }
                 layer("domain") {
-                    pattern(".*\\.domain") { name shouldBe endWiths("Entity") }
+                    pattern(".*\\.domain") { name shouldBe endsWith("Entity") }
                 }
                 layer("infrastructure") {
-                    pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
+                    pattern(".*\\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
                 }
 
                 dependency {

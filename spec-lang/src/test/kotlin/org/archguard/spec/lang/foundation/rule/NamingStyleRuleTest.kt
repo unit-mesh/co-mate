@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 class NamingStyleRuleTest {
     @Test
     fun should_return_true_when_match_naming_style() {
-        val namingStyleRule = test_naming_style({
+        val namingStyleRule = naming_style_t({
             style("CamelCase")
             pattern(".*") { name shouldNotBe contains("${'$'}") }
         }, NamingTarget.Class)
@@ -33,7 +33,7 @@ class NamingStyleRuleTest {
 
     @Test
     fun should_return_true_when_match_naming_style_for_function() {
-        val namingStyleRule = test_naming_style({
+        val namingStyleRule = naming_style_t({
             style("CamelCase")
             pattern(".*") { name shouldNotBe contains("${'$'}") }
         }, NamingTarget.Function)

@@ -44,7 +44,7 @@ class ProjectNameRule : PatternWithExampleRule<FoundationElement>, BaseDeclarati
 }
 
 @TestOnly
-fun project_name(init: ProjectNameRule.() -> Unit): ProjectNameRule {
+fun project_name_t(init: ProjectNameRule.() -> Unit): ProjectNameRule {
     val rule = ProjectNameRule()
     rule.init()
     return rule

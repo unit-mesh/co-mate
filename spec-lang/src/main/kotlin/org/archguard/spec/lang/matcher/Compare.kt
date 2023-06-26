@@ -37,7 +37,7 @@ data class DelayCompare(
         }
 
         val compare = when(compareType) {
-            CompareType.ENDS_WITH -> "endsWiths"
+            CompareType.ENDS_WITH -> "endsWith"
             CompareType.STARTS_WITH -> "startsWith"
             CompareType.CONTAINS -> "contains"
         }

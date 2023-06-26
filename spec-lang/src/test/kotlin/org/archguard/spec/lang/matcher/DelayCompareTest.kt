@@ -7,7 +7,7 @@ class DelayCompareTest {
     @Test
     fun should_get_correct_to_string() {
         val delayCompare = DelayCompare("test", CompareType.ENDS_WITH, listOf("t"))
-        assertEquals("test shouldBe endsWiths(\"t\")", delayCompare.toString())
+        assertEquals("test shouldBe endsWith(\"t\")", delayCompare.toString())
     }
 
     @Test

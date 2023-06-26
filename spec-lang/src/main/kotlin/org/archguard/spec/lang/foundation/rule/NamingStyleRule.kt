@@ -77,7 +77,7 @@ class NamingStyleRule(val target: NamingTarget) : Rule<FoundationElement> {
 }
 
 @TestOnly
-fun test_naming_style(block: NamingStyleRule.() -> Unit, namingTarget: NamingTarget): NamingStyleRule {
+fun naming_style_t(block: NamingStyleRule.() -> Unit, namingTarget: NamingTarget): NamingStyleRule {
     val namingStyleRule = NamingStyleRule(namingTarget)
     namingStyleRule.block()
     return namingStyleRule

@@ -16,18 +16,18 @@ class DependencyRuleTest {
     fun should_correct_setup_for_deps() {
         val layeredDeclaration = layered {
             layer("interface") {
-                pattern(".*\\.apis") { name shouldBe endWiths("Controller") }
+                pattern(".*\\.apis") { name shouldBe endsWith("Controller") }
             }
             layer("application") {
                 pattern(".*\\.application") {
-                    name shouldBe endWiths("DTO", "Request", "Response", "Factory", "Service")
+                    name shouldBe endsWith("DTO", "Request", "Response", "Factory", "Service")
                 }
             }
             layer("domain") {
-                pattern(".*\\.domain(?:\\.[a-zA-Z]+)?") { name shouldNotBe endWiths("Request", "Response") }
+                pattern(".*\\.domain(?:\\.[a-zA-Z]+)?") { name shouldNotBe endsWith("Request", "Response") }
             }
             layer("infrastructure") {
-                pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
+                pattern(".*\\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
             }
 
             dependency {
@@ -60,18 +60,18 @@ class DependencyRuleTest {
     fun should_find_error_layered_dep() {
         val layeredDeclaration = layered {
             layer("interface") {
-                pattern(".*\\.apis") { name shouldBe endWiths("Controller") }
+                pattern(".*\\.apis") { name shouldBe endsWith("Controller") }
             }
             layer("application") {
                 pattern(".*\\.application") {
-                    name shouldBe endWiths("DTO", "Request", "Response", "Factory", "Service")
+                    name shouldBe endsWith("DTO", "Request", "Response", "Factory", "Service")
                 }
             }
             layer("domain") {
-                pattern(".*\\.domain(?:\\.[a-zA-Z]+)?") { name shouldNotBe endWiths("Request", "Response") }
+                pattern(".*\\.domain(?:\\.[a-zA-Z]+)?") { name shouldNotBe endsWith("Request", "Response") }
             }
             layer("infrastructure") {
-                pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
+                pattern(".*\\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
             }
 
             dependency {

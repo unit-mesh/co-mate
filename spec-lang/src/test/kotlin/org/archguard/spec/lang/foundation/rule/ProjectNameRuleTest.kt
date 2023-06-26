@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 class ProjectNameRuleTest {
     @Test
     fun should_return_true_when_project_name_correct() {
-        val projectNameRule = project_name {
+        val projectNameRule = project_name_t {
             pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
             example("system1-servicecenter1-microservice1")
         }
@@ -19,7 +19,7 @@ class ProjectNameRuleTest {
 
     @Test
     fun should_return_false_when_project_name_incorrect() {
-        val projectNameRule = project_name {
+        val projectNameRule = project_name_t {
             pattern("^([a-z0-9-]+)-([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
             example("system1-servicecenter1-microservice1")
         }
