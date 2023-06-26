@@ -28,7 +28,7 @@ data class ComateContext(
      */
     val extArgs: Map<String, String> = emptyMap(),
     val strategy: Strategy = BasicPromptStrategy(),
-    val dslSpec: Spec<Any>? = null,
+    val spec: Spec<Any>? = null,
     private val ds: List<CodeDataStruct> = emptyList(),
     private val projectDependencies: List<CompositionDependency> = emptyList(),
     private val apis: List<RestApiElement> = emptyList(),

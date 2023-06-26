@@ -6,9 +6,6 @@ import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.spec.element.FoundationElement
 import org.archguard.spec.lang.FoundationSpec
-import org.archguard.spec.lang.foundation
-import org.archguard.spec.lang.matcher.shouldBe
-import org.archguard.spec.lang.matcher.shouldNotBe
 
 class FoundationGovernancePrompter(
     val context: ComateContext,
@@ -31,7 +28,12 @@ class FoundationGovernancePrompter(
     override fun getExtendData(): String {
         val codeDataStructs = context.fetchDs()
 
-        val governance = FoundationSpec().default()
+        val governance = if (context.spec != null && context.spec.javaClass == FoundationSpec::class.java) {
+            context.spec as FoundationSpec
+        } else {
+            FoundationSpec.defaultSpec()
+        }
+
         governance.setVerifier(ApiRuleVerifier(context.connector!!))
         val ruleResults = governance.exec(FoundationElement(context.projectName, codeDataStructs))
 
