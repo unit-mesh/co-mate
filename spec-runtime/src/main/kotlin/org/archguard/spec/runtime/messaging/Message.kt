@@ -11,3 +11,4 @@ data class Message(
     var msgType: MessageType = MessageType.NONE,
     var content: MessageContent? = null,
 )
+

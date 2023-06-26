@@ -16,4 +16,11 @@ class KotlinInterpreterTest {
         message.msgType shouldBe MessageType.NONE
         message.content shouldBe null
     }
+
+    @Test
+    fun should_cast_to_int() {
+        val interpreter = KotlinInterpreter()
+        val result = interpreter.evalCast<Int>(InterpreterRequest(code = "1 + 2"))
+        result shouldBe 3
+    }
 }
