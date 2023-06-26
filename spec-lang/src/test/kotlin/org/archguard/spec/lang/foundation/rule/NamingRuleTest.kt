@@ -13,7 +13,7 @@ class NamingRuleTest {
         }
 
         assertEquals("", namingRule.string)
-        assertEquals(CompareType.END_WITHS, namingRule.delayCompare!!.compareType)
+        assertEquals(CompareType.ENDS_WITH, namingRule.delayCompare!!.compareType)
 
         val exec = namingRule.exec("test")
         assertEquals(1, exec.size)
@@ -73,5 +73,14 @@ class NamingRuleTest {
         val exec = namingRule.exec("test")
         assertEquals(1, exec.size)
         assertEquals(false, exec[0].success)
+    }
+
+    @Test
+    fun should_correct_set_to_string() {
+        val namingRule = naming {
+            name shouldBe contains("es1")
+        }
+
+        assertEquals("naming { <placeholder> shouldBe contains(\"es1\") }", namingRule.toString())
     }
 }

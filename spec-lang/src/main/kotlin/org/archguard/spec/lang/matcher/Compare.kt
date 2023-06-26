@@ -1,7 +1,7 @@
 package org.archguard.spec.lang.matcher
 
 enum class CompareType {
-    END_WITHS,
+    ENDS_WITH,
     STARTS_WITH,
     CONTAINS
 }
@@ -14,7 +14,7 @@ data class DelayCompare(
 ) {
     fun compare(): Boolean {
         val result = when (compareType) {
-            CompareType.END_WITHS -> {
+            CompareType.ENDS_WITH -> {
                 right.any { left.endsWith(it) }
             }
 
@@ -28,5 +28,20 @@ data class DelayCompare(
         }
 
         return if (equal) result else !result
+    }
+
+    override fun toString(): String {
+        val infix = when(equal) {
+            true -> "shouldBe"
+            false -> "shouldNotBe"
+        }
+
+        val compare = when(compareType) {
+            CompareType.ENDS_WITH -> "endsWiths"
+            CompareType.STARTS_WITH -> "startsWith"
+            CompareType.CONTAINS -> "contains"
+        }
+
+        return """$left $infix $compare("${right.joinToString("\", \"")}")"""
     }
 }

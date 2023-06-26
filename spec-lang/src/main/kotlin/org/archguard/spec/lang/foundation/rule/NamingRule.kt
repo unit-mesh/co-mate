@@ -16,7 +16,7 @@ class NamingRule : Rule<String> {
     var delayCompare: DelayCompare? = null
 
     fun endWiths(vararg suffixes: String): DelayCompare {
-        val compare = DelayCompare(string, CompareType.END_WITHS, suffixes.toList())
+        val compare = DelayCompare(string, CompareType.ENDS_WITH, suffixes.toList())
         this.delayCompare = compare
         return compare
     }
@@ -41,6 +41,10 @@ class NamingRule : Rule<String> {
         this.delayCompare!!.left = input
         val compare = delayCompare!!.compare()
         return listOf(RuleResult(this.actionName, "Naming exec: $input, compareType: $delayCompare", compare, input))
+    }
+
+    override fun toString(): String {
+        return """naming { ${this.name}${this.delayCompare} }"""
     }
 }
 
