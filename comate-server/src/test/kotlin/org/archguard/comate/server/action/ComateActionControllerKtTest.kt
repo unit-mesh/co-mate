@@ -23,19 +23,6 @@ class ComateActionControllerKtTest {
 
     @Test
     fun should_return_bad_request_when_action_no_exist() = testApplication {
-//        externalServices {
-//            hosts("https://api.openai.com/") {
-//                install(io.ktor.server.plugins.contentnegotiation.ContentNegotiation) {
-//                    json()
-//                }
-//                routing {
-//                    post("/v1/chat/completions") {
-//                        call.respond("this is a demo from server")
-//                    }
-//                }
-//            }
-//        }
-
         val client = createClient {
             install(ContentNegotiation) {
                 json()
@@ -51,7 +38,7 @@ class ComateActionControllerKtTest {
     }
 
     @Test
-    fun should_handle_external_openai_calling()  = testApplication {
+    fun should_handle_external_openai_calling() = testApplication {
         val connector = mockk<OpenAIConnector>()
         every { connector.prompt(any()) } returns "true"
 

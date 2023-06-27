@@ -88,18 +88,18 @@ foundation {
 
     layered {
         layer("interface") {
-            pattern(".*\\.interface") { name shouldBe endWiths("Controller", "Service") }
+            pattern(".*\\.interface") { name shouldBe endsWith("Controller", "Service") }
         }
         layer("application") {
             pattern(".*\\.application") {
-                name shouldBe endWiths("DTO", "Request", "Response", "Factory", "Service")
+                name shouldBe endsWith("DTO", "Request", "Response", "Factory", "Service")
             }
         }
         layer("domain") {
-            pattern(".*\\.domain") { name shouldBe endWiths("Entity") }
+            pattern(".*\\.domain") { name shouldBe endsWith("Entity") }
         }
         layer("infrastructure") {
-            pattern(".*\\.infrastructure") { name shouldBe endWiths("Repository", "Mapper") }
+            pattern(".*\\.infrastructure") { name shouldBe endsWith("Repository", "Mapper") }
         }
 
         dependency {
@@ -136,15 +136,15 @@ foundation {
 
     layered {
         layer("controller") {
-            pattern(".*\\.controller") { name shouldBe endWiths("Controller") }
+            pattern(".*\\.controller") { name shouldBe endsWith("Controller") }
         }
         layer("service") {
             pattern(".*\\.service") {
-                name shouldBe endWiths("DTO", "Request", "Response", "Factory", "Service")
+                name shouldBe endsWith("DTO", "Request", "Response", "Factory", "Service")
             }
         }
         layer("repository") {
-            pattern(".*\\.repository") { name shouldBe endWiths("Entity", "Repository", "Mapper") }
+            pattern(".*\\.repository") { name shouldBe endsWith("Entity", "Repository", "Mapper") }
         }
 
         dependency {

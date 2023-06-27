@@ -49,7 +49,7 @@ class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val
             try {
                 val env: Map<String, String> = HashMap()
                 val array: List<String> = tokenizerPath.toString().split("!")
-                val fs: FileSystem = FileSystems.newFileSystem(URI.create(array[0]), env)
+                FileSystems.newFileSystem(URI.create(array[0]), env)
             } catch (e: Exception) {
 //                e.printStackTrace()
             }

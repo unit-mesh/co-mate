@@ -10,6 +10,7 @@ dependencies {
     implementation(projects.architecture)
     implementation(projects.llmCore)
     implementation(projects.specLang)
+    implementation(projects.specRuntime)
 
     implementation(libs.bundles.openai)
     implementation(libs.bundles.markdown)
