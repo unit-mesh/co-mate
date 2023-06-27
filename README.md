@@ -125,6 +125,48 @@ foundation {
 }
 ```
 
+for MVC:
+
+```kotlin
+foundation {
+    project_name {
+        pattern("^([a-z0-9-]+)-([a-z0-9-]+)(-common)?\$")
+        example("system1-webapp1")
+    }
+
+    layered {
+        layer("controller") {
+            pattern(".*\\.controller") { name shouldBe endWiths("Controller") }
+        }
+        layer("service") {
+            pattern(".*\\.service") {
+                name shouldBe endWiths("DTO", "Request", "Response", "Factory", "Service")
+            }
+        }
+        layer("repository") {
+            pattern(".*\\.repository") { name shouldBe endWiths("Entity", "Repository", "Mapper") }
+        }
+
+        dependency {
+            "controller" dependedOn "service"
+            "controller" dependedOn "repository"
+            "service" dependedOn "repository"
+        }
+    }
+
+    naming {
+        class_level {
+            style("CamelCase")
+            pattern(".*") { name shouldNotBe contains("$") }
+        }
+        function_level {
+            style("CamelCase")
+            pattern(".*") { name shouldNotBe contains("$") }
+        }
+    }
+}
+```
+
 ### REST API
 
 ```kotlin

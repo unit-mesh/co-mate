@@ -13,6 +13,7 @@ import org.archguard.scanner.analyser.*
 import org.archguard.scanner.core.sca.CompositionDependency
 import org.archguard.scanner.core.sourcecode.LanguageSourceCodeAnalyser
 import org.archguard.scanner.core.sourcecode.SourceCodeContext
+import org.archguard.spec.element.Element
 import org.archguard.spec.element.RestApiElement
 import org.archguard.spec.lang.base.Spec
 import java.nio.file.Path
@@ -28,7 +29,7 @@ data class ComateContext(
      */
     val extArgs: Map<String, String> = emptyMap(),
     val strategy: Strategy = BasicPromptStrategy(),
-    val spec: Spec<Any>? = null,
+    var spec: Spec<out Element>? = null,
     private val ds: List<CodeDataStruct> = emptyList(),
     private val projectDependencies: List<CompositionDependency> = emptyList(),
     private val apis: List<RestApiElement> = emptyList(),

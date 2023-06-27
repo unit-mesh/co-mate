@@ -11,13 +11,62 @@ import org.archguard.comate.connector.OPENAI_MODEL
 import org.archguard.comate.connector.OpenAIConnector
 import org.archguard.comate.server.action.dto.ActionResult
 import org.archguard.comate.server.action.dto.ToolingThought
+import org.archguard.spec.lang.FoundationSpec
+import org.archguard.spec.runtime.KotlinInterpreter
+import org.archguard.spec.runtime.interpreter.api.InterpreterRequest
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.io.path.pathString
 
 val comateContext = fakeComateContext()
 
-// https://gist.github.com/JurajBegovac/0007ae0a9631fe8606a48791c94ab6c6
+val repl = KotlinInterpreter()
+
+const val mvcDsl = """foundation {
+    project_name {
+        pattern("^([a-z0-9-]+)-([a-z0-9-]+)(-common)?\${'$'}")
+        example("system1-webapp1")
+    }
+
+    layered {
+        layer("controller") {
+            pattern(".*\\.controller") { name shouldBe endWiths("Controller") }
+        }
+        layer("service") {
+            pattern(".*\\.service") {
+                name shouldBe endWiths("DTO", "Request", "Response", "Factory", "Service")
+            }
+        }
+        layer("repository") {
+            pattern(".*\\.repository") { name shouldBe endWiths("Entity", "Repository", "Mapper") }
+        }
+
+        dependency {
+            "controller" dependedOn "service"
+            "controller" dependedOn "repository"
+            "service" dependedOn "repository"
+        }
+    }
+
+    naming {
+        class_level {
+            style("CamelCase")
+            pattern(".*") { name shouldNotBe contains("${'$'}") }
+        }
+        function_level {
+            style("CamelCase")
+            pattern(".*") { name shouldNotBe contains("${'$'}") }
+        }
+    }
+}"""
+val mvcFoundation: String = """
+val governance =
+$mvcDsl
+
+governance
+"""
+val mvcDslSpec = repl.evalCast<FoundationSpec>(InterpreterRequest(code = mvcFoundation))
+
 fun Route.routeForAction() {
     post("/api/action/tooling") {
         val toolingThought = call.receive<ToolingThought>()
@@ -45,7 +94,12 @@ fun Route.routeForAction() {
             return@post
         }
 
-        val output = action.execute(comateContext.projectRepo)
+        // todo: should be load from somewhere, like Database
+        if (action == ComateToolingAction.FOUNDATION_SPEC_GOVERNANCE) {
+            comateContext.spec = mvcDslSpec
+        }
+
+        val output = action.execute(comateContext)
 
         call.respond(ActionResult("ok", output.value.toString()))
     }

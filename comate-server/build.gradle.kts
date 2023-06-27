@@ -22,6 +22,9 @@ dependencies {
     implementation(projects.llmCore)
     implementation(projects.comateCore)
 
+    implementation(projects.specLang)
+    implementation(projects.specRuntime)
+
     implementation(libs.dotenv)
 
     // for backend code element

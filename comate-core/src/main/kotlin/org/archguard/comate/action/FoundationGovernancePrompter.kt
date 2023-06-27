@@ -28,7 +28,7 @@ class FoundationGovernancePrompter(
     override fun getExtendData(): String {
         val codeDataStructs = context.fetchDs()
 
-        val governance = if (context.spec != null && context.spec.javaClass == FoundationSpec::class.java) {
+        val governance = if (context.spec != null && context.spec!!.javaClass == FoundationSpec::class.java) {
             context.spec as FoundationSpec
         } else {
             FoundationSpec.defaultSpec()

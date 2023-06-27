@@ -27,7 +27,6 @@ class KotlinInterpreter {
     fun <T> evalCast(request: InterpreterRequest): T? {
         return try {
             val resultEx = compiler.eval(request.code, request.id, request.history)
-            val className: String = resultEx.rawValue?.javaClass?.name.orEmpty()
             resultEx.rawValue as T
         } catch (e: Exception) {
             logger.error(e.toString())

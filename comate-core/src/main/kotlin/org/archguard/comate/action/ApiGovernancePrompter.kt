@@ -45,7 +45,7 @@ class ApiGovernancePrompter(
 
         // todo: use a better way to get the apis
         val results = oneApis.map { api ->
-            val governance = if (context.spec != null && context.spec.javaClass == RestApiSpec::class.java) {
+            val governance = if (context.spec != null && context.spec!!.javaClass == RestApiSpec::class.java) {
                 context.spec as RestApiSpec
             } else {
                 RestApiSpec.defaultSpec()

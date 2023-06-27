@@ -43,9 +43,4 @@ class KotlinReplWrapper {
 
     fun eval(code: Code, jupyterId: Int = -1, storeHistory: Boolean = true) =
         repl.evalEx(EvalRequestData(code, jupyterId, storeHistory))
-
-    fun <T> evalCast(code: Code, jupyterId: Int = -1, storeHistory: Boolean = true): T {
-        val result = eval(code, jupyterId, storeHistory)
-        return result.rawValue as T
-    }
 }
