@@ -20,8 +20,6 @@ import kotlin.io.path.pathString
 
 val comateContext = fakeComateContext()
 
-val repl = KotlinInterpreter()
-
 const val mvcDsl = """foundation {
     project_name {
         pattern("^([a-z0-9-]+)-([a-z0-9-]+)(-common)?\${'$'}")
@@ -60,22 +58,25 @@ const val mvcDsl = """foundation {
     }
 }"""
 
-// we still need time to thinking about: should we use magic string here?
-// like: %comate
-val mvcFoundation: String = """
-import org.archguard.spec.lang.*
+val defaultImports = """import org.archguard.spec.lang.*
 import org.archguard.spec.lang.base.*
 import org.archguard.spec.lang.domain.*
 import org.archguard.spec.lang.foundation.*
 import org.archguard.spec.lang.matcher.*
-import org.archguard.spec.lang.restapi.*
+import org.archguard.spec.lang.restapi.*"""
+
+// we still need time to thinking about: should we use magic string here?
+// like: %comate
+val mvcFoundation: String = """
+$defaultImports
 
 $mvcDsl
 """
 
-val mvcDslSpec = repl.evalCast<FoundationSpec>(InterpreterRequest(code = mvcFoundation))
-
 fun Route.routeForAction() {
+    val repl = KotlinInterpreter()
+    val mvcDslSpec = repl.evalCast<FoundationSpec>(InterpreterRequest(code = mvcFoundation))
+
     post("/api/action/tooling") {
         val toolingThought = call.receive<ToolingThought>()
 
@@ -113,7 +114,7 @@ fun Route.routeForAction() {
     }
 }
 
-val regex = Regex("(?:https?|http)://(?:\\w+\\.)+\\w{2,}(?:\$|/[\\w-]+){2,}")
+val regex = Regex("(?:https?|http|git)://(?:\\w+\\.)+\\w{2,}(?:\$|/[\\w-]+){2,}")
 
 fun parseUrlFromRequest(input: String): String {
     val matchResult = regex.find(input) ?: throw Exception("invalid url")

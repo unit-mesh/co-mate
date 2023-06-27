@@ -22,6 +22,11 @@ class ComateActionControllerKtTest {
     }
 
     @Test
+    fun should_support_for_git_link() {
+        assertEquals("git://github.com/archguard/co-mate", parseUrlFromRequest("'git://github.com/archguard/co-mate'"))
+    }
+
+    @Test
     fun should_return_bad_request_when_action_no_exist() = testApplication {
         val client = createClient {
             install(ContentNegotiation) {
