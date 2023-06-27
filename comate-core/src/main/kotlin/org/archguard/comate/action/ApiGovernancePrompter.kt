@@ -43,16 +43,16 @@ class ApiGovernancePrompter(
             apis
         }
 
+        val governance = if (context.spec != null && context.spec!!.javaClass == RestApiSpec::class.java) {
+            context.spec as RestApiSpec
+        } else {
+            RestApiSpec.defaultSpec()
+        }
+
+        governance.setVerifier(ApiRuleVerifier(context.connector!!))
+
         // todo: use a better way to get the apis
         val results = oneApis.map { api ->
-            val governance = if (context.spec != null && context.spec!!.javaClass == RestApiSpec::class.java) {
-                context.spec as RestApiSpec
-            } else {
-                RestApiSpec.defaultSpec()
-            }
-
-            governance.setVerifier(ApiRuleVerifier(context.connector!!))
-
             val result = governance.exec(api)
             ApiResult(api.uri, result)
         }
