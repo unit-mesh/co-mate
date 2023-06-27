@@ -1,22 +1,16 @@
 package org.archguard.spec.lang
 
-import org.archguard.spec.base.Rule
 import org.archguard.spec.base.RuleResult
-import org.archguard.spec.base.verifier.LlmRuleVerifier
 import org.archguard.spec.lang.base.BaseDeclaration
 import org.archguard.spec.lang.base.Spec
 
 class ArchitectureSpec : Spec<String> {
-    override fun setVerifier(ruleVerifier: LlmRuleVerifier) {
-        TODO("Not yet implemented")
-    }
-
     override fun default(): Spec<String> {
-        TODO("Not yet implemented")
+        return defaultSpec()
     }
 
     override fun exec(element: String): List<RuleResult> {
-        TODO("Not yet implemented")
+        return listOf()
     }
 
     fun system(systemName: String, function: SystemDeclaration.() -> Unit): SystemDeclaration {
@@ -24,34 +18,40 @@ class ArchitectureSpec : Spec<String> {
         system.function()
         return system
     }
+
+    companion object {
+        fun defaultSpec(): ArchitectureSpec {
+            return architecture {
+                system("TicketBooking") {
+                    connection("Reservation" to "Ticket")
+                }
+            }
+        }
+    }
 }
 
-class SystemDeclaration(name: String) : BaseDeclaration<String> {
-    override fun rules(element: String): List<Rule<String>> {
-        TODO("Not yet implemented")
-    }
+class ConnectionDeclaration(val source: String, val target: String) : BaseDeclaration<String>
 
+class SystemDeclaration(name: String) : BaseDeclaration<String> {
     fun component(componentName: String, function: ComponentDeclaration.() -> Unit): ComponentDeclaration {
         val component = ComponentDeclaration(componentName)
         component.function()
         return component
     }
 
-    fun connection(pair: Pair<String, String>, function: () -> Unit?) {
-
+    fun connection(pair: Pair<String, String>, function: ConnectionDeclaration.() -> Unit?): ConnectionDeclaration {
+        val connection = ConnectionDeclaration(pair.first, pair.second)
+        connection.function()
+        return connection
     }
 
-    fun connection(pair: Pair<String, String>) {
-
+    fun connection(pair: Pair<String, String>): ConnectionDeclaration {
+        return ConnectionDeclaration(pair.first, pair.second)
     }
 
 }
 
 class ComponentDeclaration(name: String) : BaseDeclaration<String> {
-    override fun rules(element: String): List<Rule<String>> {
-        return listOf()
-    }
-
     fun module(moduleName: String, function: ModuleDeclaration.() -> Unit): ModuleDeclaration {
         val module = ModuleDeclaration(moduleName)
         module.function()
@@ -59,11 +59,7 @@ class ComponentDeclaration(name: String) : BaseDeclaration<String> {
     }
 }
 
-class ModuleDeclaration(name: String) : BaseDeclaration<String> {
-    override fun rules(element: String): List<Rule<String>> {
-        return listOf()
-    }
-}
+class ModuleDeclaration(name: String) : BaseDeclaration<String>
 
 fun architecture(function: ArchitectureSpec.() -> Unit): ArchitectureSpec {
     val spec = ArchitectureSpec()
