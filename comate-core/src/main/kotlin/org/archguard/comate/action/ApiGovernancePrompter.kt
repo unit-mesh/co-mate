@@ -49,7 +49,9 @@ class ApiGovernancePrompter(
             RestApiSpec.defaultSpec()
         }
 
-        governance.setVerifier(ApiRuleVerifier(context.connector!!))
+        if (context.connector != null) {
+            governance.setVerifier(ApiRuleVerifier(context.connector!!))
+        }
 
         // todo: use a better way to get the apis
         val results = oneApis.map { api ->
