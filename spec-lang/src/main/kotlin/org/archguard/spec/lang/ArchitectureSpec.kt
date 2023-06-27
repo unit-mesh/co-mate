@@ -19,8 +19,8 @@ class ArchitectureSpec : Spec<String> {
         TODO("Not yet implemented")
     }
 
-    fun system(name: String, function: SystemDeclaration.() -> Unit): SystemDeclaration {
-        val system = SystemDeclaration(name)
+    fun system(systemName: String, function: SystemDeclaration.() -> Unit): SystemDeclaration {
+        val system = SystemDeclaration(systemName)
         system.function()
         return system
     }
@@ -31,8 +31,8 @@ class SystemDeclaration(name: String) : BaseDeclaration<String> {
         TODO("Not yet implemented")
     }
 
-    fun component(name: String, function: ComponentDeclaration.() -> Unit): ComponentDeclaration {
-        val component = ComponentDeclaration(name)
+    fun component(componentName: String, function: ComponentDeclaration.() -> Unit): ComponentDeclaration {
+        val component = ComponentDeclaration(componentName)
         component.function()
         return component
     }
@@ -48,6 +48,18 @@ class SystemDeclaration(name: String) : BaseDeclaration<String> {
 }
 
 class ComponentDeclaration(name: String) : BaseDeclaration<String> {
+    override fun rules(element: String): List<Rule<String>> {
+        return listOf()
+    }
+
+    fun module(moduleName: String, function: ModuleDeclaration.() -> Unit): ModuleDeclaration {
+        val module = ModuleDeclaration(moduleName)
+        module.function()
+        return module
+    }
+}
+
+class ModuleDeclaration(name: String) : BaseDeclaration<String> {
     override fun rules(element: String): List<Rule<String>> {
         return listOf()
     }

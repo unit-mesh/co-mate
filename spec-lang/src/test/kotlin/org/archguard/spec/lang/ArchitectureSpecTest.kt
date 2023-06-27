@@ -9,7 +9,7 @@ class ArchitectureSpecTest {
         val spec = architecture {
             system("MySystem") {
                 component("MyComponent") {
-
+                    module("") {}
                 }
 
                 connection("WebServer" to "Database")
