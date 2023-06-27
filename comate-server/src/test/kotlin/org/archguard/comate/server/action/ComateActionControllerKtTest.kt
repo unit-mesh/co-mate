@@ -8,10 +8,11 @@ import io.ktor.server.testing.*
 import io.mockk.every
 import io.mockk.mockk
 import org.archguard.comate.connector.OpenAIConnector
+import org.archguard.comate.server.action.dto.ToolingThought
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class ComateActionKtTest {
+class ComateActionControllerKtTest {
     private val expect = "https://github.com/archguard/co-mate"
 
     @Test

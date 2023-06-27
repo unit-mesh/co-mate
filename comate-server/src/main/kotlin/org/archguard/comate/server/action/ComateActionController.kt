@@ -6,21 +6,16 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.serialization.Serializable
 import org.archguard.comate.command.fakeComateContext
 import org.archguard.comate.connector.OPENAI_MODEL
 import org.archguard.comate.connector.OpenAIConnector
+import org.archguard.comate.server.action.dto.ActionResult
+import org.archguard.comate.server.action.dto.ToolingThought
 import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.io.path.pathString
 
 val comateContext = fakeComateContext()
-
-@Serializable
-data class ToolingThought(val thought: String, val action: String, val actionInput: String)
-
-@Serializable
-data class ActionResult(val status: String, val action: String)
 
 // https://gist.github.com/JurajBegovac/0007ae0a9631fe8606a48791c94ab6c6
 fun Route.routeForAction() {
@@ -44,7 +39,7 @@ fun Route.routeForAction() {
             comateContext.connector = createConnector()
         }
 
-        val action = ToolingAction.from(toolingThought.action.lowercase())
+        val action = ComateToolingAction.from(toolingThought.action.lowercase())
         if (action == null) {
             call.response.status(HttpStatusCode.BadRequest)
             return@post

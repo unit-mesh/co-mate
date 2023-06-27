@@ -7,20 +7,22 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.testing.*
-import org.archguard.comate.server.action.ToolingAction
+import org.archguard.comate.server.action.ComateToolingAction
+import org.archguard.comate.server.prompt.dto.PromptToolingReq
+import org.archguard.comate.server.prompt.dto.PromptToolingRes
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-class PromptRoutesKtTest {
+class PromptControllerKtTest {
     @Test
     fun should_return_all_tooling_api() = testApplication {
         val response = client.get("/api/prompt/tooling")
         assertEquals(HttpStatusCode.OK, response.status)
         val body = response.bodyAsText()
 
-        assertTrue(body.contains(ToolingAction.REST_API_GOVERNANCE.action))
-        assertTrue(body.contains(ToolingAction.FOUNDATION_SPEC_GOVERNANCE.action))
+        assertTrue(body.contains(ComateToolingAction.REST_API_GOVERNANCE.action))
+        assertTrue(body.contains(ComateToolingAction.FOUNDATION_SPEC_GOVERNANCE.action))
     }
 
     @Test

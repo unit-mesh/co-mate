@@ -4,17 +4,11 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.serialization.Serializable
-import org.archguard.comate.command.ComateContext
 import org.archguard.comate.command.fakeComateContext
 import org.archguard.comate.dynamic.DynamicContextFactory
-import kotlin.io.path.Path
-
-@Serializable
-data class PromptToolingReq(val text: String)
-
-@Serializable
-data class PromptToolingRes(val prompt: String, val tools: List<BaseTool>)
+import org.archguard.comate.server.prompt.dto.PromptToolingReq
+import org.archguard.comate.server.prompt.dto.PromptToolingRes
+import org.archguard.comate.server.prompt.model.BaseTool
 
 fun Route.routeByPrompt() {
     val fakeFactory = DynamicContextFactory(fakeComateContext())

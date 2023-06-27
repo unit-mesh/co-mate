@@ -1,6 +1,6 @@
 package org.archguard.comate.server
 
-import org.archguard.comate.server.prompt.BaseTool
+import org.archguard.comate.server.prompt.model.BaseTool
 import org.archguard.comate.server.prompt.PromptingWrapper
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test

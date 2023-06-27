@@ -1,9 +1,6 @@
 package org.archguard.comate.server.prompt
 
-import kotlinx.serialization.Serializable
-
-@Serializable
-class BaseTool(val name: String, val description: String)
+import org.archguard.comate.server.prompt.model.BaseTool
 
 class PromptingWrapper {
     val PREFIX = """Answer the following questions as best you can. You have access to the following tools:"""

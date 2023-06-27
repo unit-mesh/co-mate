@@ -2,7 +2,7 @@ package org.archguard.comate.server.action
 
 import org.archguard.comate.dynamic.functions.*
 
-enum class ToolingAction(val action: String) {
+enum class ComateToolingAction(val action: String) {
     INTRODUCE_SYSTEM(action = "introduce_system") {
         override fun execute(input: String): FunctionResult.Success<String> {
             comateContext.projectRepo = input
@@ -25,7 +25,7 @@ enum class ToolingAction(val action: String) {
     abstract fun execute(input: String): FunctionResult.Success<Any>
 
     companion object {
-        fun from(action: String): ToolingAction? {
+        fun from(action: String): ComateToolingAction? {
             return values().find { it.action == action.lowercase() }
         }
     }
