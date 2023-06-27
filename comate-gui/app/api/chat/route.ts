@@ -7,14 +7,14 @@ import { searchTooling } from "@/app/api/common/search-tooling";
 
 export const runtime = 'edge'
 
-export async function requestToOpenAi(previewToken: string, messages: Message[], isStream: boolean = true) {
+export async function stream(apiKey: string, messages: Message[], isStream: boolean = true) {
   let basePath = process.env.OPENAI_PROXY_URL
   if (basePath == null) {
     basePath = 'https://api.openai.com'
   }
 
   const configuration = new Configuration({
-    apiKey: previewToken || process.env.OPENAI_API_KEY,
+    apiKey: apiKey || process.env.OPENAI_API_KEY,
     basePath
   })
 
@@ -63,5 +63,5 @@ export async function POST(req: Request) {
   // }
 
   // wrapper text to our server
-  return await requestToOpenAi(previewToken, messages);
+  return await stream(previewToken, messages);
 }
