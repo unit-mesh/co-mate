@@ -59,12 +59,20 @@ const val mvcDsl = """foundation {
         }
     }
 }"""
-val mvcFoundation: String = """
-val governance =
-$mvcDsl
 
-governance
+// we still need time to thinking about: should we use magic string here?
+// like: %comate
+val mvcFoundation: String = """
+import org.archguard.spec.lang.*
+import org.archguard.spec.lang.base.*
+import org.archguard.spec.lang.domain.*
+import org.archguard.spec.lang.foundation.*
+import org.archguard.spec.lang.matcher.*
+import org.archguard.spec.lang.restapi.*
+
+$mvcDsl
 """
+
 val mvcDslSpec = repl.evalCast<FoundationSpec>(InterpreterRequest(code = mvcFoundation))
 
 fun Route.routeForAction() {

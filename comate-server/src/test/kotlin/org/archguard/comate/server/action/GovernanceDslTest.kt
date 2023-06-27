@@ -4,6 +4,7 @@ import org.archguard.spec.lang.FoundationSpec
 import org.archguard.spec.runtime.KotlinInterpreter
 import org.archguard.spec.runtime.interpreter.api.InterpreterRequest
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 class GovernanceDslTest {
@@ -56,14 +57,13 @@ import org.archguard.spec.lang.foundation.*
 import org.archguard.spec.lang.matcher.*
 import org.archguard.spec.lang.restapi.*
 
-val governance = $mvcDsl
-
-governance
+$mvcDsl
 """
 
 
         val mvcDslSpec = repl.evalCast<FoundationSpec>(InterpreterRequest(code = mvcFoundation))
 
         assertNotNull(mvcDslSpec)
+        assertEquals(FoundationSpec::class.java.canonicalName, mvcDslSpec.javaClass.canonicalName)
     }
 }
