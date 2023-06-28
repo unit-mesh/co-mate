@@ -42,8 +42,40 @@ class DomainSpec : Spec<Any> {
     }
 }
 
+class UserStorySpec : Spec<String> {
+    override fun default(): Spec<String> {
+        return defaultSpec()
+    }
+
+    fun as_an(role: String) {
+
+    }
+
+    fun i_want_to(action: String) {
+
+    }
+
+    fun so_that(result: String) {
+
+    }
+
+    companion object {
+        fun defaultSpec(): UserStorySpec {
+            return user_story {
+
+            }
+        }
+    }
+}
+
 fun domain(init: DomainSpec.() -> Unit): DomainSpec {
     val spec = DomainSpec()
+    spec.init()
+    return spec
+}
+
+fun user_story(init: UserStorySpec.() -> Unit): UserStorySpec {
+    val spec = UserStorySpec()
     spec.init()
     return spec
 }
