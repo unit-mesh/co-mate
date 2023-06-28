@@ -8,6 +8,8 @@
 
 > Co-mate is an AI-powered software architecture copilot, design and governance tools.
 
+![Co-mate Logo](docs/co-mate.svg)
+
 Project Kanban: https://github.com/orgs/archguard/projects/5/views/1
 
 Supported languages by [ArchGuard](https://github.com/archguard/archguard)
