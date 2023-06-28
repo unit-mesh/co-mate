@@ -16,13 +16,7 @@ class ComposableSpec : Spec<Scenario> {
 
     companion object {
         fun defaultSpec(): ComposableSpec {
-            return composable {
-                channels {}
-                integrations {}
-                logics {}
-                records {}
-                capabilities {}
-            }
+            return composable {}
         }
     }
 
