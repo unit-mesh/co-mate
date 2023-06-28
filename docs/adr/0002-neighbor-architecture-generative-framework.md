@@ -10,7 +10,7 @@ Date: 2023-06-27
 
 First
 
-use follow format to define architecture for an online mall system,
+use the follow format to define architecture for an online mall system,
 
 ```kotlin
 context("Cinema") {

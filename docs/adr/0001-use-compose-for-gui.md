@@ -6,7 +6,7 @@ Date: 2023-05-30
 
 2023-05-30 proposed
 
-2023-05-30 done
+2023-05-30 deprecated
 
 ## Context
 
