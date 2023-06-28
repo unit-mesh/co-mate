@@ -13,7 +13,7 @@ We need to separate the implementation and design architecture.
 use implementation architecture to generate code, use design architecture to generate document.
 
 ```kotlin
-system("") {
+system("", organization = "") {
     service("") {
         module("") {
             component("") {
@@ -31,6 +31,11 @@ context("Cinema") {
     aggregate("Cinema") {
         entity("Cinema", "ScreeningRoom", "Seat")
     }
+}
+
+biz {
+
+    infrastructure("Log", "Email", "SMS")
 }
 ```
 
