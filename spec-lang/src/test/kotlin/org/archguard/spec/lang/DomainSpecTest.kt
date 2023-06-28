@@ -15,20 +15,8 @@ class DomainSpecTest {
         }
     }
 
-    private val assetManagement = FeatureSuite("AssetsManagement") {
-        Feature("", tag = "") {
-            Scenario("") {
-                Given("")
-                And("")
-                When("")
-                Then("")
-            }
-        }
-    }
-
     @Test
     fun testContextMap() {
         governance.exec("")
-        assetManagement.exec("")
     }
 }
