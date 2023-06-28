@@ -16,9 +16,9 @@ class DomainSpecTest {
     }
 
     private val userStory = user_story {
-        as_an("")
-        i_want_to("")
-        so_that("")
+        scene("") {
+//            given, when, then
+        }
     }
 
     @Test

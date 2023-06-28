@@ -42,25 +42,26 @@ class DomainSpec : Spec<Any> {
     }
 }
 
+
+class SceneDeclaration(name: String) {
+
+}
+
+
 class UserStorySpec : Spec<String> {
     override fun default(): Spec<String> {
         return defaultSpec()
     }
 
-    fun as_an(role: String) {
-
-    }
-
-    fun i_want_to(action: String) {
-
-    }
-
-    fun so_that(result: String) {
-
+    fun scene(name: String, function: SceneDeclaration.() -> Unit) : SceneDeclaration {
+        val sceneDeclaration = SceneDeclaration(name)
+        sceneDeclaration.function()
+        return sceneDeclaration
     }
 
     companion object {
         fun defaultSpec(): UserStorySpec {
+            // todo: refs to cucumber?
             return user_story {
 
             }
