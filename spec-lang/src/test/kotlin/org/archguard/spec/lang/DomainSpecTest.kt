@@ -15,7 +15,7 @@ class DomainSpecTest {
         }
     }
 
-    private val userStory = FeatureSuite {
+    private val assetManagement = FeatureSuite("AssetsManagement") {
         Feature("", tag = "") {
             Scenario("") {
                 Given("")
@@ -29,6 +29,6 @@ class DomainSpecTest {
     @Test
     fun testContextMap() {
         governance.exec("")
-        userStory.exec("")
+        assetManagement.exec("")
     }
 }
