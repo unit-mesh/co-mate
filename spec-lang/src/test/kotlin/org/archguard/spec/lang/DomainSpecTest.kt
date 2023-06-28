@@ -15,7 +15,7 @@ class DomainSpecTest {
         }
     }
 
-    private val userStory = user_story {
+    private val userStory = FeatureSuite {
         Feature("", tag = "") {
             Scenario("") {
                 Given("")

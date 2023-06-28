@@ -42,14 +42,12 @@ class DomainSpec : Spec<Any> {
     }
 }
 
+class Step(val description: String)
 class ScenarioDeclaration(val name: String) {
-    fun Given(s: String) {}
-
-    fun And(s: String) {}
-
-    fun When(s: String) {}
-
-    fun Then(s: String) {}
+    fun Given(description: String) : Step = Step(description)
+    fun And(description: String) : Step = Step(description)
+    fun When(description: String) : Step = Step(description)
+    fun Then(description: String) {}
 }
 
 class FeatureDeclaration(name: String, tag: String) {
@@ -60,7 +58,7 @@ class FeatureDeclaration(name: String, tag: String) {
     }
 }
 
-class UserStorySpec : Spec<String> {
+class FeatureSuiteSpec : Spec<String> {
     override fun default(): Spec<String> {
         return defaultSpec()
     }
@@ -72,12 +70,8 @@ class UserStorySpec : Spec<String> {
     }
 
     companion object {
-        fun defaultSpec(): UserStorySpec {
-            // todo: refs to cucumber?
-            return user_story {
-
-            }
-        }
+        @JvmStatic
+        fun defaultSpec(): FeatureSuiteSpec = FeatureSuiteSpec()
     }
 }
 
@@ -87,8 +81,8 @@ fun domain(init: DomainSpec.() -> Unit): DomainSpec {
     return spec
 }
 
-fun user_story(init: UserStorySpec.() -> Unit): UserStorySpec {
-    val spec = UserStorySpec()
+fun FeatureSuite(init: FeatureSuiteSpec.() -> Unit): FeatureSuiteSpec {
+    val spec = FeatureSuiteSpec()
     spec.init()
     return spec
 }
