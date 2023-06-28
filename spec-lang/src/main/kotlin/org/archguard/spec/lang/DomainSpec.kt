@@ -42,21 +42,33 @@ class DomainSpec : Spec<Any> {
     }
 }
 
+class ScenarioDeclaration(val name: String) {
+    fun Given(s: String) {}
 
-class SceneDeclaration(name: String) {
+    fun And(s: String) {}
 
+    fun When(s: String) {}
+
+    fun Then(s: String) {}
 }
 
+class FeatureDeclaration(name: String, tag: String) {
+    fun Scenario(scene: String, function: ScenarioDeclaration.() -> Unit) : ScenarioDeclaration {
+        val scenarioDeclaration = ScenarioDeclaration(scene)
+        scenarioDeclaration.function()
+        return scenarioDeclaration
+    }
+}
 
 class UserStorySpec : Spec<String> {
     override fun default(): Spec<String> {
         return defaultSpec()
     }
 
-    fun scene(name: String, function: SceneDeclaration.() -> Unit) : SceneDeclaration {
-        val sceneDeclaration = SceneDeclaration(name)
-        sceneDeclaration.function()
-        return sceneDeclaration
+    fun Feature(name: String, tag: String = "", function: FeatureDeclaration.() -> Unit, ) : FeatureDeclaration {
+        val featureDeclaration = FeatureDeclaration(name, tag)
+        featureDeclaration.function()
+        return featureDeclaration
     }
 
     companion object {

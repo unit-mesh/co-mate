@@ -16,8 +16,13 @@ class DomainSpecTest {
     }
 
     private val userStory = user_story {
-        scene("") {
-//            given, when, then
+        Feature("", tag = "") {
+            Scenario("") {
+                Given("")
+                And("")
+                When("")
+                Then("")
+            }
         }
     }
 
