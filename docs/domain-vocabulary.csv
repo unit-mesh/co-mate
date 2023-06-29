@@ -1,0 +1,101 @@
+Name;Description
+Abstraction;a process of breaking down complex systems into simpler parts.
+API (Application Programming Interface);a set of rules and protocols used for defining software components' communication and interaction.
+Architecture;the structure and organization of a software system used to meet system requirements and achieve system goals.
+Artifact;architecture design documents, code, and other types of outputs.
+Asynchronous;not occurring at the same time, referring to not needing to wait for other operations to complete when performing an action.
+Behavior;the way a software system behaves, including system responses and interaction methods.
+Big Data;a large collection of structured and unstructured data sets.
+Binary;a system of numerical notation that uses only two digits: 0 and 1.
+Black Box;a system or component whose internal workings are not visible to an external user.
+Bottleneck;a point in a system where the flow of data is restricted, causing a slowdown in performance.
+Cache;a high-speed storage area for frequently accessed data.
+Class;a blueprint or template for creating objects in object-oriented programming.
+Cloud Computing;a model for delivering on-demand computing resources and services over the internet.
+Cohesion;the degree to which the components of a software system work together to achieve a common goal.
+Compiler;a software tool that translates high-level programming code into machine-readable code.
+Debugging;the process of identifying and fixing errors in software code.
+Design Patterns;reusable solutions to commonly occurring software design problems.
+Dependency;a relationship between two software components where one component relies on the other to function correctly.
+Deployment;the process of delivering a software system to its end-users.
+Distributed Computing;a model for processing data and performing computations using a network of computers.
+Encapsulation;a mechanism for hiding a system's internal details and protecting its integrity.
+Endpoint;a network address used for communicating with a service or application.
+Event;a signal that indicates that something has happened in a software system.
+Exception;an error or unexpected condition that occurs during the execution of a program.
+Extensibility;the ability of a software system to be easily extended or modified.
+Fault Tolerance;the ability of a system to continue functioning in the event of a hardware or software failure.
+Framework;a set of tools, libraries, and conventions used for developing software applications.
+Functional Programming;a programming paradigm that emphasizes the use of functions to perform computations.
+Functionality;the features and capabilities of a software system.
+Fusion;the process of combining two or more software components into a single component.
+Garbage Collection;the process of automatically freeing up memory in a software system by deallocating objects that are no longer being used.
+Gateway;a network device that connects two different networks using different protocols.
+Generic;a type or class that can be used with different data types.
+GUI (Graphical User Interface);a type of user interface that allows users to interact with software applications using graphical elements such as icons, menus, and buttons.
+GZIP;a file compression format used to reduce the size of files for storage or transmission.
+Hadoop;an open-source distributed computing platform used for storing and processing large data sets.
+Hashing;a technique for converting a message or data into a fixed-size string of characters.
+High Availability;the ability of a system to remain operational and accessible even in the event of hardware or software failures.
+HTML (Hypertext Markup Language);a markup language used for creating web pages and other web-based documents.
+HTTP (Hypertext Transfer Protocol);a protocol used for transmitting data over the internet.
+IDE (Integrated Development Environment);a software application used for developing, testing, and debugging software code.
+Inheritance;a mechanism for creating new classes based on existing classes in object-oriented programming.
+Interface;a set of rules and protocols used for communicating and interacting with a software component.
+IoT (Internet of Things);a network of physical devices, vehicles, and other objects embedded with sensors, software, and other technologies for collecting and exchanging data.
+Java;a high-level programming language used for developing software applications.
+JavaScript;a programming language used for creating interactive web pages and other web-based applications.
+JSON (JavaScript Object Notation);a lightweight data interchange format used for transmitting data between a server and a web application.
+JVM (Java Virtual Machine);a software program that runs Java bytecode on a computer.
+Key-Value Store;a type of database that stores data as key-value pairs.
+Kubernetes;an open-source container orchestration platform used for automating deployment, scaling, and management of containerized applications.
+Legacy System;a software system that is outdated or nolonger supported but still in use.
+Library;a collection of pre-written code or functions that can be used by software developers to simplify their work.
+Load Balancing;the process of distributing workloads across multiple computing resources to optimize performance and availability.
+Logging;the process of recording system events and messages to facilitate troubleshooting and debugging.
+Loosely Coupled;a system architecture where components are independent of each other and can be easily swapped out or replaced.
+Microservices;a software architecture where a system is broken down into small, independent services that can be developed, deployed, and scaled separately.
+Middleware;software that connects different software components or applications to facilitate communication and data exchange.
+Modularity;the degree to which a software system is composed of independent, interchangeable modules.
+MVC (Model-View-Controller);a software design pattern used for developing user interfaces.
+Multi-Tenancy;a software architecture where a single instance of software serves multiple tenants or users.
+Namespace;a container for grouping related code or software components to avoid naming conflicts.
+Node;a computing device or server in a network.
+NoSQL (Not Only SQL);a type of database that doesn't use a traditional relational database management system to store data.
+Null;a value that represents the absence of a value or unknown data.
+Object-Oriented Programming (OOP);a programming paradigm that uses objects to represent data and behavior.
+ORM (Object-Relational Mapping);a technique for mapping between object-oriented programming and relational database systems.
+Overhead;the additional resources or processing time required by a software system or component.
+Parallel Computing;a model of computing where multiple tasks are executed simultaneously across multiple computing resources.
+Performance;the speed and efficiency of a software system or component.
+Persistence;the ability of a software system to store data across multiple sessions or restarts.
+Plugin;a software component that can be added to an existing software system to provide additional functionality.
+Polymorphism;a mechanism in object-oriented programming that allows objects to be treated as if they are of different types.
+Query;a request for information or data from a database or other software system.
+Queue;a data structure used for storing and managing a collection of objects or tasks in a specific order.
+Refactoring;the process of reorganizing and improving the structure and design of existing software code.
+REST (Representational State Transfer);a set of architectural principles used for designing web services and APIs.
+RPC (Remote Procedure Call);a protocol used for calling a function or procedure in a remote system or service.
+Runtime;the period of time during which a software system or component is running.
+Routing;the process of directing network traffic between different computing devices or services.
+Scalability;the ability of a software system or component to handle increasing amounts of data or traffic.
+Security;the protection of a software system or component from unauthorized access, use, or modification.
+Service;a self-contained software component that performs a specific function or task.
+SOAP (Simple Object Access Protocol);a protocol used for exchanging structured information between applications or systems.
+Source Code;the human-readable instructions that make up a software system or component.
+Testing;the process of verifying that a software system or component meets its requirements and specifications.
+Transaction;a sequence of related operations in a software system that must be completed as a single unit of work.
+TypeScript;a programming language that is a superset of JavaScript and adds static typing to the language.
+Two-Factor Authentication;a security process that requires users to provide two different forms of identification to access a software system or service.
+UI (User Interface);the part of a software system that allows users to interact with the system.
+Unit Testing;a type of testing where individual units or components of a software system are tested in isolation.
+URL (Uniform Resource Locator);a web address used to locate a specific resource on the internet.
+UML (Unified Modeling Language);a modeling language used for software design and development.
+Version Control;the management of changes to a software system or component over time.
+Virtualization;the creation of a virtual version of a computing resource, such as a server or network.
+VPN (Virtual Private Network);a network that provides a secure connection between computing devices or networks over the internet.
+Vulnerability;a weakness or flaw in a software system or component that can be exploited by attackers.
+Web Services;a software system or component that uses standard web protocols to exchange data and information over the internet.
+Workflow;the sequence of steps or tasks in a software system or business process.
+WSDL (Web Services Description Language);a language used for describing web services and their interfaces.
+XML (Extensible Markup Language);a markup language used for encoding documents.
