@@ -32,6 +32,7 @@ plugins {
 
 include(":architecture")
 include(":llm-core")
+include(":llm-semantic")
 
 include(":comate-core")
 //include(":comate-gui")

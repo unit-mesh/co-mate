@@ -6,13 +6,14 @@ plugins {
 
 dependencies {
     implementation(projects.specLang)
-    implementation(projects.specLang)
-    implementation(projects.llmCore)
-    implementation(projects.llmSemantic)
-
-    implementation(libs.serialization.json)
     implementation(libs.kotlin.stdlib)
-    implementation(libs.bundles.markdown)
+    implementation(libs.coroutines.core)
+
+    implementation(libs.bundles.openai)
+
+    implementation(libs.onnxruntime)
+    implementation(libs.huggingface.tokenizers)
+    implementation(libs.jtokkit)
 
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.test.junit.engine)

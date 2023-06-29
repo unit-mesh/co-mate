@@ -2,7 +2,7 @@ package org.archguard.spec.lang.domain.declaration
 
 import org.archguard.spec.lang.domain.MappingDefine
 
-class ContextMapDeclaration(name: String) {
+class ContextMapDeclaration(val name: String) {
     fun context(name: String, function: ContextDeclaration.() -> Unit): ContextDeclaration {
         val contextDeclaration = ContextDeclaration(name)
         contextDeclaration.function()

@@ -19,8 +19,8 @@ repositories {
 }
 
 dependencies {
-    implementation(projects.llmCore)
     implementation(projects.comateCore)
+    implementation(projects.llmCore)
 
     implementation(projects.specLang)
     implementation(projects.specRuntime)

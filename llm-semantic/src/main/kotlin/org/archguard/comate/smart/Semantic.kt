@@ -7,7 +7,6 @@ import ai.onnxruntime.OrtSession
 import ai.onnxruntime.OrtUtil
 import java.net.URI
 import java.nio.file.*
-import kotlin.io.path.absolutePathString
 
 
 class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val env: OrtEnvironment) {

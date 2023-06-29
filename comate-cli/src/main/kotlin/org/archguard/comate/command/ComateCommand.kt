@@ -56,7 +56,7 @@ enum class ComateCommand(val command: String) {
 
             val inputEmbed = semantic.embed(cmd)
 
-            var comateCommand = ComateCommand.None
+            var comateCommand = None
             run breaking@{
                 commandEmbedMap.forEach { (command, embeds) ->
                     embeds.forEach {

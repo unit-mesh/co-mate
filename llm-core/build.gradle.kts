@@ -10,10 +10,9 @@ dependencies {
     implementation(libs.coroutines.core)
 
     implementation(libs.bundles.openai)
-
-    implementation(libs.onnxruntime)
-    implementation(libs.huggingface.tokenizers)
     implementation(libs.jtokkit)
+
+    implementation("ch.qos.logback:logback-classic:1.4.5")
 
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.test.junit.engine)
