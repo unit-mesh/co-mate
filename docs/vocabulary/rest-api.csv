@@ -1,0 +1,35 @@
+Name,Description
+REST API,表示一种Web服务架构风格，用于创建可通过HTTP请求访问的Web服务。API以资源为中心，使用HTTP协议的GET、POST、PUT和DELETE方法来执行操作。
+URI,Uniform Resource Identifier(统一资源标识符)，用于唯一标识资源。在REST API中，URI用于标识资源的位置。
+URI构建,指创建URI的过程，包括确定URI的模式和示例。
+模式,指URI的结构或格式。在REST API中，模式用于确定URI的格式，以便客户端可以正确构建请求。
+示例,指符合模式的URI示例。在REST API中，示例用于说明如何构建URI。
+HTTP方法,表示客户端请求执行的操作类型。在REST API中，常见的HTTP方法有GET、POST、PUT和DELETE。
+状态码,指HTTP响应中的状态码，用于表示请求的结果。在REST API中，常见的状态码有200、201、202、204、400、401、403、404、500、502、503和504。
+安全性,指保护API免受未经授权访问的能力。在REST API中，安全性通常通过身份验证和授权来实现。
+Token Based Authentication,一种身份验证机制，其中客户端在每个请求中使用令牌来证明其身份。在REST API中，Token Based Authentication通常用于替代基于会话的身份验证机制，以便微服务可以保持无状态。
+杂项,指其他与REST API相关的内容，如文档或示例代码。
+JSON,JavaScript Object Notation，一种轻量级的数据交换格式。在REST API中，JSON通常用于在客户端和服务器之间传输数据。
+XML,eXtensible Markup Language，一种标记语言，用于描述数据。在REST API中，XML也可以用于在客户端和服务器之间传输数据。
+HTTP头,HTTP请求或响应中的元数据，用于传输非数据元素。在REST API中，常见的HTTP头包括Content-Type、Authorization和Accept。
+请求体,HTTP请求中的数据部分，通常包含客户端要发送到服务器的数据。在REST API中，请求体通常使用JSON或XML格式。
+响应体,HTTP响应中的数据部分，通常包含服务器要发送回客户端的数据。在REST API中，响应体通常使用JSON或XML格式。
+路由,指将HTTP请求路由到正确的资源和处理程序的过程。在REST API中，路由通常由API网关或负载均衡器执行。
+API文档,文档化REST API的过程，包括API的用途、参数、响应和错误。在REST API中，API文档通常使用Swagger或OpenAPI Specification格式编写。
+限速,指限制客户端对API的访问速度，以避免过度使用和滥用。在REST API中，限速通常由API网关或负载均衡器执行。
+缓存,指将响应缓存在客户端或代理服务器中，以避免重复请求相同的资源。在REST API中，缓存通常由HTTP缓存头控制。
+RESTful,表示符合REST原则的API。RESTful API具有可伸缩性、可扩展性和可维护性。
+HATEOAS,Hypertext As The Engine Of Application State，一种REST原则，要求API的响应包含超链接，以便客户端可以浏览API的状态。
+API网关,一个服务器，用于将API请求路由到适当的服务。API网关可处理验证、限速、缓存等功能。
+OAuth,一种开放标准的授权协议，允许用户通过第三方应用访问受保护的资源，而无需将用户名和密码提供给第三方应用。在REST API中，OAuth通常用于实现基于令牌的身份验证和授权。
+OpenAPI Specification,一种用于描述、设计和文档化REST API的开放标准。OpenAPI Specification文件使用YAML或JSON格式编写，并可使用Swagger UI生成交互式API文档。
+Swagger,一套开源工具，用于设计、构建和文档化REST API。Swagger包括Swagger Editor、Swagger UI和Swagger Codegen等组件。
+API版本控制,一种策略，用于在更改和更新API时保持向后兼容性。在REST API中，API版本控制可以通过在URI中包含版本号、使用自定义HTTP头或使用媒体类型参数实现。
+CORS,跨来源资源共享（Cross-Origin Resource Sharing），一种允许多个域之间进行资源共享的机制。在REST API中，CORS通常用于解决跨域请求的安全限制。
+GraphQL,一种数据查询和操作语言，用于API。GraphQL允许客户端在一个请求中请求所需的数据，而无需进行多个API调用。与REST API相比，GraphQL提供了一种更灵活、更高效的数据交换方式。
+API测试,一种确保API满足预期行为和性能要求的过程。API测试包括功能测试、性能测试、安全测试等。
+负载均衡器,用于在多个服务器之间分配网络流量的设备或软件。在REST API中，负载均衡器通常用于提高可用性和可伸缩性。
+身份验证,确定用户的身份的过程。在REST API中，身份验证通常通过用户名和密码、令牌或OAuth等方式实现。
+授权,确定用户有权访问特定资源的过程。在REST API中，授权通常基于用户的角色或特权。
+Webhooks,一种允许服务通过HTTP请求通知客户端事件的机制。在REST API中，Webhooks通常用于实现实时更新和异步通知。
+API管理,一种监控、分析和维护API的过程。API管理包括API版本控制、权限管理、限速、缓存和分析等功能。
