@@ -13,6 +13,7 @@ import {
 import { SidebarFooter } from '@/components/sidebar-footer'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { ClearHistory } from '@/components/clear-history'
+import Image from "next/image";
 
 export async function Header() {
   const session = await auth()
@@ -31,7 +32,8 @@ export async function Header() {
             </SidebarFooter>
           </Sidebar>
         ) : (
-          <Link href="/" target="_blank" rel="nofollow">
+          <Link href="/" rel="nofollow">
+            <Image src={"/co-mate.svg"}  alt={"Logo"} width={36} height={26}/>
             ArchGuard Co-mate
           </Link>
         )}
