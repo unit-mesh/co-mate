@@ -41,7 +41,34 @@ OPENAI_API_KEY=xxx
 OPENAI_API_PROXY=xxxx (optional, if you had a OpenAI proxy server)
 ```
 
-## Modules
+## Development
+
+### Setup
+
+Prerequisites: Node.js 16+, Java 11+
+
+1. Clone
+
+```
+git clone https://github.com/archguard/co-mate
+```
+
+2. Setup backend server
+
+```
+./gradlew :comate-server:run
+```
+
+3. Setup frontend GUI
+
+```shell
+cd comate-gui
+
+pnpm install
+pnpm dev
+```
+
+### Modules
 
 - `comate-server`: server side which provide REST API
 - `comate-gui`: web GUI
