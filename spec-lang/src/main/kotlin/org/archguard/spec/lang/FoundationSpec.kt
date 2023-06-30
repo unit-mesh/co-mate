@@ -101,11 +101,11 @@ ${declarations.joinToString(separator = "\n").lines().joinToString(separator = "
             naming {
                 class_level {
                     style("CamelCase")
-                    pattern(".*") { name shouldNotBe contains("${'$'}") }
+                    pattern(".*") { name shouldNotBe contains("$") }
                 }
                 function_level {
                     style("CamelCase")
-                    pattern(".*") { name shouldNotBe contains("${'$'}") }
+                    pattern(".*") { name shouldNotBe contains("$") }
                 }
             }
         }
