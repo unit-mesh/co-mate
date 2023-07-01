@@ -2,53 +2,53 @@ package org.archguard.spec.lang
 
 import org.archguard.spec.lang.base.Spec
 
-class CaseFlowSpec : Spec<String> {
-    lateinit var start: Step
-    lateinit var end: Step
-    private val steps = mutableListOf<Step>()
+class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
+    lateinit var start: Activity
+    lateinit var end: Activity
+    private val activities = mutableListOf<Activity>()
 
-    fun step(name: String, init: Step.() -> Unit) {
-        val step = Step(name)
-        step.init()
-        steps.add(step)
+    fun activity(name: String, init: Activity.() -> Unit) {
+        val activity = Activity(name)
+        activity.init()
+        activities.add(activity)
     }
 
     fun build() {
         // Workflow construction logic goes here
     }
 
-    open inner class NamedStep(open val name: String) {
+    open inner class NamedActivity(open val name: String) {
         override fun toString(): String {
             return "NamedStep(name='$name')"
         }
     }
 
-    inner class Step(override val name: String) : NamedStep(name) {
-        var activity: Activity = Activity("")
-        var next: NamedStep? = null
+    inner class Activity(override val name: String) : NamedActivity(name) {
+        var task: Task = Task("")
+        var next: NamedActivity? = null
 
-        fun activity(name: String, init: Activity.() -> Unit) {
-            val activity = Activity(name)
-            activity.init()
-            this.activity = activity
+        fun task(name: String, init: Task.() -> Unit) {
+            val task = Task(name)
+            task.init()
+            this.task = task
         }
 
-        fun next(step: NamedStep) {
+        // optional, default to use the next step
+        fun next(step: NamedActivity) {
             this.next = step
         }
 
         override fun toString(): String {
-            return "Step(name='$name', activity=$activity, next=$next)"
+            return "Step(name='$name', activity=$task, next=$next)"
         }
     }
 
-    inner class Activity(val name: String) {
+    inner class Task(val name: String) {
         var role: String = ""
-        var task: String = ""
-        var action: String = ""
+        var story: List<String> = listOf()
 
         override fun toString(): String {
-            return "Activity(name='$name', role='$role', task='$task', action='$action')"
+            return "Activity(name='$name', role='$role', story='$story')"
         }
     }
 
@@ -57,37 +57,38 @@ class CaseFlowSpec : Spec<String> {
     }
 
     override fun toString(): String {
-        return "CaseFlowSpec(steps=$steps)"
+        return "CaseFlowSpec(steps=$activities)"
     }
 
     companion object {
-        fun defaultSpec(): CaseFlowSpec {
-            return caseflow("MyWorkflow") {
-                step("Step1") {
-                    activity("UserRegistration") {
-                        role = "User"
-                        task = "Register on the website"
-                        action = "Fill out the registration form"
+        fun defaultSpec(): CaseFlowSpec =
+            // 使用如下的 DSL 编写一个 OKR 协作与管理系统 的需求全景。要求： 1. 你返回的内容格式如下：```kotlin
+            caseflow("MovieTicketBooking", defaultRole = "User") {
+                // activity's should consider all user activities
+                activity("AccountManage") {
+                    // task part should include all user tasks under the activity
+                    task("UserRegistration") {
+                        // you should list key steps in the story
+                        story = listOf("Register with email", "Register with phone")
                     }
-                    next(Step("Step2"))
+                    task("UserLogin") {
+                        story += "Login to the website"
+                    }
                 }
-                step("Step2") {
-                    activity("ProfileCreation") {
-                        role = "User"
-                        task = "Create user profile"
-                        action = "Provide personal information"
+                activity("MovieSelection") {}
+                // ...
+                activity("PaymentCancel") {
+                    task("ConfirmCancel") {
+                        role = "Admin" // if some task is role-specific, you can specify it here
+                        //...
                     }
-                    next(Step("Step3"))
                 }
             }
-        }
     }
-
-
 }
 
-fun caseflow(name: String, init: CaseFlowSpec.() -> Unit): CaseFlowSpec {
-    val workflow = CaseFlowSpec()
+fun caseflow(name: String, defaultRole: String = "User", init: CaseFlowSpec.() -> Unit): CaseFlowSpec {
+    val workflow = CaseFlowSpec(name, defaultRole)
     workflow.init()
     workflow.build()
     return workflow
