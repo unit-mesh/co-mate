@@ -7,6 +7,13 @@ import org.archguard.spec.lang.base.Spec
 @Serializable
 data class Scenario(val name: String, val description: String)
 
+class ChannelsDeclaration() {
+    fun send(message: String) {
+
+    }
+}
+
+
 class ComposableSpec : Spec<Scenario> {
     override fun exec(element: Scenario): List<RuleResult> = listOf()
 
@@ -20,8 +27,10 @@ class ComposableSpec : Spec<Scenario> {
         }
     }
 
-    fun channels(function: () -> Unit) {
-
+    fun channels(function: ChannelsDeclaration.() -> Unit): ChannelsDeclaration {
+        val channelsDeclaration = ChannelsDeclaration()
+        channelsDeclaration.function()
+        return channelsDeclaration
     }
 
     fun integrations(function: () -> Unit) {
