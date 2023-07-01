@@ -2,6 +2,37 @@ package org.archguard.spec.lang
 
 import org.archguard.spec.lang.base.Spec
 
+class Step(val description: String)
+class NamedStep(val description: String) {
+    val steps: MutableList<Step> = mutableListOf()
+
+    fun Given(description: String) {
+        steps.add(Step(description))
+    }
+
+    fun And(description: String) {
+        steps.add(Step(description))
+    }
+
+    fun When(description: String) {
+        steps.add(Step(description))
+    }
+
+    fun Then(description: String) {
+        steps.add(Step(description))
+    }
+}
+
+class ScenarioDeclaration(val name: String) {
+    val namedSteps: MutableList<NamedStep> = mutableListOf()
+    fun Scene(scenario: String, function: NamedStep.() -> Unit): NamedStep {
+        val namedStep = NamedStep(scenario)
+        namedStep.function()
+        namedSteps.add(namedStep)
+        return namedStep
+    }
+}
+
 class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
     lateinit var start: Activity
     lateinit var end: Activity
@@ -11,6 +42,12 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
         val activity = Activity(name)
         activity.init()
         activities.add(activity)
+    }
+
+    fun Feature(scene: String, function: ScenarioDeclaration.() -> Unit): ScenarioDeclaration {
+        val scenarioDeclaration = ScenarioDeclaration(scene)
+        scenarioDeclaration.function()
+        return scenarioDeclaration
     }
 
     fun build() {
@@ -31,11 +68,6 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
             val task = Task(name)
             task.init()
             this.task = task
-        }
-
-        // optional, default to use the next step
-        fun next(step: NamedActivity) {
-            this.next = step
         }
 
         override fun toString(): String {
@@ -83,8 +115,21 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
                         //...
                     }
                 }
+
+                Feature("Register with email") {
+                    Scene("Registered email already exists") {
+                        Given("Given an existing registered email \"user@example.com\"")
+                        When("When I fill in the following information on the registration form")
+                        And("I click the register button")
+                        Then(" I should see a message indicating that the password and confirm password do not match")
+                    }
+                }
             }
     }
+}
+
+class Behavior {
+
 }
 
 fun caseflow(name: String, defaultRole: String = "User", init: CaseFlowSpec.() -> Unit): CaseFlowSpec {

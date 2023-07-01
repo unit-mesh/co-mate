@@ -9,5 +9,4 @@ class CaseFlowSpecTest {
         val spec = CaseFlowSpec.defaultSpec()
         assertEquals(CaseFlowSpec.defaultSpec().toString(), spec.toString())
     }
-
 }
