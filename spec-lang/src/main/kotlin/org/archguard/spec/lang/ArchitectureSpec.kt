@@ -2,9 +2,10 @@ package org.archguard.spec.lang
 
 import org.archguard.spec.base.RuleResult
 import org.archguard.spec.lang.architecture.SystemDeclaration
+import org.archguard.spec.lang.base.RuleSpec
 import org.archguard.spec.lang.base.Spec
 
-class ArchitectureSpec : Spec<String> {
+class ArchitectureSpec : RuleSpec<String> {
     override fun default(): Spec<String> {
         return defaultSpec()
     }

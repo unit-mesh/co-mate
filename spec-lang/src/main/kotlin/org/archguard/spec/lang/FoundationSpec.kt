@@ -9,11 +9,12 @@ import org.archguard.spec.lang.foundation.declaration.NamingDeclaration
 import org.archguard.spec.lang.foundation.rule.ProjectNameRule
 import org.archguard.spec.lang.foundation.declaration.LayeredDefine
 import org.archguard.spec.element.FoundationElement
+import org.archguard.spec.lang.base.RuleSpec
 import org.archguard.spec.lang.matcher.shouldBe
 import org.archguard.spec.lang.matcher.shouldNotBe
 
 @SpecDsl
-class FoundationSpec : Spec<FoundationElement> {
+class FoundationSpec : RuleSpec<FoundationElement> {
     private val declarations = mutableListOf<BaseDeclaration<FoundationElement>>()
 
     fun project_name(function: ProjectNameRule.() -> Unit): ProjectNameRule {

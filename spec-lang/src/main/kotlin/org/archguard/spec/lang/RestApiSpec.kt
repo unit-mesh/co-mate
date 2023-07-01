@@ -1,16 +1,17 @@
 package org.archguard.spec.lang
 
+import org.archguard.spec.base.RuleResult
 import org.archguard.spec.base.verifier.FakeRuleVerifier
 import org.archguard.spec.base.verifier.LlmRuleVerifier
-import org.archguard.spec.base.RuleResult
+import org.archguard.spec.element.RestApiElement
+import org.archguard.spec.lang.base.RuleSpec
 import org.archguard.spec.lang.base.Spec
 import org.archguard.spec.lang.restapi.ApiAtomicRule
 import org.archguard.spec.lang.restapi.ApiLlmVerifyRule
 import org.archguard.spec.lang.restapi.rule.*
-import org.archguard.spec.element.RestApiElement
 
 @SpecDsl
-class RestApiSpec : Spec<RestApiElement> {
+class RestApiSpec : RuleSpec<RestApiElement> {
     private var ruleVerifier: LlmRuleVerifier = FakeRuleVerifier()
     private var rules: List<ApiAtomicRule> = listOf()
     private var needUpdateContextRules: List<ApiAtomicRule> = listOf()

@@ -21,7 +21,7 @@ class DomainSpec : Spec<Any> {
         return defaultSpec()
     }
 
-    override fun exec(element: Any): List<RuleResult> {
+    override fun exec(element: Any): List<String> {
         return listOf()
     }
 
