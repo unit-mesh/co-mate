@@ -2,26 +2,37 @@ package org.archguard.spec.lang
 
 import org.archguard.spec.lang.base.Spec
 
-class Bahavior(val description: String) {
-    val namedSteps: MutableList<NamedStep> = mutableListOf()
+class Scene(val description: String) {
+    val steps: MutableList<NamedStep> = mutableListOf()
 
     fun Given(description: String) {
-        namedSteps.add(NamedStep(description))
+        steps.add(NamedStep(description))
     }
 
     fun And(description: String) {
-        namedSteps.add(NamedStep(description))
+        steps.add(NamedStep(description))
     }
 
     fun When(description: String) {
-        namedSteps.add(NamedStep(description))
+        steps.add(NamedStep(description))
     }
 
     fun Then(description: String) {
-        namedSteps.add(NamedStep(description))
+        steps.add(NamedStep(description))
     }
 
     inner class NamedStep(val description: String)
+}
+
+class StoryDeclaration(val name: String) {
+    val scenes: MutableList<Scene> = mutableListOf()
+
+    fun scene(scenario: String, function: Scene.() -> Unit): Scene {
+        val scene = Scene(scenario)
+        scene.function()
+        scenes.add(scene)
+        return scene
+    }
 }
 
 class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
@@ -35,10 +46,10 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
         activities.add(activity)
     }
 
-    fun story(scenario: String, function: Bahavior.() -> Unit): Bahavior {
-        val bahavior = Bahavior(scenario)
-        bahavior.function()
-        return bahavior
+    fun story(storyName: String, function: StoryDeclaration.() -> Unit): StoryDeclaration {
+        val storyDeclaration = StoryDeclaration(storyName)
+        storyDeclaration.function()
+        return storyDeclaration
     }
 
     fun build() {
@@ -55,7 +66,7 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
         var task: Task = Task("")
         var next: NamedActivity? = null
 
-        fun feature(name: String, init: Task.() -> Unit) {
+        fun task(name: String, init: Task.() -> Unit) {
             val task = Task(name)
             task.init()
             this.task = task
@@ -90,28 +101,30 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
                 // activity's should consider all user activities
                 activity("AccountManage") {
                     // task part should include all user tasks under the activity
-                    feature("UserRegistration") {
+                    task("UserRegistration") {
                         // you should list key steps in the story
                         story = listOf("Register with email", "Register with phone")
                     }
-                    feature("UserLogin") {
+                    task("UserLogin") {
                         story += "Login to the website"
                     }
                 }
                 activity("MovieSelection") {}
                 // ...
                 activity("PaymentCancel") {
-                    feature("ConfirmCancel") {
+                    task("ConfirmCancel") {
                         role = "Admin" // if some task is role-specific, you can specify it here
                         //...
                     }
                 }
 
-                story("Registered email already exists") {
-                    Given("Given an existing registered email \"user@example.com\"")
-                    When("When I fill in the following information on the registration form")
-                    And("I click the register button")
-                    Then(" I should see a message indicating that the password and confirm password do not match")
+                story("Register with email") {
+                    scene("Registered email already exists") {
+                        Given("Given an existing registered email \"user@example.com\"")
+                        When("When I fill in the following information on the registration form")
+                        And("I click the register button")
+                        Then(" I should see a message indicating that the password and confirm password do not match")
+                    }
                 }
             }
     }
