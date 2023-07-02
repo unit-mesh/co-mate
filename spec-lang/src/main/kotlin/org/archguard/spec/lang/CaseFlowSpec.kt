@@ -24,16 +24,6 @@ class NamedStep(val description: String) {
     inner class Step(val description: String)
 }
 
-class ScenarioDeclaration(val name: String) {
-    val namedSteps: MutableList<NamedStep> = mutableListOf()
-    fun Scene(scenario: String, function: NamedStep.() -> Unit): NamedStep {
-        val namedStep = NamedStep(scenario)
-        namedStep.function()
-        namedSteps.add(namedStep)
-        return namedStep
-    }
-}
-
 class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
     lateinit var start: Activity
     lateinit var end: Activity
@@ -45,10 +35,10 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
         activities.add(activity)
     }
 
-    fun Feature(scene: String, function: ScenarioDeclaration.() -> Unit): ScenarioDeclaration {
-        val scenarioDeclaration = ScenarioDeclaration(scene)
-        scenarioDeclaration.function()
-        return scenarioDeclaration
+    fun story(scenario: String, function: NamedStep.() -> Unit): NamedStep {
+        val namedStep = NamedStep(scenario)
+        namedStep.function()
+        return namedStep
     }
 
     fun build() {
@@ -65,7 +55,7 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
         var task: Task = Task("")
         var next: NamedActivity? = null
 
-        fun task(name: String, init: Task.() -> Unit) {
+        fun feature(name: String, init: Task.() -> Unit) {
             val task = Task(name)
             task.init()
             this.task = task
@@ -100,30 +90,28 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
                 // activity's should consider all user activities
                 activity("AccountManage") {
                     // task part should include all user tasks under the activity
-                    task("UserRegistration") {
+                    feature("UserRegistration") {
                         // you should list key steps in the story
                         story = listOf("Register with email", "Register with phone")
                     }
-                    task("UserLogin") {
+                    feature("UserLogin") {
                         story += "Login to the website"
                     }
                 }
                 activity("MovieSelection") {}
                 // ...
                 activity("PaymentCancel") {
-                    task("ConfirmCancel") {
+                    feature("ConfirmCancel") {
                         role = "Admin" // if some task is role-specific, you can specify it here
                         //...
                     }
                 }
 
-                Feature("Register with email") {
-                    Scene("Registered email already exists") {
-                        Given("Given an existing registered email \"user@example.com\"")
-                        When("When I fill in the following information on the registration form")
-                        And("I click the register button")
-                        Then(" I should see a message indicating that the password and confirm password do not match")
-                    }
+                story("Registered email already exists") {
+                    Given("Given an existing registered email \"user@example.com\"")
+                    When("When I fill in the following information on the registration form")
+                    And("I click the register button")
+                    Then(" I should see a message indicating that the password and confirm password do not match")
                 }
             }
     }
