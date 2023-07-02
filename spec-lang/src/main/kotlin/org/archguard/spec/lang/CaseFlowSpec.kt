@@ -2,26 +2,26 @@ package org.archguard.spec.lang
 
 import org.archguard.spec.lang.base.Spec
 
-class NamedStep(val description: String) {
-    val steps: MutableList<Step> = mutableListOf()
+class Bahavior(val description: String) {
+    val namedSteps: MutableList<NamedStep> = mutableListOf()
 
     fun Given(description: String) {
-        steps.add(Step(description))
+        namedSteps.add(NamedStep(description))
     }
 
     fun And(description: String) {
-        steps.add(Step(description))
+        namedSteps.add(NamedStep(description))
     }
 
     fun When(description: String) {
-        steps.add(Step(description))
+        namedSteps.add(NamedStep(description))
     }
 
     fun Then(description: String) {
-        steps.add(Step(description))
+        namedSteps.add(NamedStep(description))
     }
 
-    inner class Step(val description: String)
+    inner class NamedStep(val description: String)
 }
 
 class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
@@ -35,10 +35,10 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
         activities.add(activity)
     }
 
-    fun story(scenario: String, function: NamedStep.() -> Unit): NamedStep {
-        val namedStep = NamedStep(scenario)
-        namedStep.function()
-        return namedStep
+    fun story(scenario: String, function: Bahavior.() -> Unit): Bahavior {
+        val bahavior = Bahavior(scenario)
+        bahavior.function()
+        return bahavior
     }
 
     fun build() {
@@ -115,10 +115,6 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
                 }
             }
     }
-}
-
-class Behavior {
-
 }
 
 fun caseflow(name: String, defaultRole: String = "User", init: CaseFlowSpec.() -> Unit): CaseFlowSpec {
