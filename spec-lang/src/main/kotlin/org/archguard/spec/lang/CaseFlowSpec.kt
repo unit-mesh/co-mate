@@ -2,7 +2,6 @@ package org.archguard.spec.lang
 
 import org.archguard.spec.lang.base.Spec
 
-class Step(val description: String)
 class NamedStep(val description: String) {
     val steps: MutableList<Step> = mutableListOf()
 
@@ -21,6 +20,8 @@ class NamedStep(val description: String) {
     fun Then(description: String) {
         steps.add(Step(description))
     }
+
+    inner class Step(val description: String)
 }
 
 class ScenarioDeclaration(val name: String) {
@@ -56,7 +57,7 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
 
     open inner class NamedActivity(open val name: String) {
         override fun toString(): String {
-            return "NamedStep(name='$name')"
+            return "NamedActivity(name='$name')"
         }
     }
 
@@ -71,7 +72,7 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
         }
 
         override fun toString(): String {
-            return "Step(name='$name', activity=$task, next=$next)"
+            return "Activity(name='$name', activity=$task, next=$next)"
         }
     }
 
@@ -80,7 +81,7 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
         var story: List<String> = listOf()
 
         override fun toString(): String {
-            return "Activity(name='$name', role='$role', story='$story')"
+            return "Task(name='$name', role='$role', story='$story')"
         }
     }
 
