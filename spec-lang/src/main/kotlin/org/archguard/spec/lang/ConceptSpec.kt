@@ -66,7 +66,10 @@ class ConceptSpec : Spec<String> {
     companion object {
         fun defaultSpec(): ConceptSpec {
             return concepts {
-                concept("Person") {
+                concept("Human") {
+
+                }
+                concept("Person", "com.biz.domain") {
                     prop("name" to "String")
                     prop("age", "Int")
 
@@ -78,7 +81,7 @@ class ConceptSpec : Spec<String> {
         }
     }
 
-    fun concept(className: String, function: ClassSpec.() -> Unit): ClassSpec {
+    fun concept(className: String, packageName: String = "", function: ClassSpec.() -> Unit): ClassSpec {
         val classSpec = ClassSpec(className)
         classSpec.function()
         return classSpec
