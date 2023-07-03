@@ -88,6 +88,9 @@ class ConceptSpec : Spec<String> {
     }
 }
 
+/**
+ * Concept DSL is a way to describe the concept(object) and their connections of a software system.
+ */
 fun concepts(function: ConceptSpec.() -> Unit): ConceptSpec {
     val conceptSpec = ConceptSpec()
     conceptSpec.function()

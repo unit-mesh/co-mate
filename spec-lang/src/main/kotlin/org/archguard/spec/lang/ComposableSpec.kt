@@ -7,13 +7,6 @@ import org.archguard.spec.lang.base.Spec
 @Serializable
 data class Scenario(val name: String, val description: String)
 
-class ChannelsDeclaration() {
-    fun send(message: String) {
-
-    }
-}
-
-
 class ComposableSpec : Spec<Scenario> {
     override fun exec(element: Scenario): List<RuleResult> = listOf()
 
@@ -33,6 +26,12 @@ class ComposableSpec : Spec<Scenario> {
         return channelsDeclaration
     }
 
+    inner class ChannelsDeclaration() {
+        fun send(message: String) {
+
+        }
+    }
+
     fun integrations(function: () -> Unit) {
 
     }
@@ -50,6 +49,10 @@ class ComposableSpec : Spec<Scenario> {
     }
 }
 
+/**
+ * Composable DSL is an EA (enterprise architecture) specification language with a focus on composable architecture.
+ * It is used to describe the architecture of a software system.
+ */
 fun composable(function: ComposableSpec.() -> Unit): ComposableSpec {
     val spec = ComposableSpec()
     spec.function()
