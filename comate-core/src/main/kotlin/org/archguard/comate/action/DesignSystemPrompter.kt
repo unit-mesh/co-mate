@@ -26,7 +26,7 @@ ${context.extArgs["actionInput"]}
 ###
     
             
-DSL 模板如下:
+DSL 格式如下:
 ```kotlin
 $dsl
 ```

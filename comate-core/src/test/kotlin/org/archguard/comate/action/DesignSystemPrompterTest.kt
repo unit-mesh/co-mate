@@ -15,7 +15,7 @@ class DesignSystemPrompterTest {
         val output = prompter.execute()
         assertEquals(
             output,
-            """You're an Software architecture,根据详细分析如下的需求信息，设计完整的端到端需求用例。Here is requirements: 1. 请按如下的 DSL 格式返回，不做解释。
+            """You're an Architecture,根据详细分析如下的需求信息，设计完整的端到端需求用例。Here is requirements: 1. 请按如下的 DSL 格式返回，不做解释。
 
 需求信息 如下: 
 
@@ -24,7 +24,7 @@ class DesignSystemPrompterTest {
 ###
     
             
-DSL 模板如下:
+DSL 格式如下:
 ```kotlin
 caseflow("MovieTicketBooking", defaultRole = "User") {
     activity("AccountManage") {
