@@ -1,7 +1,6 @@
 package org.archguard.comate.dynamic.functions
 
 import org.archguard.comate.action.DesignSystemPrompter
-import org.archguard.comate.action.FoundationGovernancePrompter
 import org.archguard.comate.command.ComateContext
 
 @ComateFunction

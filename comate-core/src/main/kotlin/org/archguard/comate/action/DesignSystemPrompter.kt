@@ -17,7 +17,20 @@ class DesignSystemPrompter(
 """.trimIndent()
 
     override fun getExtendData(): String {
-        CaseFlowSpec.defaultSpec()
-        return ""
+        val dsl = CaseFlowSpec.defaultSpec().toString()
+        return """
+需求信息 as follow: 
+
+###
+${context.extArgs["actionInput"]}
+###
+    
+            
+Kotlin DSL as follow:
+```kotlin
+$dsl
+```
+            
+        """.trimIndent()
     }
 }

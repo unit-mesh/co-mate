@@ -27,7 +27,7 @@ data class ComateContext(
     /**
      * extra arguments for the prompt, like DSLs
      */
-    val extArgs: Map<String, String> = emptyMap(),
+    var extArgs: MutableMap<String, String> = mutableMapOf(),
     val strategy: Strategy = BasicPromptStrategy(),
     var spec: Spec<out Element>? = null,
     private val ds: List<CodeDataStruct> = emptyList(),

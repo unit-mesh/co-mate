@@ -94,6 +94,8 @@ fun Route.routeForAction() {
             }
 
             comateContext.projectRepo = url
+        } else {
+            comateContext.extArgs["actionInput"] = toolingThought.actionInput
         }
 
         // todo: use frontend connector
