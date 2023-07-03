@@ -9,24 +9,24 @@ class DesignSystemPrompter(
     val context: ComateContext,
     override val strategy: Strategy,
 ) : CodePromptStrategy {
-    override fun getRole(): String = "Senior Software architecture"
-    override fun getInstruction(): String = "根据如下的 DSL，以及对应的需求信息，进行系统设计。"
+    override fun getRole(): String = "Software architecture"
+    override fun getInstruction(): String = "根据详细分析如下的需求信息，设计完整的端到端需求用例。"
     override fun getRequirements(): String = """
-1. 按格式要求的 DSL 返回，不做解决，我们会根据 DSL 进行评估。
+1. 请按如下的 DSL 格式返回，不做解释。
 
 """.trimIndent()
 
     override fun getExtendData(): String {
-        val dsl = CaseFlowSpec.defaultSpec().toString()
+        val dsl = CaseFlowSpec.exampleActivitySpec().toString()
         return """
-需求信息 as follow: 
+需求信息 如下: 
 
 ###
 ${context.extArgs["actionInput"]}
 ###
     
             
-Kotlin DSL as follow:
+DSL 模板如下:
 ```kotlin
 $dsl
 ```

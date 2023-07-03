@@ -108,6 +108,18 @@ class CaseFlowSpec(val name: String, private val defaultActor: String) : Spec<St
     }
 
     companion object {
+        fun exampleActivitySpec() : CaseFlowSpec =
+            caseflow("MovieTicketBooking", defaultRole = "User") {
+                activity("AccountManage") {
+                    task("UserRegistration") {
+                        stories = listOf("Register with email", "Register with phone")
+                    }
+                    task("UserLogin") {
+                        stories += "Login to the website"
+                    }
+                }
+            }
+
         fun defaultSpec(): CaseFlowSpec =
             // 使用如下的 DSL 编写一个 OKR 协作与管理系统 的需求全景。要求： 1. 你返回的内容格式如下：```kotlin
             caseflow("MovieTicketBooking", defaultRole = "User") {
@@ -128,15 +140,6 @@ class CaseFlowSpec(val name: String, private val defaultActor: String) : Spec<St
                     task("ConfirmCancel") {
                         actor = "Admin" // if some task is role-specific, you can specify it here
                         //...
-                    }
-                }
-
-                story("Register with email") {
-                    scene("Registered email already exists") {
-                        Given("Given an existing registered email \"user@example.com\"")
-                        When("When I fill in the following information on the registration form")
-                        And("I click the register button")
-                        Then(" I should see a message indicating that the password and confirm password do not match")
                     }
                 }
             }

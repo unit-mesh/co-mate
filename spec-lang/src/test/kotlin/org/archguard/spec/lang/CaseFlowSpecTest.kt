@@ -24,7 +24,6 @@ class CaseFlowSpecTest {
             }
         }
 
-        println(spec.toString())
         assertEquals(spec.toString(), """
             |caseflow("story") {
             |    story("test") {
