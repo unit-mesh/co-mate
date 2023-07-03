@@ -130,6 +130,9 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
     }
 }
 
+/**
+ * CaseFlow DSL would be used to describe the workflow of a business case, like user journey, business process, etc.
+ */
 fun caseflow(name: String, defaultRole: String = "User", init: CaseFlowSpec.() -> Unit): CaseFlowSpec {
     val workflow = CaseFlowSpec(name, defaultRole)
     workflow.init()

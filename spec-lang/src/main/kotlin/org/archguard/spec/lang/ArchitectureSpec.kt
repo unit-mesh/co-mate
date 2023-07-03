@@ -31,6 +31,9 @@ class ArchitectureSpec : RuleSpec<String> {
     }
 }
 
+/**
+ * Architecture DSL is a useless DSL for architecture specification.
+ */
 fun architecture(function: ArchitectureSpec.() -> Unit): ArchitectureSpec {
     val spec = ArchitectureSpec()
     spec.function()

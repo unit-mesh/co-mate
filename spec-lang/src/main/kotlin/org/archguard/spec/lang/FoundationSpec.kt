@@ -113,6 +113,9 @@ ${declarations.joinToString(separator = "\n").lines().joinToString(separator = "
     }
 }
 
+/**
+ * Foundation DSL provide foundation specification for a software system, like layered architecture, naming convention.
+ */
 fun foundation(init: FoundationSpec.() -> Unit): FoundationSpec {
     val spec = FoundationSpec()
     spec.init()

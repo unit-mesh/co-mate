@@ -42,6 +42,9 @@ class DomainSpec : Spec<Any> {
     }
 }
 
+/**
+ * Domain DSL is a DDD style's concept map.
+ */
 fun domain(init: DomainSpec.() -> Unit): DomainSpec {
     val spec = DomainSpec()
     spec.init()
