@@ -2,7 +2,7 @@ package org.archguard.spec.lang
 
 import org.archguard.spec.lang.base.Spec
 
-class Scene(val description: String) {
+class SceneDeclaration(val description: String) {
     val steps: MutableList<NamedStep> = mutableListOf()
 
     fun Given(description: String) {
@@ -25,25 +25,25 @@ class Scene(val description: String) {
 }
 
 class StoryDeclaration(val name: String) {
-    val scenes: MutableList<Scene> = mutableListOf()
+    val sceneDeclarations: MutableList<SceneDeclaration> = mutableListOf()
 
-    fun scene(scenario: String, function: Scene.() -> Unit): Scene {
-        val scene = Scene(scenario)
-        scene.function()
-        scenes.add(scene)
-        return scene
+    fun scene(scenario: String, function: SceneDeclaration.() -> Unit): SceneDeclaration {
+        val sceneDeclaration = SceneDeclaration(scenario)
+        sceneDeclaration.function()
+        sceneDeclarations.add(sceneDeclaration)
+        return sceneDeclaration
     }
 }
 
-class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
-    lateinit var start: Activity
-    lateinit var end: Activity
-    private val activities = mutableListOf<Activity>()
+class CaseFlowSpec(val name: String, val defaultRole: String) : Spec<String> {
+    lateinit var start: ActivityDeclaration
+    lateinit var end: ActivityDeclaration
+    private val activities = mutableListOf<ActivityDeclaration>()
 
-    fun activity(name: String, init: Activity.() -> Unit) {
-        val activity = Activity(name)
-        activity.init()
-        activities.add(activity)
+    fun activity(name: String, init: ActivityDeclaration.() -> Unit) {
+        val activityDeclaration = ActivityDeclaration(name)
+        activityDeclaration.init()
+        activities.add(activityDeclaration)
     }
 
     fun story(storyName: String, function: StoryDeclaration.() -> Unit): StoryDeclaration {
@@ -62,7 +62,7 @@ class CaseFlowSpec(name: String, defaultRole: String) : Spec<String> {
         }
     }
 
-    inner class Activity(override val name: String) : NamedActivity(name) {
+    inner class ActivityDeclaration(override val name: String) : NamedActivity(name) {
         var task: Task = Task("")
         var next: NamedActivity? = null
 

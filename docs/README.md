@@ -159,4 +159,37 @@ Todo: 调研不同类型的桌面应用
 - Refactor Command / Replacer
 - Analysis Command / Analyzer
 
+## CaseFlow
 
+```kotlin
+caseflow("电影票预订", defaultRole = "用户") {
+    // activity's should consider all user activities
+    activity("账户管理") {
+        // task part should include all user tasks under the activity
+        task("用户注册") {
+            // you should list key steps in the story
+            story = listOf("通过电子邮件注册", "通过手机号注册")
+        }
+        task("用户登录") {
+            story += "登录网站"
+        }
+    }
+    activity("电影选择") {}
+    // ...
+    activity("取消支付") {
+        task("确认取消") {
+            role = "管理员" // if some task is role-specific, you can specify it here
+            //...
+        }
+    }
+
+    story("通过电子邮件注册") {
+        scene("已存在注册邮箱") {
+            Given("假设已存在注册邮箱 \"user@example.com\"")
+            When("当我在注册表单上填写以下信息")
+            And("我点击注册按钮")
+            Then("我应该看到一个提示消息，指示密码和确认密码不匹配")
+        }
+    }
+}
+```
