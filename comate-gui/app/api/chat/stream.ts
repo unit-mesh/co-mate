@@ -16,7 +16,7 @@ export async function stream(apiKey: string, messages: Message[], isStream: bool
 
     const res = await openai.createChatCompletion({
         model: 'gpt-3.5-turbo',
-        messages,
+        messages: messages as any,
         temperature: 0.7,
         stream: isStream
     })
