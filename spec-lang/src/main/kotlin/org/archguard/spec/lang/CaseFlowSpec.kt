@@ -1,39 +1,7 @@
 package org.archguard.spec.lang
 
 import org.archguard.spec.lang.base.Spec
-
-class SceneDeclaration(val description: String) {
-    val steps: MutableList<NamedStep> = mutableListOf()
-
-    fun Given(description: String) {
-        steps.add(NamedStep(description))
-    }
-
-    fun And(description: String) {
-        steps.add(NamedStep(description))
-    }
-
-    fun When(description: String) {
-        steps.add(NamedStep(description))
-    }
-
-    fun Then(description: String) {
-        steps.add(NamedStep(description))
-    }
-
-    inner class NamedStep(val description: String)
-}
-
-class StoryDeclaration(val name: String) {
-    val sceneDeclarations: MutableList<SceneDeclaration> = mutableListOf()
-
-    fun scene(scenario: String, function: SceneDeclaration.() -> Unit): SceneDeclaration {
-        val sceneDeclaration = SceneDeclaration(scenario)
-        sceneDeclaration.function()
-        sceneDeclarations.add(sceneDeclaration)
-        return sceneDeclaration
-    }
-}
+import org.archguard.spec.lang.caseflow.declaration.StoryDeclaration
 
 class CaseFlowSpec(val name: String, val defaultRole: String) : Spec<String> {
     lateinit var start: ActivityDeclaration
