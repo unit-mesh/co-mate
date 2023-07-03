@@ -3,7 +3,7 @@ package org.archguard.spec.lang
 import org.archguard.spec.lang.base.Spec
 import org.archguard.spec.lang.caseflow.declaration.StoryDeclaration
 
-class CaseFlowSpec(val name: String, val defaultRole: String) : Spec<String> {
+class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
     lateinit var start: ActivityDeclaration
     lateinit var end: ActivityDeclaration
     private val activities = mutableListOf<ActivityDeclaration>()
@@ -46,11 +46,11 @@ class CaseFlowSpec(val name: String, val defaultRole: String) : Spec<String> {
     }
 
     inner class Task(val name: String) {
-        var role: String = ""
+        var actor: String = ""
         var story: List<String> = listOf()
 
         override fun toString(): String {
-            return "Task(name='$name', role='$role', story='$story')"
+            return "Task(name='$name', actor='$actor', story='$story')"
         }
     }
 
@@ -81,7 +81,7 @@ class CaseFlowSpec(val name: String, val defaultRole: String) : Spec<String> {
                 // ...
                 activity("PaymentCancel") {
                     task("ConfirmCancel") {
-                        role = "Admin" // if some task is role-specific, you can specify it here
+                        actor = "Admin" // if some task is role-specific, you can specify it here
                         //...
                     }
                 }
