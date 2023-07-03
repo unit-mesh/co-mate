@@ -50,8 +50,8 @@ class CaseFlowSpec(val name: String, private val defaultActor: String) : Spec<St
 
         override fun toString(): String {
             return """activity("$name") {
-                |    ${taskDeclarations.joinToString("\n    ")}
-                |}
+                |    ${taskDeclarations.joinToString("\n    ") { "    ${it.toString().replace("\n", "\n    ")}" }}
+                |    }
             """.trimMargin()
         }
     }
@@ -65,7 +65,18 @@ class CaseFlowSpec(val name: String, private val defaultActor: String) : Spec<St
         }
 
         override fun toString(): String {
-            return "TaskDeclaration(name='$name', actor='$actor', stories=$stories)"
+            val sb = StringBuilder()
+            sb.append("task(\"$name\") {\n")
+
+            if (actor.isNotEmpty()) {
+                sb.append("        actor = \"$actor\"\n")
+            }
+            if (stories.isNotEmpty()) {
+                sb.append("        stories = ${stories.joinToString("\",\"", "listOf(\"", "\")")}\n")
+            }
+
+            sb.append("    }")
+            return sb.toString()
         }
     }
 

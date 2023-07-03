@@ -12,7 +12,7 @@ class CaseFlowSpecTest {
     }
 
     @Test
-    fun should_convert_to_string() {
+    fun should_convert_story_to_string() {
         val spec = caseflow("story") {
             story("test") {
                 scene("test") {
@@ -33,6 +33,45 @@ class CaseFlowSpecTest {
             |            And("and something")
             |            When("when test")
             |            Then("then other thing")
+            |        }
+            |    }
+            |}
+        """.trimMargin())
+    }
+
+    @Test
+    fun should_convert_activity_and_story_to_string() {
+        val spec = caseflow("story") {
+            activity("test") {
+                task("test") {
+                    actor = "test"
+                    stories = listOf("test")
+                }
+            }
+            story("test2") {
+                scene("test2") {
+                    Given("given test2")
+                    And("and something2")
+                    When("when test2")
+                    Then("then other thing2")
+                }
+            }
+        }
+
+        assertEquals(spec.toString(), """
+            |caseflow("story") {
+            |    activity("test") {
+            |        task("test") {
+            |            actor = "test"
+            |            stories = listOf("test")
+            |        }
+            |    }
+            |    story("test2") {
+            |        scene("test2") {
+            |            Given("given test2")
+            |            And("and something2")
+            |            When("when test2")
+            |            Then("then other thing2")
             |        }
             |    }
             |}
