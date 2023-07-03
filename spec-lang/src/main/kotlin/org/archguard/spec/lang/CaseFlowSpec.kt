@@ -7,7 +7,7 @@ import org.archguard.spec.lang.caseflow.model.CaseFlow
 import org.archguard.spec.lang.caseflow.model.Story
 import org.archguard.spec.lang.caseflow.model.Task
 
-class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
+class CaseFlowSpec(val name: String, private val defaultActor: String) : Spec<String> {
     lateinit var start: ActivityDeclaration
     lateinit var end: ActivityDeclaration
     private val activitiesDeclarations = mutableListOf<ActivityDeclaration>()
@@ -36,7 +36,7 @@ class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
 
     inner class ActivityDeclaration(override val name: String) : NamedActivity(name) {
         var next: NamedActivity? = null
-        val taskDeclarations = mutableListOf<TaskDeclaration>()
+        private val taskDeclarations = mutableListOf<TaskDeclaration>()
 
         fun task(name: String, init: TaskDeclaration.() -> Unit) {
             val taskDeclaration = TaskDeclaration(name)
@@ -78,11 +78,22 @@ class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
     }
 
     override fun toString(): String {
-        return """caseflow("$name", defaultActor = "$defaultActor") {
-            |    ${activitiesDeclarations.joinToString("\n    ")}
-            |    ${storyDeclarations.joinToString("\n    ")}
-            |}
-        """.trimMargin()
+        val sb = StringBuilder()
+        if (defaultActor.isNotEmpty()) {
+            sb.append("caseflow(\"$name\", defaultRole = \"$defaultActor\") {\n")
+        } else {
+            sb.append("caseflow(\"$name\") {\n")
+        }
+
+        if (activitiesDeclarations.isNotEmpty()) {
+            sb.append("    ${activitiesDeclarations.joinToString("\n    ")}\n")
+        }
+        if (storyDeclarations.isNotEmpty()) {
+            sb.append("    ${storyDeclarations.joinToString("\n    ")}\n")
+        }
+        sb.append("}")
+
+        return sb.toString()
     }
 
     companion object {
@@ -124,7 +135,7 @@ class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
 /**
  * CaseFlow DSL would be used to describe the workflow of a business case, like user journey, business process, etc.
  */
-fun caseflow(name: String, defaultRole: String = "User", init: CaseFlowSpec.() -> Unit): CaseFlowSpec {
+fun caseflow(name: String, defaultRole: String = "", init: CaseFlowSpec.() -> Unit): CaseFlowSpec {
     val workflow = CaseFlowSpec(name, defaultRole)
     workflow.init()
     return workflow

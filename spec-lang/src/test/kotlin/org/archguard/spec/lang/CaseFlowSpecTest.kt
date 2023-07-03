@@ -25,6 +25,18 @@ class CaseFlowSpecTest {
         }
 
         println(spec.toString())
+        assertEquals(spec.toString(), """
+            |caseflow("story") {
+            |    story("test") {
+            |        scene("test") {
+            |            Given("given test")
+            |            And("and something")
+            |            When("when test")
+            |            Then("then other thing")
+            |        }
+            |    }
+            |}
+        """.trimMargin())
     }
 
     @Test

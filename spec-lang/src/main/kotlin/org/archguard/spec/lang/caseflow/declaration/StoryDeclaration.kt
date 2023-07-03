@@ -3,7 +3,7 @@ package org.archguard.spec.lang.caseflow.declaration
 import org.archguard.spec.lang.caseflow.model.Story
 
 class StoryDeclaration(val name: String) {
-    val sceneDeclarations: MutableList<SceneDeclaration> = mutableListOf()
+    private val sceneDeclarations: MutableList<SceneDeclaration> = mutableListOf()
 
     fun scene(scenario: String, function: SceneDeclaration.() -> Unit): SceneDeclaration {
         val sceneDeclaration = SceneDeclaration(scenario)
@@ -20,7 +20,7 @@ class StoryDeclaration(val name: String) {
         return """
             |story("$name") {
             |${sceneDeclarations.joinToString("\n") { "    ${it.toString().replace("\n", "\n    ")}" }}
-            |}
+            |    }
         """.trimMargin()
     }
 }

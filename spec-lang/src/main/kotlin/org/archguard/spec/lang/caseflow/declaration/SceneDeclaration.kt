@@ -2,7 +2,7 @@ package org.archguard.spec.lang.caseflow.declaration
 
 import org.archguard.spec.lang.caseflow.model.Scene
 
-enum class StepType(value: String) {
+enum class StepType(val value: String) {
     GIVEN("Given"),
     WHEN("When"),
     THEN("Then"),
@@ -34,9 +34,9 @@ class SceneDeclaration(val description: String) {
 
     override fun toString(): String {
         return """
-            |scene("$description") {
-            |${steps.joinToString("\n") { "    ${it.type.name}(\"${it.description}\")" }}
-            |}
+            |    scene("$description") {
+            |${steps.joinToString("\n") { "        ${it.type.value}(\"${it.description}\")".replace("\n", "\n") }}
+            |    }
         """.trimMargin()
     }
 
