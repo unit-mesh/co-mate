@@ -84,18 +84,16 @@ fun Route.routeForAction() {
     post("/api/action/tooling") {
         val toolingThought = call.receive<ToolingThought>()
 
+        comateContext.extArgs["actionInput"] = toolingThought.actionInput
         if (comateContext.projectRepo == "") {
-            val url: String
+            var url = ""
             try {
                 url = parseUrlFromRequest(toolingThought.actionInput)
-            } catch (e: Exception) {
-                call.respond(ActionResult("error", "invalid url"))
-                return@post
+            } catch (_: Exception) {
+
             }
 
             comateContext.projectRepo = url
-        } else {
-            comateContext.extArgs["actionInput"] = toolingThought.actionInput
         }
 
         // todo: use frontend connector
@@ -107,6 +105,14 @@ fun Route.routeForAction() {
         if (action == null) {
             call.response.status(HttpStatusCode.BadRequest)
             return@post
+        }
+
+        // find a better way to do this
+        if (action != ComateToolingAction.DESIGN_SYSTEM_WITH_REQUIREMENT) {
+            if (comateContext.projectRepo == "") {
+                call.response.status(HttpStatusCode.BadRequest)
+                return@post
+            }
         }
 
         // todo: should be load from somewhere, like Database
