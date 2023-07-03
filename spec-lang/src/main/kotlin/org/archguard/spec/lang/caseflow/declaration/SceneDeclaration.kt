@@ -2,28 +2,43 @@ package org.archguard.spec.lang.caseflow.declaration
 
 import org.archguard.spec.lang.caseflow.model.Scene
 
+enum class StepType(value: String) {
+    GIVEN("Given"),
+    WHEN("When"),
+    THEN("Then"),
+    AND("And");
+}
+
 class SceneDeclaration(val description: String) {
     val steps: MutableList<NamedStep> = mutableListOf()
 
     fun Given(description: String) {
-        steps.add(NamedStep(description))
+        steps.add(NamedStep(StepType.GIVEN, description))
     }
 
     fun And(description: String) {
-        steps.add(NamedStep(description))
+        steps.add(NamedStep(StepType.AND, description))
     }
 
     fun When(description: String) {
-        steps.add(NamedStep(description))
+        steps.add(NamedStep(StepType.WHEN, description))
     }
 
     fun Then(description: String) {
-        steps.add(NamedStep(description))
+        steps.add(NamedStep(StepType.THEN, description))
     }
 
     fun toModel(): Scene {
         return Scene(description, steps.map { it.description })
     }
 
-    inner class NamedStep(val description: String)
+    override fun toString(): String {
+        return """
+            |scene("$description") {
+            |${steps.joinToString("\n") { "    ${it.type.name}(\"${it.description}\")" }}
+            |}
+        """.trimMargin()
+    }
+
+    inner class NamedStep(val type: StepType, val description: String)
 }

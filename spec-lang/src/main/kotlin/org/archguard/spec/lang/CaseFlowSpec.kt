@@ -10,19 +10,21 @@ import org.archguard.spec.lang.caseflow.model.Task
 class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
     lateinit var start: ActivityDeclaration
     lateinit var end: ActivityDeclaration
-    private val activities = mutableListOf<ActivityDeclaration>()
+    private val activitiesDeclarations = mutableListOf<ActivityDeclaration>()
+    private val storyDeclarations = mutableListOf<StoryDeclaration>()
     private val stories = mutableListOf<Story>()
 
     fun activity(name: String, init: ActivityDeclaration.() -> Unit) {
         val activityDeclaration = ActivityDeclaration(name)
         activityDeclaration.init()
-        activities.add(activityDeclaration)
+        activitiesDeclarations.add(activityDeclaration)
     }
 
     fun story(storyName: String, function: StoryDeclaration.() -> Unit): StoryDeclaration {
         val storyDeclaration = StoryDeclaration(storyName)
         storyDeclaration.function()
         stories.add(storyDeclaration.toModel())
+        storyDeclarations.add(storyDeclaration)
         return storyDeclaration
     }
 
@@ -45,6 +47,13 @@ class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
         fun toModel(): Activity {
             return Activity(name, taskDeclarations.map { it.toModel() })
         }
+
+        override fun toString(): String {
+            return """activity("$name") {
+                |    ${taskDeclarations.joinToString("\n    ")}
+                |}
+            """.trimMargin()
+        }
     }
 
     inner class TaskDeclaration(val name: String) {
@@ -61,7 +70,7 @@ class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
     }
 
     override fun exec(element: String): List<CaseFlow> {
-        return listOf(CaseFlow(name, defaultActor, activities.map { it.toModel() }, stories))
+        return listOf(CaseFlow(name, defaultActor, activitiesDeclarations.map { it.toModel() }, stories))
     }
 
     override fun default(): Spec<String> {
@@ -69,7 +78,11 @@ class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
     }
 
     override fun toString(): String {
-        return "CaseFlowSpec(steps=$activities)"
+        return """caseflow("$name", defaultActor = "$defaultActor") {
+            |    ${activitiesDeclarations.joinToString("\n    ")}
+            |    ${storyDeclarations.joinToString("\n    ")}
+            |}
+        """.trimMargin()
     }
 
     companion object {

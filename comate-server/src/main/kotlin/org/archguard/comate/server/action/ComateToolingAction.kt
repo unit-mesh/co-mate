@@ -20,6 +20,11 @@ enum class ComateToolingAction(val action: String) {
             return FoundationSpecGovernanceFunction(comateContext).execute()
         }
     },
+    DESIGN_SYSTEM_WITH_REQUIREMENT(action = "design_system_with_requirement") {
+        override fun execute(comateContext: ComateContext): FunctionResult.Success<String> {
+            return DesignSystemWithRequirementFunction(comateContext).execute()
+        }
+    },
     ;
 
     abstract fun execute(comateContext: ComateContext): FunctionResult.Success<Any>

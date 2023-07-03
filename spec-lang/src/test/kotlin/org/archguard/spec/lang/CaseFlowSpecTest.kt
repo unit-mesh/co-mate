@@ -12,6 +12,22 @@ class CaseFlowSpecTest {
     }
 
     @Test
+    fun should_convert_to_string() {
+        val spec = caseflow("story") {
+            story("test") {
+                scene("test") {
+                    Given("given test")
+                    And("and something")
+                    When("when test")
+                    Then("then other thing")
+                }
+            }
+        }
+
+        println(spec.toString())
+    }
+
+    @Test
     fun should_success_convert_dsl_to_models() {
         val spec = caseflow("story") {
             story("test") {

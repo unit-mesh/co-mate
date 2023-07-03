@@ -15,4 +15,12 @@ class StoryDeclaration(val name: String) {
     fun toModel(): Story {
         return Story(name, sceneDeclarations.map { it.toModel() })
     }
+
+    override fun toString(): String {
+        return """
+            |story("$name") {
+            |${sceneDeclarations.joinToString("\n") { "    ${it.toString().replace("\n", "\n    ")}" }}
+            |}
+        """.trimMargin()
+    }
 }
