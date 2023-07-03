@@ -2,11 +2,16 @@ package org.archguard.spec.lang
 
 import org.archguard.spec.lang.base.Spec
 import org.archguard.spec.lang.caseflow.declaration.StoryDeclaration
+import org.archguard.spec.lang.caseflow.model.Activity
+import org.archguard.spec.lang.caseflow.model.CaseFlow
+import org.archguard.spec.lang.caseflow.model.Story
+import org.archguard.spec.lang.caseflow.model.Task
 
 class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
     lateinit var start: ActivityDeclaration
     lateinit var end: ActivityDeclaration
     private val activities = mutableListOf<ActivityDeclaration>()
+    private val stories = mutableListOf<Story>()
 
     fun activity(name: String, init: ActivityDeclaration.() -> Unit) {
         val activityDeclaration = ActivityDeclaration(name)
@@ -17,11 +22,8 @@ class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
     fun story(storyName: String, function: StoryDeclaration.() -> Unit): StoryDeclaration {
         val storyDeclaration = StoryDeclaration(storyName)
         storyDeclaration.function()
+        stories.add(storyDeclaration.toModel())
         return storyDeclaration
-    }
-
-    fun build() {
-        // Workflow construction logic goes here
     }
 
     open inner class NamedActivity(open val name: String) {
@@ -31,27 +33,35 @@ class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
     }
 
     inner class ActivityDeclaration(override val name: String) : NamedActivity(name) {
-        var task: Task = Task("")
         var next: NamedActivity? = null
+        val taskDeclarations = mutableListOf<TaskDeclaration>()
 
-        fun task(name: String, init: Task.() -> Unit) {
-            val task = Task(name)
-            task.init()
-            this.task = task
+        fun task(name: String, init: TaskDeclaration.() -> Unit) {
+            val taskDeclaration = TaskDeclaration(name)
+            taskDeclaration.init()
+            taskDeclarations.add(taskDeclaration)
         }
 
-        override fun toString(): String {
-            return "Activity(name='$name', activity=$task, next=$next)"
+        fun toModel(): Activity {
+            return Activity(name, taskDeclarations.map { it.toModel() })
         }
     }
 
-    inner class Task(val name: String) {
+    inner class TaskDeclaration(val name: String) {
         var actor: String = ""
-        var story: List<String> = listOf()
+        var stories: List<String> = listOf()
+
+        fun toModel(): Task {
+            return Task(name, actor, stories)
+        }
 
         override fun toString(): String {
-            return "Task(name='$name', actor='$actor', story='$story')"
+            return "TaskDeclaration(name='$name', actor='$actor', stories=$stories)"
         }
+    }
+
+    override fun exec(element: String): List<CaseFlow> {
+        return listOf(CaseFlow(name, defaultActor, activities.map { it.toModel() }, stories))
     }
 
     override fun default(): Spec<String> {
@@ -71,10 +81,10 @@ class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
                     // task part should include all user tasks under the activity
                     task("UserRegistration") {
                         // you should list key steps in the story
-                        story = listOf("Register with email", "Register with phone")
+                        stories = listOf("Register with email", "Register with phone")
                     }
                     task("UserLogin") {
-                        story += "Login to the website"
+                        stories += "Login to the website"
                     }
                 }
                 activity("MovieSelection") {}
@@ -104,6 +114,5 @@ class CaseFlowSpec(val name: String, val defaultActor: String) : Spec<String> {
 fun caseflow(name: String, defaultRole: String = "User", init: CaseFlowSpec.() -> Unit): CaseFlowSpec {
     val workflow = CaseFlowSpec(name, defaultRole)
     workflow.init()
-    workflow.build()
     return workflow
 }

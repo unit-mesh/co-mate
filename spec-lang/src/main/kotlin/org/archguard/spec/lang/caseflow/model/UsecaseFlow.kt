@@ -20,7 +20,7 @@ data class Activity(
 data class Task(
     val name: String,
     var actor: String? = null,
-    var story: List<String> = listOf()
+    var storyNames: List<String> = listOf()
 )
 
 @Serializable

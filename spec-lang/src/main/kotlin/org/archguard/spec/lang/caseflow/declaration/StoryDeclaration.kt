@@ -1,5 +1,7 @@
 package org.archguard.spec.lang.caseflow.declaration
 
+import org.archguard.spec.lang.caseflow.model.Story
+
 class StoryDeclaration(val name: String) {
     val sceneDeclarations: MutableList<SceneDeclaration> = mutableListOf()
 
@@ -8,5 +10,9 @@ class StoryDeclaration(val name: String) {
         sceneDeclaration.function()
         sceneDeclarations.add(sceneDeclaration)
         return sceneDeclaration
+    }
+
+    fun toModel(): Story {
+        return Story(name, sceneDeclarations.map { it.toModel() })
     }
 }
