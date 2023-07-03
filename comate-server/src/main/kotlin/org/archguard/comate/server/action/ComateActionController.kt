@@ -64,7 +64,10 @@ import org.archguard.spec.lang.domain.*
 import org.archguard.spec.lang.foundation.*
 import org.archguard.spec.lang.matcher.*
 import org.archguard.spec.lang.restapi.*
-import org.archguard.spec.lang.architecture.*"""
+import org.archguard.spec.lang.architecture.*
+import org.archguard.spec.lang.caseflow.*
+"""
+
 
 // we still need time to thinking about: should we use magic string here?
 // like: %comate
