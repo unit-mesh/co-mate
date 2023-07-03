@@ -10,7 +10,7 @@ import org.archguard.comate.server.prompt.dto.PromptToolingReq
 import org.archguard.comate.server.prompt.dto.PromptToolingRes
 import org.archguard.comate.server.prompt.model.BaseTool
 
-fun Route.routeByPrompt() {
+fun Route.routeForPrompt() {
     val fakeFactory = DynamicContextFactory(fakeComateContext())
     val tools: List<BaseTool> = fakeFactory.tools().map {
         BaseTool(it.key, it.value)

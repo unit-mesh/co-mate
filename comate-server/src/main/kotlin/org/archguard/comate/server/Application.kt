@@ -9,7 +9,8 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
 import org.archguard.comate.server.action.routeForAction
-import org.archguard.comate.server.prompt.routeByPrompt
+import org.archguard.comate.server.lang.routeForLang
+import org.archguard.comate.server.prompt.routeForPrompt
 
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -30,7 +31,8 @@ fun Application.module() {
         get("/") {
             call.respondText("Hello, world!")
         }
-        routeByPrompt()
+        routeForPrompt()
         routeForAction()
+        routeForLang()
     }
 }
