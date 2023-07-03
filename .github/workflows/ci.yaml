@@ -11,6 +11,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6.0.2
+
+      - name: build
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096
+        run: |
+          cd comate-gui
+          pnpm install
+          pnpm build
+
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
