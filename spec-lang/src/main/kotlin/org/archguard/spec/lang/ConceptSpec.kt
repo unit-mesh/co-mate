@@ -29,7 +29,16 @@ data class Behavior(val action: String, val description: String)
 class ConceptDeclaration(private val className: String, private val packageName: String) {
     private val properties = mutableListOf<Property>()
     private val methods = mutableListOf<Method>()
-    private val behaviors = mutableListOf<Behavior>()
+    private val innerBehaviors = mutableListOf<Behavior>()
+
+    /**
+     * Define a list of [Behavior], for example:
+     *
+     * ```kotlin
+     * behaviors = listOf("View Menu", "Place Order", "Pay", "View Order Status", "View Order History")
+     * ```
+     */
+    var behaviors: List<String> = emptyList()
 
     fun prop(name: String, type: String) {
         properties.add(Property(name, type))
@@ -50,17 +59,22 @@ class ConceptDeclaration(private val className: String, private val packageName:
     }
 
     /**
-     * same to [ConceptDeclaration.usecase]
+     * behavior is a synonym of usecase, same to [ConceptDeclaration.usecase]
+     * can define with description or empty
+     * ```kotlin
+     * behavior("Place Order", "Place an order for a coffee")
+     * behavior("Place Order")
+     * ```
      */
-    fun behavior(action: String, description: String) {
-        behaviors.add(Behavior(action, description))
+    fun behavior(action: String, description: String = "") {
+        innerBehaviors.add(Behavior(action, description))
     }
 
     /**
      * same to [ConceptDeclaration.behavior]
      */
     fun usecase(action: String, description: String) {
-        behaviors.add(Behavior(action, description))
+        innerBehaviors.add(Behavior(action, description))
     }
 
     inner class MethodBuilder(private val name: String, private val returnType: String) {
@@ -88,8 +102,12 @@ class ConceptSpec : Spec<String> {
     companion object {
         fun defaultSpec(): ConceptSpec {
             return concepts {
-                concept("Human") {
-                    behavior("action", "action description")
+                concept("Customer") {
+                    behavior("Place Order", "Place an order for a coffee")
+                    behaviors = listOf("View Menu", "Place Order", "Pay", "View Order Status", "View Order History")
+                }
+                concept("Barista") {
+                    behavior("Make Coffee")
                 }
 
                 concept("Person", "com.biz.domain") {
@@ -107,7 +125,7 @@ class ConceptSpec : Spec<String> {
     /**
      * Concept
      */
-    fun concept(className: String, packageName: String = "", function: ConceptDeclaration.() -> Unit, ): ConceptDeclaration {
+    fun concept(className: String, packageName: String = "", function: ConceptDeclaration.() -> Unit): ConceptDeclaration {
         val conceptDeclaration = ConceptDeclaration(className, packageName)
         conceptDeclaration.function()
         return conceptDeclaration
