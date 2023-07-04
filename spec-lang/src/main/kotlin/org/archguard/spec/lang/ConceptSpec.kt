@@ -26,9 +26,10 @@ data class Behavior(val action: String, val description: String)
 /**
  * Concept is a class abstraction for a concept, will be used to generate code.
  */
-class ConceptDeclaration(private val className: String, private val packageName: String) {
+class ConceptDeclaration(private val className: String, private val packageName: String = "") {
     @Deprecated("use behavior instead")
     private val properties = mutableListOf<Property>()
+
     @Deprecated("use behavior instead")
     private val methods = mutableListOf<Method>()
     private val innerBehaviors = mutableListOf<Behavior>()
@@ -111,6 +112,8 @@ class ConceptDeclaration(private val className: String, private val packageName:
     }
 }
 
+typealias CodeBlock = Any
+
 class ConceptSpec : Spec<String> {
     override fun default(): Spec<String> {
         return defaultSpec()
@@ -123,30 +126,72 @@ class ConceptSpec : Spec<String> {
     companion object {
         fun defaultSpec(): ConceptSpec {
             return concepts {
-                concept("Customer") {
+                val customer = Concept("Customer") {
                     behavior("Place Order", "Place an order for a coffee")
                     behaviors = listOf("View Menu", "Place Order", "Pay", "View Order Status", "View Order History")
                 }
-                concept("Barista") {
+
+                val barista = Concept("Barista") {
                     behavior("Make Coffee")
                 }
 
-                concept("Person", "com.biz.domain") {
+                val cart = Concept("cart")
 
+                relations {
+                    customer["Place Order"] perform barista
+                    customer["View Menu"] perform barista
+                    customer["View Order History"] perform barista
                 }
             }
         }
     }
 
+    fun relations(functions: CodeBlock.() -> Unit) = functions()
+
     /**
      * Concept
      */
-    fun concept(className: String, packageName: String = "", function: ConceptDeclaration.() -> Unit): ConceptDeclaration {
-        val conceptDeclaration = ConceptDeclaration(className, packageName)
+    fun concept(clazz: String, pkgName: String = "", function: ConceptDeclaration.() -> Unit): ConceptDeclaration {
+        val conceptDeclaration = ConceptDeclaration(clazz, pkgName)
         conceptDeclaration.function()
         return conceptDeclaration
     }
+
+    class Concept(val conceptName: String, val function: ConceptDeclaration.() -> Unit = {}) {
+        init {
+            val concept = ConceptDeclaration(conceptName)
+            concept.function()
+            println(concept)
+        }
+
+        val source: MutableMap<String, String> = mutableMapOf()
+
+        operator fun get(actionName: String): ConceptAction {
+            return ConceptAction(this, actionName)
+        }
+
+        override fun toString() = conceptName
+
+        fun recordingRelation(behavior: String, target: Concept) {
+            println("""$behavior, ${target.conceptName}""")
+        }
+    }
+
+    class ConceptAction(val concept: Concept, val actionName: String) {
+        infix fun perform(target: Concept) {
+            concept.recordingRelation(actionName, target)
+        }
+
+        override fun toString(): String {
+            return """${concept.conceptName}."$actionName""""
+        }
+
+        infix fun `--`(target: Concept) {
+            concept.recordingRelation(actionName, target)
+        }
+    }
 }
+
 
 /**
  * Concept DSL is a way to describe the concept(object) and their connections of a software system.
