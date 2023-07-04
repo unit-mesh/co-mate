@@ -20,9 +20,16 @@ data class Method(val name: String, val returnType: String, val parameters: List
 @Serializable
 data class Parameter(val name: String, val type: String)
 
-class ClassSpec(private val className: String, private val packageName: String) {
+@Serializable
+data class Behavior(val action: String, val description: String)
+
+/**
+ * Concept is a class abstraction for a concept, will be used to generate code.
+ */
+class ConceptDeclaration(private val className: String, private val packageName: String) {
     private val properties = mutableListOf<Property>()
     private val methods = mutableListOf<Method>()
+    private val behaviors = mutableListOf<Behavior>()
 
     fun prop(name: String, type: String) {
         properties.add(Property(name, type))
@@ -40,6 +47,20 @@ class ClassSpec(private val className: String, private val packageName: String) 
 
     fun prop(name: Pair<String, String>) {
         properties.add(Property(name.first, name.second))
+    }
+
+    /**
+     * same to [ConceptDeclaration.usecase]
+     */
+    fun behavior(action: String, description: String) {
+        behaviors.add(Behavior(action, description))
+    }
+
+    /**
+     * same to [ConceptDeclaration.behavior]
+     */
+    fun usecase(action: String, description: String) {
+        behaviors.add(Behavior(action, description))
     }
 
     inner class MethodBuilder(private val name: String, private val returnType: String) {
@@ -68,8 +89,9 @@ class ConceptSpec : Spec<String> {
         fun defaultSpec(): ConceptSpec {
             return concepts {
                 concept("Human") {
-
+                    behavior("action", "action description")
                 }
+
                 concept("Person", "com.biz.domain") {
                     prop("name" to "String")
                     prop("age", "Int")
@@ -82,10 +104,13 @@ class ConceptSpec : Spec<String> {
         }
     }
 
-    fun concept(className: String, packageName: String = "", function: ClassSpec.() -> Unit): ClassSpec {
-        val classSpec = ClassSpec(className, packageName)
-        classSpec.function()
-        return classSpec
+    /**
+     * Concept
+     */
+    fun concept(className: String, packageName: String = "", function: ConceptDeclaration.() -> Unit, ): ConceptDeclaration {
+        val conceptDeclaration = ConceptDeclaration(className, packageName)
+        conceptDeclaration.function()
+        return conceptDeclaration
     }
 }
 
