@@ -26,13 +26,14 @@ class DesignSystemPrompterTest {
             
 DSL 格式如下:
 ```kotlin
-caseflow("MovieTicketBooking", defaultRole = "User") {
+caseflow("MovieTicketBooking", defaultActor = "User") {
     activity("AccountManage") {
         task("UserRegistration") {
-            stories = listOf("Register with email","Register with phone")
+            stories = listOf("Register with email", "Register with phone")
         }
         task("UserLogin") {
-            stories = listOf("Login to the website")
+            stories += "Login to the website"
+            // actor = "Admin" // if some task is actor-specific, you can specify it here
         }
     }
 }
