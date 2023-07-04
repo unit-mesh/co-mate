@@ -17,7 +17,7 @@ class DesignSystemPrompter(
 """.trimIndent()
 
     override fun getExtendData(): String {
-        val dsl = CaseFlowSpec.exampleActivitySpec().toString()
+        val dsl = CaseFlowSpec.exampleActivitySpec()
         return """
 需求信息 如下: 
 

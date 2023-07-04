@@ -108,21 +108,23 @@ class CaseFlowSpec(val name: String, private val defaultActor: String) : Spec<St
     }
 
     companion object {
-        fun exampleActivitySpec() : CaseFlowSpec =
-            caseflow("MovieTicketBooking", defaultRole = "User") {
+        fun exampleActivitySpec() : String = """
+            caseflow("MovieTicketBooking", defaultActor = "User") {
                 activity("AccountManage") {
                     task("UserRegistration") {
                         stories = listOf("Register with email", "Register with phone")
                     }
                     task("UserLogin") {
                         stories += "Login to the website"
+                        // actor = "Admin" // if some task is actor-specific, you can specify it here
                     }
                 }
             }
+            """.trimIndent()
 
         fun defaultSpec(): CaseFlowSpec =
             // 使用如下的 DSL 编写一个 OKR 协作与管理系统 的需求全景。要求： 1. 你返回的内容格式如下：```kotlin
-            caseflow("MovieTicketBooking", defaultRole = "User") {
+            caseflow("MovieTicketBooking", defaultActor = "User") {
                 // activity's should consider all user activities
                 activity("AccountManage") {
                     // task part should include all user tasks under the activity
@@ -149,8 +151,8 @@ class CaseFlowSpec(val name: String, private val defaultActor: String) : Spec<St
 /**
  * CaseFlow DSL would be used to describe the workflow of a business case, like user journey, business process, etc.
  */
-fun caseflow(name: String, defaultRole: String = "", init: CaseFlowSpec.() -> Unit): CaseFlowSpec {
-    val workflow = CaseFlowSpec(name, defaultRole)
+fun caseflow(name: String, defaultActor: String = "", init: CaseFlowSpec.() -> Unit): CaseFlowSpec {
+    val workflow = CaseFlowSpec(name, defaultActor)
     workflow.init()
     return workflow
 }
