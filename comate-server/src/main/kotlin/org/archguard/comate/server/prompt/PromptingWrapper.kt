@@ -21,7 +21,7 @@ class PromptingWrapper {
 
     Question: the input question you must answer
     HasMatchFunction: true/false (if has match tool return true, else false)
-    Thought: you should always think about what to do
+    Thought: you should always think about what to do. When no match function, you will be a consultant, should try to find the answer by yourself.
     Action: the action to take, should be one of [${toolNames}]
     Action Input: the input to the action (parse from the user input, don't add other additional information)
     // end in here. the tool will handle the rest
