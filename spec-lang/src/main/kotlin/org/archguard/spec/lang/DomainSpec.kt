@@ -26,8 +26,8 @@ class DomainSpec : Spec<Any> {
     }
 
     companion object {
-        fun defaultSpec(): DomainSpec {
-            return domain {
+        fun defaultSpec(): DomainSpec =
+            domain {
                 context_map("TicketBooking") {
                     context("Reservation") {}
                     context("Ticket") {}
@@ -38,7 +38,6 @@ class DomainSpec : Spec<Any> {
                     }
                 }
             }
-        }
     }
 }
 
