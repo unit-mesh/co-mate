@@ -137,7 +137,7 @@ class ConceptSpec : Spec<String> {
                     behavior("Make Coffee")
                 }
 
-                val cart = Concept("cart")
+                Concept("cart")
 
                 relations {
                     customer["Place Order"] perform barista
@@ -159,15 +159,15 @@ class ConceptSpec : Spec<String> {
         return conceptDeclaration
     }
 
-    class Concept(val conceptName: String, val function: ConceptDeclaration.() -> Unit = {}) {
-        private var innerBehaviors = mutableListOf<Behavior>()
-        private val relations: MutableList<Pair<Behavior, Concept>> = mutableListOf()
+    inner class Concept(val conceptName: String, val function: ConceptDeclaration.() -> Unit = {}) {
+        var innerBehaviors = mutableListOf<Behavior>()
+        val relations: MutableList<Pair<Behavior, Concept>> = mutableListOf()
 
         init {
             val concept = ConceptDeclaration(conceptName)
             concept.function()
             this.innerBehaviors = concept.formatBehaviors
-//            concepts += concept
+            concepts += this
         }
 
         operator fun get(actionName: String): ConceptAction {
@@ -204,10 +204,6 @@ class ConceptSpec : Spec<String> {
 
         override fun toString(): String {
             return """${concept.conceptName}."$actionName""""
-        }
-
-        infix fun `--`(target: Concept) {
-            concept.recordingRelation(actionName, target)
         }
     }
 }
