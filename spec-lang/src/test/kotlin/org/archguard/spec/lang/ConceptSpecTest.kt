@@ -8,5 +8,7 @@ class ConceptSpecTest {
     fun should_equal_when_had_same_spec() {
         val spec = ConceptSpec.defaultSpec()
         assertEquals(ConceptSpec.defaultSpec().toString(), spec.toString())
+
+        spec.concepts
     }
 }

@@ -21,7 +21,7 @@ data class Method(val name: String, val returnType: String, val parameters: List
 data class Parameter(val name: String, val type: String)
 
 @Serializable
-data class Behavior(val action: String, val description: String)
+data class Behavior(val action: String, val description: String = "")
 
 /**
  * Concept is a class abstraction for a concept, will be used to generate code.
@@ -32,7 +32,7 @@ class ConceptDeclaration(private val className: String, private val packageName:
 
     @Deprecated("use behavior instead")
     private val methods = mutableListOf<Method>()
-    private val innerBehaviors = mutableListOf<Behavior>()
+    val formatBehaviors = mutableListOf<Behavior>()
 
     /**
      * Define a list of [Behavior], for example:
@@ -89,14 +89,14 @@ class ConceptDeclaration(private val className: String, private val packageName:
      * ```
      */
     fun behavior(action: String, description: String = "") {
-        innerBehaviors.add(Behavior(action, description))
+        formatBehaviors.add(Behavior(action, description))
     }
 
     /**
      * same to [ConceptDeclaration.behavior]
      */
     fun usecase(action: String, description: String) {
-        innerBehaviors.add(Behavior(action, description))
+        formatBehaviors.add(Behavior(action, description))
     }
 
     inner class MethodBuilder(private val name: String, private val returnType: String) {
@@ -115,6 +115,8 @@ class ConceptDeclaration(private val className: String, private val packageName:
 typealias CodeBlock = Any
 
 class ConceptSpec : Spec<String> {
+    val concepts: MutableList<Concept> = mutableListOf()
+
     override fun default(): Spec<String> {
         return defaultSpec()
     }
@@ -158,24 +160,42 @@ class ConceptSpec : Spec<String> {
     }
 
     class Concept(val conceptName: String, val function: ConceptDeclaration.() -> Unit = {}) {
+        private var innerBehaviors = mutableListOf<Behavior>()
+        private val relations: MutableList<Pair<Behavior, Concept>> = mutableListOf()
+
         init {
             val concept = ConceptDeclaration(conceptName)
             concept.function()
-            println(concept)
+            this.innerBehaviors = concept.formatBehaviors
+//            concepts += concept
         }
-
-        val source: MutableMap<String, String> = mutableMapOf()
 
         operator fun get(actionName: String): ConceptAction {
             return ConceptAction(this, actionName)
         }
 
-        override fun toString() = conceptName
-
         fun recordingRelation(behavior: String, target: Concept) {
-            println("""$behavior, ${target.conceptName}""")
+            // search in behavior is not exists add new behavior
+            val usedBehavior = innerBehaviors.filter { it.action == behavior }.toMutableList()
+            if (usedBehavior.isEmpty()) {
+                val newBehavior = Behavior(behavior)
+                this.innerBehaviors += newBehavior
+                usedBehavior += newBehavior
+            }
+
+            relations += usedBehavior[0] to target
+        }
+
+        override fun toString(): String {
+            println(this.innerBehaviors)
+            println(this.relations)
+            return ""
         }
     }
+
+//    private operator fun plusAssign(concept: ConceptDeclaration) {
+//        this.concepts += concept
+//    }
 
     class ConceptAction(val concept: Concept, val actionName: String) {
         infix fun perform(target: Concept) {
