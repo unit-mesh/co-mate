@@ -5,6 +5,7 @@ import org.archguard.spec.lang.base.Spec
 
 @Serializable
 data class Class(
+    val packageName: String,
     val name: String,
     val properties: MutableList<Property> = mutableListOf(),
     val methods: MutableList<Method> = mutableListOf(),
@@ -19,7 +20,7 @@ data class Method(val name: String, val returnType: String, val parameters: List
 @Serializable
 data class Parameter(val name: String, val type: String)
 
-class ClassSpec(private val className: String) {
+class ClassSpec(private val className: String, private val packageName: String) {
     private val properties = mutableListOf<Property>()
     private val methods = mutableListOf<Method>()
 
@@ -34,7 +35,7 @@ class ClassSpec(private val className: String) {
     }
 
     fun build(): Class {
-        return Class(className, properties, methods)
+        return Class(packageName, className, properties, methods)
     }
 
     fun prop(name: Pair<String, String>) {
@@ -82,7 +83,7 @@ class ConceptSpec : Spec<String> {
     }
 
     fun concept(className: String, packageName: String = "", function: ClassSpec.() -> Unit): ClassSpec {
-        val classSpec = ClassSpec(className)
+        val classSpec = ClassSpec(className, packageName)
         classSpec.function()
         return classSpec
     }
