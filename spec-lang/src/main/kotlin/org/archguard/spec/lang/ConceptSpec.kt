@@ -27,7 +27,9 @@ data class Behavior(val action: String, val description: String)
  * Concept is a class abstraction for a concept, will be used to generate code.
  */
 class ConceptDeclaration(private val className: String, private val packageName: String) {
+    @Deprecated("use behavior instead")
     private val properties = mutableListOf<Property>()
+    @Deprecated("use behavior instead")
     private val methods = mutableListOf<Method>()
     private val innerBehaviors = mutableListOf<Behavior>()
 
@@ -40,10 +42,28 @@ class ConceptDeclaration(private val className: String, private val packageName:
      */
     var behaviors: List<String> = emptyList()
 
+    /**
+     * aka property, define a property with name and type, for example:
+     * ```kotlin
+     * // val name: String
+     * prop("name", "String")
+     * ```
+     */
+    @Deprecated("use behavior instead")
     fun prop(name: String, type: String) {
         properties.add(Property(name, type))
     }
 
+    /**
+     * aka method, define a method with name, return type and parameters, for example:
+     * ```kotlin
+     * // fun placeOrder(order: Order): Order
+     * method("placeOrder", "Order") {
+     *    parameter("order", "Order")
+     * }
+     * ```
+     */
+    @Deprecated("use behavior instead")
     fun method(name: String, returnType: String, block: MethodBuilder.() -> Unit) {
         val methodBuilder = MethodBuilder(name, returnType)
         methodBuilder.block()
@@ -54,6 +74,7 @@ class ConceptDeclaration(private val className: String, private val packageName:
         return Class(packageName, className, properties, methods)
     }
 
+    @Deprecated("use behavior instead")
     fun prop(name: Pair<String, String>) {
         properties.add(Property(name.first, name.second))
     }
@@ -111,12 +132,7 @@ class ConceptSpec : Spec<String> {
                 }
 
                 concept("Person", "com.biz.domain") {
-                    prop("name" to "String")
-                    prop("age", "Int")
 
-                    method("speak", "Unit") {
-                        parameter("message", "String")
-                    }
                 }
             }
         }
