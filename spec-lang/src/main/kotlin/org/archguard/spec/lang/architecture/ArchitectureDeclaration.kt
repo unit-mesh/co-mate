@@ -3,7 +3,8 @@ package org.archguard.spec.lang.architecture
 import org.archguard.spec.lang.base.BaseDeclaration
 
 class ConnectionDeclaration(val source: String, val target: String) : BaseDeclaration<String>
-class SystemDeclaration(name: String) : BaseDeclaration<String> {
+
+class SystemDeclaration(val name: String) : BaseDeclaration<String> {
     fun component(componentName: String, function: ComponentDeclaration.() -> Unit): ComponentDeclaration {
         val component = ComponentDeclaration(componentName)
         component.function()
@@ -22,7 +23,7 @@ class SystemDeclaration(name: String) : BaseDeclaration<String> {
 
 }
 
-class ComponentDeclaration(name: String) : BaseDeclaration<String> {
+class ComponentDeclaration(val name: String) : BaseDeclaration<String> {
     fun module(moduleName: String, function: ModuleDeclaration.() -> Unit): ModuleDeclaration {
         val module = ModuleDeclaration(moduleName)
         module.function()
@@ -30,4 +31,4 @@ class ComponentDeclaration(name: String) : BaseDeclaration<String> {
     }
 }
 
-class ModuleDeclaration(name: String) : BaseDeclaration<String>
+class ModuleDeclaration(val name: String) : BaseDeclaration<String>

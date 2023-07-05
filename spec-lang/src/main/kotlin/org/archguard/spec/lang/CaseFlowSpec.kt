@@ -7,6 +7,7 @@ import org.archguard.spec.lang.caseflow.CaseFlow
 import org.archguard.spec.lang.caseflow.Story
 import org.archguard.spec.lang.caseflow.Task
 
+@SpecDsl
 class CaseFlowSpec(val name: String, private val defaultActor: String) : Spec<String> {
     lateinit var start: ActivityDeclaration
     lateinit var end: ActivityDeclaration

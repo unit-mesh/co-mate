@@ -1,7 +1,6 @@
 package org.archguard.spec.lang
 
 import org.archguard.spec.base.*
-import org.archguard.spec.base.verifier.LlmRuleVerifier
 import org.archguard.spec.lang.base.BaseDeclaration
 import org.archguard.spec.lang.base.Spec
 import org.archguard.spec.lang.foundation.declaration.LayeredDeclaration

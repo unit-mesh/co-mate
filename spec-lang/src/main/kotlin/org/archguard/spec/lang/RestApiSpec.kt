@@ -91,8 +91,8 @@ class RestApiSpec : RuleSpec<RestApiElement> {
 /**
  * rest_api provides a DSL for defining a REST API specification.
  */
-fun rest_api(init: RestApiSpec.() -> Unit): RestApiSpec {
+fun rest_api(block: RestApiSpec.() -> Unit): RestApiSpec {
     val spec = RestApiSpec()
-    spec.init()
+    spec.block()
     return spec
 }

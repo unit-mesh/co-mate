@@ -4,23 +4,6 @@ import kotlinx.serialization.Serializable
 import org.archguard.spec.lang.base.Spec
 
 @Serializable
-data class Class(
-    val packageName: String,
-    val name: String,
-    val properties: MutableList<Property> = mutableListOf(),
-    val methods: MutableList<Method> = mutableListOf(),
-)
-
-@Serializable
-data class Property(val name: String, val type: String)
-
-@Serializable
-data class Method(val name: String, val returnType: String, val parameters: List<Parameter> = emptyList())
-
-@Serializable
-data class Parameter(val name: String, val type: String)
-
-@Serializable
 data class Behavior(val action: String, val description: String = "")
 
 /**
@@ -57,6 +40,7 @@ typealias CodeBlock = Any
  * ConceptSpec is a DSL for define a concept
  * We also try to keep the same usage like [use-case-diagram](https://plantuml.com/zh/use-case-diagram)
  */
+@SpecDsl
 class ConceptSpec : Spec<String> {
     val concepts: MutableList<Concept> = mutableListOf()
 

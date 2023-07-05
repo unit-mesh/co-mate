@@ -7,6 +7,7 @@ import org.archguard.spec.lang.base.Spec
 @Serializable
 data class Scenario(val name: String, val description: String)
 
+@SpecDsl
 class ComposableSpec : Spec<Scenario> {
     override fun exec(element: Scenario): List<RuleResult> = listOf()
 
