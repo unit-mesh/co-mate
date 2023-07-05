@@ -1,7 +1,5 @@
 package org.archguard.spec.lang
 
-import org.archguard.spec.base.verifier.LlmRuleVerifier
-import org.archguard.spec.base.RuleResult
 import org.archguard.spec.lang.base.Spec
 import org.archguard.spec.lang.domain.declaration.ContextMapDeclaration
 
@@ -13,17 +11,7 @@ class DomainSpec : Spec<Any> {
         return contextMapDeclaration
     }
 
-    override fun setVerifier(ruleVerifier: LlmRuleVerifier) {
-
-    }
-
-    override fun default(): Spec<Any> {
-        return defaultSpec()
-    }
-
-    override fun exec(element: Any): List<String> {
-        return listOf()
-    }
+    override fun default(): Spec<Any> = defaultSpec()
 
     companion object {
         fun defaultSpec(): DomainSpec =

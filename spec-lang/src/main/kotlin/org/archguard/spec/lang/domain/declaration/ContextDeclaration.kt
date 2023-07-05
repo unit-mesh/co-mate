@@ -1,6 +1,7 @@
 package org.archguard.spec.lang.domain.declaration
 
-class ContextDeclaration(name: String) {
+class ContextDeclaration(val name: String) {
+    val relations: MutableList<Pair<ContextDeclaration, ContextDeclaration>> = mutableListOf()
     fun aggregate(name: String, function: AggregateDeclaration.() -> Unit): AggregateDeclaration {
         val aggregateDeclaration = AggregateDeclaration(name)
         aggregateDeclaration.function()
@@ -8,6 +9,6 @@ class ContextDeclaration(name: String) {
     }
 
     infix fun dependedOn(targetContextDeclaration: ContextDeclaration) {
-        
+//        relations +=
     }
 }
