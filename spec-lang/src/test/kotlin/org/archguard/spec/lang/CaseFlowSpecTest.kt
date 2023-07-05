@@ -1,6 +1,6 @@
 package org.archguard.spec.lang
 
-import org.archguard.spec.lang.caseflow.model.CaseFlow
+import org.archguard.spec.lang.caseflow.CaseFlow
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

@@ -1,4 +1,4 @@
-package org.archguard.spec.lang.caseflow.model
+package org.archguard.spec.lang.caseflow
 
 import kotlinx.serialization.Serializable
 

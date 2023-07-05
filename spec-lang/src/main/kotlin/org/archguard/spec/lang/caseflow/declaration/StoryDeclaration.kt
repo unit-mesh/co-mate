@@ -1,6 +1,6 @@
 package org.archguard.spec.lang.caseflow.declaration
 
-import org.archguard.spec.lang.caseflow.model.Story
+import org.archguard.spec.lang.caseflow.Story
 
 class StoryDeclaration(val name: String) {
     private val sceneDeclarations: MutableList<SceneDeclaration> = mutableListOf()

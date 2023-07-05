@@ -2,10 +2,10 @@ package org.archguard.spec.lang
 
 import org.archguard.spec.lang.base.Spec
 import org.archguard.spec.lang.caseflow.declaration.StoryDeclaration
-import org.archguard.spec.lang.caseflow.model.Activity
-import org.archguard.spec.lang.caseflow.model.CaseFlow
-import org.archguard.spec.lang.caseflow.model.Story
-import org.archguard.spec.lang.caseflow.model.Task
+import org.archguard.spec.lang.caseflow.Activity
+import org.archguard.spec.lang.caseflow.CaseFlow
+import org.archguard.spec.lang.caseflow.Story
+import org.archguard.spec.lang.caseflow.Task
 
 class CaseFlowSpec(val name: String, private val defaultActor: String) : Spec<String> {
     lateinit var start: ActivityDeclaration

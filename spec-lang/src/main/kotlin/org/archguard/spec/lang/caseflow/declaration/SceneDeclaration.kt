@@ -1,6 +1,6 @@
 package org.archguard.spec.lang.caseflow.declaration
 
-import org.archguard.spec.lang.caseflow.model.Scene
+import org.archguard.spec.lang.caseflow.Scene
 
 enum class StepType(val value: String) {
     GIVEN("Given"),
