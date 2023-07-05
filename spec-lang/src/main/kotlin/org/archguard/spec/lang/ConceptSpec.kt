@@ -114,6 +114,10 @@ class ConceptDeclaration(private val className: String, private val packageName:
 
 typealias CodeBlock = Any
 
+/**
+ * ConceptSpec is a DSL for define a concept
+ * We also try to keep the same usage like [use-case-diagram](https://plantuml.com/zh/use-case-diagram)
+ */
 class ConceptSpec : Spec<String> {
     val concepts: MutableList<Concept> = mutableListOf()
 
@@ -122,7 +126,7 @@ class ConceptSpec : Spec<String> {
     }
 
     override fun toString(): String {
-        return "ConceptSpec()"
+        return "concept { ${concepts.joinToString(", ")} }"
     }
 
     companion object {
