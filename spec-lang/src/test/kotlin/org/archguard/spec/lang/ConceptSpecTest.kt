@@ -9,6 +9,11 @@ class ConceptSpecTest {
     fun should_equal_when_had_same_spec() {
         val spec = ConceptSpec.defaultSpec()
         assertEquals(ConceptSpec.defaultSpec().toString(), spec.toString())
+    }
+
+    @Test
+    fun should_ident_concept_from_spec() {
+        val spec = ConceptSpec.defaultSpec()
 
         spec.concepts.size shouldBe 3
         val customer = spec.concepts[0]
