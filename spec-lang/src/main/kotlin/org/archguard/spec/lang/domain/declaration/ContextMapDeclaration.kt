@@ -9,13 +9,11 @@ class ContextMapDeclaration(val name: String) {
         return contextDeclaration
     }
 
-    fun context(name: String): ContextDeclaration {
-        return ContextDeclaration(name)
-    }
+    fun context(name: String): ContextDeclaration = ContextDeclaration(name)
 
-    fun mapping(function: () -> Unit): MappingDefine {
+    fun mapping(block: MappingDefine.() -> Unit): MappingDefine {
         val mapping = MappingDefine()
-        function()
+        mapping.block()
         return mapping
     }
 }

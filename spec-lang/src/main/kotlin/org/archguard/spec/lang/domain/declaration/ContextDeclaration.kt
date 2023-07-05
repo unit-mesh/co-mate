@@ -9,6 +9,6 @@ class ContextDeclaration(val name: String) {
     }
 
     infix fun dependedOn(targetContextDeclaration: ContextDeclaration) {
-//        relations +=
+        relations += this to targetContextDeclaration
     }
 }

@@ -41,11 +41,7 @@ class FoundationSpec : RuleSpec<FoundationElement> {
         return rule
     }
 
-    override fun setVerifier(ruleVerifier: LlmRuleVerifier) = Unit
-
-    override fun default(): Spec<FoundationElement> {
-        return defaultSpec()
-    }
+    override fun default(): Spec<FoundationElement> = defaultSpec()
 
     override fun exec(element: FoundationElement): List<RuleResult> {
         val rules = declarations.map { declaration ->

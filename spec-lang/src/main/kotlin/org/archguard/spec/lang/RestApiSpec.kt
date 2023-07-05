@@ -63,9 +63,7 @@ class RestApiSpec : RuleSpec<RestApiElement> {
         }
     }
 
-    override fun default(): Spec<RestApiElement> {
-        return defaultSpec()
-    }
+    override fun default(): Spec<RestApiElement> = defaultSpec()
 
     companion object {
         fun defaultSpec(): RestApiSpec {

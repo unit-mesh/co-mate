@@ -6,13 +6,7 @@ import org.archguard.spec.lang.base.RuleSpec
 import org.archguard.spec.lang.base.Spec
 
 class ArchitectureSpec : RuleSpec<String> {
-    override fun default(): Spec<String> {
-        return defaultSpec()
-    }
-
-    override fun exec(element: String): List<RuleResult> {
-        return listOf()
-    }
+    override fun default(): Spec<String> = defaultSpec()
 
     fun system(systemName: String, function: SystemDeclaration.() -> Unit): SystemDeclaration {
         val system = SystemDeclaration(systemName)

@@ -84,9 +84,7 @@ class CaseFlowSpec(val name: String, private val defaultActor: String) : Spec<St
         return listOf(CaseFlow(name, defaultActor, activitiesDeclarations.map { it.toModel() }, stories))
     }
 
-    override fun default(): Spec<String> {
-        return defaultSpec()
-    }
+    override fun default(): Spec<String> = defaultSpec()
 
     override fun toString(): String {
         val sb = StringBuilder()
