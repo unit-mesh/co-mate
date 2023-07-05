@@ -68,7 +68,8 @@ class ConceptDeclaration(private val className: String, private val packageName:
     fun method(name: String, returnType: String, block: MethodBuilder.() -> Unit) {
         val methodBuilder = MethodBuilder(name, returnType)
         methodBuilder.block()
-        methods.add(methodBuilder.build())
+        methods.add(methodBuilder.
+        build())
     }
 
     fun build(): Class {
@@ -106,9 +107,7 @@ class ConceptDeclaration(private val className: String, private val packageName:
             parameters.add(Parameter(name, type))
         }
 
-        fun build(): Method {
-            return Method(name, returnType, parameters)
-        }
+        fun build(): Method = Method(name, returnType, parameters)
     }
 }
 
@@ -121,13 +120,9 @@ typealias CodeBlock = Any
 class ConceptSpec : Spec<String> {
     val concepts: MutableList<Concept> = mutableListOf()
 
-    override fun default(): Spec<String> {
-        return defaultSpec()
-    }
+    override fun default(): Spec<String> = defaultSpec()
 
-    override fun toString(): String {
-        return "concept { ${concepts.joinToString(", ")} }"
-    }
+    override fun toString(): String = "concept { ${concepts.joinToString(", ")} }"
 
     companion object {
         fun defaultSpec(): ConceptSpec {
@@ -147,6 +142,7 @@ class ConceptSpec : Spec<String> {
                     customer["Place Order"] perform barista
                     customer["View Menu"] perform barista
                     customer["View Order History"] perform barista
+                    customer["Custom something"] perform barista
                 }
             }
         }
@@ -154,9 +150,6 @@ class ConceptSpec : Spec<String> {
 
     fun relations(functions: CodeBlock.() -> Unit) = functions()
 
-    /**
-     * Concept
-     */
     fun concept(clazz: String, pkgName: String = "", function: ConceptDeclaration.() -> Unit): ConceptDeclaration {
         val conceptDeclaration = ConceptDeclaration(clazz, pkgName)
         conceptDeclaration.function()
@@ -174,12 +167,9 @@ class ConceptSpec : Spec<String> {
             concepts += this
         }
 
-        operator fun get(actionName: String): ConceptAction {
-            return ConceptAction(this, actionName)
-        }
+        operator fun get(actionName: String): ConceptAction = ConceptAction(this, actionName)
 
         fun recordingRelation(behavior: String, target: Concept) {
-            // search in behavior is not exists add new behavior
             val usedBehavior = innerBehaviors.filter { it.action == behavior }.toMutableList()
             if (usedBehavior.isEmpty()) {
                 val newBehavior = Behavior(behavior)
@@ -191,24 +181,16 @@ class ConceptSpec : Spec<String> {
         }
 
         override fun toString(): String {
-            println(this.innerBehaviors)
-            println(this.relations)
-            return ""
+            return """$conceptName { ${innerBehaviors.joinToString(", ")} }"""
         }
     }
-
-//    private operator fun plusAssign(concept: ConceptDeclaration) {
-//        this.concepts += concept
-//    }
 
     class ConceptAction(val concept: Concept, val actionName: String) {
         infix fun perform(target: Concept) {
             concept.recordingRelation(actionName, target)
         }
 
-        override fun toString(): String {
-            return """${concept.conceptName}."$actionName""""
-        }
+        override fun toString(): String = """${concept.conceptName}."$actionName""""
     }
 }
 

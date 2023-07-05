@@ -18,8 +18,11 @@ class ConceptSpecTest {
         spec.concepts.size shouldBe 3
         val customer = spec.concepts[0]
         customer.conceptName shouldBe "Customer"
-        customer.innerBehaviors.size shouldBe 3
+        customer.innerBehaviors.size shouldBe 4
+        println(customer.toString())
 
-        spec.concepts[1].conceptName shouldBe "Barista"
+        val secondConcept = spec.concepts[1]
+        secondConcept.conceptName shouldBe "Barista"
+        println(secondConcept.toString())
     }
 }
