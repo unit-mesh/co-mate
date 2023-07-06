@@ -29,8 +29,6 @@ class ConceptSpec : Spec<String> {
                     behavior("Make Coffee")
                 }
 
-                Concept("cart")
-
                 relations {
                     customer["Place Order"] perform barista
                     customer["View Menu"] perform barista
