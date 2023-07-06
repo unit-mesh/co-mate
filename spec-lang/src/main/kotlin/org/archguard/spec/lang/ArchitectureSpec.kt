@@ -8,9 +8,9 @@ import org.archguard.spec.lang.base.Spec
 class ArchitectureSpec : RuleSpec<String> {
     override fun default(): Spec<String> = defaultSpec()
 
-    fun system(systemName: String, function: SystemDeclaration.() -> Unit): SystemDeclaration {
+    fun system(systemName: String, block: SystemDeclaration.() -> Unit): SystemDeclaration {
         val system = SystemDeclaration(systemName)
-        system.function()
+        system.block()
         return system
     }
 

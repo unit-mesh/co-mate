@@ -10,8 +10,6 @@ abstract class ApiLlmVerifyRule(
     override var rule: String,
     open var ruleVerifier: LlmRuleVerifier,
 ) : LlmRule<RestApiElement>, ApiAtomicRule(actionName, rule) {
-    override fun exec(input: RestApiElement): List<RuleResult> {
-        TODO()
-    }
+    override fun exec(input: RestApiElement): List<RuleResult> = listOf()
 }
 

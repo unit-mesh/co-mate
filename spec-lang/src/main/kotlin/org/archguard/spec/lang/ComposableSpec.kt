@@ -17,7 +17,15 @@ class ComposableSpec : Spec<Scenario> {
 
     companion object {
         fun defaultSpec(): ComposableSpec {
-            return composable {}
+            return composable {
+                channels {
+
+                }
+                integrations { }
+                business { }
+                records { }
+                capabilities { }
+            }
         }
     }
 
@@ -28,16 +36,14 @@ class ComposableSpec : Spec<Scenario> {
     }
 
     inner class ChannelsDeclaration() {
-        fun send(message: String) {
 
-        }
     }
 
     fun integrations(function: () -> Unit) {
 
     }
 
-    fun logics(function: () -> Unit) {
+    fun business(function: () -> Unit) {
 
     }
 
