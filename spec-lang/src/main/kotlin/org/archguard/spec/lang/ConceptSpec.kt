@@ -17,6 +17,17 @@ class ConceptSpec : Spec<String> {
 
     override fun toString(): String = "concept { ${concepts.joinToString(", ")} }"
 
+    override fun example(): String =
+        concepts {
+            //
+            val customer = Concept("Customer") {
+
+            }
+            val cart = Concept("Shopping Cart") {
+                behavior("Add to Cart", "Add a coffee to the shopping cart")
+            }
+        }.toString()
+
     companion object {
         fun defaultSpec(): ConceptSpec =
             concepts {
@@ -56,11 +67,15 @@ class ConceptSpec : Spec<String> {
                     customer["Add to Cart"] perform shoppingCart
                     customer["Remove from Cart"] perform shoppingCart
                     customer["View Cart"] perform shoppingCart
+
                     customer["Checkout"] perform barista
                     customer["Place Order"] perform barista
+
                     customer["Pay"] perform deliveryPerson
                     customer["View Order Status"] perform deliveryPerson
-                    customer["Customize Order"].perform(barista)
+                    customer["Customize Order"].perform(barista) {
+                        // condition("").action("") // when need
+                    }
                 }
             }
     }
@@ -74,23 +89,23 @@ class ConceptSpec : Spec<String> {
     }
 
     inner class Concept(val conceptName: String, val function: ConceptDeclaration.() -> Unit = {}) {
-        var innerBehaviors = mutableListOf<Behavior>()
+        var behaviors = mutableListOf<Behavior>()
         val relations: MutableList<Pair<Behavior, Concept>> = mutableListOf()
 
         init {
             val concept = ConceptDeclaration(conceptName)
             concept.function()
-            this.innerBehaviors = concept.formatBehaviors
+            this.behaviors = concept.formatBehaviors
             concepts += this
         }
 
         operator fun get(actionName: String): ConceptAction = ConceptAction(this, actionName)
 
         fun recordingRelation(behavior: String, target: Concept) {
-            val usedBehavior = innerBehaviors.filter { it.action == behavior }.toMutableList()
+            val usedBehavior = behaviors.filter { it.action == behavior }.toMutableList()
             if (usedBehavior.isEmpty()) {
                 val newBehavior = Behavior(behavior)
-                this.innerBehaviors += newBehavior
+                this.behaviors += newBehavior
                 usedBehavior += newBehavior
             }
 
@@ -98,7 +113,7 @@ class ConceptSpec : Spec<String> {
         }
 
         override fun toString(): String {
-            return """$conceptName { ${innerBehaviors.joinToString(", ")} }"""
+            return """$conceptName { ${behaviors.joinToString(", ")} }"""
         }
     }
 
@@ -107,7 +122,29 @@ class ConceptSpec : Spec<String> {
             concept.recordingRelation(actionName, target)
         }
 
+        fun perform(target: Concept, function: RuleDeclaration.() -> Unit): RuleDeclaration {
+            concept.recordingRelation(actionName, target)
+            val ruleDeclaration = RuleDeclaration(actionName)
+            ruleDeclaration.function()
+            return ruleDeclaration
+        }
+
         override fun toString(): String = """${concept.conceptName}."$actionName""""
+    }
+}
+
+class RuleDeclaration(val name: String) {
+    private val conditions = mutableListOf<String>()
+    private var action: String = ""
+
+    fun condition(condition: String): RuleDeclaration {
+        conditions.add(condition)
+        return this
+    }
+
+    fun action(action: String): RuleDeclaration {
+        this.action = action
+        return this
     }
 }
 

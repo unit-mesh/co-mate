@@ -7,6 +7,7 @@ interface Spec<T> {
     fun setVerifier(ruleVerifier: LlmRuleVerifier) {}
     fun exec(element: T): List<Any> = listOf()
     fun default(): Spec<T>
+    fun example(): String = ""
 }
 
 interface RuleSpec<T> : Spec<T> {

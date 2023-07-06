@@ -106,8 +106,7 @@ class CaseFlowSpec(val name: String, private val defaultActor: String) : Spec<St
         return sb.toString()
     }
 
-    companion object {
-        fun exampleActivitySpec() : String = """
+    override fun example(): String = """
             caseflow("MovieTicketBooking", defaultActor = "User") {
                 activity("AccountManage") {
                     task("UserRegistration") {
@@ -121,6 +120,7 @@ class CaseFlowSpec(val name: String, private val defaultActor: String) : Spec<St
             }
             """.trimIndent()
 
+    companion object {
         fun defaultSpec(): CaseFlowSpec =
             // 使用如下的 DSL 编写一个 OKR 协作与管理系统 的需求全景。要求： 1. 你返回的内容格式如下：```kotlin
             caseflow("MovieTicketBooking", defaultActor = "User") {
