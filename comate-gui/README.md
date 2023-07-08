@@ -11,6 +11,7 @@ You will need to use the environment variables [defined in `.env.example`](.env.
 3. Download your environment variables: `vercel env pull`
 
 ```bash
+npm install -g pnpm
 pnpm install
 pnpm dev
 ```
