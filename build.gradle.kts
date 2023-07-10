@@ -14,6 +14,10 @@ jacoco {
     toolVersion = "0.8.8"
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
 repositories {
     mavenCentral()
     mavenLocal()
