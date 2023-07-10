@@ -3,6 +3,11 @@ plugins {
     alias(libs.plugins.jvm)
     id("jacoco-report-aggregation")
     id("com.github.nbaztec.coveralls-jacoco") version "1.2.15"
+
+    id("java-library")
+    id("maven-publish")
+    publishing
+    signing
 }
 
 jacoco {
@@ -53,6 +58,83 @@ allprojects {
         }
     }
 }
+
+configure(
+    allprojects
+            - project(":comate-server")
+            - project(":comate-cli")
+) {
+    apply(plugin = "java-library")
+    apply(plugin = "maven-publish")
+    apply(plugin = "signing")
+    apply(plugin = "publishing")
+
+    publishing {
+        publications {
+            create<MavenPublication>("mavenJava") {
+                from(components["java"])
+                versionMapping {
+                    usage("java-api") {
+                        fromResolutionOf("runtimeClasspath")
+                    }
+                    usage("java-runtime") {
+                        fromResolutionResult()
+                    }
+                }
+                pom {
+                    name.set("ArchGuard")
+                    description.set(" ArchGuard is a architecture governance tool which can analysis architecture in container, component, code level, create architecture fitness functions, and anaysis system dependencies.. ")
+                    url.set("https://archguard.org/")
+                    licenses {
+                        license {
+                            name.set("MIP-2.0")
+                            url.set("https://raw.githubusercontent.com/archguard/co-mate/master/LICENSE")
+                        }
+                    }
+                    developers {
+                        developer {
+                            id.set("ArchGuard")
+                            name.set("ArchGuard Team")
+                            email.set("h@phodal.com")
+                        }
+                    }
+                    scm {
+                        connection.set("scm:git:git://github.com/archguard/co-mate.git")
+                        developerConnection.set("scm:git:ssh://github.com/archguard/co-mate.git")
+                        url.set("https://github.com/archguard/co-mate/")
+                    }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                val releasesRepoUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+                url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
+
+                credentials {
+                    username =
+                        (if (project.findProperty("sonatypeUsername") != null) project.findProperty("sonatypeUsername")
+                        else System.getenv("MAVEN_USERNAME")).toString()
+                    password =
+                        (if (project.findProperty("sonatypePassword") != null) project.findProperty("sonatypePassword")
+                        else System.getenv("MAVEN_PASSWORD")).toString()
+                }
+            }
+        }
+    }
+
+    signing {
+        sign(publishing.publications["mavenJava"])
+    }
+
+    java {
+        withJavadocJar()
+        withSourcesJar()
+    }
+}
+
 
 dependencies {
     jacocoAggregation(project(":architecture"))
