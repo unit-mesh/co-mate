@@ -25,10 +25,10 @@ allprojects {
     }
 
     group = "org.archguard.comate"
-    version = "0.1.9"
+    version = "0.2.0"
 
-//    java.sourceCompatibility = JavaVersion.VERSION_11
-//    java.targetCompatibility = JavaVersion.VERSION_11
+    java.sourceCompatibility = JavaVersion.VERSION_11
+    java.targetCompatibility = JavaVersion.VERSION_11
 
     tasks.withType<Test> {
         useJUnitPlatform()
