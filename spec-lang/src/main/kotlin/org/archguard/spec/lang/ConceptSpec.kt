@@ -19,12 +19,15 @@ class ConceptSpec : Spec<String> {
 
     override fun example(): String =
         concepts {
-            //
             val customer = Concept("Customer") {
 
             }
             val cart = Concept("Shopping Cart") {
                 behavior("Add to Cart", "Add a coffee to the shopping cart")
+            }
+
+            relations {
+                customer["Add to Cart"] to cart
             }
         }.toString()
 
