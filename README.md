@@ -110,6 +110,85 @@ domain {
 }
 ```
 
+### User Journey
+
+```kotlin
+caseflow("MovieTicketBooking", defaultActor = "User") {
+    // activity's should consider all user activities
+    activity("AccountManage") {
+        // task part should include all user tasks under the activity
+        task("UserRegistration") {
+            // you should list key steps in the story
+            stories = listOf("Register with email", "Register with phone")
+        }
+        task("UserLogin") {
+            stories += "Login to the website"
+        }
+    }
+    activity("MovieSelection") {}
+    // ...
+    activity("PaymentCancel") {
+        task("ConfirmCancel") {
+            actor = "Admin" // if some task is role-specific, you can specify it here
+            //...
+        }
+    }
+}
+```
+
+### Concepts 
+
+```
+concepts {
+    val customer = Concept("Customer") {
+        behavior("Place Order", "Place an order for a coffee")
+        behaviors = listOf(
+            "View Menu",
+            "Add to Cart",
+            "Remove from Cart",
+            "Place Order",
+            "Pay",
+            "View Order Status",
+            "View Order History",
+            "Customize Order"
+        )
+    }
+
+    val barista = Concept("Barista") {
+        behavior("Make Coffee")
+    }
+
+    val deliveryPerson = Concept("Delivery Person") {
+        behavior("Deliver Order")
+    }
+
+    val shoppingCart = Concept("Shopping Cart") {
+        behavior("Add to Cart", "Add a coffee to the shopping cart")
+        behavior("Remove from Cart", "Remove a coffee from the shopping cart")
+        behavior("View Cart", "View the contents of the shopping cart")
+        behavior("Checkout", "Proceed to checkout and place the order")
+    }
+
+    relations {
+        customer["View Menu"] perform barista
+        customer["View Order History"] perform barista
+
+        customer["Add to Cart"] perform shoppingCart
+        customer["Remove from Cart"] perform shoppingCart
+        customer["View Cart"] perform shoppingCart
+
+        customer["Checkout"] perform barista
+        customer["Place Order"] perform barista
+
+        customer["Pay"] perform deliveryPerson
+        customer["View Order Status"] perform deliveryPerson
+        customer["Customize Order"].perform(barista) {
+            // condition("").action("") // when need
+        }
+    }
+}
+```
+
 ### Foundation
 
 ```kotlin
