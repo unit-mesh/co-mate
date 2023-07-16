@@ -138,7 +138,7 @@ caseflow("MovieTicketBooking", defaultActor = "User") {
 
 ### Concepts 
 
-```
+```kotlin
 concepts {
     val customer = Concept("Customer") {
         behavior("Place Order", "Place an order for a coffee")
