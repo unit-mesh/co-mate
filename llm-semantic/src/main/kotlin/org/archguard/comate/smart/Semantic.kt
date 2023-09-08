@@ -42,24 +42,15 @@ class Semantic(val tokenizer: HuggingFaceTokenizer, val session: OrtSession, val
         fun create(): Semantic {
             val classLoader = Thread.currentThread().getContextClassLoader()
 
-            val tokenizerPath = classLoader.getResource("model/tokenizer.json")!!.toURI()
-            val onnxPath =  classLoader.getResource("model/model.onnx")!!.toURI()
+            val tokenizerStream = classLoader.getResourceAsStream("model/tokenizer.json")!!
+            val onnxStream = classLoader.getResourceAsStream("model/model.onnx")!!
 
-            try {
-                val env: Map<String, String> = HashMap()
-                val array: List<String> = tokenizerPath.toString().split("!")
-                FileSystems.newFileSystem(URI.create(array[0]), env)
-            } catch (e: Exception) {
-//                e.printStackTrace()
-            }
-
-            val tokenizer = HuggingFaceTokenizer.newInstance(Paths.get(tokenizerPath))
+            val tokenizer = HuggingFaceTokenizer.newInstance(tokenizerStream, null)
             val ortEnv = OrtEnvironment.getEnvironment()
             val sessionOptions = OrtSession.SessionOptions()
 
             // load onnxPath as byte[]
-            val onnxPathAsByteArray = Files.readAllBytes(Paths.get(onnxPath))
-
+            val onnxPathAsByteArray = onnxStream.readAllBytes()
             val session = ortEnv.createSession(onnxPathAsByteArray, sessionOptions)
 
             return Semantic(tokenizer, session, ortEnv)

@@ -7,7 +7,6 @@ import org.archguard.comate.strategy.CodePromptStrategy
 import org.archguard.comate.strategy.Strategy
 import org.archguard.spec.element.RestApiElement
 import org.archguard.spec.lang.RestApiSpec
-import org.archguard.spec.lang.rest_api
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
