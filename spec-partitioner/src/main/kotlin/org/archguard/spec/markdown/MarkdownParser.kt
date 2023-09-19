@@ -28,7 +28,7 @@ class MarkdownParser {
             val contentBlocks: MutableList<ContentBlocking> = ArrayList()
             val node: Node = parser.parse(markdown)
 
-            val text = TextContentRenderer.builder()
+            TextContentRenderer.builder()
                 .nodeRendererFactory(CustomRenderFactory())
                 .build().render(node)
 

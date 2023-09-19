@@ -43,9 +43,7 @@ val apiEmbeddingMap: Map<FloatArray, ApiRuleType>
         return map
     }
 
-class ApiPartitioner(document: String) : Partitioner {
-//    val embeddingMap: Map<FloatArray, ApiRuleType> = apiEmbeddingMap
-
+class ApiPartitioner : Partitioner {
     override fun partition(): List<Rule<Any>> {
         return listOf()
     }
